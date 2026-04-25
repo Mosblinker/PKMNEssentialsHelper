@@ -1017,13 +1017,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
         List<PalettePkmnSpriteIcon> preview = recolorColorExchange.setSprites(icons);
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        if (recolorColorExchange.isPreviewShown()){
-            setShownRecolorSprites(0);
-        }
         recolorPaletteColorChooser.setPalette(recolorSpritePalette);
         updateRecolorDropperImages();
         for (PalettePkmnSpriteIcon icon : preview){
             recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
+        }
+        if (recolorColorExchange.isPreviewShown()){
+            setShownRecolorSprites(0);
         }
         blendPaletteColorChooser.setPalette(recolorSpritePalette);
         blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
@@ -1145,13 +1145,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
         List<PalettePkmnSpriteIcon> preview = recolorBlendChange.setSprites(icons);
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        if (recolorBlendChange.isPreviewShown()){
-            setShownRecolorSprites(1);
-        }
         recolorPaletteColorChooser.setPalette(recolorSpritePalette);
         updateRecolorDropperImages();
         for (PalettePkmnSpriteIcon icon : preview){
             recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
+        }
+        if (recolorBlendChange.isPreviewShown()){
+            setShownRecolorSprites(1);
         }
         blendPaletteColorChooser.setPalette(recolorSpritePalette);
         blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
