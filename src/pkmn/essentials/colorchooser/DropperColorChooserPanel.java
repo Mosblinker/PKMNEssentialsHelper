@@ -254,6 +254,16 @@ public class DropperColorChooserPanel extends AbstractColorChooserPanel{
         updateIndexButtons();
     }
     
+    public double getScale(){
+        return scale;
+    }
+    
+    public void setScale(double scale){
+        if (scale != this.scale){
+            scaleModel.setSelectedItem(scale);
+        }
+    }
+    
     private class PercentRenderer extends DefaultListCellRenderer{
         @Override
         public Component getListCellRendererComponent(JList<?> list,Object value,
