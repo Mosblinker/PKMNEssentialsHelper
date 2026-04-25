@@ -741,6 +741,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jTabbedPane3.addTab("Sprites", recolorSpriteListPanel);
+
+        recolorReferencePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorReferencePanelActionPerformed(evt);
+            }
+        });
+        recolorReferencePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                recolorReferencePanelPropertyChange(evt);
+            }
+        });
         jTabbedPane3.addTab("Reference", recolorReferencePanel);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1183,6 +1194,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         config.setSelectedTabIndex(jTabbedPane1.getSelectedIndex());
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void recolorReferencePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorReferencePanelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recolorReferencePanelActionPerformed
+
+    private void recolorReferencePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorReferencePanelPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recolorReferencePanelPropertyChange
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
