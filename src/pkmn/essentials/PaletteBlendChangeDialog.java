@@ -426,9 +426,10 @@ public class PaletteBlendChangeDialog extends AbstractConfirmDialogPanel{
     
     protected void removePaletteColors(){
         int[] selection = applyToList.getSelectedIndices();
-        for (int i : selection){
-            paletteChanges.remove(applyToModel.get(i));
-            applyToModel.remove(applyToModel.get(i));
+        for (int i = selection.length-1; i >= 0; i++){
+            Integer index = applyToModel.get(selection[i]);
+            paletteChanges.remove(index);
+            applyToModel.remove(index);
         }
         updatePreviewIcons();
         updateRemoveButtonEnabled();
