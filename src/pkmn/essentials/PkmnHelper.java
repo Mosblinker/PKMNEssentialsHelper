@@ -1384,7 +1384,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         if (recolorReferencePanel.getIcon() != null)
             images.add(((PalettePkmnSpriteIcon)recolorReferencePanel.getIcon()).getBufferedImage());
+        int index = recolorDropperColorChooser.getImageIndex();
+        double scale = recolorDropperColorChooser.getScale();
         recolorDropperColorChooser.setImages(images);
+        recolorDropperColorChooser.setImageIndex(index);
+        recolorDropperColorChooser.setScale(scale);
     }
     
     private void browseSingleSprite(int mode){
