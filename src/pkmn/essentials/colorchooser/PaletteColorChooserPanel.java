@@ -31,6 +31,15 @@ public class PaletteColorChooserPanel extends AbstractColorChooserPanel{
     private boolean initialized = false;
     
     private String displayName = null;
+    
+    public PaletteColorChooserPanel(String displayName){
+        super();
+        this.displayName = displayName;
+    }
+    
+    public PaletteColorChooserPanel(){
+        this(null);
+    }
 
     @Override
     public void updateChooser() {
