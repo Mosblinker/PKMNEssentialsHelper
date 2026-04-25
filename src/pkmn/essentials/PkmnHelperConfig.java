@@ -125,6 +125,8 @@ public class PkmnHelperConfig {
     
     public static final String RECOLOR_TARGET_FOLDER_KEY = "TargetFolder";
     
+    public static final String REFERENCE_SPRITE_KEY = "ReferenceSprite";
+    
     public static final String PREVIEW_SHOWN_KEY_SUFFIX = "PreviewShown";
     
     /**
@@ -795,6 +797,20 @@ public class PkmnHelperConfig {
     
     public void setRecolorPreviewShown(Component comp, boolean value){
         getRecolorSpritePreferences().putBoolean(getComponentNames().get(comp)+PREVIEW_SHOWN_KEY_SUFFIX, value);
+    }
+    /**
+     * 
+     * @return 
+     */
+    public File getRecolorReferenceSprite(){
+        return getFile(getRecolorSpritePreferences(),REFERENCE_SPRITE_KEY,null);
+    }
+    /**
+     * 
+     * @param file 
+     */
+    public void setRecolorReferenceSprite(File file){
+        putFile(getRecolorSpritePreferences(),REFERENCE_SPRITE_KEY,file);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
