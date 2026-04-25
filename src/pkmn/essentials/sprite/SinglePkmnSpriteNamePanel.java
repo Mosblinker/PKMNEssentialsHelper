@@ -4,6 +4,7 @@
  */
 package pkmn.essentials.sprite;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -25,6 +26,12 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     public static final String CLEAR_ACTION_COMMAND = "Clear";
     
     public static final String ICON_PROPERTY_CHANGED = "IconPropertyChanged";
+    /**
+     * This identifies that the accessory component to the side of the list has 
+     * changed.
+     */
+    public static final String SIDE_ACCESSORY_PROPERTY_CHANGED = 
+            "SideAccessoryPropertyChanged";
     
     protected void addComponent(Component c,int y){
            // This is the constraints object to use to place the component
@@ -76,6 +83,18 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         clearButton.setEnabled(false);
         panel.add(clearButton);
         addComponent(panel,4);
+        
+        sideAccessoryPanel = new JPanel(new java.awt.BorderLayout());
+           // This is the constraints object to use to place the component
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.fill = GridBagConstraints.VERTICAL;
+        constraints.gridheight = 5;
+        constraints.insets = new Insets(0, 6, 0, 0);
+        constraints.anchor = GridBagConstraints.EAST;
+        add(sideAccessoryPanel,constraints);
+        sideAccessoryPanel.setVisible(false);
     }
     
     public SinglePkmnSpriteNamePanel(){
@@ -181,7 +200,25 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         }
     }
     
+    public JComponent getSideAccessory(){
+        return sideAccessory;
+    }
     
+    public void setSideAccessory(JComponent accessory){
+            // If the side accessory would not be changed
+        if (accessory == sideAccessory)
+            return;
+        JComponent old = sideAccessory;     // Get the old side accessory
+        sideAccessory = accessory;
+        firePropertyChange(SIDE_ACCESSORY_PROPERTY_CHANGED,old,accessory);
+        if (old != null)       // If the old accessory is not null
+            sideAccessoryPanel.remove(old);
+        if (accessory != null)       // If the new accessory is not null
+            sideAccessoryPanel.add(accessory,BorderLayout.CENTER);
+        sideAccessoryPanel.revalidate();
+        sideAccessoryPanel.repaint();
+        sideAccessoryPanel.setVisible(accessory != null);
+    }
     
     private PkmnSpriteIcon icon = null;
     
@@ -194,6 +231,15 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     private JButton clearButton;
     
     private double scale = 1.0;
+    /**
+     * This is the panel used to contain the side accessory within the side 
+     * panel.
+     */
+    protected JPanel sideAccessoryPanel;
+    /**
+     * This is the accessory that appears to the side of the list.
+     */
+    private JComponent sideAccessory = null;
     /**
      * 
      */
