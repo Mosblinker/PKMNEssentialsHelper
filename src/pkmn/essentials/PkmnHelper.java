@@ -1015,6 +1015,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorScaleLabel.setText((value*100)+"%");
         recolorSpriteListPanel.setScale(value);
         config.setRecolorScaleIndex(index);
+        recolorReferencePanel.setScale(value);
     }//GEN-LAST:event_recolorScaleSliderStateChanged
 
     private void recolorColorExchangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorColorExchangeButtonActionPerformed
