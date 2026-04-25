@@ -405,6 +405,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         recolorSpriteListAccessory.add(recolorRedoButton);
 
+        recolorFolderFC.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         recolorFolderFC.setName("recolorFolderFC"); // NOI18N
 
         scalePanelAccessory.setLayout(new javax.swing.BoxLayout(scalePanelAccessory, javax.swing.BoxLayout.Y_AXIS));
