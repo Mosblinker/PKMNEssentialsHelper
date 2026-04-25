@@ -219,7 +219,28 @@ public class DropperColorChooserPanel extends AbstractColorChooserPanel{
         prevButton.setEnabled(isEnabled() && !images.isEmpty() && imageIndex > 0);
     }
     
-    private void setImageIndex(int index){
+    public List<BufferedImage> getImages(){
+        return images;
+    }
+    
+    public void setImages(Collection<? extends BufferedImage> images){
+        this.images.clear();
+        this.images.addAll(images);
+    }
+    
+    public int getImageIndex(int imageIndex){
+        return imageIndex;
+    }
+    
+    private void setSelectedColor(Color color){
+        boolean temp = updating;
+        updating = true;
+        rgbInfoPanel.setColor(color);
+        getColorSelectionModel().setSelectedColor(color);
+        updating = temp;
+    }
+    
+    public void setImageIndex(int index){
         if (index != imageIndex){
             scale = 1.0;
             scaleModel.setSelectedItem(1.0);
@@ -231,23 +252,6 @@ public class DropperColorChooserPanel extends AbstractColorChooserPanel{
             imageIcon = new ImageIcon(images.get(index));
         updateImage();
         updateIndexButtons();
-    }
-    
-    public List<BufferedImage> getImages(){
-        return images;
-    }
-    
-    public void setImages(Collection<? extends BufferedImage> images){
-        this.images.clear();
-        this.images.addAll(images);
-    }
-    
-    private void setSelectedColor(Color color){
-        boolean temp = updating;
-        updating = true;
-        rgbInfoPanel.setColor(color);
-        getColorSelectionModel().setSelectedColor(color);
-        updating = temp;
     }
     
     private class PercentRenderer extends DefaultListCellRenderer{
