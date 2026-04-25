@@ -1370,6 +1370,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         for (PkmnSpriteIcon icon : recolorSpriteListPanel.getModelList()){
             images.add(((PalettePkmnSpriteIcon)icon).getBufferedImage());
         }
+        if (recolorReferencePanel.getIcon() != null)
+            images.add(((PalettePkmnSpriteIcon)recolorReferencePanel.getIcon()).getBufferedImage());
         recolorDropperColorChooser.setImages(images);
     }
     
