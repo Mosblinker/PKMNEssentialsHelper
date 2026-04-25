@@ -1196,7 +1196,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void recolorReferencePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorReferencePanelActionPerformed
-        // TODO add your handling code here:
+        switch(evt.getActionCommand()){
+            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
+                browseSingleSprite(5);
+                break;
+            
+        }
     }//GEN-LAST:event_recolorReferencePanelActionPerformed
 
     private void recolorReferencePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorReferencePanelPropertyChange
@@ -1385,10 +1390,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 break;
             case(4):
                 title = "Select Egg Hatching Graphics";
+                break;
+            case(5):
+                title = "Select Reference";
         }
         if (browseSprites(title,false) == JFileChooser.APPROVE_OPTION){
             File file = spriteFC.getSelectedFile();
-            PkmnSpriteIcon icon = loadSprite(file);
+            PkmnSpriteIcon icon;
+            switch(mode){
+                case(5):
+                    icon = loadPaletteSprite(file, null);
+                    break;
+                default:
+                    icon = loadSprite(file);
+            }
             if (icon != null){
                 switch (mode){
                     case(0):
@@ -1410,6 +1425,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     case(4):
                         eggCracksSpritePanel.setIcon(icon);
                         updateSpriteApplyButton();
+                        break;
+                    case(5):
+                        recolorReferencePanel.setIcon(icon);
                         break;
                 }
             }
