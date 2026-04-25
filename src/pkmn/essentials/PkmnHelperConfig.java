@@ -71,6 +71,10 @@ public class PkmnHelperConfig {
     /**
      * 
      */
+    public static final String PROGRAM_SELECTED_TAB_INDEX_KEY = "SelectedTabIndex";
+    /**
+     * 
+     */
     public static final String PROGRAM_SIZE_KEY = "ProgramWindowSize";
     /**
      * 
@@ -593,6 +597,20 @@ public class PkmnHelperConfig {
      */
     public int getProgressDisplaySetting(int defaultValue){
         return getPreferences().getInt(PROGRESS_DISPLAY_KEY, defaultValue);
+    }
+    /**
+     * 
+     * @param index 
+     */
+    public void setSelectedTabIndex(int index){
+        getPreferences().putInt(PROGRAM_SELECTED_TAB_INDEX_KEY, index);
+    }
+    /**
+     * 
+     * @return 
+     */
+    public int getSelectedTabIndex(){
+        return getPreferences().getInt(PROGRAM_SELECTED_TAB_INDEX_KEY, 0);
     }
     /**
      * 
