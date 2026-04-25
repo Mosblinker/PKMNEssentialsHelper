@@ -290,6 +290,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         scaleFrontToggle = new javax.swing.JToggleButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
         scaleBackToggle = new javax.swing.JToggleButton();
+        recolorReferenceSideAccessory = new javax.swing.JPanel();
+        recolorReferenceRGBInfo = new pkmn.essentials.RGBInfoPanel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -426,6 +429,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         scaleBackToggle.setEnabled(false);
         scaleBackToggle.setMaximumSize(new java.awt.Dimension(200, 25));
         scalePanelAccessory.add(scaleBackToggle);
+
+        recolorReferenceSideAccessory.setLayout(new javax.swing.BoxLayout(recolorReferenceSideAccessory, javax.swing.BoxLayout.Y_AXIS));
+
+        recolorReferenceRGBInfo.setMaximumSize(new java.awt.Dimension(2147483647, 138));
+        recolorReferenceSideAccessory.add(recolorReferenceRGBInfo);
+        recolorReferenceSideAccessory.add(filler5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -746,6 +755,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         jTabbedPane3.addTab("Sprites", recolorSpriteListPanel);
 
+        recolorReferencePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(11, 10, 11, 10));
+        recolorReferencePanel.setSideAccessory(recolorReferenceSideAccessory);
         recolorReferencePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recolorReferencePanelActionPerformed(evt);
@@ -1734,6 +1745,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel footSpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel fsSpritePanel;
     private javax.swing.JButton gameBrowseButton;
@@ -1770,6 +1782,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JList<Color> recolorPaletteList;
     private javax.swing.JButton recolorRedoButton;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
+    private pkmn.essentials.RGBInfoPanel recolorReferenceRGBInfo;
+    private javax.swing.JPanel recolorReferenceSideAccessory;
     private javax.swing.JButton recolorSaveButton;
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
