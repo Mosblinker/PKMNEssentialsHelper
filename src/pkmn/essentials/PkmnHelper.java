@@ -1520,7 +1520,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorSaveButtonActionPerformed
 
     private void recolorBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorBrowseButtonActionPerformed
-        // TODO add your handling code here:
+        if (recolorFolderFC.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+            recolorSaveField.setText(recolorFolderFC.getSelectedFile().toString());
+        }
+        recolorFolderFC.setPreferredSize(recolorFolderFC.getSize());
+            // Set the file chooser's size in the config if it's saved
+        config.storeFileChooser(recolorFolderFC);
     }//GEN-LAST:event_recolorBrowseButtonActionPerformed
     
     private void calculateBlend(){
