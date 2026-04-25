@@ -1163,7 +1163,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorBlendChangePropertyChange
 
     private void recolorSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSaveButtonActionPerformed
-        // TODO add your handling code here:
+        File folder = new File(recolorSaveField.getText());
+        new RecolorSpriteSaver(folder).execute();
     }//GEN-LAST:event_recolorSaveButtonActionPerformed
 
     private void recolorBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorBrowseButtonActionPerformed
@@ -2473,4 +2474,57 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
     }
     
+    
+    private class RecolorSpriteSaver extends FileSaver{
+        
+        private Map<PalettePkmnSpriteIcon, File> renamedFiles = new HashMap<>();
+        
+        private int index = 0;
+
+        public RecolorSpriteSaver(File file) {
+            super(file);
+        }
+        @Override
+        protected boolean isFileDirectory(){
+            return true;
+        }
+        @Override
+        public String getProgressString(){
+            return "Saving";
+        }
+        @Override
+        protected boolean saveFile(File file) throws IOException {
+            try{
+                progressBar.setMaximum(recolorSpriteListPanel.getModelList().size());
+                progressBar.setIndeterminate(false);
+                for (int i = index; i < recolorSpriteListPanel.getModelList().size(); i++, index++){
+                    PkmnSpriteIcon tempIcon = recolorSpriteListPanel.getModelList().get(i);
+                    if (!(tempIcon instanceof PalettePkmnSpriteIcon))
+                        continue;
+                    PalettePkmnSpriteIcon icon = (PalettePkmnSpriteIcon)tempIcon;
+                    BufferedImage image = icon.getBufferedImage();
+                    File newFile = new File(file,icon.getFile().getName());
+                    if (newFile.exists())
+                        newFile = FilesExtended.getNextAvailableFilePath(file);
+                    renamedFiles.put(icon, newFile);
+                    ImageIO.write(image, "png", newFile);
+                    progressBar.setValue(progressBar.getValue()+1);
+                }
+            } catch (IOException ex) {
+                getLogger().log(Level.WARNING, "Failed to save PKMN sprites", ex);
+                return false;
+            }
+            
+            return true;
+        }
+        
+        @Override
+        protected void done(){
+            super.done();
+            for (Map.Entry<PalettePkmnSpriteIcon, File> temp : renamedFiles.entrySet()){
+                temp.getKey().setFile(temp.getValue());
+            }
+            recolorSpriteListPanel.repaint();
+        }
+    }
 }
