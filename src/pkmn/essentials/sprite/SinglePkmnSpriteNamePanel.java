@@ -6,6 +6,7 @@ package pkmn.essentials.sprite;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -218,6 +219,14 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         sideAccessoryPanel.revalidate();
         sideAccessoryPanel.repaint();
         sideAccessoryPanel.setVisible(accessory != null);
+    }
+    
+    public Cursor getImageCursor(){
+        return iconLabel.getCursor();
+    }
+    
+    public void setImageCursor(Cursor cursor){
+        iconLabel.setCursor(cursor);
     }
     
     private PkmnSpriteIcon icon = null;
