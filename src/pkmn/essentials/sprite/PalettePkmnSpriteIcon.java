@@ -240,10 +240,14 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
         for (int y = 0; y < image.getHeight(); y++){
             rgbData = image.getRGB(0, y, rgbData.length, 1, rgbData, 0, 1);
             for (int x = 0; x < rgbData.length; x++){
-                Integer index = rgb.get(rgbData[x]);
+                int rgbValue = rgbData[x];
+                if (PkmnHelperUtilities.hasNoColor(rgbValue)){
+                    rgbValue = 0;
+                }
+                Integer index = rgb.get(rgbValue);
                 if (index == null){
                     index = rgb.size();
-                    rgb.put(rgbData[x], index);
+                    rgb.put(rgbValue, index);
                 }
                 indexes[x][y] = index;
             }
