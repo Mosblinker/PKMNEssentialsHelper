@@ -121,6 +121,8 @@ public class PkmnHelperConfig {
     
     public static final String RECOLOR_TARGET_FOLDER_KEY = "TargetFolder";
     
+    public static final String PREVIEW_SHOWN_KEY_SUFFIX = "PreviewShown";
+    
     /**
      * This is a preference node to store the settings for this program.
      */
@@ -767,6 +769,14 @@ public class PkmnHelperConfig {
             getRecolorSpritePreferences().remove(RECOLOR_TARGET_FOLDER_KEY);
         else
             getRecolorSpritePreferences().put(RECOLOR_TARGET_FOLDER_KEY, path);
+    }
+    
+    public boolean getRecolorPreviewShown(Component comp){
+        return getRecolorSpritePreferences().getBoolean(getComponentNames().get(comp)+PREVIEW_SHOWN_KEY_SUFFIX, true);
+    }
+    
+    public void setRecolorPreviewShown(Component comp, boolean value){
+        getRecolorSpritePreferences().putBoolean(getComponentNames().get(comp)+PREVIEW_SHOWN_KEY_SUFFIX, value);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{

@@ -255,6 +255,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         copySpritesToggle.setSelected(config.getPkmnSpritesAreCopied());
         config.getProgramBounds(PkmnHelper.this);
         recolorScaleSlider.setValue(config.getRecolorScaleIndex(recolorScaleSlider.getValue()));
+        recolorColorExchange.setPreviewShown(config.getRecolorPreviewShown(recolorColorExchange));
+        recolorBlendChange.setPreviewShown(config.getRecolorPreviewShown(recolorBlendChange));
    }
 
     /**
@@ -1439,6 +1441,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorColorExchangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorColorExchangePropertyChange
         if ("previewShown".equals(evt.getPropertyName())){
             setShownRecolorSprites(0);
+            config.setRecolorPreviewShown(recolorColorExchange, recolorColorExchange.isPreviewShown());
         }
     }//GEN-LAST:event_recolorColorExchangePropertyChange
 
@@ -1499,6 +1502,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorBlendChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorBlendChangePropertyChange
         if ("previewShown".equals(evt.getPropertyName())){
             setShownRecolorSprites(1);
+            config.setRecolorPreviewShown(recolorBlendChange, recolorBlendChange.isPreviewShown());
         }
     }//GEN-LAST:event_recolorBlendChangePropertyChange
 
