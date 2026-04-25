@@ -14,7 +14,6 @@ import components.text.action.commands.TextComponentCommands;
 import components.text.action.commands.UndoManagerCommands;
 import files.FilesExtended;
 import files.extensions.ImageExtensions;
-import icons.box.ColorBoxIcon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -273,38 +272,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spritePreview = new components.JFileDisplayPanel();
         spriteFolderFC = new javax.swing.JFileChooser();
         gameFolderFC = new javax.swing.JFileChooser();
-        jDialog1 = new javax.swing.JDialog();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
-        jSlider2 = new javax.swing.JSlider();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jColorSelector1 = new components.JColorSelector();
         recolorColorSelector = new components.JColorSelector();
         recolorColorExchange = new pkmn.essentials.PaletteColorExchangeDialog();
         blendColorSelector = new components.JColorSelector();
@@ -369,7 +336,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         debugMenu = new javax.swing.JMenu();
         inputEnabledTest = new javax.swing.JCheckBoxMenuItem();
         printTest = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
         spriteFC.setAccessory(spritePreview);
@@ -386,277 +352,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameFolderFC.setDialogTitle("Select Game Project Folder...");
         gameFolderFC.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         gameFolderFC.setName("gameFolderFC"); // NOI18N
-
-        jDialog1.setModal(true);
-
-        jButton1.setIcon(colorIcons[0]);
-        jButton1.setText("Color 1");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setIcon(colorIcons[1]);
-        jButton2.setText("Color 2");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setIcon(colorIcons[2]);
-        jButton3.setText("Color 3");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setIcon(colorIcons[3]);
-        jButton4.setText("Color 4");
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Result:");
-
-        jTextField1.setEditable(false);
-
-        jLabel5.setIcon(colorIcons[5]);
-
-        jButton5.setText("Calculate");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setIcon(colorIcons[4]);
-        jButton6.setText("Color 5");
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("R:");
-
-        jTextField2.setEditable(false);
-        jTextField2.setText("0");
-
-        jLabel7.setText("G:");
-
-        jTextField3.setEditable(false);
-        jTextField3.setText("0");
-
-        jLabel8.setText("B:");
-
-        jTextField4.setEditable(false);
-        jTextField4.setText("0");
-
-        jButton7.setIcon(colorIcons[6]);
-        jButton7.setText("Color 1");
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setIcon(colorIcons[7]);
-        jButton8.setText("Color 2");
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jSlider1.setMajorTickSpacing(10);
-        jSlider1.setMinorTickSpacing(5);
-        jSlider1.setPaintLabels(true);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setValue(0);
-        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                blendSliderStateChanged(evt);
-            }
-        });
-
-        jSlider2.setMajorTickSpacing(10);
-        jSlider2.setMinorTickSpacing(5);
-        jSlider2.setPaintLabels(true);
-        jSlider2.setPaintTicks(true);
-        jSlider2.setValue(0);
-        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                blendSliderStateChanged(evt);
-            }
-        });
-
-        jLabel9.setText("Blend:");
-
-        jLabel10.setText("0%");
-
-        jLabel11.setText("Result:");
-
-        jTextField5.setEditable(false);
-
-        jLabel12.setIcon(colorIcons[8]);
-
-        jTextField6.setEditable(false);
-        jTextField6.setText("0");
-
-        jLabel13.setText("R:");
-
-        jLabel14.setText("G:");
-
-        jTextField7.setEditable(false);
-        jTextField7.setText("0");
-
-        jLabel15.setText("B:");
-
-        jTextField8.setEditable(false);
-        jTextField8.setText("0");
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSlider2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5)
-                        .addGap(34, 34, 34))
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jDialog1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jDialog1Layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton6)))
-                            .addGroup(jDialog1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5))
-                            .addGroup(jDialog1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 78, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton6)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
 
         recolorColorSelector.setName("recolorColorSelector"); // NOI18N
 
@@ -1132,14 +827,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         debugMenu.add(printTest);
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        debugMenu.add(jMenuItem1);
-
         jMenuBar1.add(debugMenu);
 
         setJMenuBar(jMenuBar1);
@@ -1293,55 +980,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void spriteUseGameToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteUseGameToggleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_spriteUseGameToggleActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jDialog1.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        changeColor(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        changeColor(1);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        changeColor(3);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        double ratio = PkmnHelperUtilities.getColorRatio(colorIcons[0].getColor(),colorIcons[1].getColor(),colorIcons[2].getColor());
-        System.out.println(ratio);
-        Color color = PkmnHelperUtilities.blendColor(colorIcons[3].getColor(),colorIcons[4].getColor(),ratio);
-        System.out.println(color);
-        colorIcons[5].setColor(color);
-        jLabel5.repaint();
-        jTextField1.setText(String.format("%08X", color.getRGB()));
-        jTextField2.setText(""+color.getRed());
-        jTextField3.setText(""+color.getGreen());
-        jTextField4.setText(""+color.getBlue());
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        changeColor(2);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        changeColor(4);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        changeColor(6);
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        changeColor(7);
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void blendSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_blendSliderStateChanged
-        calculateBlend();
-    }//GEN-LAST:event_blendSliderStateChanged
     
     private void recolorScaleSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorScaleSliderStateChanged
         int index = recolorScaleSlider.getValue();
@@ -1527,64 +1165,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             // Set the file chooser's size in the config if it's saved
         config.storeFileChooser(recolorFolderFC);
     }//GEN-LAST:event_recolorBrowseButtonActionPerformed
-    
-    private void calculateBlend(){
-        double ratio = jSlider2.getValue() / 100.0;
-        ratio += jSlider1.getValue();
-        jLabel10.setText(ratio + "%");
-        ratio /= 100.0;
-        Color color = PkmnHelperUtilities.blendColor(colorIcons[6].getColor(),colorIcons[7].getColor(),ratio);
-        System.out.println(color);
-        colorIcons[8].setColor(color);
-        jLabel12.repaint();
-        jTextField5.setText(String.format("%08X", color.getRGB()));
-        jTextField6.setText(""+color.getRed());
-        jTextField7.setText(""+color.getGreen());
-        jTextField8.setText(""+color.getBlue());
-    }
-    
-    private void changeColor(int index){
-        if (jColorSelector1.showDialog(jDialog1, colorIcons[index].getColor()) == JColorSelector.ACCEPT_OPTION){
-            colorIcons[index].setColor(jColorSelector1.getSelectedColor());
-            switch(index){
-                case(0):
-                    jButton1.repaint();
-                    break;
-                case(1):
-                    jButton2.repaint();
-                    break;
-                case(2):
-                    jButton3.repaint();
-                    break;
-                case(3):
-                    jButton4.repaint();
-                    break;
-                case(4):
-                    jButton6.repaint();
-                    break;
-                case(6):
-                    jButton7.repaint();
-                    calculateBlend();
-                    break;
-                case(7):
-                    jButton8.repaint();
-                    calculateBlend();
-            }
-        }
-    }
-    
-    private ColorBoxIcon[] colorIcons = new ColorBoxIcon[]{
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(16,16,Color.BLACK),
-        new ColorBoxIcon(64,64,Color.BLACK)
-    };
-    
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -2091,53 +1671,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel iSpritePanel;
     private javax.swing.JCheckBoxMenuItem inputEnabledTest;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel isSpritePanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private components.JColorSelector jColorSelector1;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
