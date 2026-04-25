@@ -1348,6 +1348,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         double value = SPRITE_SCALE_VALUES[index];
         recolorScaleLabel.setText((value*100)+"%");
         recolorSpriteListPanel.setScale(value);
+        config.setRecolorScaleIndex(index);
     }//GEN-LAST:event_recolorScaleSliderStateChanged
 
     private void recolorColorExchangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorColorExchangeButtonActionPerformed
@@ -1369,6 +1370,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
             recolorChangeColorsUpdate(recolorColorExchange.getPaletteChanges());
         }
+        config.setComponentSize(recolorColorExchange);
+        config.setComponentSize(recolorColorSelector);
+        config.setComponentSize(blendColorSelector);
     }//GEN-LAST:event_recolorColorExchangeButtonActionPerformed
 
     private void recolorUndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorUndoButtonActionPerformed
@@ -1394,6 +1398,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             if (recolorColorSelector.showDialog(this, oldColor) == JColorSelector.ACCEPT_OPTION){
                 recolorChangeColor(selected,recolorColorSelector.getSelectedColor());
             }
+            config.setComponentSize(recolorColorSelector);
+            config.setComponentSize(blendColorSelector);
         } else {
             recolorClickedIndex = selected;
             recolorClickedMillis = evt.getWhen();
@@ -1492,6 +1498,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
             recolorChangeColorsUpdate(recolorBlendChange.getPaletteChanges());
         }
+        config.setComponentSize(recolorBlendChange);
+        config.setComponentSize(recolorColorSelector);
+        config.setComponentSize(blendColorSelector);
     }//GEN-LAST:event_recolorBlendChangeButtonActionPerformed
 
     private void recolorBlendChangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorBlendChangeStateChanged
