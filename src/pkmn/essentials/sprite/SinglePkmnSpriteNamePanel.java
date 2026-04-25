@@ -87,6 +87,7 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         if (icon != this.icon){
             PkmnSpriteIcon old = this.icon;
             this.icon = icon;
+            icon.setTargetScale(scale);
             iconLabel.setIcon(icon);
             clearButton.setEnabled(isEnabled() && icon != null);
             refreshName();
@@ -100,10 +101,15 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     }
     
     public void setScale(double scale){
+        this.scale = scale;
         if (icon != null)
             icon.setTargetScale(scale);
         revalidate();
         repaint();
+    }
+    
+    public double getScale(){
+        return scale;
     }
     
     public void refreshName(){
@@ -186,6 +192,8 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     private JButton browseButton;
     
     private JButton clearButton;
+    
+    private double scale = 1.0;
     /**
      * 
      */
