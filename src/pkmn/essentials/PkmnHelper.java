@@ -256,6 +256,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorScaleSlider.setValue(config.getRecolorScaleIndex(recolorScaleSlider.getValue()));
         recolorColorExchange.setPreviewShown(config.getRecolorPreviewShown(recolorColorExchange));
         recolorBlendChange.setPreviewShown(config.getRecolorPreviewShown(recolorBlendChange));
+        jTabbedPane1.setSelectedIndex(config.getSelectedTabIndex());
    }
 
     /**
@@ -422,6 +423,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         fSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1167,6 +1174,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             // Set the file chooser's size in the config if it's saved
         config.storeFileChooser(recolorFolderFC);
     }//GEN-LAST:event_recolorBrowseButtonActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        config.setSelectedTabIndex(jTabbedPane1.getSelectedIndex());
+    }//GEN-LAST:event_jTabbedPane1StateChanged
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
