@@ -8,6 +8,7 @@ import components.ListModelList;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.event.ListDataEvent;
@@ -28,6 +29,8 @@ public class PaletteColorChooserPanel extends AbstractColorChooserPanel{
     private ListModelList<Color> paletteModel = new ListModelList<>();
     private boolean updating = false;
     private boolean initialized = false;
+    
+    private String displayName = null;
 
     @Override
     public void updateChooser() {
@@ -96,8 +99,22 @@ public class PaletteColorChooserPanel extends AbstractColorChooserPanel{
         initialized = true;
     }
     
+    public void setDisplayName(String name){
+        if (Objects.equals(displayName, name))
+            return;
+        String old = displayName;
+        displayName = name;
+        firePropertyChange("displayName",old,name);
+    }
+    
+    public boolean isDisplayNameSet(){
+        return displayName != null;
+    }
+    
     @Override
     public String getDisplayName() {
+        if (displayName != null)
+            return displayName;
         return "Palette";
     }
     @Override
