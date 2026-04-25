@@ -573,7 +573,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="recolorSpriteListPanel" pref="717" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -583,6 +582,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="recolorSaveButton" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jTabbedPane3" pref="717" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -602,8 +602,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel3" max="32767" attributes="0"/>
-                          <Component id="recolorSpriteListPanel" pref="407" max="32767" attributes="0"/>
+                          <Component id="jPanel3" pref="407" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -753,20 +753,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="recolorSpriteListPanel">
-              <Properties>
-                <Property name="moveButtonsAreShown" type="boolean" value="false"/>
-                <Property name="reverseButtonIsShown" type="boolean" value="false"/>
-                <Property name="sideAccessory" type="javax.swing.JComponent" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="recolorSpriteListAccessory"/>
-                </Property>
-                <Property name="duplicateButtonShown" type="boolean" value="false"/>
-                <Property name="femaleToggleShown" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorSpriteListPanelActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save To:"/>
@@ -791,6 +777,42 @@
             </Component>
             <Component class="javax.swing.JTextField" name="recolorSaveField">
             </Component>
+            <Container class="javax.swing.JTabbedPane" name="jTabbedPane3">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="recolorSpriteListPanel">
+                  <Properties>
+                    <Property name="moveButtonsAreShown" type="boolean" value="false"/>
+                    <Property name="reverseButtonIsShown" type="boolean" value="false"/>
+                    <Property name="sideAccessory" type="javax.swing.JComponent" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="recolorSpriteListAccessory"/>
+                    </Property>
+                    <Property name="duplicateButtonShown" type="boolean" value="false"/>
+                    <Property name="femaleToggleShown" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorSpriteListPanelActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Sprites">
+                        <Property name="tabTitle" type="java.lang.String" value="Sprites"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="recolorReferencePanel">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Reference">
+                        <Property name="tabTitle" type="java.lang.String" value="Reference"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

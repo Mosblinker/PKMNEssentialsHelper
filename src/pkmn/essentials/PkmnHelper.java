@@ -320,11 +320,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorBlendChangeButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        recolorSpriteListPanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         jLabel16 = new javax.swing.JLabel();
         recolorSaveButton = new javax.swing.JButton();
         recolorBrowseButton = new javax.swing.JButton();
         recolorSaveField = new javax.swing.JTextField();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        recolorSpriteListPanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        recolorReferencePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -711,17 +713,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gridBagConstraints.weightx = 0.5;
         jPanel3.add(filler3, gridBagConstraints);
 
-        recolorSpriteListPanel.setMoveButtonsAreShown(false);
-        recolorSpriteListPanel.setReverseButtonIsShown(false);
-        recolorSpriteListPanel.setSideAccessory(recolorSpriteListAccessory);
-        recolorSpriteListPanel.setDuplicateButtonShown(false);
-        recolorSpriteListPanel.setFemaleToggleShown(false);
-        recolorSpriteListPanel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorSpriteListPanelActionPerformed(evt);
-            }
-        });
-
         jLabel16.setText("Save To:");
 
         recolorSaveButton.setText("Save");
@@ -739,6 +730,19 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
+        recolorSpriteListPanel.setMoveButtonsAreShown(false);
+        recolorSpriteListPanel.setReverseButtonIsShown(false);
+        recolorSpriteListPanel.setSideAccessory(recolorSpriteListAccessory);
+        recolorSpriteListPanel.setDuplicateButtonShown(false);
+        recolorSpriteListPanel.setFemaleToggleShown(false);
+        recolorSpriteListPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorSpriteListPanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane3.addTab("Sprites", recolorSpriteListPanel);
+        jTabbedPane3.addTab("Reference", recolorReferencePanel);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -746,7 +750,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(recolorSpriteListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -754,7 +757,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(recolorBrowseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(recolorSaveButton)))
+                        .addComponent(recolorSaveButton))
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -769,8 +773,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(recolorSpriteListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1699,6 +1703,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
@@ -1711,6 +1716,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JFileChooser recolorFolderFC;
     private javax.swing.JList<Color> recolorPaletteList;
     private javax.swing.JButton recolorRedoButton;
+    private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
     private javax.swing.JButton recolorSaveButton;
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
