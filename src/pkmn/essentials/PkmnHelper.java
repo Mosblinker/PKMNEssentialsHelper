@@ -717,6 +717,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jLabel16.setText("Save To:");
 
         recolorSaveButton.setText("Save");
+        recolorSaveButton.setEnabled(false);
         recolorSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recolorSaveButtonActionPerformed(evt);
