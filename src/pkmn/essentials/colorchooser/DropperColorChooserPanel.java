@@ -228,7 +228,7 @@ public class DropperColorChooserPanel extends AbstractColorChooserPanel{
         this.images.addAll(images);
     }
     
-    public int getImageIndex(int imageIndex){
+    public int getImageIndex(){
         return imageIndex;
     }
     
