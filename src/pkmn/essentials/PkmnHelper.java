@@ -1387,7 +1387,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         int index = recolorDropperColorChooser.getImageIndex();
         double scale = recolorDropperColorChooser.getScale();
         recolorDropperColorChooser.setImages(images);
-        recolorDropperColorChooser.setImageIndex(index);
+        recolorDropperColorChooser.setImageIndex(Math.min(Math.max(index, 0), images.size()-1));
         recolorDropperColorChooser.setScale(scale);
     }
     
