@@ -125,6 +125,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         4
     };
     
+    private static final Double[] DEFAULT_ZOOM_VALUES = {
+        8.0, 4.0, 2.0, 1.0, 0.5, 0.25, 0.125
+    };
+    
     public static final String DROPPER_CURSOR_IMAGE = "/images/dropper.png";
     
     /**
@@ -292,6 +296,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         scaleBackToggle = new javax.swing.JToggleButton();
         recolorReferenceSideAccessory = new javax.swing.JPanel();
         recolorReferenceRGBInfo = new pkmn.essentials.RGBInfoPanel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        recolorReferenceZoomCombo = new javax.swing.JComboBox<>();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -434,6 +442,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         recolorReferenceRGBInfo.setMaximumSize(new java.awt.Dimension(2147483647, 138));
         recolorReferenceSideAccessory.add(recolorReferenceRGBInfo);
+        recolorReferenceSideAccessory.add(filler6);
+
+        jPanel5.setMaximumSize(new java.awt.Dimension(2147483647, 22));
+        jPanel5.setLayout(new java.awt.BorderLayout(6, 0));
+
+        jLabel4.setText("Zoom:");
+        jPanel5.add(jLabel4, java.awt.BorderLayout.LINE_START);
+        jPanel5.add(recolorReferenceZoomCombo, java.awt.BorderLayout.CENTER);
+
+        recolorReferenceSideAccessory.add(jPanel5);
         recolorReferenceSideAccessory.add(filler5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1746,6 +1764,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel footSpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel fsSpritePanel;
     private javax.swing.JButton gameBrowseButton;
@@ -1758,6 +1777,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1765,6 +1785,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -1784,6 +1805,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
     private pkmn.essentials.RGBInfoPanel recolorReferenceRGBInfo;
     private javax.swing.JPanel recolorReferenceSideAccessory;
+    private javax.swing.JComboBox<Double> recolorReferenceZoomCombo;
     private javax.swing.JButton recolorSaveButton;
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
