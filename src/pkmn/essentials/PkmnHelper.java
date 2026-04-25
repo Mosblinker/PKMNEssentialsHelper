@@ -204,6 +204,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpritePalette.addListDataListener(handler);
         
         recolorPaletteColorChooser = new PaletteColorChooserPanel();
+        recolorReferencePaletteColorChooser = new PaletteColorChooserPanel("Reference Palette");
         recolorDropperColorChooser = new DropperColorChooserPanel();
         
         Image dropperCursorImage = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource(DROPPER_CURSOR_IMAGE));
@@ -217,14 +218,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorDropperColorChooser.setImageCursor(dropperCursor);
         
         recolorColorSelector.addChooserPanel(recolorPaletteColorChooser);
+        recolorColorSelector.addChooserPanel(recolorReferencePaletteColorChooser);
         recolorColorSelector.addChooserPanel(recolorDropperColorChooser);
         recolorColorExchange.setColorSelector(recolorColorSelector);
         recolorBlendChange.setColorSelector(recolorColorSelector);
         
         blendPaletteColorChooser = new PaletteColorChooserPanel();
+        blendReferencePaletteColorChooser = new PaletteColorChooserPanel("Reference Palette");
         blendDropperColorChooser = new DropperColorChooserPanel();
         blendDropperColorChooser.setImageCursor(dropperCursor);
         blendColorSelector.addChooserPanel(blendPaletteColorChooser);
+        blendColorSelector.addChooserPanel(blendReferencePaletteColorChooser);
         blendColorSelector.addChooserPanel(blendDropperColorChooser);
         recolorBlendColorChooser = new BlendColorChooserPanel(blendColorSelector);
         recolorColorSelector.addChooserPanel(recolorBlendColorChooser);
@@ -1200,7 +1204,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
                 browseSingleSprite(5);
                 break;
-            
+            case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
+                recolorReferencePaletteColorChooser.getPalette().clear();
+                blendReferencePaletteColorChooser.getPalette().clear();
         }
     }//GEN-LAST:event_recolorReferencePanelActionPerformed
 
@@ -1430,6 +1436,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         break;
                     case(5):
                         recolorReferencePanel.setIcon(icon);
+                        List<Color> palette = ((PalettePkmnSpriteIcon)icon).getPalette();
+                        recolorReferencePaletteColorChooser.setPalette(palette);
+                        blendReferencePaletteColorChooser.setPalette(palette);
                         break;
                 }
             }
@@ -1701,9 +1710,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private DropperColorChooserPanel recolorDropperColorChooser;
     
+    private PaletteColorChooserPanel recolorReferencePaletteColorChooser;
+    
     private PaletteColorChooserPanel blendPaletteColorChooser;
     
     private DropperColorChooserPanel blendDropperColorChooser;
+    
+    private PaletteColorChooserPanel blendReferencePaletteColorChooser;
     
     private BlendColorChooserPanel recolorBlendColorChooser;
     // Variables declaration - do not modify//GEN-BEGIN:variables
