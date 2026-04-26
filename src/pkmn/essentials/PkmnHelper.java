@@ -2575,7 +2575,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     BufferedImage image = icon.getBufferedImage();
                     File newFile = new File(file,icon.getFile().getName());
                     if (newFile.exists())
-                        newFile = FilesExtended.getNextAvailableFilePath(file);
+                        newFile = FilesExtended.getNextAvailableFilePath(newFile);
                     renamedFiles.put(icon, newFile);
                     ImageIO.write(image, "png", newFile);
                     progressBar.setValue(progressBar.getValue()+1);
