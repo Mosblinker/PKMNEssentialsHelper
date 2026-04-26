@@ -83,23 +83,25 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private static final String PREFERENCE_NODE_NAME = 
             "mosblinker/essentials/PkmnEssentialsHelper";
     
-    protected static final String FRONT_SPRITE_FOLDER = "Front";
+    protected static final String POKEMON_GRAPHICS_FOLDER = "Graphics"+File.separator+"Pokemon";
     
-    protected static final String BACK_SPRITE_FOLDER = "Back";
+    protected static final String FRONT_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Front";
     
-    protected static final String FRONT_SHINY_SPRITE_FOLDER = "Front shiny";
+    protected static final String BACK_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Back";
     
-    protected static final String BACK_SHINY_SPRITE_FOLDER = "Back shiny";
+    protected static final String FRONT_SHINY_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Front shiny";
     
-    protected static final String ICONS_SPRITE_FOLDER = "Icons";
+    protected static final String BACK_SHINY_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Back shiny";
     
-    protected static final String ICONS_SHINY_SPRITE_FOLDER = "Icons shiny";
+    protected static final String ICONS_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Icons";
     
-    protected static final String FOOTPRINTS_SPRITE_FOLDER = "Footprints";
+    protected static final String ICONS_SHINY_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Icons shiny";
     
-    protected static final String SHADOW_SPRITE_FOLDER = "Shadow";
+    protected static final String FOOTPRINTS_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Footprints";
     
-    protected static final String EGG_SPRITE_FOLDER = "Eggs";
+    protected static final String SHADOW_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Shadow";
+    
+    protected static final String EGG_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Eggs";
     
     protected static final String FEMALE_SPRITE_SUFFIX = "_female";
     
