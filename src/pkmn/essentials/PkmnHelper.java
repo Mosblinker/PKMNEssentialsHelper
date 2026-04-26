@@ -634,7 +634,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("PKMN Sprites", jPanel1);
+        jTabbedPane1.addTab("Pokemon", jPanel1);
 
         recolorScaleSlider.setMajorTickSpacing(1);
         recolorScaleSlider.setMaximum(12);
