@@ -2401,22 +2401,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                                 allFiles.add(panel.getIcon().getFile());
                         }
 
-                        if (!copySpritesToggle.isSelected()){
-                            int offset = 0;
-                            for (int i = 0; i < pkmnSpritePanels.length; i++){
-                                Set<Integer> copied = copiedIndexes.get(i);
-                                PkmnSpriteNameListPanel panel = pkmnSpritePanels[i];
-                                for (int j = 0; j < panel.getModelList().size(); j++){
-                                    Path path = panel.getModelList().get(j).getFile().toPath();
-                                    for (int k = offset+j+1; k < allFiles.size(); k++){
-                                        if (shouldCopyFile(path, allFiles.get(k).toPath())){
-                                            copied.add(j);
-                                            break;
-                                        }
+                        int offset = 0;
+                        for (int i = 0; i < pkmnSpritePanels.length; i++){
+                            Set<Integer> copied = copiedIndexes.get(i);
+                            PkmnSpriteNameListPanel panel = pkmnSpritePanels[i];
+                            for (int j = 0; j < panel.getModelList().size(); j++){
+                                Path path = panel.getModelList().get(j).getFile().toPath();
+                                for (int k = offset+j+1; k < allFiles.size(); k++){
+                                    if (shouldCopyFile(path, allFiles.get(k).toPath())){
+                                        copied.add(j);
+                                        break;
                                     }
                                 }
-                                offset += panel.getModelList().size();
                             }
+                            offset += panel.getModelList().size();
                         }
                         
                         for (File temp : allFiles){
