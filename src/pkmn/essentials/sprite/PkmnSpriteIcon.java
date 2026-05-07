@@ -89,6 +89,11 @@ public class PkmnSpriteIcon extends ScaledIcon{
         this(file,image,1);
     }
     
+    public PkmnSpriteIcon(PkmnSpriteIcon icon){
+        this(icon.getFile(),icon.getDescription(),icon.getImage(),icon.getScaleX());
+        this.index = icon.index;
+    }
+    
     public Image getImage(){
         return getIcon().getImage();
     }
