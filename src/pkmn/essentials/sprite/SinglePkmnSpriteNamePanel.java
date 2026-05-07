@@ -107,7 +107,8 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         if (icon != this.icon){
             PkmnSpriteIcon old = this.icon;
             this.icon = icon;
-            icon.setTargetScale(scale);
+            if (icon != null)
+                icon.setTargetScale(scale);
             iconLabel.setIcon(icon);
             clearButton.setEnabled(isEnabled() && icon != null);
             refreshName();
