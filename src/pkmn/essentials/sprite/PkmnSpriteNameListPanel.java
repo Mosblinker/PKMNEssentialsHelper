@@ -195,8 +195,15 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
     public void duplicate(){
         if (!isSelectionEmpty()){
             int size = getModelList().size();
-            getModelList().addAll(getSelectedValuesList());
-            setSelectionInterval(size,getModelList().size());
+            for (int i = 0; i < size; i++){
+                PkmnSpriteIcon icon = getModelList().get(i);
+                if (icon instanceof PalettePkmnSpriteIcon)
+                    icon = new PalettePkmnSpriteIcon(icon);
+                else
+                    icon = new PkmnSpriteIcon(icon);
+                getModelList().add(icon);
+            }
+            setSelectionInterval(size,getModelList().size()-1);
         }
     }
     /**
