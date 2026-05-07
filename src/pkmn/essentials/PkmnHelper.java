@@ -109,6 +109,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     protected static final String EGG_HATCHING_SPRITE_SUFFIX = "_cracks";
     
+    protected static final String PKMN_CRIES_FOLDER = "Audio"+File.separator+"SE"+File.separator+"Cries";
+    
+    protected static final String FAINTED_CRY_SUFFIX = "_fainted";
+    
+    protected static final String PKMN_CRY_FILE_EXTENSION = ".ogg";
+    
     private static final long LIST_DOUBLE_CLICK_THRESHOLD = 500;
     
     private static final double[] SPRITE_SCALE_VALUES = {
