@@ -2486,48 +2486,57 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         }
                     case(9):
                         PkmnSpriteIcon footIcon = footSpritePanel.getIcon();
-                        File temp = renameSprite(footIcon.getFile(),
-                                new File(footprintFolder,name+".png"),false);
-                        renamedFiles.put(footIcon, temp);
-                        progressBar.setValue(progressBar.getValue()+1);
+                        if (footIcon != null){
+                            File temp = renameSprite(tempFiles.getOrDefault(footIcon.getFile(),footIcon.getFile()),
+                                    new File(footprintFolder,name+".png"),false);
+                            renamedFiles.put(footIcon, temp);
+                            progressBar.setValue(progressBar.getValue()+1);
+                        }
                         stage = 10;
                         index = 0;
                     case(10):
                         PkmnSpriteIcon shadow = shadowSpritePanel.getIcon();
-                        File temp1 = renameSprite(shadow.getFile(),
-                                new File(shadowFolder,name+".png"),false);
-                        renamedFiles.put(shadow, temp1);
-                        progressBar.setValue(progressBar.getValue()+1);
+                        if (shadow != null){
+                            File temp = renameSprite(tempFiles.getOrDefault(shadow.getFile(),shadow.getFile()),
+                                    new File(shadowFolder,name+".png"),false);
+                            renamedFiles.put(shadow, temp);
+                            progressBar.setValue(progressBar.getValue()+1);
+                        }
                         stage = 11;
                         index = 0;
                     case(11):
                         for (int i = index; i < 3; i++, index++){
                             PkmnSpriteIcon icon;
-                            File temp2;
+                            File temp;
                             switch(i){
                                 case(0):
                                     icon = eggSpritePanel.getIcon();
-                                    temp2 = new File(eggFolder,name+".png");
+                                    temp = new File(eggFolder,name+".png");
                                     break;
                                 case(1):
                                     icon = eggIconSpritePanel.getIcon();
-                                    temp2 = new File(eggFolder,name+EGG_ICON_SPRITE_SUFFIX+".png");
+                                    temp = new File(eggFolder,name+EGG_ICON_SPRITE_SUFFIX+".png");
                                     break;
                                 case(2):
                                     icon = eggCracksSpritePanel.getIcon();
-                                    temp2 = new File(eggFolder,name+EGG_HATCHING_SPRITE_SUFFIX+".png");
+                                    temp = new File(eggFolder,name+EGG_HATCHING_SPRITE_SUFFIX+".png");
                                     break;
                                 default:
                                     continue;
                             }
-                            temp2 = renameSprite(icon.getFile(),temp2,false);
-                            renamedFiles.put(icon, temp2);
-                            progressBar.setValue(progressBar.getValue()+1);
+                            if (icon != null){
+                                temp = renameSprite(tempFiles.getOrDefault(icon.getFile(),icon.getFile()),
+                                        temp,false);
+                                renamedFiles.put(icon, temp);
+                                progressBar.setValue(progressBar.getValue()+1);
+                            }
                         }
                 }
             } catch (IOException ex) {
                 getLogger().log(Level.WARNING, "Failed to save PKMN sprites", ex);
                 return false;
+            } catch (Exception ex){
+                getLogger().log(Level.WARNING, "Failed to save PKMN sprites", ex);
             }
             
             return true;
