@@ -2434,6 +2434,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             if (i1 >= index){
                                 try{
                                     entry.setValue(moveOrCopy(entry.getKey().toPath(),entry.getValue().toPath(),copySpritesToggle.isSelected(),true).toFile());
+                                    progressBar.setValue(progressBar.getValue()+1);
                                 } catch (FileNotFoundException ex){}
                                 index++;
                             }
