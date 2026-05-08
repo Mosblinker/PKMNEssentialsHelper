@@ -196,12 +196,14 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
         if (!isSelectionEmpty()){
             int size = getModelList().size();
             for (int i = 0; i < size; i++){
-                PkmnSpriteIcon icon = getModelList().get(i);
-                if (icon instanceof PalettePkmnSpriteIcon)
-                    icon = new PalettePkmnSpriteIcon(icon);
-                else
-                    icon = new PkmnSpriteIcon(icon);
-                getModelList().add(icon);
+                if (list.isSelectedIndex(i)){
+                    PkmnSpriteIcon icon = getModelList().get(i);
+                    if (icon instanceof PalettePkmnSpriteIcon)
+                        icon = new PalettePkmnSpriteIcon(icon);
+                    else
+                        icon = new PkmnSpriteIcon(icon);
+                    getModelList().add(icon);
+                }
             }
             setSelectionInterval(size,getModelList().size()-1);
         }
