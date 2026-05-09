@@ -40,7 +40,7 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
         super();
         super.setControlButtonsAreShown(false);
         super.setResetButtonIsShown(false);
-        super.setMoveToEdgeButtonsAreShown(false);
+//        super.setMoveToEdgeButtonsAreShown(false);
         browseButton = new JButton("Browse");
         browseButton.setActionCommand(BROWSE_ACTION_COMMAND);
         browseButton.addMouseListener(getDisabledComponentListener());
