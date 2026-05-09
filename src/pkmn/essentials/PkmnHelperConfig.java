@@ -815,15 +815,12 @@ public class PkmnHelperConfig {
         putFile(getRecolorSpritePreferences(),REFERENCE_SPRITE_KEY,file);
     }
     
-    public String getGameProjectFolder(){
-        return getPreferences().get(GAME_PROJECT_FOLDER_KEY, null);
+    public File getGameProjectFolder(){
+        return getFile(GAME_PROJECT_FOLDER_KEY, null);
     }
     
-    public void setGameProjectFolder(String folder){
-        if (folder == null || folder.isBlank())
-            getPreferences().remove(GAME_PROJECT_FOLDER_KEY);
-        else
-            getPreferences().put(GAME_PROJECT_FOLDER_KEY, folder);
+    public void setGameProjectFolder(File folder){
+        putFile(GAME_PROJECT_FOLDER_KEY, folder);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
