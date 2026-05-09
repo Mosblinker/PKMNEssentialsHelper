@@ -39,6 +39,13 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     
     public Type(Type type){
         super(type);
+        this.iconPosition = type.iconPosition;
+        this.isSpecialType = type.isSpecialType;
+        this.isPseudoType = type.isPseudoType;
+        this.flags.addAll(type.flags);
+        this.weaknesses.addAll(type.weaknesses);
+        this.resistances.addAll(type.resistances);
+        this.immunities.addAll(type.immunities);
     }
     /**
      * The internal ID for this type. This is how the scripts will refer to the 
