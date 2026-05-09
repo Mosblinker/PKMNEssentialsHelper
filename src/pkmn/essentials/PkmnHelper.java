@@ -13,6 +13,7 @@ import components.text.CompoundUndoManager;
 import components.text.action.commands.TextComponentCommands;
 import components.text.action.commands.UndoManagerCommands;
 import files.FilesExtended;
+import static files.FilesExtended.generateExtensionFilter;
 import files.extensions.ImageExtensions;
 import java.awt.Color;
 import java.awt.Component;
@@ -48,6 +49,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.sprite.*;
@@ -117,7 +119,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     protected static final String FAINTED_CRY_SUFFIX = "_fainted";
     
-    protected static final String PKMN_CRY_FILE_EXTENSION = ".ogg";
+    public static final String OGG_FILE_EXTENSION = "ogg";
+    
+    protected static final String PKMN_CRY_FILE_EXTENSION = OGG_FILE_EXTENSION;
+    /**
+     * This is a FileFilter for config files.
+     */
+    public static final FileFilter OGG_FILTER = generateExtensionFilter(
+            "OGG Vorbis Files",OGG_FILE_EXTENSION);
     
     private static final long LIST_DOUBLE_CLICK_THRESHOLD = 500;
     
@@ -262,7 +271,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteNameField.getDocument().addDocumentListener(handler);
         recolorSaveField.getDocument().addDocumentListener(handler);
         for (JFileChooser fc : new JFileChooser[]{
-            spriteFC,spriteFolderFC,gameFolderFC,recolorFolderFC
+            spriteFC,spriteFolderFC,gameFolderFC,recolorFolderFC,audioFC
         }){
             config.addFileChooser(fc, fc.getName());
             config.loadFileChooser(fc);
@@ -312,6 +321,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         scaleFrontToggle = new javax.swing.JToggleButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
         scaleBackToggle = new javax.swing.JToggleButton();
+        audioFC = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -452,6 +462,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         scaleBackToggle.setEnabled(false);
         scaleBackToggle.setMaximumSize(new java.awt.Dimension(200, 25));
         scalePanelAccessory.add(scaleBackToggle);
+
+        audioFC.setFileFilter(OGG_FILTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1806,6 +1818,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private BlendColorChooserPanel recolorBlendColorChooser;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
     private components.JColorSelector blendColorSelector;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bsSpritePanel;
