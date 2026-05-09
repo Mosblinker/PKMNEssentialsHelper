@@ -2369,6 +2369,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private Map<File,File> tempFiles = new LinkedHashMap<>();
         
+        private Map<SinglePkmnSpriteNamePanel,File> singleSpriteFiles = new HashMap<>();
+        
         private File frontFolder;
         private File backFolder;
         private File frontShinyFolder;
@@ -2415,32 +2417,46 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         followerFolder = new File(file,FOLLOWER_SPRITE_FOLDER);
                         followerShinyFolder = new File(file,FOLLOWER_SHINY_SPRITE_FOLDER);
                         folders = new File[]{
+                            footprintFolder,
+                            shadowFolder,
+                            eggFolder,
                             frontFolder,
                             backFolder,
                             frontShinyFolder,
                             backShinyFolder,
                             iconFolder,
                             iconShinyFolder,
-                            footprintFolder,
-                            shadowFolder,
-                            eggFolder,
                             followerFolder,
                             followerShinyFolder
                         };
                         
                         List<File> allFiles = new ArrayList<>();
-
+                        
+                        for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels) {
+                            if (panel.getIcon() != null)
+                                allFiles.add(panel.getIcon().getFile());
+                        }
                         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels){
                             copiedIndexes.add(new HashSet<>());
                             for (PkmnSpriteIcon icon : panel.getModelList())
                                 allFiles.add(icon.getFile());
                         }
-                        for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels) {
-                            if (panel.getIcon() != null)
-                                allFiles.add(panel.getIcon().getFile());
-                        }
-
+                        copiedIndexes.add(new HashSet<>());
+                        
                         int offset = 0;
+                        for (int i = 0; i < singlePkmnSpritePanels.length; i++){
+                            PkmnSpriteIcon icon = singlePkmnSpritePanels[i].getIcon();
+                            if (icon != null){
+                                Path path = icon.getFile().toPath();
+                                for (int j = offset+1; j < allFiles.size(); j++){
+                                    if (shouldCopyFile(path, allFiles.get(j).toPath())){
+                                        copiedIndexes.get(copiedIndexes.size()-1).add(i);
+                                        break;
+                                    }
+                                }
+                                offset++;
+                            }
+                        }
                         for (int i = 0; i < pkmnSpritePanels.length; i++){
                             Set<Integer> copied = copiedIndexes.get(i);
                             PkmnSpriteNameListPanel panel = pkmnSpritePanels[i];
@@ -2457,12 +2473,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         }
                         
                         for (File temp : allFiles){
-                            try{
-                                tempFiles.put(temp, File.createTempFile("PkmnHelperSprite", ".png"));
-                            } catch (IOException ex){
-                                getLogger().log(Level.INFO, null, ex);
+                            if (!tempFiles.containsKey(temp)){
+                                try{
+                                    tempFiles.put(temp, File.createTempFile("PkmnHelperSprite", ".png"));
+                                } catch (IOException ex){
+                                    getLogger().log(Level.INFO, null, ex);
+                                }
                             }
                         }
+                        
+                        singleSpriteFiles.put(footSpritePanel, new File(footprintFolder,name+".png"));
+                        singleSpriteFiles.put(shadowSpritePanel, new File(footprintFolder,name+".png"));
+                        singleSpriteFiles.put(eggSpritePanel, new File(eggFolder,name+".png"));
+                        singleSpriteFiles.put(eggIconSpritePanel, new File(eggFolder,name+EGG_ICON_SPRITE_SUFFIX+".png"));
+                        singleSpriteFiles.put(eggCracksSpritePanel, new File(eggFolder,name+EGG_HATCHING_SPRITE_SUFFIX+".png"));
+                        
                         progressBar.setMaximum(folders.length + allFiles.size() + tempFiles.size());
                         progressBar.setIndeterminate(false);
                         stage = 1;
@@ -2492,15 +2517,23 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         stage = 3;
                         index = 0;
                     case(3):
-                    case(4):
-                    case(5):
-                    case(6):
-                    case(7):
-                    case(8):
-                        while (stage < 9){
-                            File folder = folders[stage-3];
-                            List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-3].getListData();
-                            Set<Integer> copied = copiedIndexes.get(stage-3);
+                        for (int i = index; i < singlePkmnSpritePanels.length; i++, index++){
+                            SinglePkmnSpriteNamePanel panel = singlePkmnSpritePanels[i];
+                            PkmnSpriteIcon icon = panel.getIcon();
+                            if (icon != null){
+                                File temp = renameSprite(tempFiles.getOrDefault(icon.getFile(),icon.getFile()),
+                                    singleSpriteFiles.get(panel),false);
+                                renamedFiles.put(icon, temp);
+                                progressBar.setValue(progressBar.getValue()+1);
+                            }
+                        }
+                        stage = 4;
+                        index = 0;
+                    default:
+                        while (stage-4 < pkmnSpritePanels.length){
+                            File folder = folders[stage-1];
+                            List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-4].getListData();
+                            Set<Integer> copied = copiedIndexes.get(stage-4);
                             int maleIndex = 0;
                             int femaleIndex = 0;
 
@@ -2521,53 +2554,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             }
                             stage++;
                             index = 0;
-                        }
-                    case(9):
-                        PkmnSpriteIcon footIcon = footSpritePanel.getIcon();
-                        if (footIcon != null){
-                            File temp = renameSprite(tempFiles.getOrDefault(footIcon.getFile(),footIcon.getFile()),
-                                    new File(footprintFolder,name+".png"),false);
-                            renamedFiles.put(footIcon, temp);
-                            progressBar.setValue(progressBar.getValue()+1);
-                        }
-                        stage = 10;
-                        index = 0;
-                    case(10):
-                        PkmnSpriteIcon shadow = shadowSpritePanel.getIcon();
-                        if (shadow != null){
-                            File temp = renameSprite(tempFiles.getOrDefault(shadow.getFile(),shadow.getFile()),
-                                    new File(shadowFolder,name+".png"),false);
-                            renamedFiles.put(shadow, temp);
-                            progressBar.setValue(progressBar.getValue()+1);
-                        }
-                        stage = 11;
-                        index = 0;
-                    case(11):
-                        for (int i = index; i < 3; i++, index++){
-                            PkmnSpriteIcon icon;
-                            File temp;
-                            switch(i){
-                                case(0):
-                                    icon = eggSpritePanel.getIcon();
-                                    temp = new File(eggFolder,name+".png");
-                                    break;
-                                case(1):
-                                    icon = eggIconSpritePanel.getIcon();
-                                    temp = new File(eggFolder,name+EGG_ICON_SPRITE_SUFFIX+".png");
-                                    break;
-                                case(2):
-                                    icon = eggCracksSpritePanel.getIcon();
-                                    temp = new File(eggFolder,name+EGG_HATCHING_SPRITE_SUFFIX+".png");
-                                    break;
-                                default:
-                                    continue;
-                            }
-                            if (icon != null){
-                                temp = renameSprite(tempFiles.getOrDefault(icon.getFile(),icon.getFile()),
-                                        temp,false);
-                                renamedFiles.put(icon, temp);
-                                progressBar.setValue(progressBar.getValue()+1);
-                            }
                         }
                 }
             } catch (IOException ex) {
