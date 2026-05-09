@@ -129,6 +129,8 @@ public class PkmnHelperConfig {
     
     public static final String PREVIEW_SHOWN_KEY_SUFFIX = "PreviewShown";
     
+    public static final String GAME_PROJECT_FOLDER_KEY = "GameProjectFolder";
+    
     /**
      * This is a preference node to store the settings for this program.
      */
@@ -811,6 +813,17 @@ public class PkmnHelperConfig {
      */
     public void setRecolorReferenceSprite(File file){
         putFile(getRecolorSpritePreferences(),REFERENCE_SPRITE_KEY,file);
+    }
+    
+    public String getGameProjectFolder(){
+        return getPreferences().get(GAME_PROJECT_FOLDER_KEY, null);
+    }
+    
+    public void setGameProjectFolder(String folder){
+        if (folder == null || folder.isBlank())
+            getPreferences().remove(GAME_PROJECT_FOLDER_KEY);
+        else
+            getPreferences().put(GAME_PROJECT_FOLDER_KEY, folder);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
