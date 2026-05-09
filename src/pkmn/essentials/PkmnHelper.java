@@ -328,6 +328,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         eggCracksSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         followerSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         followerShinySpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        pkmnCriesAudioPanel = new pkmn.essentials.audio.TempPkmnAudioFileListPanel();
+        pkmnFaintCriesAudioPanel = new pkmn.essentials.audio.TempPkmnAudioFileListPanel();
         jLabel1 = new javax.swing.JLabel();
         spriteFolderField = new javax.swing.JTextField();
         copySpritesToggle = new javax.swing.JCheckBox();
@@ -575,6 +577,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jTabbedPane2.addTab("Follower Shiny", followerShinySpritePanel);
+
+        pkmnCriesAudioPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pkmnCriesAudioPanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Cries", pkmnCriesAudioPanel);
+
+        pkmnFaintCriesAudioPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pkmnFaintCriesAudioPanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Faint Cries", pkmnFaintCriesAudioPanel);
 
         jLabel1.setText("Target Folder:");
 
@@ -1264,6 +1280,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 browseMultipleSprites(8);
         }
     }//GEN-LAST:event_followerShinySpritePanelActionPerformed
+
+    private void pkmnCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnCriesAudioPanelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pkmnCriesAudioPanelActionPerformed
+
+    private void pkmnFaintCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnFaintCriesAudioPanelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pkmnFaintCriesAudioPanelActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -1556,6 +1580,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 case(3):
                 case(4):
                 case(5):
+                case(7):
+                case(8):
                     for (File file : files){
                         PkmnSpriteIcon icon = loadSprite(file);
                         if (icon != null){
@@ -1818,6 +1844,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnCriesAudioPanel;
+    private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnFaintCriesAudioPanel;
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
