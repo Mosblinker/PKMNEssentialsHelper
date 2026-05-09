@@ -117,6 +117,8 @@ public class PkmnHelperConfig {
     
     public static final String COPY_PKMN_SPRITES_KEY = "CopyPkmnSprites";
     
+    public static final String PKMN_SPRITES_USE_PROJECT_FOLDER = "UseProjectFolder";
+    
     public static final String RECOLOR_SPRITE_NODE_NAME = "RecolorSprites";
     
     public static final String RECOLOR_SCALE_INDEX_KEY = "ScaleIndex";
@@ -130,6 +132,8 @@ public class PkmnHelperConfig {
     public static final String PREVIEW_SHOWN_KEY_SUFFIX = "PreviewShown";
     
     public static final String GAME_PROJECT_FOLDER_KEY = "GameProjectFolder";
+    
+    
     
     /**
      * This is a preference node to store the settings for this program.
@@ -821,6 +825,14 @@ public class PkmnHelperConfig {
     
     public void setGameProjectFolder(File folder){
         putFile(GAME_PROJECT_FOLDER_KEY, folder);
+    }
+    
+    public boolean getPkmnSpritesUseGameFolder(){
+        return getPkmnSpritePreferences().getBoolean(PKMN_SPRITES_USE_PROJECT_FOLDER, false);
+    }
+    
+    public void setPkmnSpritesUseGameFolder(boolean value){
+        getPkmnSpritePreferences().putBoolean(PKMN_SPRITES_USE_PROJECT_FOLDER, value);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
