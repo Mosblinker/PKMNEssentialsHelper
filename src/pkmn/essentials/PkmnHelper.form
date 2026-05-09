@@ -163,6 +163,7 @@
         <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="OGG_FILTER" type="code"/>
         </Property>
+        <Property name="name" type="java.lang.String" value="audioFC" noResource="true"/>
       </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">

@@ -51,6 +51,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
+import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
@@ -231,8 +232,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             eggSpritePanel,eggIconSpritePanel,
             eggCracksSpritePanel
         };
+        
         recolorSpriteListPanel.addListDataListener(handler);
         recolorSpritePalette.addListDataListener(handler);
+        
+        pkmnAudioPanels = new TempPkmnAudioFileListPanel[]{
+            pkmnCriesAudioPanel,
+            pkmnFaintCriesAudioPanel
+        };
+        for (TempPkmnAudioFileListPanel panel : pkmnAudioPanels)
+            panel.addListDataListener(handler);
         
         recolorPaletteColorChooser = new PaletteColorChooserPanel();
         recolorReferencePaletteColorChooser = new PaletteColorChooserPanel("Reference Palette");
@@ -464,6 +473,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         scalePanelAccessory.add(scaleBackToggle);
 
         audioFC.setFileFilter(OGG_FILTER);
+        audioFC.setName("audioFC"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1030,6 +1040,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             panel.clear();
         for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels)
             panel.setIcon(null);
+        for (TempPkmnAudioFileListPanel panel : pkmnAudioPanels){
+            panel.clear();
+        }
         spriteFolderField.setText("");
         spriteNameField.setText("");
     }//GEN-LAST:event_spriteResetButtonActionPerformed
@@ -1294,11 +1307,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_followerShinySpritePanelActionPerformed
 
     private void pkmnCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnCriesAudioPanelActionPerformed
-        // TODO add your handling code here:
+        browseMultipleAudioFiles(0);
     }//GEN-LAST:event_pkmnCriesAudioPanelActionPerformed
 
     private void pkmnFaintCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnFaintCriesAudioPanelActionPerformed
-        // TODO add your handling code here:
+        browseMultipleAudioFiles(1);
     }//GEN-LAST:event_pkmnFaintCriesAudioPanelActionPerformed
     
     private void setFilesAreHidden(boolean value){
@@ -1390,19 +1403,19 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         return icon;
     }
     
-    private int browseSprites(String title, boolean multiSelection){
-        spriteFC.setMultiSelectionEnabled(multiSelection);
-        spriteFC.setDialogTitle(title);
+    private int browseFiles(String title, boolean multiSelection, JFileChooser fc){
+        fc.setMultiSelectionEnabled(multiSelection);
+        fc.setDialogTitle(title);
         int option;
         boolean noFile;
         do{
             noFile = false;
-            option = spriteFC.showOpenDialog(this);
-            spriteFC.setPreferredSize(spriteFC.getSize());
+            option = fc.showOpenDialog(this);
+            fc.setPreferredSize(fc.getSize());
                 // Set the file chooser's size in the config if it's saved
-            config.storeFileChooser(spriteFC);
+            config.storeFileChooser(fc);
             if (option == JFileChooser.APPROVE_OPTION){
-                for (File file : spriteFC.getSelectedFiles()){
+                for (File file : fc.getSelectedFiles()){
                     if (!file.exists()){
                         JOptionPane.showMessageDialog(this, 
                             "\""+file.getName()+"\"\nFile not found.\n"
@@ -1415,6 +1428,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         } while (option == JFileChooser.APPROVE_OPTION && noFile);
         return option;
+    }
+    
+    private int browseSprites(String title, boolean multiSelection){
+        return browseFiles(title,multiSelection,spriteFC);
     }
     
     private Map<Integer,Color> recolorChangeColors(Map<Integer,Color> changes){
@@ -1624,6 +1641,45 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
     }
     
+    private int browseAudio(String title, boolean multiSelection){
+        return browseFiles(title,multiSelection,audioFC);
+    }
+    
+    private void browseMultipleAudioFiles(int mode){
+        String title;
+        List<File> list;
+        switch (mode){
+            case(0):
+                title = "Select Pokemon Cries";
+                list = pkmnCriesAudioPanel.getModelList();
+                break;
+            case(1):
+                title = "Select Fainting Pokemon Cries";
+                list = pkmnFaintCriesAudioPanel.getModelList();
+                break;
+            default:
+                return;
+        }
+        if (list == null)
+            return;
+        if (browseAudio(title,true) == JFileChooser.APPROVE_OPTION){
+            File[] files = audioFC.getSelectedFiles();
+            Arrays.sort(files, fileNameComparator);
+            switch (mode){
+                case(0):
+                case(1):
+//                    for (File file : files){
+//                        PkmnSpriteIcon icon = loadSprite(file);
+//                        if (icon != null){
+//                            list.add(icon);
+//                        }
+//                    }
+                    list.addAll(Arrays.asList(files));
+                    updateSpriteApplyButton();
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1708,6 +1764,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         break;
                 }
             }
+            if (!enabled){
+                for (TempPkmnAudioFileListPanel panel : pkmnAudioPanels){
+                    enabled = !panel.getModelList().isEmpty();
+                    if (enabled)
+                        break;
+                }
+            }
         }
         spriteApplyButton.setEnabled(enabled);
     }
@@ -1743,6 +1806,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels)
             panel.setEnabled(enabled);
+        for (TempPkmnAudioFileListPanel panel : pkmnAudioPanels){
+            panel.setEnabled(enabled);
+        }
         inputEnabledTest.setSelected(enabled);
         recolorSpriteListPanel.setEnabled(enabled);
         updateRecolorPaletteButtons();
@@ -1793,6 +1859,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private PkmnSpriteNameListPanel[] pkmnSpritePanels;
     
     private SinglePkmnSpriteNamePanel[] singlePkmnSpritePanels;
+    
+    private TempPkmnAudioFileListPanel[] pkmnAudioPanels;
     
     private ArrayListModel<Color> recolorSpritePalette = new ArrayListModel<>();
     
@@ -2421,6 +2489,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private Map<PkmnSpriteIcon, File> renamedFiles = new HashMap<>();
         
+        private Map<List<File>,Map<Integer,File>> renamedAudioFiles = new HashMap<>();
+        
         private List<Set<Integer>> copiedIndexes = new ArrayList<>();
         
         private Map<File,File> tempFiles = new LinkedHashMap<>();
@@ -2438,6 +2508,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         private File eggFolder;
         private File followerFolder;
         private File followerShinyFolder;
+        private File criesFolder;
         private File[] folders;
         
         private int stage = 0;
@@ -2472,10 +2543,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         eggFolder = new File(file,EGG_SPRITE_FOLDER);
                         followerFolder = new File(file,FOLLOWER_SPRITE_FOLDER);
                         followerShinyFolder = new File(file,FOLLOWER_SHINY_SPRITE_FOLDER);
+                        criesFolder = new File(file,PKMN_CRIES_FOLDER);
                         folders = new File[]{
                             footprintFolder,
                             shadowFolder,
                             eggFolder,
+                            criesFolder,
                             frontFolder,
                             backFolder,
                             frontShinyFolder,
@@ -2531,7 +2604,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         for (File temp : allFiles){
                             if (!tempFiles.containsKey(temp)){
                                 try{
-                                    tempFiles.put(temp, File.createTempFile("PkmnHelperSprite", ".png"));
+                                    tempFiles.put(temp, File.createTempFile("PkmnHelper", ".png"));
                                 } catch (IOException ex){
                                     getLogger().log(Level.INFO, null, ex);
                                 }
@@ -2543,6 +2616,34 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         singleSpriteFiles.put(eggSpritePanel, new File(eggFolder,name+".png"));
                         singleSpriteFiles.put(eggIconSpritePanel, new File(eggFolder,name+EGG_ICON_SPRITE_SUFFIX+".png"));
                         singleSpriteFiles.put(eggCracksSpritePanel, new File(eggFolder,name+EGG_HATCHING_SPRITE_SUFFIX+".png"));
+                        
+                        for (int i = 0; i <  pkmnAudioPanels.length; i++){
+                            TempPkmnAudioFileListPanel panel = pkmnAudioPanels[i];
+                            Set<Integer> copied = new HashSet<>();
+                            for (int j = 0; j < panel.getModelList().size(); j++){
+                                File temp = panel.getModelList().get(j);
+                                Path path = temp.toPath();
+                                for (int k = i; k < pkmnAudioPanels.length; k++){
+                                    TempPkmnAudioFileListPanel panel2 = pkmnAudioPanels[k];
+                                    for (int l = (k == i)?j+1:0; l < panel2.getModelList().size(); l++){
+                                        if (shouldCopyFile(path, panel2.getModelList().get(l).toPath())){
+                                            copied.add(j);
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (!tempFiles.containsKey(temp)){
+                                    try{
+                                        tempFiles.put(temp, File.createTempFile("PkmnHelper", ".ogg"));
+                                    } catch (IOException ex){
+                                        getLogger().log(Level.INFO, null, ex);
+                                    }
+                                }
+                            }
+                            allFiles.addAll(panel.getModelList());
+                            copiedIndexes.add(copied);
+                            renamedAudioFiles.put(panel.getModelList(), new HashMap<>());
+                        }
                         
                         progressBar.setMaximum(folders.length + allFiles.size() + tempFiles.size());
                         progressBar.setIndeterminate(false);
@@ -2578,18 +2679,30 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             PkmnSpriteIcon icon = panel.getIcon();
                             if (icon != null){
                                 File temp = renameSprite(tempFiles.getOrDefault(icon.getFile(),icon.getFile()),
-                                    singleSpriteFiles.get(panel),false);
+                                    singleSpriteFiles.get(panel),
+                                    copiedIndexes.get(pkmnSpritePanels.length).contains(i));
                                 renamedFiles.put(icon, temp);
                                 progressBar.setValue(progressBar.getValue()+1);
                             }
                         }
                         stage = 4;
                         index = 0;
+                    case(4):
+                        renameAudioFiles(pkmnCriesAudioPanel.getModelList(),criesFolder,"",
+                                copiedIndexes.get(pkmnSpritePanels.length+1));
+                        stage = 5;
+                        index = 0;
+                    case(5):
+                        renameAudioFiles(pkmnFaintCriesAudioPanel.getModelList(),
+                                criesFolder,FAINTED_CRY_SUFFIX,
+                                copiedIndexes.get(pkmnSpritePanels.length+2));
+                        stage = 6;
+                        index = 0;
                     default:
-                        while (stage-4 < pkmnSpritePanels.length){
-                            File folder = folders[stage-1];
-                            List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-4].getListData();
-                            Set<Integer> copied = copiedIndexes.get(stage-4);
+                        while (stage-6 < pkmnSpritePanels.length){
+                            File folder = folders[stage-2];
+                            List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-6].getListData();
+                            Set<Integer> copied = copiedIndexes.get(stage-6);
                             int maleIndex = 0;
                             int femaleIndex = 0;
 
@@ -2621,6 +2734,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             
             return true;
         }
+        
+        private void renameAudioFiles(List<File> files, File folder, 
+                String suffix, Set<Integer> copied) throws IOException{
+            for (int i = index; i < files.size(); i++, index++){
+                String newName = name;
+                if (i > 0)
+                    newName += "_"+i;
+                File temp = renameSprite(tempFiles.getOrDefault(files.get(i),files.get(i)),
+                        new File(folder,newName+suffix+"."+OGG_FILE_EXTENSION),
+                        copied.contains(i));
+                renamedAudioFiles.get(files).put(i, temp);
+                progressBar.setValue(progressBar.getValue()+1);
+            }
+        }
         @Override
         protected void done(){
             super.done();
@@ -2632,9 +2759,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels){
                 panel.refreshName();
             }
+            for (TempPkmnAudioFileListPanel panel : pkmnAudioPanels){
+                Map<Integer,File> changes = renamedAudioFiles.get(panel.getModelList());
+                if (changes != null){
+                    for (Map.Entry<Integer,File> entry : changes.entrySet()){
+                        panel.getModelList().set(entry.getKey(), entry.getValue());
+                    }
+                }
+            }
         }
     }
-    
     
     private class RecolorSpriteSaver extends FileSaver{
         
