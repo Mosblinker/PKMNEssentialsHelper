@@ -4,9 +4,12 @@
  */
 package pkmn.essentials.data.pkmn;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSData;
 
 /**
@@ -143,5 +146,33 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     @Override
     public int compareTo(Type o) {
         return getID().compareTo(o.getID());
+    }
+    
+    private static List<ImageIcon> getTypeIcons(BufferedImage icons, int typeCount, List<Type> types){
+        Objects.requireNonNull(icons);
+        int height = Math.floorDiv(icons.getHeight(), typeCount);
+        List<ImageIcon> iconList = new ArrayList<>();
+        for (int i = 0; i < typeCount; i++){
+            BufferedImage img = icons.getSubimage(0, height*i, icons.getHeight(), height);
+            String desc = null;
+            if (types != null){
+                for (Type type : types){
+                    if (type.getIconPosition() == i){
+                        desc = type.getName();
+                        break;
+                    }
+                }
+            }
+            iconList.add(new ImageIcon(img,desc));
+        }
+        return iconList;
+    }
+    
+    public static List<ImageIcon> getTypeIcons(BufferedImage icons, List<Type> types){
+        return getTypeIcons(icons,types.size(),types);
+    }
+    
+    public static List<ImageIcon> getTypeIcons(BufferedImage icons, int typeCount){
+        return getTypeIcons(icons,typeCount,null);
     }
 }
