@@ -103,6 +103,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     protected static final String EGG_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Eggs";
     
+    protected static final String FOLLOWER_SPRITE_FOLDER = "Graphics"+File.separator+"Characters"+File.separator+"Followers";
+    
+    protected static final String FOLLOWER_SHINY_SPRITE_FOLDER = FOLLOWER_SPRITE_FOLDER + " shiny";
+    
     protected static final String FEMALE_SPRITE_SUFFIX = "_female";
     
     protected static final String EGG_ICON_SPRITE_SUFFIX = "_icon";
@@ -316,6 +320,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         eggSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         eggIconSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         eggCracksSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        followerSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        followerShinySpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         jLabel1 = new javax.swing.JLabel();
         spriteFolderField = new javax.swing.JTextField();
         copySpritesToggle = new javax.swing.JCheckBox();
@@ -550,6 +556,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         jTabbedPane2.addTab("Egg Hatching", eggCracksSpritePanel);
 
+        followerSpritePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                followerSpritePanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Follower", followerSpritePanel);
+
+        followerShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                followerShinySpritePanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Follower Shiny", followerShinySpritePanel);
+
         jLabel1.setText("Target Folder:");
 
         copySpritesToggle.setText("Copy Files");
@@ -598,7 +618,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -623,7 +643,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -1227,6 +1247,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorReferencePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorReferencePanelPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_recolorReferencePanelPropertyChange
+
+    private void followerSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerSpritePanelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_followerSpritePanelActionPerformed
+
+    private void followerShinySpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerShinySpritePanelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_followerShinySpritePanelActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -1751,6 +1779,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerShinySpritePanel;
+    private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerSpritePanel;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel footSpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel fsSpritePanel;
     private javax.swing.JButton gameBrowseButton;
