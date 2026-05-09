@@ -235,6 +235,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         recolorSpriteListPanel.addListDataListener(handler);
         recolorSpritePalette.addListDataListener(handler);
+        gameFolderField.getDocument().addDocumentListener(handler);
         
         pkmnAudioPanels = new TempPkmnAudioFileListPanel[]{
             pkmnCriesAudioPanel,
@@ -301,6 +302,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorColorExchange.setPreviewShown(config.getRecolorPreviewShown(recolorColorExchange));
         recolorBlendChange.setPreviewShown(config.getRecolorPreviewShown(recolorBlendChange));
         jTabbedPane1.setSelectedIndex(config.getSelectedTabIndex());
+        
+        gameProjectFolder = config.getGameProjectFolder();
+        if (gameProjectFolder != null)
+            gameFolderField.setText(gameProjectFolder.toString());
+        spriteUseGameToggle.setSelected(config.getPkmnSpritesUseGameFolder());
+        updateGameProjectFolderButtons();
+        updateSpriteFolderButtons();
    }
 
     /**
@@ -380,6 +388,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
         gameFolderField = new javax.swing.JTextField();
+        gameLoadButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -850,7 +859,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addComponent(recolorBrowseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(recolorSaveButton))
-                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -887,6 +896,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameBrowseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameBrowseButtonActionPerformed(evt);
+            }
+        });
+
+        gameLoadButton.setText("Load");
+        gameLoadButton.setEnabled(false);
+        gameLoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameLoadButtonActionPerformed(evt);
             }
         });
 
@@ -950,7 +967,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gameFolderField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gameBrowseButton)))
+                        .addComponent(gameBrowseButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(gameLoadButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -960,7 +979,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(gameBrowseButton)
-                    .addComponent(gameFolderField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gameFolderField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gameLoadButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1007,7 +1027,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_fSpritePanelActionPerformed
 
     private void spriteApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteApplyButtonActionPerformed
-        File folder = new File(spriteFolderField.getText());
+        File folder;
+        if (spriteUseGameToggle.isEnabled() && spriteUseGameToggle.isSelected())
+            folder = gameProjectFolder;
+        else
+            folder = new File(spriteFolderField.getText());
         String name = spriteNameField.getText();
         new SpriteRenamer(folder,name).execute();
     }//GEN-LAST:event_spriteApplyButtonActionPerformed
@@ -1079,11 +1103,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_singleSpritePanelPropertyChange
 
     private void gameBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameBrowseButtonActionPerformed
-        // TODO add your handling code here:
+        if (browseFiles(gameFolderFC.getDialogTitle(),false,gameFolderFC) == JFileChooser.APPROVE_OPTION){
+//            File file = FilesExtended.removeQuotations(gameFolderFC.getSelectedFile())
+            File file = gameFolderFC.getSelectedFile();
+            gameFolderField.setText(file.toString());
+        }
     }//GEN-LAST:event_gameBrowseButtonActionPerformed
 
     private void spriteUseGameToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteUseGameToggleActionPerformed
-        // TODO add your handling code here:
+        spriteFolderField.setEnabled(inputEnabled);
+        updateSpriteFolderButtons();
+        config.setPkmnSpritesUseGameFolder(spriteUseGameToggle.isSelected());
     }//GEN-LAST:event_spriteUseGameToggleActionPerformed
     
     private void recolorScaleSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorScaleSliderStateChanged
@@ -1313,6 +1343,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void pkmnFaintCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnFaintCriesAudioPanelActionPerformed
         browseMultipleAudioFiles(1);
     }//GEN-LAST:event_pkmnFaintCriesAudioPanelActionPerformed
+
+    private void gameLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameLoadButtonActionPerformed
+        File file = new File(gameFolderField.getText());
+        file = FilesExtended.removeQuotations(file);
+        if (!file.exists()){
+            JOptionPane.showMessageDialog(this, "Game project folder does not exist.", 
+                    "ERROR - Folder Not Found", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        gameProjectFolder = file;
+        config.setGameProjectFolder(file);
+        updateGameProjectFolderButtons();
+        updateSpriteFolderButtons();
+    }//GEN-LAST:event_gameLoadButtonActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -1743,14 +1787,25 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             new PkmnHelper().setVisible(true);
         });
     }
+    
+    private void updateSpriteFolderButtons(){
+        spriteFolderField.setEnabled(inputEnabled && !(spriteUseGameToggle.isEnabled() && spriteUseGameToggle.isSelected()));
+        spriteFolderBrowseButton.setEnabled(spriteFolderField.isEnabled());
+        updateSpriteApplyButton();
+    }
     /**
      * 
      */
     private void updateSpriteApplyButton(){
-        boolean enabled = inputEnabled && spriteFolderField.getText() != null && 
-                !spriteFolderField.getText().isBlank() && 
-                spriteNameField.getText() != null && 
+        boolean enabled = inputEnabled && spriteNameField.getText() != null && 
                 !spriteNameField.getText().isBlank();
+        if (enabled){
+            if (spriteUseGameToggle.isEnabled() && spriteUseGameToggle.isSelected())
+                enabled = gameProjectFolder != null;
+            else
+                enabled = spriteFolderField.getText() != null && 
+                        !spriteFolderField.getText().isBlank();
+        }
         if (enabled){
             for (PkmnSpriteNameListPanel panel : pkmnSpritePanels){
                 enabled = !panel.getModelList().isEmpty();
@@ -1792,14 +1847,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 !recolorSaveField.getText().isEmpty() && 
                 !recolorSpriteListPanel.getModelList().isEmpty());
     }
+    
+    private void updateGameProjectFolderButtons(){
+        gameBrowseButton.setEnabled(gameFolderField.isEnabled());
+        gameLoadButton.setEnabled(gameFolderField.isEnabled() && gameFolderField.getText() != null &&
+                !gameFolderField.getText().isBlank());
+        spriteUseGameToggle.setEnabled(gameFolderField.isEnabled() && gameProjectFolder != null);
+    }
     @Override
     public void setInputEnabled(boolean enabled) {
         inputEnabled = enabled;
-        updateSpriteApplyButton();
         spriteNameField.setEnabled(enabled);
-        spriteFolderField.setEnabled(enabled);
         copySpritesToggle.setEnabled(enabled);
-        spriteFolderBrowseButton.setEnabled(enabled);
         spriteResetButton.setEnabled(enabled);
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels){
             panel.setEnabled(enabled);
@@ -1816,6 +1875,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateRecolorSaveButton();
         recolorBrowseButton.setEnabled(enabled);
         recolorSaveField.setEnabled(enabled);
+        gameFolderField.setEnabled(enabled);
+        updateGameProjectFolderButtons();
+        updateSpriteFolderButtons();
     }
     @Override
     public boolean isInputEnabled() {
@@ -1885,6 +1947,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private PaletteColorChooserPanel blendReferencePaletteColorChooser;
     
     private BlendColorChooserPanel recolorBlendColorChooser;
+    
+    private File gameProjectFolder = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -1907,6 +1971,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JButton gameBrowseButton;
     private javax.swing.JFileChooser gameFolderFC;
     private javax.swing.JTextField gameFolderField;
+    private javax.swing.JButton gameLoadButton;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel iSpritePanel;
     private javax.swing.JCheckBoxMenuItem inputEnabledTest;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel isSpritePanel;
@@ -1973,6 +2038,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.setPkmnSpriteName(spriteNameField.getText());
         if (evt.getDocument() == recolorSaveField.getDocument())
             updateRecolorSaveButton();
+        if (gameFolderField.getDocument() == evt.getDocument())
+            updateGameProjectFolderButtons();
     }
     
     private class Handler implements DocumentListener, ListDataListener{

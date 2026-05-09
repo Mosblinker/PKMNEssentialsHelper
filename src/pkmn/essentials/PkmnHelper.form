@@ -256,6 +256,8 @@
                       <Component id="gameFolderField" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="gameBrowseButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="gameLoadButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -270,6 +272,7 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="gameBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="gameFolderField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="gameLoadButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" max="32767" attributes="0"/>
@@ -638,7 +641,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="recolorSaveButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jTabbedPane3" pref="717" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane3" pref="739" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -900,6 +903,15 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="gameFolderField">
+    </Component>
+    <Component class="javax.swing.JButton" name="gameLoadButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Load"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameLoadButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
