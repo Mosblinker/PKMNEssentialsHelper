@@ -1,0 +1,140 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package pkmn.essentials.data.pkmn;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import pkmn.essentials.data.AbstractPBSData;
+
+/**
+ *
+ * @author Mosblinker
+ */
+public class Type extends AbstractPBSData implements Comparable<Type>{
+    
+    public static final String PBS_FILE = "types.txt";
+    
+    public static final String ICONS = "Graphics"+File.separator+"UI"+File.separator+"types.png";
+    
+    private int iconPosition = 0;
+    
+    private boolean isSpecialType = false;
+    
+    private boolean isPseudoType = false;
+    
+    private List<String> flags = new ArrayList<>();
+    
+    private List<Type> weaknesses = new ArrayList<>();
+    
+    private List<Type> resistances = new ArrayList<>();
+    
+    private List<Type> immunities = new ArrayList<>();
+    
+    public Type(String id){
+        super(id);
+    }
+    
+    public Type(Type type){
+        super(type);
+    }
+    /**
+     * The internal ID for this type. This is how the scripts will refer to the 
+     * type. Each type much have a different ID. This is surrounded by square 
+     * brackets in the PBS file.
+     * @return 
+     */
+    @Override
+    public String getID(){
+        return super.getID();
+    }
+    /**
+     * The name of this type, as seen by the player.
+     * @return 
+     */
+    @Override
+    public String getName(){
+        return super.getName();
+    }
+    /**
+     * A number that determines which icon to use to represent this type. This 
+     * is also used by the move Hidden Power when determining its type.
+     * @return 
+     */
+    public int getIconPosition(){
+        return iconPosition;
+    }
+    /**
+     * 
+     * @param position 
+     */
+    public void setIconPosition(int position){
+        this.iconPosition = position;
+    }
+    /**
+     * Whether moves of this type will use the special stats or physical stats 
+     * for damage calculation.
+     * @return 
+     */
+    public boolean isSpecialType(){
+        return isSpecialType;
+    }
+    /**
+     * 
+     * @param specialType 
+     */
+    public void setSpecialType(boolean specialType){
+        this.isSpecialType = specialType;
+    }
+    /**
+     * Whether this type is a pseudotype, or in other words not a "proper" type.
+     * No Pokemon should have a pseudotype as one of it's types.
+     * @return 
+     */
+    public boolean isPseudoType(){
+        return isPseudoType;
+    }
+    /**
+     * 
+     * @param value 
+     */
+    public void setPseudoType(boolean value){
+        isPseudoType = value;
+    }
+    /**
+     * Labels that can be applied to a type to make it behave differently.
+     * @return 
+     */
+    public List<String> getFlags(){
+        return flags;
+    }
+    /**
+     * A list of types that will inflict double damage (or in other words, are 
+     * super effective) against a Pokemon of this type.
+     * @return 
+     */
+    public List<Type> getWeaknesses(){
+        return weaknesses;
+    }
+    /**
+     * A list of types that will inflict half damage (or in other words, are 
+     * not very effective) against a Pokemon of this type.
+     * @return 
+     */
+    public List<Type> getResistances(){
+        return resistances;
+    }
+    /**
+     * A list of types that cannot inflict any damage on a Pokemon of this type.
+     * @return 
+     */
+    public List<Type> getImmunities(){
+        return immunities;
+    }
+    @Override
+    public int compareTo(Type o) {
+        return getID().compareTo(o.getID());
+    }
+}
