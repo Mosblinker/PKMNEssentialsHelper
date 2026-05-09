@@ -216,6 +216,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         };
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
             panel.addListDataListener(handler);
+        singlePkmnSpritePanels = new SinglePkmnSpriteNamePanel[]{
+            footSpritePanel,shadowSpritePanel,
+            eggSpritePanel,eggIconSpritePanel,
+            eggCracksSpritePanel
+        };
         recolorSpriteListPanel.addListDataListener(handler);
         recolorSpritePalette.addListDataListener(handler);
         
@@ -994,11 +999,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void spriteResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteResetButtonActionPerformed
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
             panel.clear();
-        footSpritePanel.setIcon(null);
-        shadowSpritePanel.setIcon(null);
-        eggSpritePanel.setIcon(null);
-        eggIconSpritePanel.setIcon(null);
-        eggCracksSpritePanel.setIcon(null);
+        for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels)
+            panel.setIcon(null);
         spriteFolderField.setText("");
         spriteNameField.setText("");
     }//GEN-LAST:event_spriteResetButtonActionPerformed
@@ -1647,9 +1649,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     break;
             }
             if (!enabled){
-                for (SinglePkmnSpriteNamePanel panel : new SinglePkmnSpriteNamePanel[]{
-                    footSpritePanel,shadowSpritePanel,eggSpritePanel,eggIconSpritePanel,eggCracksSpritePanel
-                }) {
+                for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels) {
                     enabled = panel != null;
                     if (enabled)
                         break;
@@ -1688,11 +1688,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels){
             panel.setEnabled(enabled);
         }
-        footSpritePanel.setEnabled(enabled);
-        shadowSpritePanel.setEnabled(enabled);
-        eggSpritePanel.setEnabled(enabled);
-        eggIconSpritePanel.setEnabled(enabled);
-        eggCracksSpritePanel.setEnabled(enabled);
+        for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels)
+            panel.setEnabled(enabled);
         inputEnabledTest.setSelected(enabled);
         recolorSpriteListPanel.setEnabled(enabled);
         updateRecolorPaletteButtons();
@@ -1741,6 +1738,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private FileNameComparator fileNameComparator = new FileNameComparator();
     
     private PkmnSpriteNameListPanel[] pkmnSpritePanels;
+    
+    private SinglePkmnSpriteNamePanel[] singlePkmnSpritePanels;
     
     private ArrayListModel<Color> recolorSpritePalette = new ArrayListModel<>();
     
@@ -2379,6 +2378,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         private File footprintFolder;
         private File shadowFolder;
         private File eggFolder;
+        private File followerFolder;
+        private File followerShinyFolder;
         private File[] folders;
         
         private int stage = 0;
@@ -2411,6 +2412,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         footprintFolder = new File(file,FOOTPRINTS_SPRITE_FOLDER);
                         shadowFolder = new File(file,SHADOW_SPRITE_FOLDER);
                         eggFolder = new File(file,EGG_SPRITE_FOLDER);
+                        followerFolder = new File(file,FOLLOWER_SPRITE_FOLDER);
+                        followerShinyFolder = new File(file,FOLLOWER_SHINY_SPRITE_FOLDER);
                         folders = new File[]{
                             frontFolder,
                             backFolder,
@@ -2420,7 +2423,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             iconShinyFolder,
                             footprintFolder,
                             shadowFolder,
-                            eggFolder
+                            eggFolder,
+                            followerFolder,
+                            followerShinyFolder
                         };
                         
                         List<File> allFiles = new ArrayList<>();
@@ -2430,9 +2435,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             for (PkmnSpriteIcon icon : panel.getModelList())
                                 allFiles.add(icon.getFile());
                         }
-                        for (SinglePkmnSpriteNamePanel panel : new SinglePkmnSpriteNamePanel[]{
-                                footSpritePanel,shadowSpritePanel,eggSpritePanel,eggIconSpritePanel,eggCracksSpritePanel
-                            }) {
+                        for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels) {
                             if (panel.getIcon() != null)
                                 allFiles.add(panel.getIcon().getFile());
                         }
@@ -2584,7 +2587,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
             for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
                 panel.repaint();
-            footSpritePanel.refreshName();
+            for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels){
+                panel.refreshName();
+            }
         }
     }
     
