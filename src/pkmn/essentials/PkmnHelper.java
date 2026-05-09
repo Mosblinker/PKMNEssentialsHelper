@@ -212,7 +212,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         pkmnSpritePanels = new PkmnSpriteNameListPanel[]{
             fSpritePanel,bSpritePanel,
             fsSpritePanel,bsSpritePanel,
-            iSpritePanel,isSpritePanel
+            iSpritePanel,isSpritePanel,
+            followerSpritePanel,followerShinySpritePanel
         };
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
             panel.addListDataListener(handler);
@@ -1251,11 +1252,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorReferencePanelPropertyChange
 
     private void followerSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerSpritePanelActionPerformed
-        // TODO add your handling code here:
+        switch(evt.getActionCommand()){
+            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
+                browseMultipleSprites(7);
+        }
     }//GEN-LAST:event_followerSpritePanelActionPerformed
 
     private void followerShinySpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerShinySpritePanelActionPerformed
-        // TODO add your handling code here:
+        switch(evt.getActionCommand()){
+            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
+                browseMultipleSprites(8);
+        }
     }//GEN-LAST:event_followerShinySpritePanelActionPerformed
     
     private void setFilesAreHidden(boolean value){
@@ -1524,6 +1531,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             case(6):
                 title = "Select Sprites To Recolor";
                 list = recolorSpriteListPanel.getModelList();
+                break;
+            case(7):
+                title = "Select Follower Sprites";
+                list = followerSpritePanel.getModelList();
+                break;
+            case(8):
+                title = "Select Shiny Follower Sprites";
+                list = followerShinySpritePanel.getModelList();
                 break;
             default:
                 return;
