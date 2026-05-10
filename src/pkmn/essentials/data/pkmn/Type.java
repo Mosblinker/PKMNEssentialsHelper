@@ -7,6 +7,8 @@ package pkmn.essentials.data.pkmn;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -47,10 +49,15 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     
     private Set<Type> weaknesses = new LinkedHashSet<>();
     
+    private String weaknessesStr = null;
+    
     private Set<Type> resistances = new LinkedHashSet<>();
+    
+    private String resistancesStr = null;
     
     private Set<Type> immunities = new LinkedHashSet<>();
     
+    private String immunitiesStr = null;
     
     public Type(){
         super();
@@ -69,6 +76,9 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
         this.weaknesses.addAll(type.weaknesses);
         this.resistances.addAll(type.resistances);
         this.immunities.addAll(type.immunities);
+        this.weaknessesStr = type.weaknessesStr;
+        this.resistancesStr = type.resistancesStr;
+        this.immunitiesStr = type.immunitiesStr;
     }
     /**
      * The internal ID for this type. This is how the scripts will refer to the 
@@ -188,6 +198,48 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     public int compareTo(Type o) {
         return getID().compareTo(o.getID());
     }
+    @Override
+    public String toData(){
+        String str = super.toData();
+        if (getName() != null)
+            str += System.lineSeparator()+PROPERTIES[0] + " = " + getName();
+        if (isIconPositionSet())
+            str += System.lineSeparator()+PROPERTIES[1] + " = " + getIconPosition();
+        if (isSpecialTypeSet())
+            str += System.lineSeparator()+PROPERTIES[2] + " = " + isSpecialType();
+        if (isPseudoTypeSet())
+            str += System.lineSeparator()+PROPERTIES[3] + " = " + isPseudoType();
+        if (!getFlags().isEmpty()){
+            str += System.lineSeparator()+PROPERTIES[4] + " = ";
+            String flagStr = "";
+            for (String flag : flags){
+                flagStr += ", " + flag;
+            }
+            str += flagStr.substring(2);
+        }
+        if (!getWeaknesses().isEmpty())
+            str += System.lineSeparator()+PROPERTIES[5] + " = " + typesToData(getWeaknesses());
+        else if (weaknessesStr != null)
+            str += System.lineSeparator()+PROPERTIES[5] + " = " + weaknessesStr;
+        if (!getResistances().isEmpty())
+            str += System.lineSeparator()+PROPERTIES[6] + " = " + typesToData(getResistances());
+        else if (resistancesStr != null)
+            str += System.lineSeparator()+PROPERTIES[6] + " = " + resistancesStr;
+        if (!getImmunities().isEmpty())
+            str += System.lineSeparator()+PROPERTIES[7] + " = " + typesToData(getImmunities());
+        else if (resistancesStr != null)
+            str += System.lineSeparator()+PROPERTIES[7] + " = " + immunitiesStr;
+        return str;
+    }
+    
+    private String typesToData(Collection<Type> types){
+        if (types.isEmpty())
+            return "";
+        String str = "";
+        for (Type type : types)
+            str += ", " + type.getID();
+        return str.substring(2);
+    }
     
     private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
         BufferedImage img = icons.getSubimage(0, height*index, icons.getHeight(), height);
@@ -213,6 +265,79 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
             iconMap.put(type, getTypeIcon(icons,height,type.getIconPosition(),type.getName()));
         }
         return iconMap;
+    }
+    
+    @Override
+    protected void reset(){
+        super.reset();
+        flags.clear();
+        weaknesses.clear();
+        resistances.clear();
+        immunities.clear();
+        iconPosition = null;
+        isSpecialType = null;
+        isPseudoType = null;
+        weaknessesStr = null;
+        resistancesStr = null;
+        immunitiesStr = null;
+    }
+
+    @Override
+    protected void setProperty(int propertyIndex, String value) {
+        switch(propertyIndex){
+            case(0):
+                setName(value);
+                break;
+            case(1):
+                setIconPosition(Integer.valueOf(value));
+                break;
+            case(2):
+                setSpecialType(Boolean.valueOf(value));
+                break;
+            case(3):
+                setPseudoType(Boolean.valueOf(value));
+                break;
+            case(4):
+                String[] arr = value.split(",");
+                for (String temp : arr){
+                    flags.add(temp.trim());
+                }
+                break;
+            case(5):
+                this.weaknessesStr = value;
+                break;
+            case(6):
+                this.resistancesStr = value;
+                break;
+           case(7):
+               this.immunitiesStr = value;
+        }
+        if (propertyIndex == getPropertyNames().length)
+            setID(value);
+    }
+    
+    public void loadTypeStrengthsAndWeaknesses(Collection<Type> types){
+        loadTypes(types,weaknessesStr,weaknesses);
+        loadTypes(types,resistancesStr,resistances);
+        loadTypes(types,immunitiesStr,immunities);
+    }
+    
+    private void loadTypes(Collection<Type> types, String values, Collection<Type> target){
+        if (values == null || values.isBlank())
+            return;
+        String[] arr = values.split(",");
+        for (String str : arr){
+            String temp = str.trim();
+            Iterator<Type> itr = types.iterator();
+            Type type = null;
+            while(itr.hasNext() && type == null){
+                Type currType = itr.next();
+                if (currType.matchesID(temp))
+                    type = currType;
+            }
+            if (type != null)
+                target.add(type);
+        }
     }
     @Override
     protected String[] getPropertyNames() {
