@@ -8,9 +8,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSData;
 
@@ -32,11 +34,12 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     
     private List<String> flags = new ArrayList<>();
     
-    private List<Type> weaknesses = new ArrayList<>();
+    private Set<Type> weaknesses = new LinkedHashSet<>();
     
-    private List<Type> resistances = new ArrayList<>();
+    private Set<Type> resistances = new LinkedHashSet<>();
     
-    private List<Type> immunities = new ArrayList<>();
+    private Set<Type> immunities = new LinkedHashSet<>();
+    
     
     public Type(String id){
         super(id);
@@ -144,26 +147,26 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
         return flags;
     }
     /**
-     * A list of types that will inflict double damage (or in other words, are 
+     * A set of types that will inflict double damage (or in other words, are 
      * super effective) against a Pokemon of this type.
      * @return 
      */
-    public List<Type> getWeaknesses(){
+    public Set<Type> getWeaknesses(){
         return weaknesses;
     }
     /**
-     * A list of types that will inflict half damage (or in other words, are 
+     * A set of types that will inflict half damage (or in other words, are 
      * not very effective) against a Pokemon of this type.
      * @return 
      */
-    public List<Type> getResistances(){
+    public Set<Type> getResistances(){
         return resistances;
     }
     /**
-     * A list of types that cannot inflict any damage on a Pokemon of this type.
+     * A set of types that cannot inflict any damage on a Pokemon of this type.
      * @return 
      */
-    public List<Type> getImmunities(){
+    public Set<Type> getImmunities(){
         return immunities;
     }
     @Override
