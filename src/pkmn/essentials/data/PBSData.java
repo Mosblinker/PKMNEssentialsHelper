@@ -55,7 +55,7 @@ public class PBSData {
         }
             // Set strengths and weaknesses for each type
         for (Type type : types){
-            type.loadTypeStrengthsAndWeaknesses(types);
+            type.finishLoad(types);
         }
     }
     

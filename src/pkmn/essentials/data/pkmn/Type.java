@@ -318,7 +318,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
             setID(value);
     }
     
-    public void loadTypeStrengthsAndWeaknesses(Collection<Type> types){
+    public void finishLoad(Collection<Type> types){
         loadTypes(types,weaknessesStr,weaknesses);
         loadTypes(types,resistancesStr,resistances);
         loadTypes(types,immunitiesStr,immunities);
