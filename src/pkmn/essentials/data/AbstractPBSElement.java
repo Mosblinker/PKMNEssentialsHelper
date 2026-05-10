@@ -4,6 +4,7 @@
  */
 package pkmn.essentials.data;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.JProgressBar;
@@ -168,5 +169,15 @@ public abstract class AbstractPBSElement {
     @Override
     public String toString(){
         return getID();
+    }
+    
+    public static String getFlagString(Collection<String> flags){
+        if (flags.isEmpty())
+            return "";
+        String str = "";
+        for (String temp : flags){
+            str += ", " + temp;
+        }
+        return str.substring(2);
     }
 }

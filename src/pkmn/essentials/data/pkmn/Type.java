@@ -210,14 +210,8 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
             str += System.lineSeparator()+PROPERTIES[2] + " = " + isSpecialType();
         if (isPseudoTypeSet())
             str += System.lineSeparator()+PROPERTIES[3] + " = " + isPseudoType();
-        if (!getFlags().isEmpty()){
-            str += System.lineSeparator()+PROPERTIES[4] + " = ";
-            String flagStr = "";
-            for (String flag : flags){
-                flagStr += ", " + flag;
-            }
-            str += flagStr.substring(2);
-        }
+        if (!getFlags().isEmpty())
+            str += System.lineSeparator()+PROPERTIES[4] + " = " + AbstractPBSElement.getFlagString(flags);
         if (!getWeaknesses().isEmpty())
             str += System.lineSeparator()+PROPERTIES[5] + " = " + typesToData(getWeaknesses());
         else if (weaknessesStr != null)
