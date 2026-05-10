@@ -14,6 +14,10 @@ import pkmn.essentials.data.pkmn.*;
  */
 public class PBSData {
     
+    public static final String PBS_FOLDER = "PBS";
+    
+    public static final String PBS_FILE_EXTENSION = "txt";
+    
     public static boolean isID(String str){
         return str.startsWith("[") && str.endsWith("]");
     }
