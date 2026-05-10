@@ -116,16 +116,24 @@ public abstract class AbstractPBSData {
     public int fromData(List<String> data, int startIndex, JProgressBar progressBar){
         int index;
         int propertyIndex = 0;
+        boolean gotID = false;
         for (index = startIndex; index < data.size(); index++){
             String value = data.get(index).trim();
             propertyIndex = matchProperty(value);
             if (propertyIndex < 0)
-                break;
+                return index;
             if (propertyIndex < getPropertyNames().length)
                 value = value.substring(value.indexOf("=",getPropertyNames()[propertyIndex].length())).trim();
-            else
+            else{
+                if (!gotID)
+                    gotID = true;
+                else
+                    return index;
                 value = value.substring(1,value.length()-1);
-            setProperty(propertyIndex,value);
+            }
+            if (!gotID){
+                setProperty(propertyIndex,value);
+            }
             if (progressBar != null)
                 progressBar.setValue(progressBar.getValue()+1);
         }
