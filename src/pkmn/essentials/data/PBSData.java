@@ -25,6 +25,8 @@ public class PBSData {
     
     private List<Type> types = new ArrayList<>();
     
+    private List<Move> moves = new ArrayList<>();
+    
     public PBSData(){
         
     }
@@ -32,6 +34,13 @@ public class PBSData {
     public PBSData(PBSData data){
         for (Type type : data.types)
             this.types.add(new Type(type));
+        for (Move move : data.moves){
+            Move temp = new Move(move);
+            int index = data.types.indexOf(move.getType());
+            if (index >= 0)
+                temp.setType(this.types.get(index));
+            this.moves.add(temp);
+        }
     } 
     
     public List<Type> getTypes(){
@@ -61,5 +70,34 @@ public class PBSData {
     
     public void loadTypes(List<String> lines){
         loadTypes(lines,null);
+    }
+    
+    public List<Move> getMoves(){
+        return moves;
+    }
+    
+    public void loadMoves(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next move
+            Move move = new Move();
+            index = move.fromData(lines, index, progressBar);
+            moves.add(move);
+        }
+            // Set the type for each move
+        for (Move move : moves){
+            move.finishLoad(types);
+        }
+    }
+    
+    public void loadMoves(List<String> lines){
+        loadMoves(lines,null);
     }
 }
