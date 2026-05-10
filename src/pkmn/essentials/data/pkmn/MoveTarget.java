@@ -79,7 +79,7 @@ public enum MoveTarget {
         return desc;
     }
     
-    public static MoveTarget getValueFromText(String name){
+    public static MoveTarget parseTarget(String name){
         for (MoveTarget target : values()){
             if (target.toString().equals(name))
                 return target;
