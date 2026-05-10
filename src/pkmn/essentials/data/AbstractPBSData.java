@@ -106,9 +106,7 @@ public abstract class AbstractPBSData {
     }
     
     public String toData(){
-        String str = "["+getID() + "]"+System.lineSeparator();
-        if (getName() != null)
-            str += "Name = " + getName();
+        String str = "["+getID() + "]";
         return str;
     }
     
