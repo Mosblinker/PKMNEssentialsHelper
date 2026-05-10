@@ -34,7 +34,7 @@ public enum MoveCategory {
         return name;
     }
     
-    public static MoveCategory getValueOfName(String name){
+    public static MoveCategory parseCategory(String name){
         for (MoveCategory cat : values()){
             if (cat.toString().equals(name))
                 return cat;
