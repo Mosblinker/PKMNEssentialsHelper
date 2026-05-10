@@ -24,7 +24,7 @@ import pkmn.essentials.data.AbstractPBSData;
  */
 public class Type extends AbstractPBSData implements Comparable<Type>{
     
-    public static final String PBS_FILE = "types.txt";
+    public static final String PBS_FILE_TEMPLATE = "types";
     
     public static final String ICONS = "Graphics"+File.separator+"UI"+File.separator+"types.png";
     
