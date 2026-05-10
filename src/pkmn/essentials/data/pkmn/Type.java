@@ -26,6 +26,17 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     
     public static final String ICONS = "Graphics"+File.separator+"UI"+File.separator+"types.png";
     
+    public static final String[] PROPERTIES = {
+        "Name",
+        "IconPosition",
+        "IsSpecialType",
+        "IsPseudoType",
+        "Flags",
+        "Weaknesses",
+        "Resistances",
+        "Immunities"
+    };
+    
     private Integer iconPosition = null;
     
     private Boolean isSpecialType = null;
@@ -198,5 +209,9 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
             iconMap.put(type, getTypeIcon(icons,height,type.getIconPosition(),type.getName()));
         }
         return iconMap;
+    }
+    @Override
+    protected String[] getPropertyNames() {
+        return PROPERTIES;
     }
 }
