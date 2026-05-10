@@ -18,7 +18,7 @@ public abstract class AbstractPBSData {
      * value. Each value much have a different ID. This is surrounded by square 
      * brackets in the file.
      */
-    private String id;
+    private String id = null;
     /**
      * The name of the data, as seen often by the player.
      */
@@ -27,6 +27,9 @@ public abstract class AbstractPBSData {
      * An optional version number. This is not always used.
      */
     private int version = 0;
+    
+    protected AbstractPBSData(){
+    }
     
     protected AbstractPBSData(String id){
         this.id = Objects.requireNonNull(id);

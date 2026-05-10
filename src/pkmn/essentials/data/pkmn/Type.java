@@ -52,6 +52,10 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     private Set<Type> immunities = new LinkedHashSet<>();
     
     
+    public Type(){
+        super();
+    }
+    
     public Type(String id){
         super(id);
     }
