@@ -124,6 +124,18 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public Move(Move move){
         super(move);
+        this.type = move.type;
+        this.typeStr = move.typeStr;
+        this.category = move.category;
+        this.power = move.power;
+        this.accuracy = move.accuracy;
+        this.totalPP = move.totalPP;
+        this.target = move.target;
+        this.priority = move.priority;
+        this.functionCode = move.functionCode;
+        this.flags.addAll(move.flags);
+        this.effectChance = move.effectChance;
+        this.desc = move.desc;
     }
     /**
      * The internal ID for this move. This is how the scripts will refer to the 
