@@ -4,6 +4,7 @@
  */
 package pkmn.essentials.data;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -101,7 +102,7 @@ public abstract class AbstractPBSElement {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.getID());
         return hash;
     }
     
@@ -179,5 +180,33 @@ public abstract class AbstractPBSElement {
             str += ", " + temp;
         }
         return str.substring(2);
+    }
+    
+    public static List<String> getFlags(String value, List<String> flags){
+        if (flags == null)
+            flags = new ArrayList<>();
+        String[] arr = value.split(",");
+        for (String temp : arr){
+            flags.add(temp.trim());
+        }
+        return flags;
+    }
+    
+    public static String toIDString(Collection<? extends AbstractPBSElement> elements){
+        if (elements.isEmpty())
+            return "";
+        String str = "";
+        for (AbstractPBSElement element : elements){
+            str += ", " + element.getID();
+        }
+        return str.substring(2);
+    }
+    
+    public static AbstractPBSElement getMatch(String id, Collection<? extends AbstractPBSElement> elements){
+        for (AbstractPBSElement element : elements){
+            if (element != null && element.matchesID(id))
+                return element;
+        }
+        return null;
     }
 }

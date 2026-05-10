@@ -213,27 +213,18 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         if (!getFlags().isEmpty())
             str += System.lineSeparator()+PROPERTIES[4] + " = " + AbstractPBSElement.getFlagString(flags);
         if (!getWeaknesses().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[5] + " = " + typesToData(getWeaknesses());
+            str += System.lineSeparator()+PROPERTIES[5] + " = " + AbstractPBSElement.toIDString(getWeaknesses());
         else if (weaknessesStr != null)
             str += System.lineSeparator()+PROPERTIES[5] + " = " + weaknessesStr;
         if (!getResistances().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[6] + " = " + typesToData(getResistances());
+            str += System.lineSeparator()+PROPERTIES[6] + " = " + AbstractPBSElement.toIDString(getResistances());
         else if (resistancesStr != null)
             str += System.lineSeparator()+PROPERTIES[6] + " = " + resistancesStr;
         if (!getImmunities().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[7] + " = " + typesToData(getImmunities());
+            str += System.lineSeparator()+PROPERTIES[7] + " = " + AbstractPBSElement.toIDString(getImmunities());
         else if (resistancesStr != null)
             str += System.lineSeparator()+PROPERTIES[7] + " = " + immunitiesStr;
         return str;
-    }
-    
-    private String typesToData(Collection<Type> types){
-        if (types.isEmpty())
-            return "";
-        String str = "";
-        for (Type type : types)
-            str += ", " + type.getID();
-        return str.substring(2);
     }
     
     private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
@@ -293,10 +284,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
                 setPseudoType(Boolean.valueOf(value));
                 break;
             case(4):
-                String[] arr = value.split(",");
-                for (String temp : arr){
-                    flags.add(temp.trim());
-                }
+                AbstractPBSElement.getFlags(value, flags);
                 break;
             case(5):
                 this.weaknessesStr = value;
@@ -325,14 +313,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
             return;
         String[] arr = values.split(",");
         for (String str : arr){
-            String temp = str.trim();
-            Type type = null;
-            for (Type currType : types){
-                if (currType.matchesID(temp)){
-                    type = currType;
-                    break;
-                }
-            }
+            Type type = (Type) AbstractPBSElement.getMatch(str.trim(), types);
             if (type != null)
                 target.add(type);
         }
