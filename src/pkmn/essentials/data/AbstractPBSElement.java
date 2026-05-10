@@ -158,7 +158,7 @@ public abstract class AbstractPBSElement {
             if (str.startsWith(getPropertyNames()[i]))
                 return i;
         }
-        if (str.startsWith("[") && str.endsWith("]"))
+        if (isID(str))
             return getPropertyNames().length;
         return -1;
     }
@@ -168,5 +168,9 @@ public abstract class AbstractPBSElement {
     @Override
     public String toString(){
         return getID();
+    }
+    
+    public static boolean isID(String str){
+        return str.startsWith("[") && str.endsWith("]");
     }
 }
