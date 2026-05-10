@@ -24,11 +24,11 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
     
     public static final String ICONS = "Graphics"+File.separator+"UI"+File.separator+"types.png";
     
-    private int iconPosition = 0;
+    private Integer iconPosition = null;
     
-    private boolean isSpecialType = false;
+    private Boolean isSpecialType = null;
     
-    private boolean isPseudoType = false;
+    private Boolean isPseudoType = null;
     
     private List<String> flags = new ArrayList<>();
     
@@ -76,14 +76,21 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
      * @return 
      */
     public int getIconPosition(){
-        return iconPosition;
+        return (iconPosition==null)?0:iconPosition;
     }
     /**
      * 
      * @param position 
      */
-    public void setIconPosition(int position){
+    public void setIconPosition(Integer position){
         this.iconPosition = position;
+    }
+    /**
+     * 
+     * @return 
+     */
+    public boolean isIconPositionSet(){
+        return iconPosition != null;
     }
     /**
      * Whether moves of this type will use the special stats or physical stats 
@@ -91,14 +98,21 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
      * @return 
      */
     public boolean isSpecialType(){
-        return isSpecialType;
+        return (isSpecialType!=null)?isSpecialType:false;
     }
     /**
      * 
      * @param specialType 
      */
-    public void setSpecialType(boolean specialType){
+    public void setSpecialType(Boolean specialType){
         this.isSpecialType = specialType;
+    }
+    /**
+     * 
+     * @return 
+     */
+    public boolean isSpecialTypeSet(){
+        return isSpecialType != null;
     }
     /**
      * Whether this type is a pseudotype, or in other words not a "proper" type.
@@ -106,14 +120,21 @@ public class Type extends AbstractPBSData implements Comparable<Type>{
      * @return 
      */
     public boolean isPseudoType(){
-        return isPseudoType;
+        return (isPseudoType!=null)?isPseudoType:false;
     }
     /**
      * 
      * @param value 
      */
-    public void setPseudoType(boolean value){
+    public void setPseudoType(Boolean value){
         isPseudoType = value;
+    }
+    /**
+     * 
+     * @return 
+     */
+    public boolean isPseudoTypeSet(){
+        return isPseudoType != null;
     }
     /**
      * Labels that can be applied to a type to make it behave differently.
