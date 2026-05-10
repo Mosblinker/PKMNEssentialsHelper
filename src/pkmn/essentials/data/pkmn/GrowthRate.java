@@ -33,7 +33,7 @@ public enum GrowthRate {
         return name;
     }
     
-    public static GrowthRate getValueOfName(String name){
+    public static GrowthRate parseGrowthRate(String name){
         for (GrowthRate rate : values()){
             if (rate.toString().equals(name))
                 return rate;
