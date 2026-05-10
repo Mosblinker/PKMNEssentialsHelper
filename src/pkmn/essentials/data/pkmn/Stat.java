@@ -10,15 +10,25 @@ package pkmn.essentials.data.pkmn;
  */
 public enum Stat {
     
-    HP,
+    HP("HP"),
     
-    ATTACK,
+    ATTACK("Attack"),
     
-    DEFENSE,
+    DEFENSE("Defense"),
     
-    SPEED,
+    SPEED("Speed"),
     
-    SPECIAL_ATTACK,
+    SPECIAL_ATTACK("Special Attack"),
     
-    SPECIAL_DEFENSE;
+    SPECIAL_DEFENSE("Special Defense");
+    
+    private String name;
+    
+    private Stat(String name){
+        this.name = name;
+    }
+    
+    public String toString(){
+        return name;
+    }
 }
