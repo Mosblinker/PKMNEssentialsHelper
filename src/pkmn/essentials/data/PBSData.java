@@ -51,6 +51,7 @@ public class PBSData {
             // Load the next type
             Type type = new Type();
             index = type.fromData(lines, index, progressBar);
+            types.add(type);
         }
             // Set strengths and weaknesses for each type
         for (Type type : types){
