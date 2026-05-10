@@ -298,7 +298,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     }
     
     private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
-        BufferedImage img = icons.getSubimage(0, height*index, icons.getHeight(), height);
+        BufferedImage img = icons.getSubimage(0, height*index, icons.getWidth(), height);
         return new ImageIcon(img, desc);
     }
     
