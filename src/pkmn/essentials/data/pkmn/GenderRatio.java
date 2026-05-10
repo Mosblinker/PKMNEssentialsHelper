@@ -48,7 +48,7 @@ public enum GenderRatio {
         return name;
     }
     
-    public static GenderRatio getValueOfName(String name){
+    public static GenderRatio parseGenderRatio(String name){
         for (GenderRatio ratio : values()){
             if (ratio.toString().equals(name))
                 return ratio;
