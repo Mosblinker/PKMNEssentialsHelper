@@ -4,7 +4,9 @@
  */
 package pkmn.essentials.data;
 
+import java.util.List;
 import java.util.Objects;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -102,4 +104,42 @@ public abstract class AbstractPBSData {
     public boolean matchesID(String str){
         return getID().equals(str);
     }
+    
+    public String toData(){
+        String str = "["+getID() + "]"+System.lineSeparator();
+        if (getName() != null)
+            str += "Name = " + getName();
+        return str;
+    }
+    
+    public int fromData(List<String> data, int startIndex, JProgressBar progressBar){
+        int index;
+        int propertyIndex = 0;
+        for (index = startIndex; index < data.size(); index++){
+            String value = data.get(index).trim();
+            propertyIndex = matchProperty(value);
+            if (propertyIndex < 0)
+                break;
+            if (propertyIndex < getPropertyNames().length)
+                value = value.substring(value.indexOf("=",getPropertyNames()[propertyIndex].length())).trim();
+            else
+                value = value.substring(1,value.length()-1);
+            setProperty(propertyIndex,value);
+        }
+        return index;
+    }
+    
+    protected abstract void setProperty(int propertyIndex, String value);
+    
+    protected int matchProperty(String str){
+        for (int i = 0; i < getPropertyNames().length; i++){
+            if (str.startsWith(getPropertyNames()[i]))
+                return i;
+        }
+        if (str.startsWith("[") && str.endsWith("]"))
+            return getPropertyNames().length;
+        return -1;
+    }
+    
+    protected abstract String[] getPropertyNames();
 }
