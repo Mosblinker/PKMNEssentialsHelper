@@ -245,8 +245,6 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     }
     
     public void setPriority(Integer priority){
-        if (priority != null && (priority < -6 || priority > 6))
-            throw new IllegalArgumentException("Priority "+ priority);
         this.priority = priority;
     }
     
