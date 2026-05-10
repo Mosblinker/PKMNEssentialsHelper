@@ -8,6 +8,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,6 +25,12 @@ import java.util.Set;
  * @author Mosblinker
  */
 public final class PkmnHelperUtilities {
+    /**
+     * This is the directory that contains this program. This is initially null 
+     * and is initialized the first time it is requested and successfully 
+     * loaded.
+     */
+    private static String programDir = null;
     
     private PkmnHelperUtilities(){ }
     /**
@@ -186,5 +195,33 @@ public final class PkmnHelperUtilities {
             }
             image.setRGB(0, y, rgbImg.length, 1, rgbImg, 0, 1);
         }
+    }
+    /**
+     * This returns the working directory for this program.
+     * @return The working directory for the program.
+     */
+    public static String getWorkingDirectory(){
+        return System.getProperty("user.dir");
+    }
+    /**
+     * This returns the directory of this program.
+     * @return The directory containing this program.
+     */
+    public static String getProgramDirectory(){
+            // If the program directory has been previously retrieved
+        if (programDir != null)
+            return programDir;
+            // Get the location of this program, as a URL
+        URL url = PkmnHelper.class.getProtectionDomain().getCodeSource().getLocation();
+            // If a URL was found
+        if (url != null)
+            try {   // Get the parent of this program
+                programDir = new File(url.toURI()).getParent();
+                return programDir;
+            } catch (URISyntaxException ex) {
+                PkmnHelper.getLogger().log(java.util.logging.Level.WARNING,
+                        "Failed to retrieve program directory.", ex);
+            }
+        return getWorkingDirectory();
     }
 }
