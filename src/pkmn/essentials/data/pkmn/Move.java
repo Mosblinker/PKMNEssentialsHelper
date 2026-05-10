@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSElement;
-import static pkmn.essentials.data.pkmn.Type.PROPERTIES;
 
 /**
  *
@@ -296,31 +295,31 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     public String toData(){
         String str = super.toData();
         if (getName() != null)
-            str += System.lineSeparator()+PROPERTIES[0] + " = " + getName();
+            str += System.lineSeparator()+PROPERTY_NAMES[0] + " = " + getName();
         if (getType() != null)
-            str += System.lineSeparator()+PROPERTIES[1] + " = " + getType().getID();
+            str += System.lineSeparator()+PROPERTY_NAMES[1] + " = " + getType().getID();
         else if (typeStr != null)
-            str += System.lineSeparator()+PROPERTIES[1] + " = " + typeStr;
+            str += System.lineSeparator()+PROPERTY_NAMES[1] + " = " + typeStr;
         if (isCategorySet())
-            str += System.lineSeparator()+PROPERTIES[2] + " = " + getCategory().toString();
+            str += System.lineSeparator()+PROPERTY_NAMES[2] + " = " + getCategory().toString();
         if (isPowerSet())
-            str += System.lineSeparator()+PROPERTIES[3] + " = " + getPower();
+            str += System.lineSeparator()+PROPERTY_NAMES[3] + " = " + getPower();
         if (isAccuracySet())
-            str += System.lineSeparator()+PROPERTIES[4] + " = " + getAccuracy();
+            str += System.lineSeparator()+PROPERTY_NAMES[4] + " = " + getAccuracy();
         if (isTotalPPSet())
-            str += System.lineSeparator()+PROPERTIES[5] + " = " + getTotalPP();
+            str += System.lineSeparator()+PROPERTY_NAMES[5] + " = " + getTotalPP();
         if (isTargetSet())
-            str += System.lineSeparator()+PROPERTIES[6] + " = " + getTarget().getValue();
+            str += System.lineSeparator()+PROPERTY_NAMES[6] + " = " + getTarget().getValue();
         if (isPrioritySet())
-            str += System.lineSeparator()+PROPERTIES[7] + " = " + getPriority();
+            str += System.lineSeparator()+PROPERTY_NAMES[7] + " = " + getPriority();
         if (getFunctionCode() != null)
-            str += System.lineSeparator()+PROPERTIES[8] + " = " + getFunctionCode();
+            str += System.lineSeparator()+PROPERTY_NAMES[8] + " = " + getFunctionCode();
         if (!getFlags().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[9] + " = " + AbstractPBSElement.getFlagString(getFlags());
+            str += System.lineSeparator()+PROPERTY_NAMES[9] + " = " + AbstractPBSElement.getFlagString(getFlags());
         if (isEffectChanceSet())
-            str += System.lineSeparator()+PROPERTIES[10] + " = " + getEffectChance();
+            str += System.lineSeparator()+PROPERTY_NAMES[10] + " = " + getEffectChance();
         if (getDescription() != null)
-            str += System.lineSeparator()+PROPERTIES[11] + " = " + getDescription();
+            str += System.lineSeparator()+PROPERTY_NAMES[11] + " = " + getDescription();
         return str;
     }
 
