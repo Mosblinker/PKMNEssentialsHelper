@@ -81,7 +81,7 @@ public enum MoveTarget {
     
     public static MoveTarget parseTarget(String name){
         for (MoveTarget target : values()){
-            if (target.toString().equals(name))
+            if (target.getValue().equals(name))
                 return target;
         }
         throw new IllegalArgumentException();
