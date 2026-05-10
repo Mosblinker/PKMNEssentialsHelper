@@ -227,32 +227,6 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         return str;
     }
     
-    private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
-        BufferedImage img = icons.getSubimage(0, height*index, icons.getHeight(), height);
-        return new ImageIcon(img, desc);
-    }
-    
-    public static List<ImageIcon> getTypeIcons(BufferedImage icons, int typeCount){
-        Objects.requireNonNull(icons);
-        int height = Math.floorDiv(icons.getHeight(), typeCount);
-        List<ImageIcon> iconList = new ArrayList<>();
-        for (int i = 0; i < typeCount; i++){
-            iconList.add(getTypeIcon(icons,height,i,null));
-        }
-        return iconList;
-    }
-    
-    public static Map<Type,ImageIcon> getTypeIcons(BufferedImage icons, List<Type> types){
-        Objects.requireNonNull(icons);
-        Objects.requireNonNull(types);
-        Map<Type,ImageIcon> iconMap = new LinkedHashMap<>();
-        int height = Math.floorDiv(icons.getHeight(), types.size());
-        for (Type type : types){
-            iconMap.put(type, getTypeIcon(icons,height,type.getIconPosition(),type.getName()));
-        }
-        return iconMap;
-    }
-    
     @Override
     protected void reset(){
         super.reset();
@@ -321,5 +295,31 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     @Override
     protected String[] getPropertyNames() {
         return PROPERTIES;
+    }
+    
+    private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
+        BufferedImage img = icons.getSubimage(0, height*index, icons.getHeight(), height);
+        return new ImageIcon(img, desc);
+    }
+    
+    public static List<ImageIcon> getTypeIcons(BufferedImage icons, int typeCount){
+        Objects.requireNonNull(icons);
+        int height = Math.floorDiv(icons.getHeight(), typeCount);
+        List<ImageIcon> iconList = new ArrayList<>();
+        for (int i = 0; i < typeCount; i++){
+            iconList.add(getTypeIcon(icons,height,i,null));
+        }
+        return iconList;
+    }
+    
+    public static Map<Type,ImageIcon> getTypeIcons(BufferedImage icons, List<Type> types){
+        Objects.requireNonNull(icons);
+        Objects.requireNonNull(types);
+        Map<Type,ImageIcon> iconMap = new LinkedHashMap<>();
+        int height = Math.floorDiv(icons.getHeight(), types.size());
+        for (Type type : types){
+            iconMap.put(type, getTypeIcon(icons,height,type.getIconPosition(),type.getName()));
+        }
+        return iconMap;
     }
 }
