@@ -193,7 +193,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public void setPower(Integer power){
         if (power != null && power < 0)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Power " + power);
         this.power = power;
     }
     
@@ -207,7 +207,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public void setAccuracy(Integer accuracy){
         if (accuracy != null && (accuracy < 0 || accuracy > 100))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Accuracy " + accuracy);
         this.accuracy = accuracy;
     }
     
@@ -221,7 +221,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public void setTotalPP(Integer pp){
         if (pp != null && pp < 0)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("TotalPP " + pp);
         this.totalPP = pp;
     }
     
@@ -247,7 +247,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public void setPriority(Integer priority){
         if (priority != null && (priority < -6 || priority > 6))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Priority "+ priority);
         this.priority = priority;
     }
     
@@ -273,7 +273,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public void setEffectChance(Integer chance){
         if (chance != null && (chance < 0 || chance > 100))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("EffectChance " + chance);
         effectChance = chance;
     }
     
