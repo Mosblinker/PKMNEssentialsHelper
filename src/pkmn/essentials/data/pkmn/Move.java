@@ -272,8 +272,6 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     }
     
     public void setEffectChance(Integer chance){
-        if (chance != null && (chance < 0 || chance > 100))
-            throw new IllegalArgumentException("EffectChance " + chance);
         effectChance = chance;
     }
     
