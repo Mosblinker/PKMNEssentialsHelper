@@ -140,4 +140,9 @@ public abstract class AbstractPBSData {
     }
     
     protected abstract String[] getPropertyNames();
+    
+    @Override
+    public String toString(){
+        return getID();
+    }
 }
