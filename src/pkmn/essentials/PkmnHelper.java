@@ -153,6 +153,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     public static final String DROPPER_CURSOR_IMAGE = "/images/dropper.png";
     
+    public static final String DATA_FOLDER = "data";
+    
     /**
      * This is a logger used to log messages for the program.
      */
