@@ -284,7 +284,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
                 setPseudoType(Boolean.valueOf(value));
                 break;
             case(4):
-                AbstractPBSElement.getFlags(value, flags);
+                AbstractPBSElement.getFlags(value, getFlags());
                 break;
             case(5):
                 this.weaknessesStr = value;
