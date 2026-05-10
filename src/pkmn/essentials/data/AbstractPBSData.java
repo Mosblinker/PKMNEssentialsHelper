@@ -123,8 +123,14 @@ public abstract class AbstractPBSData {
             else
                 value = value.substring(1,value.length()-1);
             setProperty(propertyIndex,value);
+            if (progressBar != null)
+                progressBar.setValue(progressBar.getValue()+1);
         }
         return index;
+    }
+    
+    public int fromData(List<String> data, int startIndex){
+        return fromData(data,startIndex,null);
     }
     
     protected abstract void setProperty(int propertyIndex, String value);
