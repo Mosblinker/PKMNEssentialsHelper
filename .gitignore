@@ -31,3 +31,6 @@ build/
 dist/
 Development_Stuff/
 desktop.ini
+
+# The data files generated and used by the program
+data/*
