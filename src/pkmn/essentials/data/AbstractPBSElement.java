@@ -125,7 +125,7 @@ public abstract class AbstractPBSElement {
             if (propertyIndex < 0)
                 return index;
             if (propertyIndex < getPropertyNames().length)
-                value = value.substring(value.indexOf("=",getPropertyNames()[propertyIndex].length())).trim();
+                value = value.substring(value.indexOf("=",getPropertyNames()[propertyIndex].length())+1).trim();
             else{
                 if (!gotID){
                     gotID = true;
@@ -134,7 +134,7 @@ public abstract class AbstractPBSElement {
                     return index;
                 value = value.substring(1,value.length()-1);
             }
-            if (!gotID){
+            if (gotID){
                 setProperty(propertyIndex,value);
             }
             if (progressBar != null)
