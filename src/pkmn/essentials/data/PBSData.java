@@ -6,6 +6,7 @@ package pkmn.essentials.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JProgressBar;
 import pkmn.essentials.data.pkmn.*;
 
 /**
@@ -37,4 +38,27 @@ public class PBSData {
         return types;
     }
     
+    public void loadTypes(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next type
+            Type type = new Type();
+            index = type.fromData(lines, index, progressBar);
+        }
+            // Set strengths and weaknesses for each type
+        for (Type type : types){
+            type.loadTypeStrengthsAndWeaknesses(types);
+        }
+    }
+    
+    public void loadTypes(List<String> lines){
+        loadTypes(lines,null);
+    }
 }
