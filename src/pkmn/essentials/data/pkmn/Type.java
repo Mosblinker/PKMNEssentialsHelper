@@ -27,7 +27,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     
     public static final String ICONS = "Graphics"+File.separator+"UI"+File.separator+"types.png";
     
-    public static final String[] PROPERTIES = {
+    public static final String[] PROPERTY_NAMES = {
         "Name",
         "IconPosition",
         "IsSpecialType",
@@ -203,27 +203,27 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     public String toData(){
         String str = super.toData();
         if (getName() != null)
-            str += System.lineSeparator()+PROPERTIES[0] + " = " + getName();
+            str += System.lineSeparator()+PROPERTY_NAMES[0] + " = " + getName();
         if (isIconPositionSet())
-            str += System.lineSeparator()+PROPERTIES[1] + " = " + getIconPosition();
+            str += System.lineSeparator()+PROPERTY_NAMES[1] + " = " + getIconPosition();
         if (isSpecialTypeSet())
-            str += System.lineSeparator()+PROPERTIES[2] + " = " + isSpecialType();
+            str += System.lineSeparator()+PROPERTY_NAMES[2] + " = " + isSpecialType();
         if (isPseudoTypeSet())
-            str += System.lineSeparator()+PROPERTIES[3] + " = " + isPseudoType();
+            str += System.lineSeparator()+PROPERTY_NAMES[3] + " = " + isPseudoType();
         if (!getFlags().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[4] + " = " + AbstractPBSElement.getFlagString(flags);
+            str += System.lineSeparator()+PROPERTY_NAMES[4] + " = " + AbstractPBSElement.getFlagString(flags);
         if (!getWeaknesses().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[5] + " = " + AbstractPBSElement.toIDString(getWeaknesses());
+            str += System.lineSeparator()+PROPERTY_NAMES[5] + " = " + AbstractPBSElement.toIDString(getWeaknesses());
         else if (weaknessesStr != null)
-            str += System.lineSeparator()+PROPERTIES[5] + " = " + weaknessesStr;
+            str += System.lineSeparator()+PROPERTY_NAMES[5] + " = " + weaknessesStr;
         if (!getResistances().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[6] + " = " + AbstractPBSElement.toIDString(getResistances());
+            str += System.lineSeparator()+PROPERTY_NAMES[6] + " = " + AbstractPBSElement.toIDString(getResistances());
         else if (resistancesStr != null)
-            str += System.lineSeparator()+PROPERTIES[6] + " = " + resistancesStr;
+            str += System.lineSeparator()+PROPERTY_NAMES[6] + " = " + resistancesStr;
         if (!getImmunities().isEmpty())
-            str += System.lineSeparator()+PROPERTIES[7] + " = " + AbstractPBSElement.toIDString(getImmunities());
+            str += System.lineSeparator()+PROPERTY_NAMES[7] + " = " + AbstractPBSElement.toIDString(getImmunities());
         else if (resistancesStr != null)
-            str += System.lineSeparator()+PROPERTIES[7] + " = " + immunitiesStr;
+            str += System.lineSeparator()+PROPERTY_NAMES[7] + " = " + immunitiesStr;
         return str;
     }
     
@@ -294,7 +294,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     }
     @Override
     protected String[] getPropertyNames() {
-        return PROPERTIES;
+        return PROPERTY_NAMES;
     }
     
     private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
