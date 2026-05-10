@@ -16,13 +16,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import javax.swing.ImageIcon;
-import pkmn.essentials.data.AbstractPBSData;
+import pkmn.essentials.data.AbstractPBSElement;
 
 /**
  *
  * @author Mosblinker
  */
-public class Type extends AbstractPBSData implements Comparable<Type>{
+public class Type extends AbstractPBSElement implements Comparable<Type>{
     
     public static final String PBS_FILE_TEMPLATE = "types";
     

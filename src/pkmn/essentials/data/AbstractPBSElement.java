@@ -12,7 +12,7 @@ import javax.swing.JProgressBar;
  *
  * @author Mosblinker
  */
-public abstract class AbstractPBSData {
+public abstract class AbstractPBSElement {
     /**
      * The internal ID for this value. This is how the scripts will refer to the 
      * value. Each value much have a different ID. This is surrounded by square 
@@ -28,17 +28,17 @@ public abstract class AbstractPBSData {
      */
     private int version = 0;
     
-    protected AbstractPBSData(){
+    protected AbstractPBSElement(){
     }
     
-    protected AbstractPBSData(String id){
+    protected AbstractPBSElement(String id){
         this.id = Objects.requireNonNull(id);
     };
     /**
      * 
      * @param data 
      */
-    protected AbstractPBSData(AbstractPBSData data){
+    protected AbstractPBSElement(AbstractPBSElement data){
         this.id = data.id;
         this.name = data.name;
         this.version = data.version;
@@ -90,8 +90,8 @@ public abstract class AbstractPBSData {
     
     @Override
     public boolean equals(Object o){
-        if (o instanceof AbstractPBSData){
-            AbstractPBSData data = (AbstractPBSData) o;
+        if (o instanceof AbstractPBSElement){
+            AbstractPBSElement data = (AbstractPBSElement) o;
             return data.getID().equals(getID());
         }
         return false;
