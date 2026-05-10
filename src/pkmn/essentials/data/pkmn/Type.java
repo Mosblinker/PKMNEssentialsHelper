@@ -322,6 +322,9 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         loadTypes(types,weaknessesStr,weaknesses);
         loadTypes(types,resistancesStr,resistances);
         loadTypes(types,immunitiesStr,immunities);
+        weaknessesStr = null;
+        resistancesStr = null;
+        immunitiesStr = null;
     }
     
     private void loadTypes(Collection<Type> types, String values, Collection<Type> target){
