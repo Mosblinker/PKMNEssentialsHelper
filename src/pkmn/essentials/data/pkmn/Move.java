@@ -19,7 +19,7 @@ import static pkmn.essentials.data.pkmn.Type.PROPERTIES;
  */
 public class Move extends AbstractPBSElement implements Comparable<Move>{
     
-    public static final String PBS_FILE_TEMPLATE = "types.txt";
+    public static final String PBS_FILE_TEMPLATE = "moves";
     
     public static final String CATEGORY_ICONS = "Graphics"+File.separator+"UI"+File.separator+"category.png";
     
