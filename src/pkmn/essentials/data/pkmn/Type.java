@@ -111,6 +111,8 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
      * @param position 
      */
     public void setIconPosition(Integer position){
+        if (position != null && position < 0)
+            throw new IllegalArgumentException();
         this.iconPosition = position;
     }
     /**
