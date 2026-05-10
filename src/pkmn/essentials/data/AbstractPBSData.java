@@ -125,9 +125,10 @@ public abstract class AbstractPBSData {
             if (propertyIndex < getPropertyNames().length)
                 value = value.substring(value.indexOf("=",getPropertyNames()[propertyIndex].length())).trim();
             else{
-                if (!gotID)
+                if (!gotID){
                     gotID = true;
-                else
+                    reset();
+                } else
                     return index;
                 value = value.substring(1,value.length()-1);
             }
@@ -142,6 +143,12 @@ public abstract class AbstractPBSData {
     
     public int fromData(List<String> data, int startIndex){
         return fromData(data,startIndex,null);
+    }
+    
+    protected void reset(){
+        id = null;
+        name = null;
+        version = 0;
     }
     
     protected abstract void setProperty(int propertyIndex, String value);
