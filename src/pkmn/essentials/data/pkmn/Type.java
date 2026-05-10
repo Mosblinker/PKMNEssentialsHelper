@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -333,12 +332,12 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         String[] arr = values.split(",");
         for (String str : arr){
             String temp = str.trim();
-            Iterator<Type> itr = types.iterator();
             Type type = null;
-            while(itr.hasNext() && type == null){
-                Type currType = itr.next();
-                if (currType.matchesID(temp))
+            for (Type currType : types){
+                if (currType.matchesID(temp)){
                     type = currType;
+                    break;
+                }
             }
             if (type != null)
                 target.add(type);
