@@ -19,6 +19,10 @@ public class PBSData {
     
     public static final String PBS_FILE_EXTENSION = "txt";
     
+    public static final String FILE_HEADER = "# See the documentation on the wiki to learn how to edit this file.";
+    
+    public static final String DATA_SEPARATOR = "#-------------------------------";
+    
     public static boolean isID(String str){
         return str.startsWith("[") && str.endsWith("]");
     }
