@@ -38,6 +38,14 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         "Immunities"
     };
     
+    public static final String FLAG_FILE = "type_flags.txt";
+    
+    private static Map<String,String> flagMap = new LinkedHashMap<>();
+    
+    public static Map<String, String> getFlagMap(){
+        return flagMap;
+    }
+    
     private Integer iconPosition = null;
     
     private Boolean isSpecialType = null;
