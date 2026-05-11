@@ -23,7 +23,9 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,6 +41,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -311,6 +314,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteUseGameToggle.setSelected(config.getPkmnSpritesUseGameFolder());
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
+        
+        String programDir = PkmnHelperUtilities.getProgramDirectory();
+        File programDirFile = new File(programDir);
+        if (!PkmnHelperUtilities.getWorkingDirectory().equals(programDir))
+            programDirFile = programDirFile.getParentFile();
+        new LoadDataFolder(new File(programDirFile,DATA_FOLDER)).execute();
    }
 
     /**
@@ -1085,7 +1094,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_inputEnabledTestActionPerformed
 
     private void printTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printTestActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Move Flags:");
+        for (Map.Entry<String, String> entries : pkmn.essentials.data.pkmn.Move.getFlagMap().entrySet()){
+            System.out.printf("    %20s - %s%n",entries.getKey(),entries.getValue());
+        }
+        System.out.println();
+        System.out.println("Type Flags:");
+        for (Map.Entry<String, String> entries : pkmn.essentials.data.pkmn.Type.getFlagMap().entrySet()){
+            System.out.printf("    %20s - %s%n",entries.getKey(),entries.getValue());
+        }
+        System.out.println();
     }//GEN-LAST:event_printTestActionPerformed
 
     private void showHiddenFilesToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHiddenFilesToggleActionPerformed
@@ -2891,4 +2909,57 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             recolorSpriteListPanel.repaint();
         }
     }
+    
+    private class LoadDataFolder extends FileLoader{
+
+        public LoadDataFolder(File file) {
+            super(file, false);
+        }
+
+        @Override
+        protected boolean loadFile(File file) throws IOException {
+            if (!file.exists())
+                if (!FilesExtended.createDirectories(PkmnHelper.this, file))
+                    return false;
+            loadFlagFile(file,pkmn.essentials.data.pkmn.Move.FLAG_FILE,
+                    "Pokemon Move Flags",pkmn.essentials.data.pkmn.Move.getFlagMap());
+            loadFlagFile(file,pkmn.essentials.data.pkmn.Type.FLAG_FILE,
+                    "Pokemon Type Flags",pkmn.essentials.data.pkmn.Type.getFlagMap());
+            
+            return true;
+        }
+        
+        private void loadFlagFile(File folder, String name, String comment, Map<String, String> flags) throws IOException{
+            File file = new File(folder,name);
+            Properties prop = new Properties();
+            if (!file.exists()){
+                try(PrintWriter writer = new PrintWriter(file)){
+                    prop.store(writer, comment);
+                }
+            }
+            try(FileReader reader = new FileReader(file)){
+                prop.load(reader);
+            }
+            progressBar.setMaximum(prop.size());
+            progressBar.setIndeterminate(false);
+            for (String key : prop.stringPropertyNames()){
+                String desc = prop.getProperty(key);
+                if (desc == null || desc.isBlank())
+                    desc = null;
+                flags.put(key, desc);
+                progressBar.setValue(progressBar.getValue()+1);
+            }
+            progressBar.setValue(0);
+            progressBar.setIndeterminate(true);
+        }
+        @Override
+        public String getProgressString(){
+            return "Loading Data Files";
+        }
+        @Override
+        protected void done(){
+            super.done();
+        }
+    }
+    
 }
