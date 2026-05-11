@@ -59,6 +59,7 @@ import javax.swing.text.JTextComponent;
 import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.PBSData;
+import pkmn.essentials.data.pkmn.MoveCategory;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -2001,6 +2002,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private File gameProjectFolder = null;
     
     private PBSData pbsData = null;
+    
+    private Map<pkmn.essentials.data.pkmn.Type, ImageIcon> typeIcons = null;
+    
+    private Map<MoveCategory, ImageIcon> moveCategoryIcons = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -2999,6 +3004,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private PBSData data = new PBSData();
         
+        private Map<pkmn.essentials.data.pkmn.Type, ImageIcon> typeIcons = null;
+    
+        private Map<MoveCategory, ImageIcon> moveCategoryIcons = null;
+        
         private int stage = 0;
 
         public LoadGameProject(File file) {
@@ -3059,11 +3068,24 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                }
-                catch(IOException | IllegalArgumentException ex){
+                    
+                } catch(IOException | IllegalArgumentException ex){
                     getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
+                    return false;
                 }
             }
+            stage = 0;
+            progressDisplay.setString(getProgressString());
+            try{
+                BufferedImage image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Type.ICONS));
+                typeIcons = pkmn.essentials.data.pkmn.Type.getTypeIcons(image, data.getTypes());
+                image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Move.CATEGORY_ICONS));
+                moveCategoryIcons = pkmn.essentials.data.pkmn.Move.getCategoryIcons(image);
+            } catch(IOException | IllegalArgumentException ex){
+                getLogger().log(Level.WARNING, "Failed to load icons", ex);
+            }
+            
+            
             
             return true;
         }
@@ -3093,6 +3115,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         protected void done(){
             if (success){
                 pbsData = data;
+                PkmnHelper.this.typeIcons = typeIcons;
+                PkmnHelper.this.moveCategoryIcons = moveCategoryIcons;
             }
             super.done();
         }
