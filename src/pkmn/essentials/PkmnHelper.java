@@ -42,10 +42,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import java.util.stream.Stream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -56,6 +58,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
+import pkmn.essentials.data.PBSData;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -408,6 +411,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         debugMenu = new javax.swing.JMenu();
         inputEnabledTest = new javax.swing.JCheckBoxMenuItem();
         printTest = new javax.swing.JMenuItem();
+        printPBSTest = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
         spriteFC.setAccessory(spritePreview);
@@ -960,6 +964,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         debugMenu.add(printTest);
 
+        printPBSTest.setText("Print PBS Data");
+        printPBSTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printPBSTestActionPerformed(evt);
+            }
+        });
+        debugMenu.add(printPBSTest);
+
         jMenuBar1.add(debugMenu);
 
         setJMenuBar(jMenuBar1);
@@ -1374,9 +1386,27 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         gameProjectFolder = file;
         config.setGameProjectFolder(file);
-        updateGameProjectFolderButtons();
-        updateSpriteFolderButtons();
+        new LoadGameProject(file).execute();
     }//GEN-LAST:event_gameLoadButtonActionPerformed
+
+    private void printPBSTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPBSTestActionPerformed
+        if (pbsData != null){
+            System.out.println("Types:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (pkmn.essentials.data.pkmn.Type type : pbsData.getTypes()){
+                System.out.println(type.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
+            System.out.println();
+            System.out.println("Moves:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (pkmn.essentials.data.pkmn.Move move : pbsData.getMoves()){
+                System.out.println(move.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
+            System.out.println();
+        }
+    }//GEN-LAST:event_printPBSTestActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -1969,6 +1999,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private BlendColorChooserPanel recolorBlendColorChooser;
     
     private File gameProjectFolder = null;
+    
+    private PBSData pbsData = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -2012,6 +2044,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTabbedPane jTabbedPane3;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnCriesAudioPanel;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnFaintCriesAudioPanel;
+    private javax.swing.JMenuItem printPBSTest;
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
@@ -2962,4 +2995,106 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
     }
     
+    private class LoadGameProject extends FileLoader{
+        
+        private PBSData data = new PBSData();
+        
+        private int stage = 0;
+
+        public LoadGameProject(File file) {
+            super(file);
+        }
+
+        @Override
+        protected boolean loadFile(File file) throws IOException {
+            File pbsFolder = new File(file,PBSData.PBS_FOLDER);
+            ArrayList<File> pbsFiles = new ArrayList<>();
+            if (pbsFolder.exists()){
+                try{
+                    Stream<Path> fileStream = Files.walk(pbsFolder.toPath());
+                    Object[] paths = fileStream.toArray();
+                    for (Object path : paths){
+                        if (path instanceof Path){
+                            pbsFiles.add(((Path)path).toFile());
+                        }
+                    }
+                } catch (IOException ex){
+                    getLogger().log(Level.WARNING, "Error finding PBS files", ex);
+                    return false;
+                }
+            }
+            if (!pbsFiles.isEmpty()){
+                pbsFiles.removeIf((File t) -> t.isDirectory() || !t.exists() || !FilesExtended.endsWithFileExtension(t, PBSData.PBS_FILE_EXTENSION));
+                stage = 1;
+                progressDisplay.setString(getProgressString());
+                ArrayList<String> lines = new ArrayList<>();
+                try{
+                    getLogger().finer("Loading Pokemon Types");
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        if (pbsFiles.get(i).getName().startsWith(pkmn.essentials.data.pkmn.Type.PBS_FILE_TEMPLATE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadTypes(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
+                    stage = 2;
+                    getLogger().finer("Loading Pokemon Moves");
+                    progressDisplay.setString(getProgressString());
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        if (pbsFiles.get(i).getName().startsWith(pkmn.essentials.data.pkmn.Move.PBS_FILE_TEMPLATE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadMoves(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
+                }
+                catch(IOException | IllegalArgumentException ex){
+                    getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
+                }
+            }
+            
+            return true;
+        }
+        
+        private List<String> readLines(File file, List<String> lines) throws FileNotFoundException{
+            getLogger().log(Level.FINER, "Loading File {0}", file);
+            if (lines == null)
+                lines = new ArrayList<>();
+            try(Scanner scanner = new Scanner(file)){
+                while(scanner.hasNextLine())
+                    lines.add(scanner.nextLine());
+            }
+            return lines;
+        }
+        
+        @Override
+        public String getProgressString(){
+            switch(stage){
+                case(1):
+                    return "Loading Pokemon Types";
+                case(2):
+                    return "Loading Pokemon Moves";
+            }
+            return "Loading Game Project";
+        }
+        @Override
+        protected void done(){
+            if (success){
+                pbsData = data;
+            }
+            super.done();
+        }
+    }
 }
