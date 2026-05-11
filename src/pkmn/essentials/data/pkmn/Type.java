@@ -52,8 +52,6 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     
     private Boolean isPseudoType = null;
     
-    private List<String> flags = new ArrayList<>();
-    
     private Set<Type> weaknesses = new LinkedHashSet<>();
     
     private String weaknessesStr = null;
@@ -79,7 +77,6 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         this.iconPosition = type.iconPosition;
         this.isSpecialType = type.isSpecialType;
         this.isPseudoType = type.isPseudoType;
-        this.flags.addAll(type.flags);
         this.weaknesses.addAll(type.weaknesses);
         this.resistances.addAll(type.resistances);
         this.immunities.addAll(type.immunities);
@@ -177,8 +174,9 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
      * Labels that can be applied to a type to make it behave differently.
      * @return 
      */
+    @Override
     public List<String> getFlags(){
-        return flags;
+        return super.getFlags();
     }
     /**
      * A set of types that will inflict double damage (or in other words, are 
@@ -219,7 +217,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         if (isPseudoTypeSet())
             str += System.lineSeparator()+PROPERTY_NAMES[3] + " = " + isPseudoType();
         if (!getFlags().isEmpty())
-            str += System.lineSeparator()+PROPERTY_NAMES[4] + " = " + AbstractPBSElement.getFlagString(flags);
+            str += System.lineSeparator()+PROPERTY_NAMES[4] + " = " + AbstractPBSElement.getFlagString(getFlags());
         if (!getWeaknesses().isEmpty())
             str += System.lineSeparator()+PROPERTY_NAMES[5] + " = " + AbstractPBSElement.toIDString(getWeaknesses());
         else if (weaknessesStr != null)
@@ -238,7 +236,6 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     @Override
     protected void reset(){
         super.reset();
-        flags.clear();
         weaknesses.clear();
         resistances.clear();
         immunities.clear();

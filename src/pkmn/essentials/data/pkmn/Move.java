@@ -6,7 +6,6 @@ package pkmn.essentials.data.pkmn;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -109,8 +108,6 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     private String functionCode = null;
     
-    private List<String> flags = new ArrayList<>();
-    
     private Integer effectChance = null;
     
     private String desc = null;
@@ -134,7 +131,6 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
         this.target = move.target;
         this.priority = move.priority;
         this.functionCode = move.functionCode;
-        this.flags.addAll(move.flags);
         this.effectChance = move.effectChance;
         this.desc = move.desc;
     }
@@ -260,8 +256,9 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
         this.functionCode = code;
     }
     
+    @Override
     public List<String> getFlags(){
-        return flags;
+        return super.getFlags();
     }
     
     public int getEffectChance(){
@@ -381,7 +378,6 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
         target = null;
         priority = null;
         functionCode = null;
-        flags.clear();
         effectChance = null;
         desc = null;
     }

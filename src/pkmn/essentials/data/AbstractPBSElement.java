@@ -30,6 +30,8 @@ public abstract class AbstractPBSElement {
      */
     private int version = 0;
     
+    private List<String> flags = new ArrayList<>();
+    
     protected AbstractPBSElement(){
     }
     
@@ -44,6 +46,7 @@ public abstract class AbstractPBSElement {
         this.id = data.id;
         this.name = data.name;
         this.version = data.version;
+        this.flags.addAll(data.flags);
     }
     /**
      * This returns the internal ID for this data. This is how the scripts will 
@@ -88,6 +91,10 @@ public abstract class AbstractPBSElement {
      */
     protected void setVersion(int version){
         this.version = version;
+    }
+    
+    protected List<String> getFlags(){
+        return flags;
     }
     
     @Override
@@ -151,6 +158,7 @@ public abstract class AbstractPBSElement {
         id = null;
         name = null;
         version = 0;
+        flags.clear();
     }
     
     protected abstract void setProperty(int propertyIndex, String value);
