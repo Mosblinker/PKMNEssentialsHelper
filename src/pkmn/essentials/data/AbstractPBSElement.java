@@ -18,7 +18,7 @@ public abstract class AbstractPBSElement {
     
     public static final String FLAG_ENCODED_SEPARATOR = "_";
     
-    public static final String FLAG_NUMBER_REGEX = "[0-9]+";
+    public static final String NUMBER_REGEX = "[0-9]+";
     
     public static final String FLAG_NUMBER_PLACEHOLDER = FLAG_ENCODED_SEPARATOR+"[##]";
     
