@@ -1406,6 +1406,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 System.out.println(PBSData.DATA_SEPARATOR);
             }
             System.out.println();
+            System.out.println("Abilities:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (pkmn.essentials.data.pkmn.Ability ability : pbsData.getAbilities()){
+                System.out.println(ability.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
+            System.out.println();
         }
     }//GEN-LAST:event_printPBSTestActionPerformed
     
@@ -3068,7 +3075,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                    
+                    stage = 3;
+                    getLogger().finer("Loading Pokemon Abilities");
+                    progressDisplay.setString(getProgressString());
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        if (pbsFiles.get(i).getName().startsWith(pkmn.essentials.data.pkmn.Ability.PBS_FILE_TEMPLATE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadAbilities(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
                 } catch(IOException | IllegalArgumentException ex){
                     getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
                     return false;
@@ -3108,6 +3130,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return "Loading Pokemon Types";
                 case(2):
                     return "Loading Pokemon Moves";
+                case(3):
+                    return "Loading Pokemon Abilities";
             }
             return "Loading Game Project";
         }
