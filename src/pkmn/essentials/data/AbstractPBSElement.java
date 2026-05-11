@@ -32,7 +32,7 @@ public abstract class AbstractPBSElement {
     /**
      * The name of the data, as seen often by the player.
      */
-    private String name = "Unnamed";
+    private String name = null;
     /**
      * An optional version number. This is not always used.
      */
