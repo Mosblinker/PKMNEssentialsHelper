@@ -3103,7 +3103,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 typeIcons = PkmnHelperUtilities.splitIcons(image, data.getTypes().size(), 1);
                 data.setTypeIcons(typeIcons);
                 image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Move.CATEGORY_ICONS));
-                moveCategoryIcons = pkmn.essentials.data.pkmn.Move.getCategoryIcons(image);
+                moveCategoryIcons = new LinkedHashMap<>();
+                List<ImageIcon> tempIconList = PkmnHelperUtilities.splitIcons(image, MoveCategory.values().length, 1);
+                for (int i = 0; i < MoveCategory.values().length; i++){
+                    moveCategoryIcons.put(MoveCategory.values()[i], tempIconList.get(i));
+                    tempIconList.get(i).setDescription(MoveCategory.values()[i].toString());
+                }
             } catch(IOException | IllegalArgumentException ex){
                 getLogger().log(Level.WARNING, "Failed to load icons", ex);
             }

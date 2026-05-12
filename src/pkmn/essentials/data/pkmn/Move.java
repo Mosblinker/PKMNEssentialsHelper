@@ -4,13 +4,11 @@
  */
 package pkmn.essentials.data.pkmn;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSElement;
 
 /**
@@ -386,15 +384,5 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
         if (typeStr == null || typeStr.isBlank())
             return;
         setType((Type) AbstractPBSElement.getMatch(typeStr, types));
-    }
-    
-    public static Map<MoveCategory, ImageIcon> getCategoryIcons(BufferedImage icons){
-        Map<MoveCategory, ImageIcon> iconMap = new LinkedHashMap<>();
-        int height = Math.floorDiv(icons.getHeight(), MoveCategory.values().length);
-        for (MoveCategory category : MoveCategory.values()){
-            BufferedImage img = icons.getSubimage(0, height*category.getIndex(), icons.getWidth(), height);
-            iconMap.put(category,new ImageIcon(img, category.toString()));
-        }
-        return iconMap;
     }
 }
