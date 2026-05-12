@@ -58,7 +58,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
-import pkmn.essentials.data.PBSData;
+import pkmn.essentials.data.*;
+import pkmn.essentials.data.pkmn.*;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -3032,7 +3033,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
             if (!pbsFiles.isEmpty()){
                 pbsFiles.removeIf((File t) -> t.isDirectory() || !t.exists() || !FilesExtended.endsWithFileExtension(t, PBSData.PBS_FILE_EXTENSION));
-                stage = 1;
+                stage = 2;
                 progressDisplay.setString(getProgressString());
                 ArrayList<String> lines = new ArrayList<>();
                 try{
@@ -3050,7 +3051,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                    stage = 2;
+                    stage = 3;
                     getLogger().finer("Loading Pokemon Moves");
                     progressDisplay.setString(getProgressString());
                     for (int i = 0; i < pbsFiles.size(); i++){
@@ -3066,7 +3067,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                    stage = 3;
+                    stage = 4;
                     getLogger().finer("Loading Pokemon Abilities");
                     progressDisplay.setString(getProgressString());
                     for (int i = 0; i < pbsFiles.size(); i++){
@@ -3082,7 +3083,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                    stage = 4;
+                    stage = 5;
                     getLogger().finer("Loading Items");
                     progressDisplay.setString(getProgressString());
                     for (int i = 0; i < pbsFiles.size(); i++){
@@ -3103,13 +3104,52 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return false;
                 }
             }
-            stage = 0;
+            stage = 1;
             progressDisplay.setString(getProgressString());
             try{
-                BufferedImage image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Type.ICONS));
-                data.setTypeIcons(image);
-                image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Move.CATEGORY_ICONS));
-                data.setMoveCategoryIcons(image);
+                File imageFile = new File(file,pkmn.essentials.data.pkmn.Type.ICONS);
+                BufferedImage image;
+                if (imageFile.exists()){
+                    image = ImageIO.read(imageFile);
+                    data.setTypeIcons(image);
+                }
+                imageFile = new File(file,Move.CATEGORY_ICONS);
+                if (imageFile.exists()){
+                    image = ImageIO.read(imageFile);
+                    data.setMoveCategoryIcons(image);
+                }
+                File itemFolder = new File(file,Item.SPRITE_FOLDER);
+                Map<String,BufferedImage> tmImages = new HashMap<>();
+                for (pkmn.essentials.data.pkmn.Type type : data.getTypes()){
+                    for (String prefix : new String[]{
+                        Item.HM_SPRITE_NAME_PREFIX,
+                        Item.TM_SPRITE_NAME_PREFIX,
+                        Item.TR_SPRITE_NAME_PREFIX
+                    }){
+                        String name = prefix + type.getID();
+                        File iconFile = new File(itemFolder,name+"."+Item.SPRITE_FILE_EXTENSION);
+                        if (imageFile.exists()){
+                            try{
+                                tmImages.put(name, ImageIO.read(iconFile));
+                            } catch (IOException ex){
+                                getLogger().log(Level.WARNING, "Failed to load "+ name + " icon", ex);
+                            }
+                        }
+                    }
+                }
+                Item.setTutorMachineIcons(tmImages, data.getTypes());
+                imageFile = new File(itemFolder,Item.DEFAULT_SPRITE_NAME+"."+Item.SPRITE_FILE_EXTENSION);
+                if (imageFile.exists()){
+                    image = ImageIO.read(imageFile);
+                    Item.setDefaultImageIcon(new ImageIcon(image));
+                }
+                for (Item item : data.getItems()){
+                    imageFile = new File(itemFolder,item.getID()+"."+Item.SPRITE_FILE_EXTENSION);
+                    if (imageFile.exists()){
+                        image = ImageIO.read(imageFile);
+                        item.setIcon(new ImageIcon(image));
+                    }
+                }
             } catch(IOException | IllegalArgumentException ex){
                 getLogger().log(Level.WARNING, "Failed to load icons", ex);
             }
@@ -3134,13 +3174,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         public String getProgressString(){
             switch(stage){
                 case(1):
-                    return "Loading Pokemon Types";
+                    return "Loading Images";
                 case(2):
-                    return "Loading Pokemon Moves";
+                    return "Loading Pokemon Types";
                 case(3):
-                    return "Loading Pokemon Abilities";
+                    return "Loading Pokemon Moves";
                 case(4):
+                    return "Loading Pokemon Abilities";
+                case(5):
                     return "Loading Items";
+                
             }
             return "Loading Game Project";
         }
