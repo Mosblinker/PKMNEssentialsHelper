@@ -142,6 +142,11 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         return tutorMachineSprites;
     }
     
+    public static void setTutorMachineIcons(Map<String, BufferedImage> sprites, Collection<? extends Type> types){
+        getTutorMachineIcons().clear();
+        getTutorMachineIcons().putAll(getTutorMachineIcons(sprites,types));
+    }
+    
     private static ImageIcon defaultItemIcon = null;
     
     public static ImageIcon getDefaultImageIcon(){
