@@ -59,7 +59,6 @@ import javax.swing.text.JTextComponent;
 import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.PBSData;
-import pkmn.essentials.data.pkmn.MoveCategory;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -2009,10 +2008,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private File gameProjectFolder = null;
     
     private PBSData pbsData = null;
-    
-    private List<ImageIcon> typeIcons = null;
-    
-    private Map<MoveCategory, ImageIcon> moveCategoryIcons = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -3011,10 +3006,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private PBSData data = new PBSData();
         
-        private List<ImageIcon> typeIcons = null;
-    
-        private Map<MoveCategory, ImageIcon> moveCategoryIcons = null;
-        
         private int stage = 0;
 
         public LoadGameProject(File file) {
@@ -3100,15 +3091,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             progressDisplay.setString(getProgressString());
             try{
                 BufferedImage image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Type.ICONS));
-                typeIcons = PkmnHelperUtilities.splitIcons(image, data.getTypes().size(), 1);
-                data.setTypeIcons(typeIcons);
+                data.setTypeIcons(image);
                 image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Move.CATEGORY_ICONS));
-                moveCategoryIcons = new LinkedHashMap<>();
-                List<ImageIcon> tempIconList = PkmnHelperUtilities.splitIcons(image, MoveCategory.values().length, 1);
-                for (int i = 0; i < MoveCategory.values().length; i++){
-                    moveCategoryIcons.put(MoveCategory.values()[i], tempIconList.get(i));
-                    tempIconList.get(i).setDescription(MoveCategory.values()[i].toString());
-                }
+                data.setMoveCategoryIcons(image);
             } catch(IOException | IllegalArgumentException ex){
                 getLogger().log(Level.WARNING, "Failed to load icons", ex);
             }
@@ -3145,8 +3130,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         protected void done(){
             if (success){
                 pbsData = data;
-                PkmnHelper.this.typeIcons = typeIcons;
-                PkmnHelper.this.moveCategoryIcons = moveCategoryIcons;
             }
             super.done();
         }
