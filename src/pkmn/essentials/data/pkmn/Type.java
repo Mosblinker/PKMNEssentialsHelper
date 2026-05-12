@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSElement;
 
@@ -64,6 +65,8 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     
     private String immunitiesStr = null;
     
+    private Icon icon = null;
+    
     public Type(){
         super();
     }
@@ -83,6 +86,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         this.weaknessesStr = type.weaknessesStr;
         this.resistancesStr = type.resistancesStr;
         this.immunitiesStr = type.immunitiesStr;
+        this.icon = type.icon;
     }
     /**
      * The internal ID for this type. This is how the scripts will refer to the 
@@ -201,6 +205,14 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     public Set<Type> getImmunities(){
         return immunities;
     }
+    
+    public Icon getIcon(){
+        return icon;
+    }
+    
+    public void setIcon(Icon icon){
+        this.icon = icon;
+    }
     @Override
     public int compareTo(Type o) {
         return getID().compareTo(o.getID());
@@ -245,6 +257,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         weaknessesStr = null;
         resistancesStr = null;
         immunitiesStr = null;
+        setIcon(null);
     }
 
     @Override
