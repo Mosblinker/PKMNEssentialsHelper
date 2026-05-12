@@ -4,10 +4,14 @@
  */
 package pkmn.essentials.data;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
+import pkmn.essentials.PkmnHelperUtilities;
 import pkmn.essentials.data.pkmn.*;
 
 /**
@@ -36,6 +40,14 @@ public class PBSData {
     
     private List<Item> items = new ArrayList<>();
     
+    
+    
+    private List<ImageIcon> typeIcons = new ArrayList<>();
+    
+    private Map<MoveCategory, ImageIcon> moveCategoryIcons = new HashMap<>();
+    
+    
+    
     public PBSData(){
         
     }
@@ -60,6 +72,10 @@ public class PBSData {
                 temp.setMove(this.moves.get(index));
             this.items.add(temp);
         }
+        
+        
+        this.typeIcons.addAll(data.typeIcons);
+        this.moveCategoryIcons.putAll(data.moveCategoryIcons);
     } 
     
     public List<Type> getTypes(){
@@ -91,13 +107,23 @@ public class PBSData {
         loadTypes(lines,null);
     }
     
+    public List<ImageIcon> getTypeIcons(){
+        return typeIcons;
+    }
+    
     public void setTypeIcons(List<? extends ImageIcon> icons){
+        getTypeIcons().clear();
+        getTypeIcons().addAll(icons);
         for (Type type : getTypes()){
             if (type.getIconPosition() >= 0 && type.getIconPosition() < icons.size())
                 type.setIcon(icons.get(type.getIconPosition()));
             else
                 type.setIcon(null);
         }
+    }
+    
+    public void setTypeIcons(BufferedImage image){
+        setTypeIcons(PkmnHelperUtilities.splitIcons(image, getTypes().size(), 1));
     }
     
     public List<Move> getMoves(){
@@ -127,6 +153,19 @@ public class PBSData {
     
     public void loadMoves(List<String> lines){
         loadMoves(lines,null);
+    }
+    
+    public Map<MoveCategory, ImageIcon> getMoveCategoryIcons(){
+        return moveCategoryIcons;
+    }
+    
+    public void setMoveCategoryIcons(BufferedImage image){
+        getMoveCategoryIcons().clear();
+        List<ImageIcon> icons = PkmnHelperUtilities.splitIcons(image, MoveCategory.values().length, 1);
+        for (int i = 0; i < MoveCategory.values().length; i++){
+            getMoveCategoryIcons().put(MoveCategory.values()[i], icons.get(i));
+            icons.get(i).setDescription(MoveCategory.values()[i].toString());
+        }
     }
     
     public List<Ability> getAbilities(){
