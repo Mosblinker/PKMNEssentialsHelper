@@ -164,9 +164,9 @@ public abstract class AbstractPBSElement {
     
     protected void reset(){
         id = null;
-        name = null;
-        version = 0;
-        flags.clear();
+        setName(null);
+        setVersion(0);
+        getFlags().clear();
     }
     
     protected abstract void setProperty(int propertyIndex, String value);

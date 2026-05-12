@@ -236,12 +236,12 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     @Override
     protected void reset(){
         super.reset();
-        weaknesses.clear();
-        resistances.clear();
-        immunities.clear();
-        iconPosition = null;
-        isSpecialType = null;
-        isPseudoType = null;
+        getWeaknesses().clear();
+        getResistances().clear();
+        getImmunities().clear();
+        setIconPosition(null);
+        setSpecialType(null);
+        setPseudoType(null);
         weaknessesStr = null;
         resistancesStr = null;
         immunitiesStr = null;
@@ -279,9 +279,9 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     }
     
     public void finishLoad(Collection<Type> types){
-        loadTypes(types,weaknessesStr,weaknesses);
-        loadTypes(types,resistancesStr,resistances);
-        loadTypes(types,immunitiesStr,immunities);
+        loadTypes(types,weaknessesStr,getWeaknesses());
+        loadTypes(types,resistancesStr,getResistances());
+        loadTypes(types,immunitiesStr,getImmunities());
         weaknessesStr = null;
         resistancesStr = null;
         immunitiesStr = null;

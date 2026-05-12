@@ -135,6 +135,6 @@ public class Ability extends AbstractPBSElement implements Comparable<Ability>{
     @Override
     protected void reset(){
         super.reset();
-        desc = null;
+        setDescription(null);
     }
 }

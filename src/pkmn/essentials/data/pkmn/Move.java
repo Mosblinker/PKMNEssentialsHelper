@@ -369,17 +369,17 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     @Override
     protected void reset(){
         super.reset();
-        type = null;
+        setType(null);
         typeStr = null;
-        category = null;
-        power = null;
-        accuracy = null;
-        totalPP = null;
-        target = null;
-        priority = null;
-        functionCode = null;
-        effectChance = null;
-        desc = null;
+        setCategory(null);
+        setPower(null);
+        setAccuracy(null);
+        setTotalPP(null);
+        setTarget(null);
+        setPriority(null);
+        setFunctionCode(null);
+        setEffectChance(null);
+        setDescription(null);
     }
     
     public void finishLoad(Collection<Type> types){
