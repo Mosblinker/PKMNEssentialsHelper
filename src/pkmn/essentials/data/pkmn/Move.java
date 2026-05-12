@@ -382,7 +382,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
         setDescription(null);
     }
     
-    public void finishLoad(Collection<Type> types){
+    public void finishLoad(Collection<? extends Type> types){
         if (typeStr == null || typeStr.isBlank())
             return;
         setType((Type) AbstractPBSElement.getMatch(typeStr, types));
