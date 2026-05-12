@@ -308,6 +308,12 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         this.fieldUse = use;
     }
     
+     public boolean isTutorMachine(){
+         return ItemFieldUse.HM.equals(getFieldUse()) || 
+                 ItemFieldUse.TM.equals(getFieldUse()) || 
+                ItemFieldUse.TR.equals(getFieldUse());
+     }
+    
     public ItemBattleUse getBattleUse(){
         return battleUse;
     }
@@ -363,10 +369,7 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
     }
     
     public String getDescription(){
-        if (desc == null && getMove() != null && 
-                (ItemFieldUse.TR.equals(getFieldUse())||
-                ItemFieldUse.TM.equals(getFieldUse())||
-                ItemFieldUse.HM.equals(getFieldUse())))
+        if (desc == null && getMove() != null && isTutorMachine())
             return getMove().getDescription();
         return desc;
     }
@@ -380,6 +383,9 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
     }
     
     public ImageIcon getIcon(){
+        if (icon == null && getMove() != null && getMove().getType() != null && 
+                isTutorMachine())
+            return getTutorMachineSprites().get(getFieldUse()).get(getMove().getType());
         return icon;
     }
     
