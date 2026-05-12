@@ -136,6 +136,12 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         "Description"
     };
     
+    private static Map<ItemFieldUse,Map<Type,ImageIcon>> tutorMachineSprites = new HashMap<>();
+    
+    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineSprites(){
+        return tutorMachineSprites;
+    }
+    
     private String namePlural = null;
     
     private String portionName = null;
@@ -506,7 +512,7 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         setMove((Move)AbstractPBSElement.getMatch(moveStr, moves));
     }
     
-    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTechnicalMachineSprites(
+    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineSprites(
             Map<String, BufferedImage> sprites, Collection<? extends Type> types){
         Map<ItemFieldUse,Map<Type,ImageIcon>> map = new HashMap<>();
         map.put(ItemFieldUse.TR, new HashMap<>());
