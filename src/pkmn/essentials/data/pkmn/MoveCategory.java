@@ -10,23 +10,16 @@ package pkmn.essentials.data.pkmn;
  */
 public enum MoveCategory {
     
-    PHYSICAL("Physical", 0),
+    PHYSICAL("Physical"),
     
-    SPECIAL("Special", 1),
+    SPECIAL("Special"),
     
-    STATUS("Status", 2);
+    STATUS("Status");
     
     private String name;
     
-    private int index;
-    
-    private MoveCategory(String name, int index){
+    private MoveCategory(String name){
         this.name = name;
-        this.index = index;
-    }
-    
-    public int getIndex(){
-        return index;
     }
     
     @Override
