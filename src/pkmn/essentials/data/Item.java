@@ -138,7 +138,7 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
     
     private static Map<ItemFieldUse,Map<Type,ImageIcon>> tutorMachineSprites = new HashMap<>();
     
-    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineSprites(){
+    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineIcons(){
         return tutorMachineSprites;
     }
     
@@ -396,7 +396,7 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         if (icon == null){
             if (getMove() != null && getMove().getType() != null && 
                     isTutorMachine())
-                return getTutorMachineSprites().get(getFieldUse()).getOrDefault(getMove().getType(), defaultItemIcon);
+                return getTutorMachineIcons().get(getFieldUse()).getOrDefault(getMove().getType(), defaultItemIcon);
             return defaultItemIcon;
         }
         return icon;
@@ -535,7 +535,7 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         setMove((Move)AbstractPBSElement.getMatch(moveStr, moves));
     }
     
-    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineSprites(
+    public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineIcons(
             Map<String, BufferedImage> sprites, Collection<? extends Type> types){
         Map<ItemFieldUse,Map<Type,ImageIcon>> map = new HashMap<>();
         map.put(ItemFieldUse.TR, new HashMap<>());
