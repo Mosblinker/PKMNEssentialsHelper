@@ -2962,12 +2962,43 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             if (!file.exists())
                 if (!FilesExtended.createDirectories(PkmnHelper.this, file))
                     return false;
-            loadFlagFile(file,pkmn.essentials.data.pkmn.Move.FLAG_FILE,
-                    "Pokemon Move Flags",pkmn.essentials.data.pkmn.Move.getFlagMap());
+            loadFlagFile(file,Move.FLAG_FILE,
+                    "Pokemon Move Flags",Move.getFlagMap());
             loadFlagFile(file,pkmn.essentials.data.pkmn.Type.FLAG_FILE,
                     "Pokemon Type Flags",pkmn.essentials.data.pkmn.Type.getFlagMap());
+            loadFlagFile(file,Item.FLAG_FILE,
+                    "Item Flags",Item.getFlagMap());
+            loadListFile(file,Item.BAG_POCKETS_NAME_FILE,"Bag Pocket Names",Item.getBagPocketNames());
             
             return true;
+        }
+        
+        private void loadListFile(File folder, String name, String comment, List<String> list) throws IOException{
+            File file = new File(folder,name);
+            Properties prop = new Properties();
+            if (!file.exists()){
+                try(PrintWriter writer = new PrintWriter(file)){
+                    prop.store(writer, comment);
+                }
+            }
+            try(FileReader reader = new FileReader(file)){
+                prop.load(reader);
+            }
+            progressBar.setMaximum(prop.size());
+            progressBar.setIndeterminate(false);
+            for (String key : prop.stringPropertyNames()){
+                try{
+                    int index = Integer.parseInt(key);
+                    while(index > list.size())
+                        list.add(null);
+                    if (index == list.size())
+                        list.add(prop.getProperty(key));
+                    else
+                        list.set(index, prop.getProperty(key));
+                } catch (NumberFormatException ex){
+                    getLogger().log(Level.INFO, "Invalid index in list "+key, ex);
+                }
+            }
         }
         
         private void loadFlagFile(File folder, String name, String comment, Map<String, String> flags) throws IOException{
