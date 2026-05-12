@@ -278,7 +278,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
             setID(value);
     }
     
-    public void finishLoad(Collection<Type> types){
+    public void finishLoad(Collection<? extends Type> types){
         loadTypes(types,weaknessesStr,getWeaknesses());
         loadTypes(types,resistancesStr,getResistances());
         loadTypes(types,immunitiesStr,getImmunities());
@@ -287,7 +287,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         immunitiesStr = null;
     }
     
-    private void loadTypes(Collection<Type> types, String values, Collection<Type> target){
+    private void loadTypes(Collection<? extends Type> types, String values, Collection<Type> target){
         if (values == null || values.isBlank())
             return;
         String[] arr = values.split(",");
