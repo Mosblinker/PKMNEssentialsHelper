@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSElement;
 
 /**
@@ -61,7 +61,7 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     
     private String immunitiesStr = null;
     
-    private Icon icon = null;
+    private ImageIcon icon = null;
     
     public Type(){
         super();
@@ -202,11 +202,11 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         return immunities;
     }
     
-    public Icon getIcon(){
+    public ImageIcon getIcon(){
         return icon;
     }
     
-    public void setIcon(Icon icon){
+    public void setIcon(ImageIcon icon){
         this.icon = icon;
     }
     @Override

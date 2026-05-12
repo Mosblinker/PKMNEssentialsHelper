@@ -6,7 +6,7 @@ package pkmn.essentials.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
 import pkmn.essentials.data.pkmn.*;
 
@@ -82,7 +82,7 @@ public class PBSData {
         loadTypes(lines,null);
     }
     
-    public void setTypeIcons(List<? extends Icon> icons){
+    public void setTypeIcons(List<? extends ImageIcon> icons){
         for (Type type : getTypes()){
             if (type.getIconPosition() >= 0 && type.getIconPosition() < icons.size())
                 type.setIcon(icons.get(type.getIconPosition()));
