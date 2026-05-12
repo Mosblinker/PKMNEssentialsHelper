@@ -142,6 +142,16 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         return tutorMachineSprites;
     }
     
+    private static ImageIcon defaultItemIcon = null;
+    
+    public static ImageIcon getDefaultImageIcon(){
+        return defaultItemIcon;
+    }
+    
+    public static void setDefaultImageIcon(ImageIcon icon){
+        defaultItemIcon = icon;
+    }
+    
     private String namePlural = null;
     
     private String portionName = null;
@@ -383,14 +393,21 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
     }
     
     public ImageIcon getIcon(){
-        if (icon == null && getMove() != null && getMove().getType() != null && 
-                isTutorMachine())
-            return getTutorMachineSprites().get(getFieldUse()).get(getMove().getType());
+        if (icon == null){
+            if (getMove() != null && getMove().getType() != null && 
+                    isTutorMachine())
+                return getTutorMachineSprites().get(getFieldUse()).getOrDefault(getMove().getType(), defaultItemIcon);
+            return defaultItemIcon;
+        }
         return icon;
     }
     
     public void setIcon(ImageIcon icon){
         this.icon = icon;
+    }
+    
+    public boolean isIconSet(){
+        return icon != null;
     }
     
     @Override
