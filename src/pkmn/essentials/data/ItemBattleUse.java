@@ -49,7 +49,7 @@ public enum ItemBattleUse {
         return name;
     }
     
-    public ItemBattleUse parseBattleUse(String name){
+    public static ItemBattleUse parseBattleUse(String name){
         for (ItemBattleUse use : values()){
             if (use.getValue().equals(name))
                 return use;

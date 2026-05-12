@@ -49,7 +49,7 @@ public enum ItemFieldUse {
         return name;
     }
     
-    public ItemFieldUse parseFieldUse(String name){
+    public static ItemFieldUse parseFieldUse(String name){
         for (ItemFieldUse use : values()){
             if (use.getValue().equals(name))
                 return use;
