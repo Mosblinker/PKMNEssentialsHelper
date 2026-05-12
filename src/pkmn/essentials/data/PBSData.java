@@ -34,6 +34,8 @@ public class PBSData {
     
     private List<Ability> abilities = new ArrayList<>();
     
+    private List<Item> items = new ArrayList<>();
+    
     public PBSData(){
         
     }
@@ -50,6 +52,13 @@ public class PBSData {
         }
         for (Ability ability : data.abilities){
             this.abilities.add(new Ability(ability));
+        }
+        for (Item item : data.items){
+            Item temp = new Item(item);
+            int index = data.moves.indexOf(temp.getMove());
+            if (index >= 0)
+                temp.setMove(this.moves.get(index));
+            this.items.add(temp);
         }
     } 
     
@@ -143,5 +152,34 @@ public class PBSData {
     
     public void loadAbilities(List<String> lines){
         loadAbilities(lines,null);
+    }
+    
+    public List<Item> getItems(){
+        return items;
+    }
+    
+    public void loadItems(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next type
+            Item item = new Item();
+            index = item.fromData(lines, index, progressBar);
+            getItems().add(item);
+        }
+            // Set the move for each type
+        for (Item item : getItems()){
+            item.finishLoad(getMoves());
+        }
+    }
+    
+    public void loadItems(List<String> lines){
+        loadItems(lines,null);
     }
 }
