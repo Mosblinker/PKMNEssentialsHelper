@@ -6,6 +6,7 @@ package pkmn.essentials.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
 import javax.swing.JProgressBar;
 import pkmn.essentials.data.pkmn.*;
 
@@ -69,16 +70,25 @@ public class PBSData {
             // Load the next type
             Type type = new Type();
             index = type.fromData(lines, index, progressBar);
-            types.add(type);
+            getTypes().add(type);
         }
             // Set strengths and weaknesses for each type
-        for (Type type : types){
-            type.finishLoad(types);
+        for (Type type : getTypes()){
+            type.finishLoad(getTypes());
         }
     }
     
     public void loadTypes(List<String> lines){
         loadTypes(lines,null);
+    }
+    
+    public void setTypeIcons(List<? extends Icon> icons){
+        for (Type type : getTypes()){
+            if (type.getIconPosition() >= 0 && type.getIconPosition() < icons.size())
+                type.setIcon(icons.get(type.getIconPosition()));
+            else
+                type.setIcon(null);
+        }
     }
     
     public List<Move> getMoves(){
@@ -98,11 +108,11 @@ public class PBSData {
             // Load the next move
             Move move = new Move();
             index = move.fromData(lines, index, progressBar);
-            moves.add(move);
+            getMoves().add(move);
         }
             // Set the type for each move
-        for (Move move : moves){
-            move.finishLoad(types);
+        for (Move move : getMoves()){
+            move.finishLoad(getTypes());
         }
     }
     
@@ -127,7 +137,7 @@ public class PBSData {
             // Load the next ability
             Ability ability = new Ability();
             index = ability.fromData(lines, index, progressBar);
-            abilities.add(ability);
+            getAbilities().add(ability);
         }
     }
     

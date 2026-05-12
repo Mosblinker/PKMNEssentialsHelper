@@ -329,15 +329,4 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
         }
         return iconList;
     }
-    
-    public static Map<Type,ImageIcon> getTypeIcons(BufferedImage icons, List<Type> types){
-        Objects.requireNonNull(icons);
-        Objects.requireNonNull(types);
-        Map<Type,ImageIcon> iconMap = new LinkedHashMap<>();
-        int height = Math.floorDiv(icons.getHeight(), types.size());
-        for (Type type : types){
-            iconMap.put(type, getTypeIcon(icons,height,type.getIconPosition(),type.getName()));
-        }
-        return iconMap;
-    }
 }

@@ -2010,7 +2010,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private PBSData pbsData = null;
     
-    private Map<pkmn.essentials.data.pkmn.Type, ImageIcon> typeIcons = null;
+    private List<ImageIcon> typeIcons = null;
     
     private Map<MoveCategory, ImageIcon> moveCategoryIcons = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3011,7 +3011,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private PBSData data = new PBSData();
         
-        private Map<pkmn.essentials.data.pkmn.Type, ImageIcon> typeIcons = null;
+        private List<ImageIcon> typeIcons = null;
     
         private Map<MoveCategory, ImageIcon> moveCategoryIcons = null;
         
@@ -3100,7 +3100,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             progressDisplay.setString(getProgressString());
             try{
                 BufferedImage image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Type.ICONS));
-                typeIcons = pkmn.essentials.data.pkmn.Type.getTypeIcons(image, data.getTypes());
+                typeIcons = pkmn.essentials.data.pkmn.Type.getTypeIcons(image, data.getTypes().size());
+                data.setTypeIcons(typeIcons);
                 image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Move.CATEGORY_ICONS));
                 moveCategoryIcons = pkmn.essentials.data.pkmn.Move.getCategoryIcons(image);
             } catch(IOException | IllegalArgumentException ex){
