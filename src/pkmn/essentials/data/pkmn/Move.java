@@ -162,6 +162,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     
     public void setType(Type type){
         this.type = type;
+        typeStr = null;
     }
     
     public MoveCategory getCategory(){
@@ -370,7 +371,6 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     protected void reset(){
         super.reset();
         setType(null);
-        typeStr = null;
         setCategory(null);
         setPower(null);
         setAccuracy(null);
@@ -385,8 +385,7 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
     public void finishLoad(Collection<Type> types){
         if (typeStr == null || typeStr.isBlank())
             return;
-        type = (Type) AbstractPBSElement.getMatch(typeStr, types);
-        typeStr = null;
+        setType((Type) AbstractPBSElement.getMatch(typeStr, types));
     }
     
     public static Map<MoveCategory, ImageIcon> getCategoryIcons(BufferedImage icons){
