@@ -3082,6 +3082,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
+                    stage = 4;
+                    getLogger().finer("Loading Items");
+                    progressDisplay.setString(getProgressString());
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        if (pbsFiles.get(i).getName().startsWith(pkmn.essentials.data.Item.PBS_FILE_TEMPLATE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadItems(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
                 } catch(IOException | IllegalArgumentException ex){
                     getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
                     return false;
@@ -3123,6 +3139,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return "Loading Pokemon Moves";
                 case(3):
                     return "Loading Pokemon Abilities";
+                case(4):
+                    return "Loading Items";
             }
             return "Loading Game Project";
         }
