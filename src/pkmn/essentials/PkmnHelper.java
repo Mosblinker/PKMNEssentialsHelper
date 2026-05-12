@@ -3100,7 +3100,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             progressDisplay.setString(getProgressString());
             try{
                 BufferedImage image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Type.ICONS));
-                typeIcons = pkmn.essentials.data.pkmn.Type.getTypeIcons(image, data.getTypes().size());
+                typeIcons = PkmnHelperUtilities.splitIcons(image, data.getTypes().size(), 1);
                 data.setTypeIcons(typeIcons);
                 image = ImageIO.read(new File(file,pkmn.essentials.data.pkmn.Move.CATEGORY_ICONS));
                 moveCategoryIcons = pkmn.essentials.data.pkmn.Move.getCategoryIcons(image);

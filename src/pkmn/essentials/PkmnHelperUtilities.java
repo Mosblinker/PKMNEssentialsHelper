@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -223,5 +224,25 @@ public final class PkmnHelperUtilities {
                         "Failed to retrieve program directory.", ex);
             }
         return getWorkingDirectory();
+    }
+    
+    public static List<BufferedImage> splitImage(BufferedImage image, int rows, int columns){
+        List<BufferedImage> list = new ArrayList<>();
+        int w = Math.floorDiv(image.getWidth(), columns);
+        int h = Math.floorDiv(image.getHeight(), rows);
+        for (int y = 0; y < rows; y++){
+            for (int x = 0; x < columns; x++){
+                list.add(image.getSubimage(x*w, y*h, w, h));
+            }
+        }
+        return list;
+    }
+    
+    public static List<ImageIcon> splitIcons(BufferedImage image, int rows, int columns){
+        List<BufferedImage> images = splitImage(image,rows,columns);
+        List<ImageIcon> icons = new ArrayList<>();
+        for (BufferedImage temp : images)
+            icons.add(new ImageIcon(temp));
+        return icons;
     }
 }

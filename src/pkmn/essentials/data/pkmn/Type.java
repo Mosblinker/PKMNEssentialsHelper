@@ -4,18 +4,14 @@
  */
 package pkmn.essentials.data.pkmn;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSElement;
 
 /**
@@ -313,20 +309,5 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
     @Override
     protected String[] getPropertyNames() {
         return PROPERTY_NAMES;
-    }
-    
-    private static ImageIcon getTypeIcon(BufferedImage icons, int height, int index, String desc){
-        BufferedImage img = icons.getSubimage(0, height*index, icons.getWidth(), height);
-        return new ImageIcon(img, desc);
-    }
-    
-    public static List<ImageIcon> getTypeIcons(BufferedImage icons, int typeCount){
-        Objects.requireNonNull(icons);
-        int height = Math.floorDiv(icons.getHeight(), typeCount);
-        List<ImageIcon> iconList = new ArrayList<>();
-        for (int i = 0; i < typeCount; i++){
-            iconList.add(getTypeIcon(icons,height,i,null));
-        }
-        return iconList;
     }
 }
