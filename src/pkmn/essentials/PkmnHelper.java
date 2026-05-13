@@ -1117,6 +1117,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             System.out.printf("    %20s - %s%n",entries.getKey(),entries.getValue());
         }
         System.out.println();
+        System.out.println("Ability Flags:");
+        for (Map.Entry<String, String> entries : pkmn.essentials.data.pkmn.Ability.getFlagMap().entrySet()){
+            System.out.printf("    %20s - %s%n",entries.getKey(),entries.getValue());
+        }
+        System.out.println();
+        System.out.println("Item Flags:");
+        for (Map.Entry<String, String> entries : pkmn.essentials.data.Item.getFlagMap().entrySet()){
+            System.out.printf("    %20s - %s%n",entries.getKey(),entries.getValue());
+        }
+        System.out.println();
+        System.out.println("Bag Pockets:");
+        for (int i = 0; i < Item.getBagPocketNames().size(); i++){
+            System.out.printf("    %6d: %s%n", i, Item.getBagPocketNames().get(i));
+        }
+        System.out.println();
     }//GEN-LAST:event_printTestActionPerformed
 
     private void showHiddenFilesToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHiddenFilesToggleActionPerformed
@@ -1410,6 +1425,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             System.out.println(PBSData.DATA_SEPARATOR);
             for (pkmn.essentials.data.pkmn.Ability ability : pbsData.getAbilities()){
                 System.out.println(ability.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
+            System.out.println();
+            System.out.println("Items:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (pkmn.essentials.data.Item item : pbsData.getItems()){
+                System.out.println(item.toData());
                 System.out.println(PBSData.DATA_SEPARATOR);
             }
             System.out.println();
@@ -3159,7 +3181,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     }){
                         String name = prefix + type.getID();
                         File iconFile = new File(itemFolder,name+"."+Item.SPRITE_FILE_EXTENSION);
-                        if (imageFile.exists()){
+                        if (iconFile.exists()){
                             try{
                                 tmImages.put(name, ImageIO.read(iconFile));
                             } catch (IOException ex){
