@@ -3072,7 +3072,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             ArrayList<File> pbsFiles = new ArrayList<>();
             if (pbsFolder.exists()){
                 try{
-                    Stream<Path> fileStream = Files.walk(pbsFolder.toPath());
+                    Stream<Path> fileStream = Files.walk(pbsFolder.toPath(),1);
                     Object[] paths = fileStream.toArray();
                     for (Object path : paths){
                         if (path instanceof Path){
