@@ -190,6 +190,10 @@ public abstract class AbstractPBSElement {
         return getID();
     }
     
+    public void finishLoading(PBSData data){
+        
+    }
+    
     public static String getFlagString(Collection<String> flags){
         if (flags.isEmpty())
             return "";

@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import pkmn.essentials.data.AbstractPBSElement;
+import pkmn.essentials.data.PBSData;
 
 /**
  *
@@ -287,13 +288,17 @@ public class Type extends AbstractPBSElement implements Comparable<Type>{
             setID(value);
     }
     
-    public void finishLoad(Collection<? extends Type> types){
+    public void finishLoading(Collection<? extends Type> types){
         loadTypes(types,weaknessesStr,getWeaknesses());
         loadTypes(types,resistancesStr,getResistances());
         loadTypes(types,immunitiesStr,getImmunities());
         weaknessesStr = null;
         resistancesStr = null;
         immunitiesStr = null;
+    }
+    @Override
+    public void finishLoading(PBSData data){
+        finishLoading(data.getTypes());
     }
     
     private void loadTypes(Collection<? extends Type> types, String values, Collection<Type> target){

@@ -99,7 +99,7 @@ public class PBSData {
         }
             // Set strengths and weaknesses for each type
         for (Type type : getTypes()){
-            type.finishLoad(getTypes());
+            type.finishLoading(this);
         }
     }
     
@@ -143,12 +143,12 @@ public class PBSData {
             // Load the next move
             Move move = new Move();
             index = move.fromData(lines, index, progressBar);
-            if (move != null)
+            if (move.getID() != null)
                 getMoves().add(move);
         }
             // Set the type for each move
         for (Move move : getMoves()){
-            move.finishLoad(getTypes());
+            move.finishLoading(this);
         }
     }
     
@@ -186,7 +186,7 @@ public class PBSData {
             // Load the next ability
             Ability ability = new Ability();
             index = ability.fromData(lines, index, progressBar);
-            if (ability != null)
+            if (ability.getID() != null)
                 getAbilities().add(ability);
         }
     }
@@ -212,12 +212,12 @@ public class PBSData {
             // Load the next type
             Item item = new Item();
             index = item.fromData(lines, index, progressBar);
-            if (item != null)
+            if (item.getID() != null)
                 getItems().add(item);
         }
             // Set the move for each type
         for (Item item : getItems()){
-            item.finishLoad(getMoves());
+            item.finishLoading(this);
         }
     }
     

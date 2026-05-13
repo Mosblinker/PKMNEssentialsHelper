@@ -534,10 +534,15 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         return getID().compareTo(o.getID());
     }
     
-    public void finishLoad(Collection<? extends Move> moves){
+    public void finishLoading(Collection<? extends Move> moves){
         if (moveStr == null || moveStr.isBlank())
             return;
         setMove((Move)AbstractPBSElement.getMatch(moveStr, moves));
+    }
+    
+    @Override
+    public void finishLoading(PBSData data){
+        finishLoading(data.getMoves());
     }
     
     public static Map<ItemFieldUse,Map<Type,ImageIcon>> getTutorMachineIcons(

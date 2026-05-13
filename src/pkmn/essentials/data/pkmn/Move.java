@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import pkmn.essentials.data.AbstractPBSElement;
+import pkmn.essentials.data.PBSData;
 
 /**
  *
@@ -380,9 +381,13 @@ public class Move extends AbstractPBSElement implements Comparable<Move>{
         setDescription(null);
     }
     
-    public void finishLoad(Collection<? extends Type> types){
+    public void finishLoading(Collection<? extends Type> types){
         if (typeStr == null || typeStr.isBlank())
             return;
         setType((Type) AbstractPBSElement.getMatch(typeStr, types));
+    }
+    @Override
+    public void finishLoading(PBSData data){
+        finishLoading(data.getTypes());
     }
 }
