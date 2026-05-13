@@ -107,6 +107,8 @@ public abstract class AbstractPBSElement {
     
     @Override
     public boolean equals(Object o){
+        if (o == this)
+            return true;
         if (o instanceof AbstractPBSElement){
             AbstractPBSElement data = (AbstractPBSElement) o;
             return data.getID().equals(getID());
