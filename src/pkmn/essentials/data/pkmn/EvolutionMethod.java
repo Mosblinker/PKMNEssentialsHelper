@@ -101,8 +101,6 @@ public abstract class EvolutionMethod {
     
     public static final String METHODS_DATA_FILE = "evolution_methods.txt";
     
-    public static final String NO_PARAMETERS_FLAG = "NO_PARAM";
-    
     protected String value;
     
     protected String text;
