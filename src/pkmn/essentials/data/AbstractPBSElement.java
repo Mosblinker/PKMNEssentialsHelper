@@ -15,14 +15,6 @@ import javax.swing.JProgressBar;
  * @author Mosblinker
  */
 public abstract class AbstractPBSElement {
-    
-    public static final String FLAG_ENCODED_SEPARATOR = "_";
-    
-    public static final String NUMBER_REGEX = "[0-9]+";
-    
-    public static final String FLAG_NUMBER_PLACEHOLDER = FLAG_ENCODED_SEPARATOR+"[##]";
-    
-    public static final String FLAG_TYPE_PLACEHOLDER = FLAG_ENCODED_SEPARATOR+"[TYPE]";
     /**
      * The internal ID for this value. This is how the scripts will refer to the 
      * value. Each value much have a different ID. This is surrounded by square 

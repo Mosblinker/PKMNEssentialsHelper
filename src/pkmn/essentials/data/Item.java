@@ -36,11 +36,6 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
     public static final String TM_SPRITE_NAME_PREFIX = "machine_";
     
     public static final String TR_SPRITE_NAME_PREFIX = "machine_tr_";
-    /**
-     * The Natural Gift flag has a type and a number and thus should be handled 
-     * in a special way.
-     */
-    public static final String NATURAL_GIFT_FLAG_PREFIX = "NaturalGift";
     
     public static final String KEY_ITEM_FLAG = "KeyItem";
     
@@ -58,8 +53,8 @@ public class Item extends AbstractPBSElement implements Comparable<Item>{
         "Mulch",
         "MegaStone",
         "Repel",
-        "Fling_"+NUMBER_REGEX,
-        NATURAL_GIFT_FLAG_PREFIX+"_.+_"+NUMBER_REGEX
+        "Fling_"+PBSData.FLAG_NUMBER_TEMPLATE,
+        "NaturalGift_"+PBSData.FLAG_TYPE_TEMPLATE+"_"+PBSData.FLAG_NUMBER_TEMPLATE
     };
     
     public static final String[] DEFAULT_FLAG_DESCRIPTIONS = {

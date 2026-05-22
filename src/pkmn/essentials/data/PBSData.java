@@ -6,7 +6,10 @@ package pkmn.essentials.data;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -30,6 +33,69 @@ public class PBSData {
     
     public static boolean isID(String str){
         return str.startsWith("[") && str.endsWith("]");
+    }
+    
+    public static final String NUMBER_REGEX = "[0-9]+";
+    
+    public static final String TEXT_REGEX = ".+";
+    
+    public static final String FLAG_NUMBER_TEMPLATE = "[##]";
+    
+    public static final String FLAG_TYPE_TEMPLATE = "[TYPE]";
+    
+    public static final String[][] FLAG_TEMPLATE_DESCRIPTIONS = {
+        {FLAG_NUMBER_TEMPLATE,"Number"},
+        {FLAG_TYPE_TEMPLATE,"Type"}
+    };
+    
+    private static final String[][] FLAG_TEMPLATE_REGEX = {
+        {FLAG_NUMBER_TEMPLATE,NUMBER_REGEX},
+        {FLAG_TYPE_TEMPLATE,TEXT_REGEX}
+    };
+    
+    private static Map<String,String> getFlagTemplateToRegexMap(){
+        Map<String,String> map = new LinkedHashMap<>();
+        for (String[] entry : FLAG_TEMPLATE_REGEX){
+            map.put(entry[0],entry[1]);
+        }
+        return Collections.unmodifiableMap(map);
+    }
+    
+    public static final Map<String,String> FLAG_TEMPLATE_TO_REGEX_MAP = getFlagTemplateToRegexMap();
+    
+    private static Map<String, String> flagRegexMap = new LinkedHashMap<>();
+    
+    public static Map<String, String> getFlagRegexMap(){
+        return flagRegexMap;
+    }
+    
+    public static void addFlagsToRegexMap(Collection<String> flags){
+        for (String flag : flags){
+            if (getFlagRegexMap().containsKey(flag))
+                continue;
+            String regex = flag;
+            boolean changed = false;
+            for (Map.Entry<String,String> entry : FLAG_TEMPLATE_TO_REGEX_MAP.entrySet()){
+                int index = 0;
+                do {
+                    index = regex.indexOf(entry.getKey(), index);
+                    if (index >= 0){
+                        if (index > 0 && regex.charAt(index-1) == '\\'){
+                            index += entry.getKey().length();
+                            continue;
+                        }
+                        regex = regex.substring(0, index)+entry.getValue()+regex.substring(index+entry.getKey().length());
+                        changed = true;
+                    }
+                } while (index < regex.length() && index >= 0);
+            }
+            if (changed)
+                getFlagRegexMap().put(flag, regex);
+        }
+    }
+    
+    public static void addFlagsToRegexMap(Map<String,String> flags){
+        addFlagsToRegexMap(flags.keySet());
     }
     
     private List<Type> types = new ArrayList<>();

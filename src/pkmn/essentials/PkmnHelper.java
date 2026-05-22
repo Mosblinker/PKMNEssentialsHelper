@@ -2991,6 +2991,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             loadFlagFile(file,Item.FLAG_FILE,
                     "Item Flags",Item.getFlagMap());
             loadListFile(file,Item.BAG_POCKETS_NAME_FILE,"Bag Pocket Names",Item.getBagPocketNames());
+            PBSData.addFlagsToRegexMap(Move.getFlagMap());
+            PBSData.addFlagsToRegexMap(pkmn.essentials.data.pkmn.Type.getFlagMap());
+            PBSData.addFlagsToRegexMap(Item.getFlagMap());
             
             return true;
         }
