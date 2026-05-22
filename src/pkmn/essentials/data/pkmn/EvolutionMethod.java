@@ -140,6 +140,10 @@ public abstract class EvolutionMethod {
         return desc;
     }
     
+    public boolean match(String str){
+        return getValue().equals(str);
+    }
+    
     public abstract String getParameterName();
     
     public Class<?> getParameterClass(){
