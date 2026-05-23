@@ -406,6 +406,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameLoadButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        configDataButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         progressDisplay = new components.progress.JProgressDisplayMenu();
         showHiddenFilesToggle = new javax.swing.JCheckBoxMenuItem();
@@ -924,6 +925,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
 
         jMenu1.setText("File");
+
+        configDataButton.setText("Configure Data");
+        configDataButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configDataButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(configDataButton);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Options");
@@ -1437,6 +1447,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             System.out.println();
         }
     }//GEN-LAST:event_printPBSTestActionPerformed
+
+    private void configDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configDataButtonActionPerformed
+//        configDataDialog.setVisible(true);
+    }//GEN-LAST:event_configDataButtonActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -2048,6 +2062,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
     private components.JColorSelector blendColorSelector;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bsSpritePanel;
+    private javax.swing.JMenuItem configDataButton;
     private javax.swing.JCheckBox copySpritesToggle;
     private javax.swing.JMenu debugMenu;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggCracksSpritePanel;
