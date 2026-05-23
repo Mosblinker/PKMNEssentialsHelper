@@ -1549,6 +1549,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         break;
                     }
                 }
+                if (fc.getSelectedFiles().length == 0 && (fc.getSelectedFile() == null || !fc.getSelectedFile().exists())){
+                    if (fc.getSelectedFile() != null)
+                        JOptionPane.showMessageDialog(this, 
+                            "\""+fc.getSelectedFile().getName()+"\"\nFile not found.\n"
+                                    + "Check the file name and try again.", 
+                            "File Not Found", JOptionPane.WARNING_MESSAGE);
+                    noFile = true;
+                }
             }
         } while (option == JFileChooser.APPROVE_OPTION && noFile);
         return option;
@@ -1636,6 +1644,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         if (browseSprites(title,false) == JFileChooser.APPROVE_OPTION){
             File file = spriteFC.getSelectedFile();
+            if (file == null || !file.exists())
+                return;
             PkmnSpriteIcon icon;
             switch(mode){
                 case(5):
@@ -1724,6 +1734,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             return;
         if (browseSprites(title,true) == JFileChooser.APPROVE_OPTION){
             File[] files = spriteFC.getSelectedFiles();
+            if (files.length == 0)
+                return;
             Arrays.sort(files, fileNameComparator);
             Set<Color> palette;
             switch (mode){
