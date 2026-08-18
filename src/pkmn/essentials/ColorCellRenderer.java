@@ -24,6 +24,8 @@ public class ColorCellRenderer extends DefaultListCellRenderer{
     
     private static final int BORDER_LINE_THICKNESS = 2;
     
+    private Color color;
+    
     private Border colorBorder;
     
     private Border selColorBorder;
@@ -47,7 +49,9 @@ public class ColorCellRenderer extends DefaultListCellRenderer{
         }
         Component c = super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
         if (color != null){
-            isTransparentColor = PkmnHelperUtilities.hasNoColor(color);
+            this.color = color;
+            isTransparentColor = color.getAlpha() != 0xFF;
+//            isTransparentColor = PkmnHelperUtilities.hasNoColor(color);
             if (!isTransparentColor)
                 setBackground(color);
             Border outside = BorderFactory.createLineBorder((isSelected)?list.getSelectionBackground():list.getBackground());
@@ -74,6 +78,8 @@ public class ColorCellRenderer extends DefaultListCellRenderer{
             int halfY = Math.floorDiv(getHeight()-4, 2);
             g2D.fillRect(halfX, 0, getWidth()-halfX, halfY);
             g2D.fillRect(0, halfY, halfX, getHeight()-halfY);
+            g2D.setColor(color);
+            g2D.fillRect(0, 0, getWidth(), getHeight());
             g2D.dispose();
             if (img != null)
                 g.drawImage(img, 2, 2, null);
