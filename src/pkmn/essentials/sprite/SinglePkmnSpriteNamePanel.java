@@ -27,6 +27,8 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     public static final String CLEAR_ACTION_COMMAND = "Clear";
     
     public static final String ICON_PROPERTY_CHANGED = "IconPropertyChanged";
+    
+    public static final String SCALE_PROPERTY_CHANGED = "ScalePropertyChanged";
     /**
      * This identifies that the accessory component to the side of the list has 
      * changed.
@@ -122,9 +124,13 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     }
     
     public void setScale(double scale){
+        if (this.scale == scale)
+            return;
+        double old = this.scale;
         this.scale = scale;
         if (icon != null)
             icon.setTargetScale(scale);
+        firePropertyChange(SCALE_PROPERTY_CHANGED,old,scale);
         revalidate();
         repaint();
     }
