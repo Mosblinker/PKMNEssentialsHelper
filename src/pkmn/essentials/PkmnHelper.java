@@ -390,6 +390,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jPanel4 = new javax.swing.JPanel();
         recolorColorExchangeButton = new javax.swing.JButton();
         recolorBlendChangeButton = new javax.swing.JButton();
+        recolorSimplifyPaletteButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel16 = new javax.swing.JLabel();
@@ -799,6 +800,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jPanel4.add(recolorBlendChangeButton);
+
+        recolorSimplifyPaletteButton.setText("Simplify Palette");
+        recolorSimplifyPaletteButton.setEnabled(false);
+        recolorSimplifyPaletteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorSimplifyPaletteButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(recolorSimplifyPaletteButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -1451,6 +1461,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void configDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configDataButtonActionPerformed
 //        configDataDialog.setVisible(true);
     }//GEN-LAST:event_configDataButtonActionPerformed
+
+    private void recolorSimplifyPaletteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyPaletteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recolorSimplifyPaletteButtonActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -1939,6 +1953,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void updateRecolorPaletteButtons(){
         recolorColorExchangeButton.setEnabled(inputEnabled && !recolorSpritePalette.isEmpty());
         recolorBlendChangeButton.setEnabled(recolorColorExchangeButton.isEnabled());
+        recolorSimplifyPaletteButton.setEnabled(recolorColorExchangeButton.isEnabled());
         updateRecolorSaveButton();
     }
     
@@ -2119,6 +2134,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
     private javax.swing.JSlider recolorScaleSlider;
+    private javax.swing.JButton recolorSimplifyPaletteButton;
     private javax.swing.JPanel recolorSpriteListAccessory;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel recolorSpriteListPanel;
     private javax.swing.JButton recolorUndoButton;
