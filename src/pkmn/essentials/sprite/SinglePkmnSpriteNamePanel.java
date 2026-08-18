@@ -10,9 +10,13 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseWheelEvent;
 import javax.swing.*;
+import pkmn.essentials.listeners.CtrlMouseWheelListener;
 
 /**
  *
@@ -45,7 +49,7 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
             constraints.fill = GridBagConstraints.HORIZONTAL;
             // If the component is to be placed at the top
         if (y < 3){
-            if (y != 1){
+            if (y == 1){
                 constraints.weighty = 0.5;
                 constraints.weightx = 0.5;
             }
@@ -59,6 +63,7 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     }
     
     private void initialize(){
+        Handler handler = new Handler();
         addComponent(new Box.Filler(
                 new Dimension(0, 0), 
                 new Dimension(0, 0), 
@@ -66,7 +71,11 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         iconLabel = new JLabel();
         iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
         iconLabel.setVerticalAlignment(SwingConstants.CENTER);
-        addComponent(iconLabel,1);
+        iconLabel.addMouseListener(handler);
+        iconLabel.addMouseWheelListener(handler);
+        imageScrollPane = new JScrollPane(iconLabel);
+        imageScrollPane.setMaximumSize(new java.awt.Dimension(32767,32767));
+        addComponent(imageScrollPane,1);
         addComponent(new Box.Filler(
                 new Dimension(0, 0), 
                 new Dimension(0, 0), 
@@ -78,11 +87,11 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         JPanel panel = new JPanel(new java.awt.GridLayout(1,0,6,0));
         browseButton = new JButton("Browse");
         browseButton.setActionCommand(BROWSE_ACTION_COMMAND);
-        browseButton.addActionListener(new Handler());
+        browseButton.addActionListener(handler);
         panel.add(browseButton);
         clearButton = new JButton("Clear");
         clearButton.setActionCommand(CLEAR_ACTION_COMMAND);
-        clearButton.addActionListener(new Handler());
+        clearButton.addActionListener(handler);
         clearButton.setEnabled(false);
         panel.add(clearButton);
         addComponent(panel,4);
@@ -207,6 +216,36 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
                 l.actionPerformed(evt);
         }
     }
+    /**
+     * This adds the given {@code ActionListener} to this panel.
+     * @param l The listener to add.
+     * @see #removeActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void addCtrlMouseWheelListener(CtrlMouseWheelListener l){
+        if (l != null)          // If the listener is not null
+            listenerList.add(CtrlMouseWheelListener.class, l);
+    }
+    /**
+     * This removes the given {@code ActionListener} from this panel.
+     * @param l The listener to remove.
+     * @see #addActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void removeCtrlMouseWheelListener(CtrlMouseWheelListener l){
+        listenerList.remove(CtrlMouseWheelListener.class, l);
+    }
+    /**
+     * This returns an array containing all the {@code ActionListener}s that 
+     * have been added to this panel.
+     * @return An array containing the {@code ActionListener}s that have been 
+     * added, or an empty array if none have been added.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     */
+    public CtrlMouseWheelListener[] getCtrlMouseWheelListeners(){
+        return listenerList.getListeners(CtrlMouseWheelListener.class);
+    }
     
     public JComponent getSideAccessory(){
         return sideAccessory;
@@ -236,6 +275,20 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         iconLabel.setCursor(cursor);
     }
     
+    private int imageScrollInc = 3;
+    
+    public int getImageScrollIncrement(){
+        return imageScrollInc;
+    }
+    
+    public void setImageScrollIncrement(int inc){
+        if (imageScrollInc == inc)
+            return;
+        int old  = imageScrollInc;
+        imageScrollInc = inc;
+        firePropertyChange("imageScrollIncrement",old,inc);
+    }
+    
     private PkmnSpriteIcon icon = null;
     
     private JLabel iconLabel;
@@ -247,6 +300,8 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     private JButton clearButton;
     
     private double scale = 1.0;
+    
+    private JScrollPane imageScrollPane;
     /**
      * This is the panel used to contain the side accessory within the side 
      * panel.
@@ -259,7 +314,7 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
     /**
      * 
      */
-    private class Handler implements ActionListener{
+    private class Handler extends MouseAdapter implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -270,6 +325,24 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
                 case(CLEAR_ACTION_COMMAND):
                     setIcon(null);
                     fireActionPerformed(evt);
+            }
+        }
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent evt){
+            if (evt.isControlDown()){
+                    // A for loop to go through the mouse wheel listeners
+                for (CtrlMouseWheelListener l : listenerList.getListeners(CtrlMouseWheelListener.class)){
+                    if (l != null)  // If the listener is not null
+                        l.mouseWheelMoved(evt);
+                }
+            } else {
+                Rectangle rect = imageScrollPane.getViewport().getViewRect();
+                int scrollUnits = evt.getUnitsToScroll() * imageScrollInc;
+                if (evt.isShiftDown())
+                    rect.x += scrollUnits;
+                else
+                    rect.y += scrollUnits;
+                iconLabel.scrollRectToVisible(rect);
             }
         }
     }
