@@ -205,13 +205,13 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
         }
     }
     
-    public void setIndex(int x, int y, int index){
+    public void setPaletteIndex(int x, int y, int index){
         Objects.checkIndex(index, palette.size());
         indexes[x][y] = index;
         image.setRGB(x, y, paletteRGB.get(index));
     }
     
-    public void setIndex(int startX, int startY, int w, int h, int[] indexes, int offset, int scansize){
+    public void setPaletteIndex(int startX, int startY, int w, int h, int[] indexes, int offset, int scansize){
         Objects.checkFromIndexSize(startX, w, getWidth());
         Objects.checkFromIndexSize(startY, h, getHeight());
         for (int i : indexes)
