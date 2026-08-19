@@ -97,18 +97,20 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
     public PalettePkmnSpriteIcon(PalettePkmnSpriteIcon icon){
         super(icon.getFile(),icon.getDescription(),PkmnHelperUtilities.createCopy(icon.image),
                 icon.getScaleX());
+        this.image = (BufferedImage)getIcon().getImage();
         super.setIndex(icon.getIndex());
         this.palette.palette.addAll(icon.palette.palette);
         super.setFemale(icon.isFemale());
         indexes = new int[icon.image.getWidth()][icon.image.getHeight()];
         for (int x = 0; x < icon.image.getWidth(); x++){
-            System.arraycopy(indexes[x], 0, icon.indexes[x], 0, icon.image.getHeight());
+            System.arraycopy(icon.indexes[x], 0, indexes[x], 0, icon.image.getHeight());
         }
     }
     
     public PalettePkmnSpriteIcon(PkmnSpriteIcon icon, Collection<? extends Color> palette){
         this(icon.getFile(),icon.getDescription(),PkmnHelperUtilities.createCopy(icon.getImage()),
                 icon.getScaleX(),palette);
+        this.image = (BufferedImage)getIcon().getImage();
         super.setIndex(icon.getIndex());
         super.setFemale(icon.isFemale());
         if (icon instanceof PalettePkmnSpriteIcon){
