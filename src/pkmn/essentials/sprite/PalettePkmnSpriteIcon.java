@@ -294,6 +294,7 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
     public static Map<Integer,Color> changeColors(List<Color> palette, Map<Integer,Color> change){
         Map<Integer,Color> inverse = new TreeMap<>();
         change = new TreeMap<>(change);
+        int size = palette.size();
         for (Map.Entry<Integer,Color> entry : ((TreeMap<Integer,Color>)change).descendingMap().entrySet()){
             Color old = null;
             if (entry.getKey() < palette.size()){
@@ -301,11 +302,13 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
                     old = palette.remove((int)entry.getKey());
                 else
                     old = palette.set(entry.getKey(), entry.getValue());
-            } else {
+            } else if (entry.getValue() != null) {
                 while(palette.size() < entry.getKey())
                     palette.add(new Color(0,true));
                 palette.add(entry.getValue());
-            }
+            }   // If the index was not in the array before we started
+            if (entry.getKey() >= size)
+                old = null;
             inverse.put(entry.getKey(), old);
         }
         return inverse;
