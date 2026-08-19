@@ -4,6 +4,7 @@
  */
 package pkmn.essentials;
 
+import components.JColorSelector;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -20,6 +21,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
+import pkmn.essentials.colorchooser.CustomColorPreviewPanel;
 
 /**
  *
@@ -244,5 +247,15 @@ public final class PkmnHelperUtilities {
         for (BufferedImage temp : images)
             icons.add(new ImageIcon(temp));
         return icons;
+    }
+    
+    public static void resetColorPreviewColor(JColorSelector chooser){
+        if (chooser.getPreviewPanel() instanceof CustomColorPreviewPanel)
+            ((CustomColorPreviewPanel)chooser.getPreviewPanel()).resetOldColor();
+    }
+    
+    public static void resetColorPreviewColor(JColorChooser chooser){
+        if (chooser.getPreviewPanel() instanceof CustomColorPreviewPanel)
+            ((CustomColorPreviewPanel)chooser.getPreviewPanel()).resetOldColor();
     }
 }
