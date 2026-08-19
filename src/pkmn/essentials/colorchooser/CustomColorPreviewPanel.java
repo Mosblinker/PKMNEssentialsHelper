@@ -39,6 +39,8 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final int SWATCH_HEIGHT = 28;
     
+    public Color oldColor = null;
+    
     public CustomColorPreviewPanel(){
         
     }
@@ -97,7 +99,9 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         
         Color color = (getColorChooser()!=null)?getColorChooser().getColor():getBackground();
-        Color oldColor = getForeground();
+        
+        if (oldColor == null)
+            oldColor = getForeground();
         
         // Draw squares
         
