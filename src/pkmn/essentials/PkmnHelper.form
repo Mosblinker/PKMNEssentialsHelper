@@ -226,6 +226,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printTestActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="printRecolorTest">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Print Recolor Data"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printRecolorTestActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="printPBSTest">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Print PBS Data"/>

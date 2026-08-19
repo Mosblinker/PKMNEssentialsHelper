@@ -1465,6 +1465,36 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorSimplifyPaletteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyPaletteButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_recolorSimplifyPaletteButtonActionPerformed
+
+    private void printRecolorTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printRecolorTestActionPerformed
+        int length = recolorSpritePalette.size();
+        List<PalettePkmnSpriteIcon> icons = new ArrayList<>();
+        ListModelList<PkmnSpriteIcon> icons1 = recolorSpriteListPanel.getModelList();
+        for (PkmnSpriteIcon icon : icons1){
+            if (icon instanceof PalettePkmnSpriteIcon){
+                icons.add((PalettePkmnSpriteIcon) icon);
+                length = Math.max(length, ((PalettePkmnSpriteIcon) icon).getPalette().size());
+            }
+        }
+        for (int i = 0; i < length; i++){
+            System.out.printf("%6d: ", i);
+            if (i < recolorSpritePalette.size())
+                System.out.printf("0x%08X ", recolorSpritePalette.get(i).getRGB());
+            else
+                System.out.print("           ");
+            for (PalettePkmnSpriteIcon icon : icons){
+                if (i < icon.getPalette().size())
+                    System.out.printf("0x%08X ", icon.getPalette().get(i).getRGB());
+                else
+                    System.out.print("           ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        
+        System.out.println(recolorSpriteUndo.peekFirst());
+        System.out.println(recolorSpriteRedo.peekFirst());
+    }//GEN-LAST:event_printRecolorTestActionPerformed
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
