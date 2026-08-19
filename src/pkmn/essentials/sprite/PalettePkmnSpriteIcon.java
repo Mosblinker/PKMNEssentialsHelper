@@ -289,14 +289,28 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
         palette.palette.addAll(c);
     }
     
-    public Map<Integer,Color> changeColors(Map<Integer,Color> change){
-        Map<Integer,Color> inverse = new HashMap<>();
-        for (Map.Entry<Integer,Color> entry : change.entrySet()){
+    public static Map<Integer,Color> changeColors(List<Color> palette, Map<Integer,Color> change){
+        Map<Integer,Color> inverse = new TreeMap<>();
+        change = new TreeMap<>(change);
+        for (Map.Entry<Integer,Color> entry : ((TreeMap<Integer,Color>)change).descendingMap().entrySet()){
+            Color old = null;
             if (entry.getKey() < palette.size()){
-                Color old = palette.palette.set(entry.getKey(), entry.getValue());
-                inverse.put(entry.getKey(), old);
+                if (entry.getValue() == null)
+                    old = palette.remove((int)entry.getKey());
+                else
+                    old = palette.set(entry.getKey(), entry.getValue());
+            } else {
+                while(palette.size() < entry.getKey())
+                    palette.add(new Color(0,true));
+                palette.add(entry.getValue());
             }
+            inverse.put(entry.getKey(), old);
         }
+        return inverse;
+    }
+    
+    public Map<Integer,Color> changeColors(Map<Integer,Color> change){
+        Map<Integer,Color> inverse = changeColors(palette.palette,change);
         ColorRGBMap<Integer> rgb = new ColorRGBMap<>(change);
         int[] rgbData = new int[image.getWidth()];
         for (int y = 0; y < image.getHeight(); y++){
@@ -304,7 +318,11 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
             for (int x = 0; x < image.getWidth(); x++){
                 for (Map.Entry<Integer,Integer> entry : rgb.entrySet()){
                     if (indexes[x][y] == entry.getKey()){
-                        rgbData[x] = entry.getValue();
+                        if (entry.getValue() == null){
+                            rgbData[x] = paletteRGB.get(0);
+                            indexes[x][y] = 0;
+                        } else
+                            rgbData[x] = entry.getValue();
                     }
                 }
             }
