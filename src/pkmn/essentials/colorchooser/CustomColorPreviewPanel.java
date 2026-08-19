@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -32,6 +33,10 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     public CustomColorPreviewPanel(){
         
+    }
+    
+    protected JColorChooser getColorChooser(){
+        return (JColorChooser)SwingUtilities.getAncestorOfClass(JColorChooser.class, this);
     }
 
     @Override
