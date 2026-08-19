@@ -43,6 +43,13 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     }
     
     @Override
+    public Dimension getPreferredSize(){
+        int width = SQUARE_SIZE*3 + SQUARE_GAP*2;
+        int height = SQUARE_SIZE*2 + SQUARE_GAP;
+        return new Dimension(width, height);
+    }
+    
+    @Override
     public void paintComponent(java.awt.Graphics g){
         super.paintComponent(g);
         g = g.create();
@@ -63,6 +70,42 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
             g2D.setColor(g.getColor());
         } else          // If the graphics conext is somehow null
             return;
+        
+        Color color = getColorChooser().getColor();
+        Color oldColor = getForeground();
+        
+        // Draw squares
+        
+        g2D.setColor(Color.WHITE);
+        g2D.fillRect(0, 0, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, 0, SQUARE_SIZE, SQUARE_SIZE);
+        
+        g2D.setColor(Color.BLACK);
+        g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, 0, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
+        
+        g.setColor(color);
+        g2D.fillRect(0, SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
+        for (int y = 0; y < 2; y++){
+            for (int x = 0; x < 3; x++){
+                g2D.fillRect(SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*x, 
+                        SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*y, 
+                        SQUARE_SIZE-SQUARE_GAP-SQUARE_GAP, 
+                        SQUARE_SIZE-SQUARE_GAP-SQUARE_GAP);
+            }
+        }
+        
+        g2D.setColor(Color.WHITE);
+        g2D.fillRect(SQUARE_GAP+SQUARE_GAP, SQUARE_GAP+SQUARE_GAP, 
+                SQUARE_SIZE-SQUARE_GAP*4, SQUARE_SIZE-SQUARE_GAP*4);
+        g2D.fillRect(SQUARE_GAP+SQUARE_GAP+SQUARE_SIZE+SQUARE_GAP, SQUARE_GAP+SQUARE_GAP, 
+                SQUARE_SIZE-SQUARE_GAP*4, SQUARE_SIZE-SQUARE_GAP*4);
+        
+        g2D.setColor(Color.BLACK);
+        g2D.fillRect(SQUARE_GAP+SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*2, SQUARE_GAP+SQUARE_GAP, 
+                SQUARE_SIZE-SQUARE_GAP*4, SQUARE_SIZE-SQUARE_GAP*4);
+        
         
         
         if (img != null){               // If this rendered to an image
