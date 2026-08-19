@@ -4,14 +4,17 @@
  */
 package pkmn.essentials.colorchooser;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author Mosblinker
  */
-public class CustomColorPreviewPanel extends JPanel{
+public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final int SQUARE_SIZE = 25;
     
@@ -24,6 +27,15 @@ public class CustomColorPreviewPanel extends JPanel{
     private static final int DISPLAY_ICON_WIDTH = 25;
     
     private static final int DISPLAY_ICON_HEIGHT = 28;
+    
+    public CustomColorPreviewPanel(){
+        
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent evt) {
+        
+    }
     
     
     
