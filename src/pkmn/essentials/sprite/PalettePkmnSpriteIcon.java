@@ -11,12 +11,14 @@ import java.io.File;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import pkmn.essentials.ColorRGBList;
 import pkmn.essentials.ColorRGBMap;
@@ -364,6 +366,17 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
     
     public Map<Integer,Color> changeIndexes(int oldIndex, int newIndex){
         return changeIndexes(oldIndex,newIndex,newIndex);
+    }
+    
+    public void changeIndexes2(int oldIndex, int newIndex){
+        if (oldIndex == newIndex)
+            return;
+        for (int y = 0; y < getHeight(); y++){
+            for (int x = 0; x < getWidth(); x++){
+                if (indexes[x][y] == oldIndex)
+                    indexes[x][y] = newIndex;
+            }
+        }
     }
     
 //    public void setPalette(List<Color> palette){
