@@ -1475,7 +1475,43 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_configDataButtonActionPerformed
 
     private void recolorSimplifyPaletteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyPaletteButtonActionPerformed
-        // TODO add your handling code here:
+        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
+        Map<Integer, PkmnSpriteIcon> changedIcons = new HashMap<>();
+        Map<Integer, Color> changes = new TreeMap<>();
+        
+        Set<Color> colors = new LinkedHashSet<>(recolorSpritePalette);
+        Map<Color, Integer> colorMap = new HashMap<>();
+            // If all colors are unique
+        if (colors.size() == recolorSpritePalette.size())
+            return;
+        
+        int i = 0;
+        for (Color color : colors) {
+            colorMap.put(color, i);
+            if (!color.equals(recolorSpritePalette.get(i))){
+                changes.put(i, color);
+            }
+            i++;
+        }
+        while (i < recolorSpritePalette.size()){
+            changes.put(i, null);
+            i++;
+        }
+        
+        for (int j = 0; j < icons.size(); j++){
+            if (icons.get(j) instanceof PalettePkmnSpriteIcon){
+                PalettePkmnSpriteIcon icon = (PalettePkmnSpriteIcon) icons.get(j);
+                BufferedImage a = icon.getBufferedImage();
+                changedIcons.put(j, new PalettePkmnSpriteIcon(icon));
+                for (int k = 0; k < icon.getPalette().size(); k++){
+                    icon.changeIndexes2(k, colorMap.get(icon.getPalette().get(k)));
+                }
+            }
+        }
+        
+        if (!changes.isEmpty()){
+            recolorChangeColorsUpdate(changes,changedIcons);
+        }
     }//GEN-LAST:event_recolorSimplifyPaletteButtonActionPerformed
 
     private void printRecolorTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printRecolorTestActionPerformed
