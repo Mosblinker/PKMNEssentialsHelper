@@ -140,6 +140,7 @@ public class SinglePkmnSpriteNamePanel extends JPanel{
         if (icon != null)
             icon.setTargetScale(scale);
         firePropertyChange(SCALE_PROPERTY_CHANGED,old,scale);
+        imageScrollPane.revalidate();
         revalidate();
         repaint();
     }

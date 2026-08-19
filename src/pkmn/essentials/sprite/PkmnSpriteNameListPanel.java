@@ -131,6 +131,7 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
         this.scale = scale;
         for (PkmnSpriteIcon icon : getListData())
             icon.setTargetScale(scale);
+        scrollPane.revalidate();
         list.repaint();
         list.updateUI();
     }
