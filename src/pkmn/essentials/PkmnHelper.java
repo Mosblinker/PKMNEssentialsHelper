@@ -1252,6 +1252,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateRecolorDropperImages();
             blendPaletteColorChooser.setPalette(recolorSpritePalette);
             blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
+            recolorColorSelector.setColor(oldColor);
             if (recolorColorSelector.showDialog(this, oldColor) == JColorSelector.ACCEPT_OPTION){
                 recolorChangeColor(selected,recolorColorSelector.getSelectedColor());
             }

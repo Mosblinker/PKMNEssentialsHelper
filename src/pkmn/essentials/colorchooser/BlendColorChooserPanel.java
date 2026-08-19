@@ -156,6 +156,7 @@ public class BlendColorChooserPanel extends AbstractColorChooserPanel{
                 case("Color2"):
                     initColor = color2Icon.getColor();
             }
+            selector.setColor(initColor);
             if (selector.showDialog(BlendColorChooserPanel.this,initColor) == JColorSelector.ACCEPT_OPTION){
                 Color color = selector.getSelectedColor();
                 switch(evt.getActionCommand()){

@@ -403,6 +403,7 @@ public class PaletteBlendChangeDialog extends AbstractConfirmDialogPanel{
     protected Color showColorSelector(Color color){
         if (colorSelector == null)
             return color;
+        colorSelector.setColor(color);
         if (colorSelector.showDialog(this, color) == JColorSelector.ACCEPT_OPTION){
             return colorSelector.getSelectedColor();
         }
