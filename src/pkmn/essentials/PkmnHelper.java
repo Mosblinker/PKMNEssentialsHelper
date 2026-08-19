@@ -1228,11 +1228,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorColorExchangeButtonActionPerformed
 
     private void recolorUndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorUndoButtonActionPerformed
-        recolorUndoOrRedo(recolorSpriteUndo,recolorSpriteRedo);
+        recolorUndoOrRedo(recolorSpriteUndo,recolorSpriteRedo,recolorSpriteUndo2,recolorSpriteRedo2);
     }//GEN-LAST:event_recolorUndoButtonActionPerformed
 
     private void recolorRedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorRedoButtonActionPerformed
-        recolorUndoOrRedo(recolorSpriteRedo,recolorSpriteUndo);
+        recolorUndoOrRedo(recolorSpriteRedo,recolorSpriteUndo,recolorSpriteRedo2,recolorSpriteUndo2);
     }//GEN-LAST:event_recolorRedoButtonActionPerformed
 
     private void recolorPaletteListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recolorPaletteListMouseClicked
@@ -1669,10 +1669,25 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateRecolorUndoRedoButtons();
     }
     
-    private void recolorUndoOrRedo(ArrayDeque<Map<Integer,Color>> source, ArrayDeque<Map<Integer,Color>> target){
-        if (source.isEmpty())
-            return;
-        target.push(recolorChangeColors(source.pop()));
+    private void recolorUndoOrRedo(ArrayDeque<Map<Integer,Color>> source, ArrayDeque<Map<Integer,Color>> target
+            ,ArrayDeque<Map<Integer,PkmnSpriteIcon>> sourceIcons, ArrayDeque<Map<Integer,PkmnSpriteIcon>> targetIcons){
+        boolean imageChange = false;
+        if (!sourceIcons.isEmpty()){
+            Map<Integer,PkmnSpriteIcon> change = sourceIcons.pop();
+            Map<Integer,PkmnSpriteIcon> inverse = new HashMap<>();
+            imageChange = !change.isEmpty();
+            List<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
+            for (Map.Entry<Integer,PkmnSpriteIcon> entry : change.entrySet()){
+                if (entry.getKey() < icons.size()){
+                    inverse.put(entry.getKey(), icons.set(entry.getKey(), entry.getValue()));
+                }
+            }
+            targetIcons.push(inverse);
+        }
+        if (!source.isEmpty()){
+            Map<Integer,Color> change = source.pop();
+            target.push(recolorChangeColors(change,imageChange));
+        }
         recolorSpriteListPanel.repaint();
         updateRecolorUndoRedoButtons();
     }
