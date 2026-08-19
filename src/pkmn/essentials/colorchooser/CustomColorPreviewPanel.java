@@ -31,7 +31,7 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final Font SAMPLE_TEXT_FONT = new Font(Font.DIALOG, Font.PLAIN, 12);
     
-    private static final Font HEX_TEXT_FONT = new Font(Font.MONOSPACED,Font.PLAIN, 12);
+    private static final Font HEX_TEXT_FONT = new Font(Font.MONOSPACED,Font.PLAIN, 14);
     
     private static final String SAMPLE_TEXT = "Sample Text Sample Text";
     
@@ -66,7 +66,11 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         width += metrics.stringWidth(SAMPLE_TEXT)+2;
         int height = SQUARE_GAP * 2 + (metrics.getHeight()+2)*3;
         
-        width += SQUARE_GAP+SWATCH_WIDTH;
+        width += SQUARE_GAP+SWATCH_WIDTH+SQUARE_GAP;
+        
+        metrics = getFontMetricsInternal(HEX_TEXT_FONT);
+        
+        width += 6+metrics.stringWidth("0x00000000");
         
         return new Dimension(width, height);
     }
@@ -160,6 +164,14 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         
         g2D.setColor(color);
         g2D.fillRect(x, y1+SWATCH_HEIGHT, SWATCH_WIDTH, SWATCH_HEIGHT);
+        
+        // Draw Hex codes
+        x += SQUARE_GAP+SWATCH_WIDTH+1;
+        metrics = getFontMetricsInternal(HEX_TEXT_FONT);
+        y1 += SWATCH_HEIGHT/2+metrics.getDescent();
+        g2D.setColor(Color.BLACK);
+        g2D.drawString(String.format("0x%08X", oldColor.getRGB()), x, y1);
+        g2D.drawString(String.format("0x%08X", color.getRGB()), x, y1+SWATCH_HEIGHT);
         
         if (img != null){               // If this rendered to an image
             g2D.dispose();
