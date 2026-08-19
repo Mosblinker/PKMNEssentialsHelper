@@ -235,11 +235,15 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
     }
     
     public boolean updatePalette(){
+            // This gets if a change occurred to the image
+        boolean changed = false;
             // A map to map the RGB values to their indexes
         Map<Integer,Integer> rgb = new LinkedHashMap<>();
             // Go through and put the existing palette into the map
         for (int i = 0; i < paletteRGB.size(); i++)
-            rgb.put(paletteRGB.get(i), i);
+                // If the map does not already contain the value
+            if (!rgb.containsKey(paletteRGB.get(i)))
+                rgb.put(paletteRGB.get(i), i);
             // An array to get a line of data from the image
         int[] rgbData = new int[image.getWidth()];
             // Go through the image line by line
@@ -261,16 +265,22 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
                         // Add it to the map
                     index = rgb.size();
                     rgb.put(rgbValue, index);
-                }
+                    changed = true;
+                }   // If the index of the pixel is to change
+                if (indexes[x][y] != index)
+                    changed = true;
                     // Set the index of the pixel
                 indexes[x][y] = index;
             }
         }   // Remove all existing RGB values
         rgb.keySet().removeAll(paletteRGB);
+            // The palette changed if any RGB values are added
+        changed |= !rgb.isEmpty();
             // Go through and add all the new colors to the palette
         for (Integer i : rgb.keySet()){
             palette.palette.add(new Color(i,true));
         }
+        return changed;
     }
     
     public void addAbsentColors(Collection<? extends Color> c){
