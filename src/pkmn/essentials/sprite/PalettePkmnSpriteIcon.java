@@ -234,27 +234,40 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
         return image.getHeight();
     }
     
-    public void updatePalette(){
+    public boolean updatePalette(){
+            // A map to map the RGB values to their indexes
         Map<Integer,Integer> rgb = new LinkedHashMap<>();
+            // Go through and put the existing palette into the map
         for (int i = 0; i < paletteRGB.size(); i++)
             rgb.put(paletteRGB.get(i), i);
+            // An array to get a line of data from the image
         int[] rgbData = new int[image.getWidth()];
+            // Go through the image line by line
         for (int y = 0; y < image.getHeight(); y++){
+                // Get a line of data from the image
             rgbData = image.getRGB(0, y, rgbData.length, 1, rgbData, 0, 1);
+                // Go through the line of data
             for (int x = 0; x < rgbData.length; x++){
+                    // Get the RGB value of the current pixel
                 int rgbValue = rgbData[x];
+                    // If the pixel has no color
                 if (PkmnHelperUtilities.hasNoColor(rgbValue)){
+                        // The pixel is fully transparent
                     rgbValue = 0;
-                }
+                }   // Get the index of the RGB value
                 Integer index = rgb.get(rgbValue);
+                    // If there is no index for this RGB value
                 if (index == null){
+                        // Add it to the map
                     index = rgb.size();
                     rgb.put(rgbValue, index);
                 }
+                    // Set the index of the pixel
                 indexes[x][y] = index;
             }
-        }
+        }   // Remove all existing RGB values
         rgb.keySet().removeAll(paletteRGB);
+            // Go through and add all the new colors to the palette
         for (Integer i : rgb.keySet()){
             palette.palette.add(new Color(i,true));
         }
