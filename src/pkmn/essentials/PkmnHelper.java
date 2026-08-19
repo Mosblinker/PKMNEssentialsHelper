@@ -2082,7 +2082,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private ArrayDeque<Map<Integer,Color>> recolorSpriteUndo = new ArrayDeque<>();
     
+    private ArrayDeque<Map<Integer,PkmnSpriteIcon>> recolorSpriteUndo2 = new ArrayDeque<>();
+    
     private ArrayDeque<Map<Integer,Color>> recolorSpriteRedo = new ArrayDeque<>();
+    
+    private ArrayDeque<Map<Integer,PkmnSpriteIcon>> recolorSpriteRedo2 = new ArrayDeque<>();
     
     private long recolorClickedMillis = 0L;
     
@@ -2150,6 +2154,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnCriesAudioPanel;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnFaintCriesAudioPanel;
     private javax.swing.JMenuItem printPBSTest;
+    private javax.swing.JMenuItem printRecolorTest;
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
