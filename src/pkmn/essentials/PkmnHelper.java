@@ -44,6 +44,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
@@ -1628,11 +1629,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         for (PkmnSpriteIcon icon : recolorSpriteListPanel.getModelList()){
             ((PalettePkmnSpriteIcon) icon).changeColors(changes);
         }
-        Map<Integer,Color> inverse = new HashMap<>();
-        for (Map.Entry<Integer,Color> entry : changes.entrySet()){
-            inverse.put(entry.getKey(), recolorSpritePalette.set(entry.getKey(), entry.getValue()));
         }
-        return inverse;
+        return PalettePkmnSpriteIcon.changeColors(recolorSpritePalette, changes);
     }
     
     private void recolorChangeColorsUpdate(Map<Integer,Color> changes){
