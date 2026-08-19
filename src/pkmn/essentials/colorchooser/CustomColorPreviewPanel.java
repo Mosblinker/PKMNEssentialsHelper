@@ -8,9 +8,12 @@ import components.JColorSelector;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.JColorChooser;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
@@ -30,6 +33,8 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final Font HEX_TEXT_FONT = new Font(Font.MONOSPACED,Font.PLAIN, 12);
     
+    private static final String SAMPLE_TEXT = "Sample Text Sample Text";
+    
     private static final int DISPLAY_ICON_WIDTH = 25;
     
     private static final int DISPLAY_ICON_HEIGHT = 28;
@@ -42,16 +47,31 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         return (JColorChooser)SwingUtilities.getAncestorOfClass(JColorChooser.class, this);
     }
     
+    private FontMetrics getFontMetricsInternal(Font font){
+        JComponent c = getColorChooser();
+        if (c == null)
+            c = this;
+        return c.getFontMetrics(font);
+    }
+    
     @Override
     public Dimension getPreferredSize(){
-        int width = SQUARE_SIZE*3 + SQUARE_GAP*2;
-        int height = SQUARE_SIZE*2 + SQUARE_GAP;
+        int width = (SQUARE_SIZE+SQUARE_GAP)*3;
+        //int height = (SQUARE_SIZE+SQUARE_GAP)*2;
+        
+        FontMetrics metrics = getFontMetricsInternal(SAMPLE_TEXT_FONT);
+        
+        width += metrics.stringWidth(SAMPLE_TEXT)+2;
+        int height = SQUARE_GAP * 2 + (metrics.getHeight()+2)*3;
+        
+        
         return new Dimension(width, height);
     }
     
     @Override
     public void paintComponent(java.awt.Graphics g){
         super.paintComponent(g);
+        
         g = g.create();
             // An image to render to if the given graphics context is not a 
         BufferedImage img = null;       // Graphics2D object
@@ -71,40 +91,60 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         } else          // If the graphics conext is somehow null
             return;
         
-        Color color = getColorChooser().getColor();
+        Dimension dim = getPreferredSize();
+        int y1 = (dim.height - (SQUARE_SIZE+SQUARE_GAP+SQUARE_SIZE))/2;
+        g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        
+        Color color = (getColorChooser()!=null)?getColorChooser().getColor():getBackground();
         Color oldColor = getForeground();
         
         // Draw squares
         
         g2D.setColor(Color.WHITE);
-        g2D.fillRect(0, 0, SQUARE_SIZE, SQUARE_SIZE);
-        g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
-        g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, 0, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect(0, y1, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, y1+SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, y1, SQUARE_SIZE, SQUARE_SIZE);
         
         g2D.setColor(Color.BLACK);
-        g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, 0, SQUARE_SIZE, SQUARE_SIZE);
-        g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, y1, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, y1+SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
         
         g.setColor(color);
-        g2D.fillRect(0, SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
+        g2D.fillRect(0, y1+SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
         for (int y = 0; y < 2; y++){
             for (int x = 0; x < 3; x++){
                 g2D.fillRect(SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*x, 
-                        SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*y, 
+                        y1+SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*y, 
                         SQUARE_SIZE-SQUARE_GAP-SQUARE_GAP, 
                         SQUARE_SIZE-SQUARE_GAP-SQUARE_GAP);
             }
         }
         
         g2D.setColor(Color.WHITE);
-        g2D.fillRect(SQUARE_GAP+SQUARE_GAP, SQUARE_GAP+SQUARE_GAP, 
+        g2D.fillRect(SQUARE_GAP+SQUARE_GAP, y1+SQUARE_GAP+SQUARE_GAP, 
                 SQUARE_SIZE-SQUARE_GAP*4, SQUARE_SIZE-SQUARE_GAP*4);
-        g2D.fillRect(SQUARE_GAP+SQUARE_GAP+SQUARE_SIZE+SQUARE_GAP, SQUARE_GAP+SQUARE_GAP, 
+        g2D.fillRect(SQUARE_GAP+SQUARE_GAP+SQUARE_SIZE+SQUARE_GAP, y1+SQUARE_GAP+SQUARE_GAP, 
                 SQUARE_SIZE-SQUARE_GAP*4, SQUARE_SIZE-SQUARE_GAP*4);
         
         g2D.setColor(Color.BLACK);
-        g2D.fillRect(SQUARE_GAP+SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*2, SQUARE_GAP+SQUARE_GAP, 
+        g2D.fillRect(SQUARE_GAP+SQUARE_GAP+(SQUARE_SIZE+SQUARE_GAP)*2, y1+SQUARE_GAP+SQUARE_GAP, 
                 SQUARE_SIZE-SQUARE_GAP*4, SQUARE_SIZE-SQUARE_GAP*4);
+        
+        // Draw sample text
+        FontMetrics metrics = getFontMetricsInternal(SAMPLE_TEXT_FONT);
+        int x = (SQUARE_SIZE+SQUARE_GAP)*3;
+        
+        g2D.setColor(Color.WHITE);
+        int w = metrics.stringWidth(SAMPLE_TEXT);
+        g2D.fillRect(x, (metrics.getHeight()+SQUARE_GAP+2)*2, w+2, metrics.getHeight()+2);
+        
+        g.setColor(color);
+        g2D.drawString(SAMPLE_TEXT, x+1, metrics.getAscent()+1);
+        g2D.drawString(SAMPLE_TEXT, x+1, metrics.getAscent()+1+(metrics.getHeight()+SQUARE_GAP+2)*2);
+        g2D.fillRect(x, metrics.getHeight()+SQUARE_GAP+2, w+2, metrics.getHeight()+2);
+        
+        g2D.setColor(Color.BLACK);
+        g2D.drawString(SAMPLE_TEXT, x+1, metrics.getAscent()+metrics.getHeight()+SQUARE_GAP+3);
         
         
         
