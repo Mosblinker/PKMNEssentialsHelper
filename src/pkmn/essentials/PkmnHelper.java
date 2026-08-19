@@ -1625,12 +1625,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         return browseFiles(title,multiSelection,spriteFC);
     }
     
-    private Map<Integer,Color> recolorChangeColors(Map<Integer,Color> changes){
-        for (PkmnSpriteIcon icon : recolorSpriteListPanel.getModelList()){
-            ((PalettePkmnSpriteIcon) icon).changeColors(changes);
-        }
+    private Map<Integer,Color> recolorChangeColors(Map<Integer,Color> changes, boolean skipIcons){
+        if (!skipIcons){
+            for (PkmnSpriteIcon icon : recolorSpriteListPanel.getModelList()){
+                ((PalettePkmnSpriteIcon) icon).changeColors(changes);
+            }
         }
         return PalettePkmnSpriteIcon.changeColors(recolorSpritePalette, changes);
+    }
+    
+    private Map<Integer,Color> recolorChangeColors(Map<Integer,Color> changes){
+        return recolorChangeColors(changes,false);
     }
     
     private void recolorChangeColorsUpdate(Map<Integer,Color> changes){
