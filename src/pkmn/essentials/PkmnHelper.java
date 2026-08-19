@@ -1271,6 +1271,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 recolorSpritePalette.clear();
                 recolorSpriteUndo.clear();
                 recolorSpriteRedo.clear();
+                recolorSpriteUndo2.clear();
+                recolorSpriteRedo2.clear();
         }
     }//GEN-LAST:event_recolorSpriteListPanelActionPerformed
 
@@ -1647,11 +1649,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         return recolorChangeColors(changes,false);
     }
     
-    private void recolorChangeColorsUpdate(Map<Integer,Color> changes){
+    private void recolorChangeColorsUpdate(Map<Integer,Color> changes, Map<Integer,PkmnSpriteIcon> icons){
         recolorSpriteUndo.push(recolorChangeColors(changes));
+        recolorSpriteUndo2.push(icons);
         recolorSpriteRedo.clear();
+        recolorSpriteRedo2.clear();
         recolorSpriteListPanel.repaint();
         updateRecolorUndoRedoButtons();
+    }
+    
+    private void recolorChangeColorsUpdate(Map<Integer,Color> changes){
+        recolorChangeColorsUpdate(changes,new HashMap<>());
     }
     
     private void recolorChangeColor(int index, Color color){
@@ -1661,7 +1669,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpritePalette.set(index, color);
         Map<Integer,Color> replacement = Collections.singletonMap(index, oldColor);
         recolorSpriteUndo.push(replacement);
+        recolorSpriteUndo2.push(new HashMap<>());
         recolorSpriteRedo.clear();
+        recolorSpriteRedo2.clear();
         for (PkmnSpriteIcon icon : recolorSpriteListPanel.getModelList()){
             ((PalettePkmnSpriteIcon)icon).getPalette().set(index, color);
         }
