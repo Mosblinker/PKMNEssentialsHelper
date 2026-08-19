@@ -4,8 +4,10 @@
  */
 package pkmn.essentials.colorchooser;
 
+import components.JColorSelector;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.JColorChooser;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -34,7 +36,8 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
 
     @Override
     public void stateChanged(ChangeEvent evt) {
-        
+        if (evt.getSource() instanceof JColorChooser || evt.getSource() instanceof JColorSelector)
+            repaint();
     }
     
     
