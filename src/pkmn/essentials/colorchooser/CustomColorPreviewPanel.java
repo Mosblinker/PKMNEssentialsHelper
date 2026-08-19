@@ -167,6 +167,19 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         }
         g.dispose();
     }
+    
+    public void setOldColor(Color color){
+        this.oldColor = color;
+        repaint();
+    }
+    
+    public Color getOldColor(){
+        return oldColor;
+    }
+    
+    public void resetOldColor(){
+        setOldColor(null);
+    }
 
     @Override
     public void stateChanged(ChangeEvent evt) {
