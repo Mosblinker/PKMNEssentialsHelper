@@ -861,6 +861,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jTabbedPane3.addTab("Sprites", recolorSpriteListPanel);
 
         recolorReferencePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(11, 10, 11, 10));
+        recolorReferencePanel.addCtrlMouseWheelListener(new pkmn.essentials.listeners.CtrlMouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                recolorReferencePanelMouseWheelMoved(evt);
+            }
+        });
         recolorReferencePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recolorReferencePanelActionPerformed(evt);
@@ -1543,6 +1548,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         System.out.println(recolorSpriteUndo.peekFirst());
         System.out.println(recolorSpriteRedo.peekFirst());
     }//GEN-LAST:event_printRecolorTestActionPerformed
+
+    private void recolorReferencePanelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_recolorReferencePanelMouseWheelMoved
+        int index = Math.min(Math.max(recolorScaleSlider.getValue() - 
+                evt.getWheelRotation(),recolorScaleSlider.getMinimum()),
+                recolorScaleSlider.getMaximum());
+        if (index != recolorScaleSlider.getValue()){
+            recolorScaleSlider.setValue(index);
+        }
+    }//GEN-LAST:event_recolorReferencePanelMouseWheelMoved
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
