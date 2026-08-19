@@ -273,6 +273,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorColorSelector.addChooserPanel(recolorDropperColorChooser);
         recolorColorExchange.setColorSelector(recolorColorSelector);
         recolorBlendChange.setColorSelector(recolorColorSelector);
+        CustomColorPreviewPanel colorPreview = new CustomColorPreviewPanel();
+        recolorColorSelector.setPreviewPanel(colorPreview);
+        recolorColorSelector.addChangeListener(colorPreview);
         
         blendPaletteColorChooser = new PaletteColorChooserPanel();
         blendReferencePaletteColorChooser = new PaletteColorChooserPanel("Reference Palette");
@@ -283,6 +286,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         blendColorSelector.addChooserPanel(blendDropperColorChooser);
         recolorBlendColorChooser = new BlendColorChooserPanel(blendColorSelector);
         recolorColorSelector.addChooserPanel(recolorBlendColorChooser);
+        colorPreview = new CustomColorPreviewPanel();
+        blendColorSelector.setPreviewPanel(colorPreview);
+        blendColorSelector.addChangeListener(colorPreview);
         
         spriteFolderField.setText(config.getPkmnSpriteTargetFolder());
         spriteNameField.setText(config.getPkmnSpriteName());
@@ -1252,7 +1258,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateRecolorDropperImages();
             blendPaletteColorChooser.setPalette(recolorSpritePalette);
             blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
-            recolorColorSelector.setColor(oldColor);
+            PkmnHelperUtilities.resetColorPreviewColor(recolorColorSelector);
             if (recolorColorSelector.showDialog(this, oldColor) == JColorSelector.ACCEPT_OPTION){
                 recolorChangeColor(selected,recolorColorSelector.getSelectedColor());
             }
