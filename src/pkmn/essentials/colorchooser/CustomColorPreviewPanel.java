@@ -39,6 +39,8 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final int SWATCH_HEIGHT = 28;
     
+    private static final int CHECKERBOARD_PATTERN = 8;
+    
     public Color oldColor = null;
     
     public CustomColorPreviewPanel(){
@@ -158,6 +160,25 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         // Drawing sample swatches
         y1 = dim.height/2 - SWATCH_HEIGHT;
         x += w+2+SQUARE_GAP;
+        
+        g2D.setColor(Color.WHITE);
+        g2D.fillRect(x, y1, SWATCH_WIDTH, SWATCH_HEIGHT*2);
+        int y2 = (int)Math.ceil((SWATCH_HEIGHT*2)/((double)CHECKERBOARD_PATTERN));
+        int x2 = (int)Math.ceil(SWATCH_WIDTH/((double)CHECKERBOARD_PATTERN));
+        System.out.println(x2 + " " + y2);
+        g2D.setColor(Color.LIGHT_GRAY);
+        for (int y = 0; y < y2; y++){
+            int h = CHECKERBOARD_PATTERN;
+            if (y == y2-1)
+                h = (SWATCH_HEIGHT*2) - CHECKERBOARD_PATTERN*(y2-1);
+            System.out.println(h);
+            for (int x1 = y%2; x1 < x2; x1+=2){
+                int w1 = CHECKERBOARD_PATTERN;
+                if (x1 == x2-1)
+                    w1 = SWATCH_WIDTH - CHECKERBOARD_PATTERN*(x2-1);
+                g2D.fillRect(x+CHECKERBOARD_PATTERN*x1, y1+CHECKERBOARD_PATTERN*y, w1, h);
+            }
+        }
         
         g2D.setColor(oldColor);
         g2D.fillRect(x, y1, SWATCH_WIDTH, SWATCH_HEIGHT);
