@@ -415,6 +415,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         debugMenu = new javax.swing.JMenu();
         inputEnabledTest = new javax.swing.JCheckBoxMenuItem();
         printTest = new javax.swing.JMenuItem();
+        printRecolorTest = new javax.swing.JMenuItem();
         printPBSTest = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
@@ -985,6 +986,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         debugMenu.add(printTest);
+
+        printRecolorTest.setText("Print Recolor Data");
+        printRecolorTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printRecolorTestActionPerformed(evt);
+            }
+        });
+        debugMenu.add(printRecolorTest);
 
         printPBSTest.setText("Print PBS Data");
         printPBSTest.addActionListener(new java.awt.event.ActionListener() {
