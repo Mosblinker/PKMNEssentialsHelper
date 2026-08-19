@@ -331,6 +331,41 @@ public class PalettePkmnSpriteIcon extends PkmnSpriteIcon{
         return inverse;
     }
     
+    protected Map<Integer, Color> changeIndexes(int oldIndex, int newIndex, int newIndex2){
+        Objects.checkIndex(oldIndex, palette.size());
+        Objects.checkIndex(newIndex, palette.size());
+        Objects.checkIndex(newIndex2, palette.size());
+        Map<Integer,Color> inverse = new HashMap<>();
+        if (!palette.get(oldIndex).equals(palette.get(newIndex)))
+            inverse.put(oldIndex, palette.get(oldIndex));
+        if (newIndex != newIndex2 && !palette.get(newIndex).equals(palette.get(newIndex2)))
+            inverse.put(newIndex, palette.get(newIndex));
+        if (newIndex2 == oldIndex)
+            Collections.swap(palette.palette, oldIndex, newIndex);
+        else{
+            palette.palette.set(oldIndex, palette.get(newIndex));
+            if (newIndex != newIndex2)
+                palette.palette.set(newIndex, palette.get(newIndex2));
+        }
+        for (int y = 0; y < getHeight(); y++){
+            for (int x = 0; x < getWidth(); x++){
+                if (indexes[x][y] == oldIndex)
+                    indexes[x][y] = newIndex;
+                else if (indexes[x][y] == newIndex)
+                    indexes[x][y] = newIndex2;
+            }
+        }
+        return inverse;
+    }
+    
+    public Map<Integer,Color> swapIndexes(int oldIndex, int newIndex){
+        return changeIndexes(oldIndex,newIndex,oldIndex);
+    }
+    
+    public Map<Integer,Color> changeIndexes(int oldIndex, int newIndex){
+        return changeIndexes(oldIndex,newIndex,newIndex);
+    }
+    
 //    public void setPalette(List<Color> palette){
 //        this.palette.palette.clear();
 //        this.palette.palette.addAll(palette);
