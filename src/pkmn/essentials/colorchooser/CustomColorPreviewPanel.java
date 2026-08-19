@@ -18,11 +18,11 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final int SQUARE_SIZE = 25;
     
-    private static final int MIDDLE_SQUARE_SIZE = SQUARE_SIZE - 10;
+    private static final int SQUARE_GAP = 5;
     
-    private static final int SMALL_SQUARE_SIZE = MIDDLE_SQUARE_SIZE - 10;
+    private static final Font SAMPLE_TEXT_FONT = new Font(Font.DIALOG, Font.PLAIN, 12);
     
-    private static final Font DIALOG_FONT = new Font(Font.DIALOG, Font.PLAIN, 12);
+    private static final Font HEX_TEXT_FONT = new Font(Font.MONOSPACED,Font.PLAIN, 12);
     
     private static final int DISPLAY_ICON_WIDTH = 25;
     
