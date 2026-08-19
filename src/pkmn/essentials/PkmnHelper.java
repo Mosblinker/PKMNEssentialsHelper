@@ -391,7 +391,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jPanel4 = new javax.swing.JPanel();
         recolorColorExchangeButton = new javax.swing.JButton();
         recolorBlendChangeButton = new javax.swing.JButton();
-        recolorSimplifyPaletteButton = new javax.swing.JButton();
+        recolorRemoveDuplButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel16 = new javax.swing.JLabel();
@@ -803,14 +803,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         jPanel4.add(recolorBlendChangeButton);
 
-        recolorSimplifyPaletteButton.setText("Simplify Palette");
-        recolorSimplifyPaletteButton.setEnabled(false);
-        recolorSimplifyPaletteButton.addActionListener(new java.awt.event.ActionListener() {
+        recolorRemoveDuplButton.setText("Remove Duplicates");
+        recolorRemoveDuplButton.setEnabled(false);
+        recolorRemoveDuplButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorSimplifyPaletteButtonActionPerformed(evt);
+                recolorRemoveDuplButtonActionPerformed(evt);
             }
         });
-        jPanel4.add(recolorSimplifyPaletteButton);
+        jPanel4.add(recolorRemoveDuplButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -1474,7 +1474,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 //        configDataDialog.setVisible(true);
     }//GEN-LAST:event_configDataButtonActionPerformed
 
-    private void recolorSimplifyPaletteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyPaletteButtonActionPerformed
+    private void recolorRemoveDuplButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorRemoveDuplButtonActionPerformed
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
         Map<Integer, PkmnSpriteIcon> changedIcons = new HashMap<>();
         Map<Integer, Color> changes = new TreeMap<>();
@@ -1512,7 +1512,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (!changes.isEmpty()){
             recolorChangeColorsUpdate(changes,changedIcons);
         }
-    }//GEN-LAST:event_recolorSimplifyPaletteButtonActionPerformed
+    }//GEN-LAST:event_recolorRemoveDuplButtonActionPerformed
 
     private void printRecolorTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printRecolorTestActionPerformed
         int length = recolorSpritePalette.size();
@@ -2056,7 +2056,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void updateRecolorPaletteButtons(){
         recolorColorExchangeButton.setEnabled(inputEnabled && !recolorSpritePalette.isEmpty());
         recolorBlendChangeButton.setEnabled(recolorColorExchangeButton.isEnabled());
-        recolorSimplifyPaletteButton.setEnabled(recolorColorExchangeButton.isEnabled());
+        recolorRemoveDuplButton.setEnabled(recolorColorExchangeButton.isEnabled());
         updateRecolorSaveButton();
     }
     
@@ -2238,11 +2238,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JList<Color> recolorPaletteList;
     private javax.swing.JButton recolorRedoButton;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
+    private javax.swing.JButton recolorRemoveDuplButton;
     private javax.swing.JButton recolorSaveButton;
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
     private javax.swing.JSlider recolorScaleSlider;
-    private javax.swing.JButton recolorSimplifyPaletteButton;
     private javax.swing.JPanel recolorSpriteListAccessory;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel recolorSpriteListPanel;
     private javax.swing.JButton recolorUndoButton;

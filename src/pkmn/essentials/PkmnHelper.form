@@ -804,13 +804,13 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorBlendChangeButtonActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="recolorSimplifyPaletteButton">
+                    <Component class="javax.swing.JButton" name="recolorRemoveDuplButton">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Simplify Palette"/>
+                        <Property name="text" type="java.lang.String" value="Remove Duplicates"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorSimplifyPaletteButtonActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorRemoveDuplButtonActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
