@@ -35,9 +35,9 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
     
     private static final String SAMPLE_TEXT = "Sample Text Sample Text";
     
-    private static final int DISPLAY_ICON_WIDTH = 25;
+    private static final int SWATCH_WIDTH = 50;
     
-    private static final int DISPLAY_ICON_HEIGHT = 28;
+    private static final int SWATCH_HEIGHT = 28;
     
     public CustomColorPreviewPanel(){
         
@@ -64,6 +64,7 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         width += metrics.stringWidth(SAMPLE_TEXT)+2;
         int height = SQUARE_GAP * 2 + (metrics.getHeight()+2)*3;
         
+        width += SQUARE_GAP+SWATCH_WIDTH;
         
         return new Dimension(width, height);
     }
@@ -109,7 +110,7 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         g2D.fillRect(SQUARE_SIZE+SQUARE_GAP, y1, SQUARE_SIZE, SQUARE_SIZE);
         g2D.fillRect((SQUARE_SIZE+SQUARE_GAP)*2, y1+SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
         
-        g.setColor(color);
+        g2D.setColor(color);
         g2D.fillRect(0, y1+SQUARE_SIZE+SQUARE_GAP, SQUARE_SIZE, SQUARE_SIZE);
         for (int y = 0; y < 2; y++){
             for (int x = 0; x < 3; x++){
@@ -138,7 +139,7 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         int w = metrics.stringWidth(SAMPLE_TEXT);
         g2D.fillRect(x, (metrics.getHeight()+SQUARE_GAP+2)*2, w+2, metrics.getHeight()+2);
         
-        g.setColor(color);
+        g2D.setColor(color);
         g2D.drawString(SAMPLE_TEXT, x+1, metrics.getAscent()+1);
         g2D.drawString(SAMPLE_TEXT, x+1, metrics.getAscent()+1+(metrics.getHeight()+SQUARE_GAP+2)*2);
         g2D.fillRect(x, metrics.getHeight()+SQUARE_GAP+2, w+2, metrics.getHeight()+2);
@@ -146,7 +147,15 @@ public class CustomColorPreviewPanel extends JPanel implements ChangeListener{
         g2D.setColor(Color.BLACK);
         g2D.drawString(SAMPLE_TEXT, x+1, metrics.getAscent()+metrics.getHeight()+SQUARE_GAP+3);
         
+        // Drawing sample swatches
+        y1 = dim.height/2 - SWATCH_HEIGHT;
+        x += w+2+SQUARE_GAP;
         
+        g2D.setColor(oldColor);
+        g2D.fillRect(x, y1, SWATCH_WIDTH, SWATCH_HEIGHT);
+        
+        g2D.setColor(color);
+        g2D.fillRect(x, y1+SWATCH_HEIGHT, SWATCH_WIDTH, SWATCH_HEIGHT);
         
         if (img != null){               // If this rendered to an image
             g2D.dispose();
