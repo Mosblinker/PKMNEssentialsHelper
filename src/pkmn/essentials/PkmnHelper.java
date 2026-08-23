@@ -1513,7 +1513,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         for (int j = 0; j < icons.size(); j++){
             if (icons.get(j) instanceof PalettePkmnSpriteIcon){
                 PalettePkmnSpriteIcon icon = (PalettePkmnSpriteIcon) icons.get(j);
-                BufferedImage a = icon.getBufferedImage();
                 changedIcons.put(j, new PalettePkmnSpriteIcon(icon));
                 for (int k = 0; k < icon.getPalette().size(); k++){
                     icon.changeIndexes2(k, colorMap.get(icon.getPalette().get(k)));
@@ -1648,7 +1647,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (image == null){
             return null;
         }
-        PalettePkmnSpriteIcon icon = new PalettePkmnSpriteIcon(file,image,palette);
+        PalettePkmnSpriteIcon icon = new PalettePkmnSpriteIcon(file,PkmnHelperUtilities.createCopy(image),palette);
         if (palette != null)
             palette.addAll(icon.getPalette());
         return icon;
