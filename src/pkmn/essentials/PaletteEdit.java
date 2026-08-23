@@ -19,6 +19,14 @@ public class PaletteEdit {
     
     private Map<Integer,PkmnSpriteIcon> icons = null;
     
+    public static PaletteEdit getColorOnlyEdit(Map<Integer,Color> colors){
+        return new PaletteEdit(colors,null);
+    }
+    
+    public static PaletteEdit getIconOnlyEdit(Map<Integer,PkmnSpriteIcon> icons){
+        return new PaletteEdit(null,icons);
+    }
+    
     public PaletteEdit(Map<Integer,Color> colors, Map<Integer,PkmnSpriteIcon> icons){
         this.colors = colors;
         this.icons = icons;
