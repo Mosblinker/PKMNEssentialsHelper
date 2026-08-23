@@ -682,7 +682,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
-        spriteUseGameToggle.setText("Use Projject Folder");
+        spriteUseGameToggle.setText("Use Project Folder");
         spriteUseGameToggle.setEnabled(false);
         spriteUseGameToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1258,7 +1258,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateRecolorDropperImages();
             blendPaletteColorChooser.setPalette(recolorSpritePalette);
             blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
-            PkmnHelperUtilities.resetColorPreviewColor(recolorColorSelector);
+            PkmnHelperUtilities.resetColorPreviewColor(recolorColorSelector); 
             if (recolorColorSelector.showDialog(this, oldColor) == JColorSelector.ACCEPT_OPTION){
                 recolorChangeColor(selected,recolorColorSelector.getSelectedColor());
             }

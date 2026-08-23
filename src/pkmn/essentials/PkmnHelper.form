@@ -634,7 +634,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="spriteUseGameToggle">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Use Projject Folder"/>
+                <Property name="text" type="java.lang.String" value="Use Project Folder"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
