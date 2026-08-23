@@ -1239,11 +1239,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorColorExchangeButtonActionPerformed
 
     private void recolorUndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorUndoButtonActionPerformed
-        recolorUndoOrRedo(recolorSpriteUndo,recolorSpriteRedo,recolorSpriteUndo2,recolorSpriteRedo2);
+        recolorUndoOrRedo(recolorSpriteUndo,recolorSpriteRedo);
     }//GEN-LAST:event_recolorUndoButtonActionPerformed
 
     private void recolorRedoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorRedoButtonActionPerformed
-        recolorUndoOrRedo(recolorSpriteRedo,recolorSpriteUndo,recolorSpriteRedo2,recolorSpriteUndo2);
+        recolorUndoOrRedo(recolorSpriteRedo,recolorSpriteUndo);
     }//GEN-LAST:event_recolorRedoButtonActionPerformed
 
     private void recolorPaletteListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recolorPaletteListMouseClicked
@@ -1283,8 +1283,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 recolorSpritePalette.clear();
                 recolorSpriteUndo.clear();
                 recolorSpriteRedo.clear();
-                recolorSpriteUndo2.clear();
-                recolorSpriteRedo2.clear();
         }
     }//GEN-LAST:event_recolorSpriteListPanelActionPerformed
 
@@ -1706,10 +1704,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void recolorChangeColorsUpdate(Map<Integer,Color> changes, Map<Integer,PkmnSpriteIcon> icons){
-        recolorSpriteUndo.push(recolorChangeColors(changes));
-        recolorSpriteUndo2.push(icons);
+        Map<Integer,Color> inverse = null;
+        if (changes != null)
+            inverse = recolorChangeColors(changes);
+        recolorSpriteUndo.push(new PaletteEdit(inverse,icons));
         recolorSpriteRedo.clear();
-        recolorSpriteRedo2.clear();
         recolorSpriteListPanel.repaint();
         updateRecolorUndoRedoButtons();
     }
@@ -1724,10 +1723,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             return;
         recolorSpritePalette.set(index, color);
         Map<Integer,Color> replacement = Collections.singletonMap(index, oldColor);
-        recolorSpriteUndo.push(replacement);
-        recolorSpriteUndo2.push(new HashMap<>());
+        recolorSpriteUndo.push(PaletteEdit.getColorOnlyEdit(replacement));
         recolorSpriteRedo.clear();
-        recolorSpriteRedo2.clear();
         for (PkmnSpriteIcon icon : recolorSpriteListPanel.getModelList()){
             ((PalettePkmnSpriteIcon)icon).getPalette().set(index, color);
         }
@@ -1753,6 +1750,29 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (!source.isEmpty()){
             Map<Integer,Color> change = source.pop();
             target.push(recolorChangeColors(change,imageChange));
+        }
+        recolorSpriteListPanel.repaint();
+        updateRecolorUndoRedoButtons();
+    }
+    
+    private void recolorUndoOrRedo(ArrayDeque<PaletteEdit> source, ArrayDeque<PaletteEdit> target){
+        if (!source.isEmpty()){
+            PaletteEdit edit = source.pop();
+            Map<Integer,PkmnSpriteIcon> inverseIcons = null;
+            Map<Integer,Color> inverseColors = null;
+            if (edit.getIcons() != null && !edit.getIcons().isEmpty()){
+                inverseIcons = new HashMap<>();
+                List<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
+                for (Map.Entry<Integer,PkmnSpriteIcon> entry : edit.getIcons().entrySet()){
+                    if (entry.getKey() < icons.size()){
+                        inverseIcons.put(entry.getKey(), icons.set(entry.getKey(), entry.getValue()));
+                    }
+                }
+            }
+            if (edit.getColors() != null && !edit.getColors().isEmpty()){
+                inverseColors = recolorChangeColors(edit.getColors(),inverseIcons!=null);
+            }
+            target.push(new PaletteEdit(inverseColors,inverseIcons));
         }
         recolorSpriteListPanel.repaint();
         updateRecolorUndoRedoButtons();
@@ -2170,13 +2190,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private ArrayListModel<Color> recolorSpritePalette = new ArrayListModel<>();
     
-    private ArrayDeque<Map<Integer,Color>> recolorSpriteUndo = new ArrayDeque<>();
+    private ArrayDeque<PaletteEdit> recolorSpriteUndo = new ArrayDeque<>();
     
-    private ArrayDeque<Map<Integer,PkmnSpriteIcon>> recolorSpriteUndo2 = new ArrayDeque<>();
-    
-    private ArrayDeque<Map<Integer,Color>> recolorSpriteRedo = new ArrayDeque<>();
-    
-    private ArrayDeque<Map<Integer,PkmnSpriteIcon>> recolorSpriteRedo2 = new ArrayDeque<>();
+    private ArrayDeque<PaletteEdit> recolorSpriteRedo = new ArrayDeque<>();
     
     private long recolorClickedMillis = 0L;
     
