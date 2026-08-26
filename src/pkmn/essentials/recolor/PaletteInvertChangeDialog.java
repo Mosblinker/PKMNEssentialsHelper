@@ -29,7 +29,12 @@ public class PaletteInvertChangeDialog extends AbstractPaletteChangeDialog{
     protected void updatePaletteChanges(List<Integer> list, List<Color> palette, Map<Integer, Color> changes) {
         for (Integer index : list){
             Color color = palette.get(index);
-            changes.put(index, new Color(~color.getRed(),~color.getGreen(),~color.getBlue(),color.getAlpha()));
+            
+            changes.put(index, new Color(
+                    (~color.getRed())&0xFF,
+                    (~color.getGreen())&0xFF,
+                    (~color.getBlue())&0xFF,
+                    color.getAlpha()));
         }
     }
     
