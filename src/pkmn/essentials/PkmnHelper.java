@@ -61,6 +61,7 @@ import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.*;
 import pkmn.essentials.data.pkmn.*;
+import pkmn.essentials.recolor.AbstractPaletteChangeDialog;
 import pkmn.essentials.recolor.PaletteColorExchangeDialog;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
@@ -304,7 +305,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.loadFileChooser(fc);
         }
         for (Component comp : new Component[]{
-            recolorColorSelector,blendColorSelector,recolorColorExchange,recolorBlendChange
+            recolorColorSelector,blendColorSelector,recolorColorExchange,
+            recolorBlendChange,recolorInvertChange,recolorDesaturateChange
         }){
             config.getComponentNames().put(comp, comp.getName());
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
@@ -362,6 +364,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
         scaleBackToggle = new javax.swing.JToggleButton();
         audioFC = new javax.swing.JFileChooser();
+        recolorInvertChange = new pkmn.essentials.recolor.PaletteInvertChangeDialog();
+        recolorDesaturateChange = new pkmn.essentials.recolor.PaletteDesaturateChangeDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -399,6 +403,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorColorExchangeButton = new javax.swing.JButton();
         recolorBlendChangeButton = new javax.swing.JButton();
         recolorRemoveDuplButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        recolorInvertButton = new javax.swing.JButton();
+        recolorDesaturateButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel16 = new javax.swing.JLabel();
@@ -510,6 +517,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         audioFC.setFileFilter(OGG_FILTER);
         audioFC.setName("audioFC"); // NOI18N
+
+        recolorInvertChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                recolorInvertChangePropertyChange(evt);
+            }
+        });
+
+        recolorDesaturateChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                recolorDesaturateChangePropertyChange(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -818,6 +837,28 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jPanel4.add(recolorRemoveDuplButton);
+
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0, 6, 0));
+
+        recolorInvertButton.setText("Invert");
+        recolorInvertButton.setEnabled(false);
+        recolorInvertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorInvertButtonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(recolorInvertButton);
+
+        recolorDesaturateButton.setText("Desaturate");
+        recolorDesaturateButton.setEnabled(false);
+        recolorDesaturateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorDesaturateButtonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(recolorDesaturateButton);
+
+        jPanel4.add(jPanel5);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -1225,7 +1266,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         recolorSpriteListPanel.setModel(new ListModelList<>());
         if (recolorColorExchange.isPreviewShown()){
-            setShownRecolorSprites(0);
+            setShownRecolorSprites(recolorColorExchange);
         }
         blendPaletteColorChooser.setPalette(recolorSpritePalette);
         blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
@@ -1292,27 +1333,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             recolorSpriteListPanel.repaint();
     }//GEN-LAST:event_recolorColorExchangeStateChanged
     
-    private void setShownRecolorSprites(int mode){
+    private void setShownRecolorSprites(AbstractPaletteChangeDialog dialog){
         recolorSpriteListPanel.getModelList().clear();
-        switch(mode){
-            case(0):
-                recolorSpriteListPanel.getModelList().addAll(
-                        (recolorColorExchange.isPreviewShown())?
-                                recolorColorExchange.getPreviewSprites():
-                                recolorColorExchange.getSprites());
-                break;
-            case(1):
-                recolorSpriteListPanel.getModelList().addAll(
-                        (recolorBlendChange.isPreviewShown())?
-                                recolorBlendChange.getPreviewSprites():
-                                recolorBlendChange.getSprites());
-        }
+        recolorSpriteListPanel.getModelList().addAll((dialog.isPreviewShown())?
+                dialog.getPreviewSprites():dialog.getSprites());
+        config.setRecolorPreviewShown(dialog, dialog.isPreviewShown());
     }
     
     private void recolorColorExchangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorColorExchangePropertyChange
         if ("previewShown".equals(evt.getPropertyName())){
-            setShownRecolorSprites(0);
-            config.setRecolorPreviewShown(recolorColorExchange, recolorColorExchange.isPreviewShown());
+            setShownRecolorSprites(recolorColorExchange);
         }
     }//GEN-LAST:event_recolorColorExchangePropertyChange
 
@@ -1354,7 +1384,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         recolorSpriteListPanel.setModel(new ListModelList<>());
         if (recolorBlendChange.isPreviewShown()){
-            setShownRecolorSprites(1);
+            setShownRecolorSprites(recolorBlendChange);
         }
         blendPaletteColorChooser.setPalette(recolorSpritePalette);
         blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
@@ -1375,8 +1405,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
     private void recolorBlendChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorBlendChangePropertyChange
         if ("previewShown".equals(evt.getPropertyName())){
-            setShownRecolorSprites(1);
-            config.setRecolorPreviewShown(recolorBlendChange, recolorBlendChange.isPreviewShown());
+            setShownRecolorSprites(recolorBlendChange);
         }
     }//GEN-LAST:event_recolorBlendChangePropertyChange
 
@@ -1562,6 +1591,52 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             recolorScaleSlider.setValue(index);
         }
     }//GEN-LAST:event_recolorReferencePanelMouseWheelMoved
+
+    private void recolorInvertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorInvertButtonActionPerformed
+        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
+        recolorInvertChange.setSprites(icons);
+        recolorSpriteListPanel.setModel(new ListModelList<>());
+        if (recolorInvertChange.isPreviewShown()){
+            setShownRecolorSprites(recolorInvertChange);
+        }
+       
+        int option = recolorInvertChange.showDialog(this, recolorSpritePalette);
+        recolorSpriteListPanel.setModel(icons);
+        if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
+            recolorChangeColorsUpdate(recolorInvertChange.getPaletteChanges());
+        }
+        config.setComponentSize(recolorInvertChange);
+        config.setComponentSize(recolorColorSelector);
+    }//GEN-LAST:event_recolorInvertButtonActionPerformed
+
+    private void recolorDesaturateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorDesaturateButtonActionPerformed
+        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
+        recolorDesaturateChange.setSprites(icons);
+        recolorSpriteListPanel.setModel(new ListModelList<>());
+        if (recolorDesaturateChange.isPreviewShown()){
+            setShownRecolorSprites(recolorDesaturateChange);
+        }
+       
+        int option = recolorDesaturateChange.showDialog(this, recolorSpritePalette);
+        recolorSpriteListPanel.setModel(icons);
+        if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
+            recolorChangeColorsUpdate(recolorDesaturateChange.getPaletteChanges());
+        }
+        config.setComponentSize(recolorDesaturateChange);
+        config.setComponentSize(recolorColorSelector);
+    }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
+
+    private void recolorInvertChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorInvertChangePropertyChange
+        if ("previewShown".equals(evt.getPropertyName())){
+            setShownRecolorSprites(recolorInvertChange);
+        }
+    }//GEN-LAST:event_recolorInvertChangePropertyChange
+
+    private void recolorDesaturateChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorDesaturateChangePropertyChange
+        if ("previewShown".equals(evt.getPropertyName())){
+            setShownRecolorSprites(recolorDesaturateChange);
+        }
+    }//GEN-LAST:event_recolorDesaturateChangePropertyChange
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -2098,6 +2173,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorColorExchangeButton.setEnabled(inputEnabled && !recolorSpritePalette.isEmpty());
         recolorBlendChangeButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorRemoveDuplButton.setEnabled(recolorColorExchangeButton.isEnabled());
+        recolorInvertButton.setEnabled(recolorColorExchangeButton.isEnabled());
+        recolorDesaturateButton.setEnabled(recolorColorExchangeButton.isEnabled());
         updateRecolorSaveButton();
     }
     
@@ -2254,6 +2331,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -2271,7 +2349,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.recolor.PaletteColorExchangeDialog recolorColorExchange;
     private javax.swing.JButton recolorColorExchangeButton;
     private components.JColorSelector recolorColorSelector;
+    private javax.swing.JButton recolorDesaturateButton;
+    private pkmn.essentials.recolor.PaletteDesaturateChangeDialog recolorDesaturateChange;
     private javax.swing.JFileChooser recolorFolderFC;
+    private javax.swing.JButton recolorInvertButton;
+    private pkmn.essentials.recolor.PaletteInvertChangeDialog recolorInvertChange;
     private javax.swing.JList<Color> recolorPaletteList;
     private javax.swing.JButton recolorRedoButton;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
