@@ -1631,6 +1631,45 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jDialog1.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
+    private static final double RGB_TO_LINEAR_CROSSOVER = 0.04045;
+    
+    private static double rgbToLinear(int value){
+        return rgbToLinear(value/255.0);
+    }
+    
+    private static double rgbToLinear(double value){
+        if (value > RGB_TO_LINEAR_CROSSOVER)
+            return Math.pow((value + 0.055) / 1.055, 2.4);
+        else
+            return value / 12.92;
+    }
+    
+    private static final double LINEAR_TO_RGB_CROSSOVER = rgbToLinear(RGB_TO_LINEAR_CROSSOVER);
+    
+    private static int linearToRGB(double value){
+        if (value > LINEAR_TO_RGB_CROSSOVER)
+            value = Math.pow(value, 1/2.4) * 1.055 - 0.055;
+        else
+            value *= 12.92;
+        return (int)Math.round(value * 255.0);
+    }
+    
+    private Color blendFlicker(Color color1, Color color2){
+        int[] c1 = {color1.getRed(),color1.getGreen(),color1.getBlue()};
+        int[] c2 = {color2.getRed(),color2.getGreen(),color2.getBlue()};
+        double alpha = (color1.getAlpha() / 255.0) + (color2.getAlpha() / 255.0);
+        alpha /= 2.0;
+        int a = (int)Math.round(alpha*255);
+        int[] rgb = new int[3];
+        for (int i = 0; i < 3; i++){
+            double linear1 = rgbToLinear(c1[i]);
+            double linear2 = rgbToLinear(c2[i]);
+            double avg = (linear1+linear2)/2.0;
+            rgb[i] = linearToRGB(avg);
+        }
+        return new Color(rgb[0],rgb[1],rgb[2],a);
+    }
+    
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
         spriteFolderFC.setFileHidingEnabled(!value);
