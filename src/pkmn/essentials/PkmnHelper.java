@@ -518,12 +518,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         audioFC.setFileFilter(OGG_FILTER);
         audioFC.setName("audioFC"); // NOI18N
 
+        recolorInvertChange.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                recolorInvertChangeStateChanged(evt);
+            }
+        });
         recolorInvertChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 recolorInvertChangePropertyChange(evt);
             }
         });
 
+        recolorDesaturateChange.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                recolorDesaturateChangeStateChanged(evt);
+            }
+        });
         recolorDesaturateChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 recolorDesaturateChangePropertyChange(evt);
@@ -1637,6 +1647,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             setShownRecolorSprites(recolorDesaturateChange);
         }
     }//GEN-LAST:event_recolorDesaturateChangePropertyChange
+
+    private void recolorInvertChangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorInvertChangeStateChanged
+        if (recolorInvertChange.isPreviewShown())
+            recolorSpriteListPanel.repaint();
+    }//GEN-LAST:event_recolorInvertChangeStateChanged
+
+    private void recolorDesaturateChangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorDesaturateChangeStateChanged
+        if (recolorDesaturateChange.isPreviewShown())
+            recolorSpriteListPanel.repaint();
+    }//GEN-LAST:event_recolorDesaturateChangeStateChanged
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);

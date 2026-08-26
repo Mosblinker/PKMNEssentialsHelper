@@ -168,11 +168,13 @@
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteInvertChangeDialog" name="recolorInvertChange">
       <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="recolorInvertChangeStateChanged"/>
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorInvertChangePropertyChange"/>
       </Events>
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteDesaturateChangeDialog" name="recolorDesaturateChange">
       <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="recolorDesaturateChangeStateChanged"/>
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorDesaturateChangePropertyChange"/>
       </Events>
     </Component>
