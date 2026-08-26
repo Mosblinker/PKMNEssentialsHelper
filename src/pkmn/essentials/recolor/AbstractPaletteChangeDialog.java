@@ -100,26 +100,26 @@ public abstract class AbstractPaletteChangeDialog extends AbstractConfirmDialogP
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
         constraints.insets = new java.awt.Insets(7, 6, 0, 6);
-        constraints.weightx = 0.9;
-        add(ctrlPanel, constraints);
+        if (ctrlPanel != null){
+            add(ctrlPanel, constraints);
         
-        constraints = new java.awt.GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.fill = java.awt.GridBagConstraints.BOTH;
-        constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
-        constraints.gridwidth = 2;
+            constraints = new java.awt.GridBagConstraints();
+            constraints.gridx = 0;
+            constraints.gridy = 1;
+            constraints.fill = java.awt.GridBagConstraints.BOTH;
+            constraints.anchor = java.awt.GridBagConstraints.CENTER;
+            constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        }
+        constraints.weightx = 0.9;
         constraints.weighty = 0.9;
         add(applyPanel, constraints);
         
         constraints = new java.awt.GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 2;
+        constraints.gridy = (ctrlPanel != null)?2:1;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
         constraints.insets = new java.awt.Insets(7, 6, 7, 6);
-        constraints.gridwidth = 2;
         add(bottomPanel, constraints);
         
         applyAddSelector = new JListSelector<>(new DefaultListModel<>());
