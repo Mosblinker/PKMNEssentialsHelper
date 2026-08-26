@@ -109,7 +109,7 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
         fromColor = color;
         fromColorButton.setBackground(fromColor);
         firePropertyChange("fromColor",old,color);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     public Color getToColor(){
@@ -123,7 +123,7 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
         toColor = color;
         toColorButton.setBackground(toColor);
         firePropertyChange("toColor",old,color);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     public int showDialog(Component parent, List<Color> palette, Color fromColor){

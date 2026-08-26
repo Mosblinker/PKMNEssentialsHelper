@@ -178,7 +178,7 @@ public abstract class AbstractPaletteChangeDialog extends AbstractConfirmDialogP
             applyToModel.add(i);
         }
         prevPalette = new ArrayList<>(palette);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     public boolean isPreviewShown(){
@@ -252,7 +252,7 @@ public abstract class AbstractPaletteChangeDialog extends AbstractConfirmDialogP
             applyToModel.add(i);
         }
         paletteChanges.clear();
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     protected void addPaletteColors(){
@@ -291,6 +291,10 @@ public abstract class AbstractPaletteChangeDialog extends AbstractConfirmDialogP
                 paletteChanges.remove(i);
         }
         updatePreviewIcons();
+    }
+    
+    public void updatePaletteChanges(){
+        updatePaletteChanges(applyToModel);
     }
     
     public void updatePreviewIcons(){

@@ -143,7 +143,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         fromColor1 = color;
         fromColor1Button.setBackground(fromColor1);
         firePropertyChange("fromColor1",old,color);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     public Color getFromColor2(){
@@ -157,7 +157,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         fromColor2 = color;
         fromColor2Button.setBackground(fromColor2);
         firePropertyChange("fromColor2",old,color);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     public Color getToColor1(){
@@ -171,7 +171,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         toColor1 = color;
         toColor1Button.setBackground(toColor1);
         firePropertyChange("toColor1",old,color);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     public Color getToColor2(){
@@ -185,7 +185,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         toColor2 = color;
         toColor2Button.setBackground(toColor2);
         firePropertyChange("toColor2",old,color);
-        updatePaletteChanges(applyToModel);
+        updatePaletteChanges();
     }
     
     private void resetColors(){
