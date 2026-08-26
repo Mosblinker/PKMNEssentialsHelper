@@ -15,9 +15,11 @@ import components.text.action.commands.UndoManagerCommands;
 import files.FilesExtended;
 import static files.FilesExtended.generateExtensionFilter;
 import files.extensions.ImageExtensions;
+import icons.Icon2D;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -1624,10 +1626,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        // TODO add your handling code here:
+        jThumbnailLabel1.repaint();
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jThumbnailLabel1.setIcon(new C64ColorMergeIcon());
         jDialog1.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
@@ -1668,6 +1671,48 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             rgb[i] = linearToRGB(avg);
         }
         return new Color(rgb[0],rgb[1],rgb[2],a);
+    }
+    
+    private class C64ColorMergeIcon implements Icon2D{
+        
+        private static final int SQUARE_SIZE = 32;
+        
+        private static final int COLOR_SQUARE_SIZE = 28;
+        
+        private static final int SQUARE_OFFSET = (SQUARE_SIZE - COLOR_SQUARE_SIZE) / 2;
+
+        @Override
+        public void paintIcon2D(Component c, Graphics2D g, int x, int y) {
+            Color[] palette = C64ColorPalette.C64_COLOR_PALETTE_TEST[jSlider1.getValue()];
+            
+            for (int i = 0; i < palette.length; i++){
+                int offset = i * SQUARE_SIZE + SQUARE_SIZE + SQUARE_OFFSET;
+                g.setColor(palette[i]);
+                g.fillRect(offset, SQUARE_OFFSET, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
+                g.fillRect(SQUARE_OFFSET, offset, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
+            }
+            
+            for (int i = 0; i < palette.length; i++){
+                int x1 = i * SQUARE_SIZE + SQUARE_SIZE + SQUARE_OFFSET;
+                for (int j = 0; j < palette.length; j++){
+                    int y1 = j * SQUARE_SIZE + SQUARE_SIZE + SQUARE_OFFSET;
+                    g.setColor(blendFlicker(palette[i],palette[j]));
+                    g.fillRect(x1, y1, COLOR_SQUARE_SIZE, COLOR_SQUARE_SIZE);
+                    
+                }
+            }
+        }
+
+        @Override
+        public int getIconWidth() {
+            return SQUARE_SIZE*17;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return getIconWidth();
+        }
+        
     }
     
     private void setFilesAreHidden(boolean value){
