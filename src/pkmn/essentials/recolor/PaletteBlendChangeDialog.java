@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pkmn.essentials;
+package pkmn.essentials.recolor;
 
 import components.AbstractConfirmDialogPanel;
 import components.ArrayListModel;
@@ -26,6 +26,8 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import pkmn.essentials.ColorCellRenderer;
+import pkmn.essentials.PkmnHelperUtilities;
 import pkmn.essentials.sprite.PalettePkmnSpriteIcon;
 import pkmn.essentials.sprite.PkmnSpriteIcon;
 

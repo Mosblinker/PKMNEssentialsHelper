@@ -41,7 +41,7 @@
         <Property name="name" type="java.lang.String" value="recolorColorSelector" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="pkmn.essentials.PaletteColorExchangeDialog" name="recolorColorExchange">
+    <Component class="pkmn.essentials.recolor.PaletteColorExchangeDialog" name="recolorColorExchange">
       <Properties>
         <Property name="dialogTitle" type="java.lang.String" value="Color Exchange"/>
         <Property name="name" type="java.lang.String" value="recolorColorExchange" noResource="true"/>
@@ -56,7 +56,7 @@
         <Property name="name" type="java.lang.String" value="blendColorSelector" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="pkmn.essentials.PaletteBlendChangeDialog" name="recolorBlendChange">
+    <Component class="pkmn.essentials.recolor.PaletteBlendChangeDialog" name="recolorBlendChange">
       <Properties>
         <Property name="name" type="java.lang.String" value="recolorBlendChange" noResource="true"/>
       </Properties>

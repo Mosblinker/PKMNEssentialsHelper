@@ -61,6 +61,7 @@ import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.*;
 import pkmn.essentials.data.pkmn.*;
+import pkmn.essentials.recolor.PaletteColorExchangeDialog;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -348,9 +349,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteFolderFC = new javax.swing.JFileChooser();
         gameFolderFC = new javax.swing.JFileChooser();
         recolorColorSelector = new components.JColorSelector();
-        recolorColorExchange = new pkmn.essentials.PaletteColorExchangeDialog();
+        recolorColorExchange = new pkmn.essentials.recolor.PaletteColorExchangeDialog();
         blendColorSelector = new components.JColorSelector();
-        recolorBlendChange = new pkmn.essentials.PaletteBlendChangeDialog();
+        recolorBlendChange = new pkmn.essentials.recolor.PaletteBlendChangeDialog();
         recolorSpriteListAccessory = new javax.swing.JPanel();
         recolorUndoButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
@@ -2264,10 +2265,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
-    private pkmn.essentials.PaletteBlendChangeDialog recolorBlendChange;
+    private pkmn.essentials.recolor.PaletteBlendChangeDialog recolorBlendChange;
     private javax.swing.JButton recolorBlendChangeButton;
     private javax.swing.JButton recolorBrowseButton;
-    private pkmn.essentials.PaletteColorExchangeDialog recolorColorExchange;
+    private pkmn.essentials.recolor.PaletteColorExchangeDialog recolorColorExchange;
     private javax.swing.JButton recolorColorExchangeButton;
     private components.JColorSelector recolorColorSelector;
     private javax.swing.JFileChooser recolorFolderFC;
