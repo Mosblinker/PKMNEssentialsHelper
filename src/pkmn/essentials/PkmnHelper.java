@@ -1625,7 +1625,19 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorReferencePanelMouseWheelMoved
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if (jFileChooser1.showSaveDialog(jDialog1) == JFileChooser.APPROVE_OPTION){
+            File file = jFileChooser1.getSelectedFile();
+            C64ColorMergeIcon icon = (C64ColorMergeIcon)jThumbnailLabel1.getIcon();
+            BufferedImage image = new BufferedImage(icon.getIconWidth(),icon.getIconHeight(),BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g = image.createGraphics();
+            icon.paintIcon2D(null, g, 0, 0);
+            g.dispose();
+            try {
+                ImageIO.write(image, "png", file);
+            } catch (IOException ex) {
+                Logger.getLogger(PkmnHelper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
