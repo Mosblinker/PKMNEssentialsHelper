@@ -66,6 +66,7 @@ import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.*;
 import pkmn.essentials.data.pkmn.*;
 import pkmn.essentials.recolor.AbstractPaletteChangeDialog;
+import pkmn.essentials.recolor.AbstractPaletteColorChangeDialog;
 import pkmn.essentials.recolor.PaletteColorExchangeDialog;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
@@ -277,8 +278,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorColorSelector.addChooserPanel(recolorPaletteColorChooser);
         recolorColorSelector.addChooserPanel(recolorReferencePaletteColorChooser);
         recolorColorSelector.addChooserPanel(recolorDropperColorChooser);
-        recolorColorExchange.setColorSelector(recolorColorSelector);
-        recolorBlendChange.setColorSelector(recolorColorSelector);
         CustomColorPreviewPanel colorPreview = new CustomColorPreviewPanel();
         recolorColorSelector.setPreviewPanel(colorPreview);
         recolorColorSelector.addChangeListener(colorPreview);
@@ -317,6 +316,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
             if (comp instanceof AbstractPaletteChangeDialog){
                 AbstractPaletteChangeDialog dialog = (AbstractPaletteChangeDialog) comp;
+                if (dialog instanceof AbstractPaletteColorChangeDialog)
+                    ((AbstractPaletteColorChangeDialog)dialog).setColorSelector(recolorColorSelector);
                 dialog.setPreviewShown(config.getRecolorPreviewShown(comp));
                 dialog.addPropertyChangeListener(previewHandler);
                 dialog.addChangeListener(previewHandler);
