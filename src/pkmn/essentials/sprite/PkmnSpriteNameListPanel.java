@@ -179,7 +179,7 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
         try{
             clearButton.setEnabled(isEnabled()&&!getModelList().isEmpty());
             for (int i = index0; i <= index1; i++){
-                if (getModelList().get(i) != null)
+                if (getModelList().size() > i && getModelList().get(i) != null)
                     getModelList().get(i).setTargetScale(scale);
             }
         }catch(NullPointerException ex) {}
