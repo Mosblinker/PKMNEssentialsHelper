@@ -1239,25 +1239,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorScaleSliderStateChanged
 
     private void recolorColorExchangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorColorExchangeButtonActionPerformed
-        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
-        List<PalettePkmnSpriteIcon> preview = recolorColorExchange.setSprites(icons);
-        recolorPaletteColorChooser.setPalette(recolorSpritePalette);
-        updateRecolorDropperImages();
-        for (PalettePkmnSpriteIcon icon : preview){
-            recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
-        }
-        recolorSpriteListPanel.setModel(new ListModelList<>());
-        setShownRecolorSprites(recolorColorExchange);
-        blendPaletteColorChooser.setPalette(recolorSpritePalette);
-        blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
-        int option = recolorColorExchange.showDialog(this, recolorSpritePalette);
-        recolorSpriteListPanel.setModel(icons);
-        if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
-            recolorChangeColorsUpdate(recolorColorExchange.getPaletteChanges());
-        }
-        config.setComponentSize(recolorColorExchange);
-        config.setComponentSize(recolorColorSelector);
-        config.setComponentSize(blendColorSelector);
+        showRecolorChangeDialog(recolorColorExchange);
     }//GEN-LAST:event_recolorColorExchangeButtonActionPerformed
 
     private void recolorUndoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorUndoButtonActionPerformed
@@ -1344,25 +1326,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_eggCracksSpritePanelActionPerformed
 
     private void recolorBlendChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorBlendChangeButtonActionPerformed
-        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
-        List<PalettePkmnSpriteIcon> preview = recolorBlendChange.setSprites(icons);
-        recolorPaletteColorChooser.setPalette(recolorSpritePalette);
-        updateRecolorDropperImages();
-        for (PalettePkmnSpriteIcon icon : preview){
-            recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
-        }
-        recolorSpriteListPanel.setModel(new ListModelList<>());
-        setShownRecolorSprites(recolorBlendChange);
-        blendPaletteColorChooser.setPalette(recolorSpritePalette);
-        blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
-        int option = recolorBlendChange.showDialog(this, recolorSpritePalette);
-        recolorSpriteListPanel.setModel(icons);
-        if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
-            recolorChangeColorsUpdate(recolorBlendChange.getPaletteChanges());
-        }
-        config.setComponentSize(recolorBlendChange);
-        config.setComponentSize(recolorColorSelector);
-        config.setComponentSize(blendColorSelector);
+        showRecolorChangeDialog(recolorBlendChange);
     }//GEN-LAST:event_recolorBlendChangeButtonActionPerformed
 
     private void recolorSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSaveButtonActionPerformed
@@ -1549,34 +1513,38 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorReferencePanelMouseWheelMoved
 
     private void recolorInvertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorInvertButtonActionPerformed
-        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
-        recolorInvertChange.setSprites(icons);
-        recolorSpriteListPanel.setModel(new ListModelList<>());
-        setShownRecolorSprites(recolorInvertChange);
-       
-        int option = recolorInvertChange.showDialog(this, recolorSpritePalette);
-        recolorSpriteListPanel.setModel(icons);
-        if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
-            recolorChangeColorsUpdate(recolorInvertChange.getPaletteChanges());
-        }
-        config.setComponentSize(recolorInvertChange);
-        config.setComponentSize(recolorColorSelector);
+        showRecolorChangeDialog(recolorInvertChange);
     }//GEN-LAST:event_recolorInvertButtonActionPerformed
 
     private void recolorDesaturateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorDesaturateButtonActionPerformed
+        showRecolorChangeDialog(recolorDesaturateChange);
+    }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
+    
+    private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
-        recolorDesaturateChange.setSprites(icons);
+        List<PalettePkmnSpriteIcon> preview = dialog.setSprites(icons);
+        if (dialog instanceof AbstractPaletteColorChangeDialog){
+            recolorPaletteColorChooser.setPalette(recolorSpritePalette);
+            updateRecolorDropperImages();
+            for (PalettePkmnSpriteIcon icon : preview){
+                recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
+            }
+            blendPaletteColorChooser.setPalette(recolorSpritePalette);
+            blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
+        }
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        setShownRecolorSprites(recolorDesaturateChange);
-       
-        int option = recolorDesaturateChange.showDialog(this, recolorSpritePalette);
+        setShownRecolorSprites(dialog);
+        int option = dialog.showDialog(this, recolorSpritePalette);
         recolorSpriteListPanel.setModel(icons);
         if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
-            recolorChangeColorsUpdate(recolorDesaturateChange.getPaletteChanges());
+            recolorChangeColorsUpdate(dialog.getPaletteChanges());
         }
-        config.setComponentSize(recolorDesaturateChange);
-        config.setComponentSize(recolorColorSelector);
-    }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
+        if (dialog instanceof AbstractPaletteColorChangeDialog){
+            config.setComponentSize(recolorColorSelector);
+            config.setComponentSize(blendColorSelector);
+        }
+        config.setComponentSize(dialog);
+    }
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
