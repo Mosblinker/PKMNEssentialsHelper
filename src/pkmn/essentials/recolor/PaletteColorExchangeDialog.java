@@ -135,7 +135,6 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
             setFromColor((fromColor != null)?fromColor:Color.WHITE);
             setToColor(Color.BLACK);
         }
-        System.out.println("Hello");
         return super.showDialog(parent,palette);
     }
     
