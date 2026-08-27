@@ -4,7 +4,6 @@
  */
 package pkmn.essentials.recolor;
 
-import components.JColorSelector;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -13,13 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import javax.swing.*;
-import pkmn.essentials.PkmnHelperUtilities;
 
 /**
  *
  * @author Mosblinker
  */
-public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
+public class PaletteColorExchangeDialog extends AbstractPaletteColorChangeDialog{
     
     @Override
     protected JPanel constructControlPanel() {
@@ -85,19 +83,6 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
         toColorButton.setBackground(toColor);
     }
     
-    public void setColorSelector(JColorSelector colorSelector){
-        if (colorSelector == this.colorSelector)
-            return;
-        JColorSelector old = this.colorSelector;
-        this.colorSelector = colorSelector;
-        firePropertyChange("colorSelector",old,colorSelector);
-        updateColorButtonsEnabled();
-    }
-    
-    public JColorSelector getColorSelector(){
-        return colorSelector;
-    }
-    
     public Color getFromColor(){
         return fromColor;
     }
@@ -156,16 +141,6 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
         super.reset();
     }
     
-    protected Color showColorSelector(Color color){
-        if (colorSelector == null)
-            return color;
-        PkmnHelperUtilities.resetColorPreviewColor(colorSelector);
-        if (colorSelector.showDialog(this, color) == JColorSelector.ACCEPT_OPTION){
-            return colorSelector.getSelectedColor();
-        }
-        return color;
-    }
-    
     @Override
     protected void updatePaletteChanges(List<Integer> list, List<Color> palette, 
             Map<Integer,Color> changes){
@@ -192,9 +167,10 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
         }
     }
     
-    private void updateColorButtonsEnabled(){
-        fromColorButton.setEnabled(isEnabled() && colorSelector != null);
-        toColorButton.setEnabled(fromColorButton.isEnabled());
+    @Override
+    protected void updateColorButtonsEnabled(boolean enabled){
+        fromColorButton.setEnabled(enabled);
+        toColorButton.setEnabled(enabled);
     }
     
     @Override
@@ -212,8 +188,6 @@ public class PaletteColorExchangeDialog extends AbstractPaletteChangeDialog{
     private Color fromColor = Color.WHITE;
     
     private Color toColor = Color.BLACK;
-    
-    private JColorSelector colorSelector = null;
     
     private class Handler implements ActionListener{
         @Override

@@ -4,7 +4,6 @@
  */
 package pkmn.essentials.recolor;
 
-import components.JColorSelector;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +17,7 @@ import pkmn.essentials.PkmnHelperUtilities;
  *
  * @author Mosblinker
  */
-public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
+public class PaletteBlendChangeDialog extends AbstractPaletteColorChangeDialog{
     
     @Override
     protected JPanel constructControlPanel() {
@@ -53,7 +52,6 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         toColorLabel.setLabelFor(toColor1Button);
         
         java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
-        constraints = new java.awt.GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.fill = java.awt.GridBagConstraints.VERTICAL;
@@ -117,19 +115,6 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         fromColor2Button.setBackground(fromColor2);
         toColor1Button.setBackground(toColor1);
         toColor2Button.setBackground(toColor2);
-    }
-    
-    public void setColorSelector(JColorSelector colorSelector){
-        if (colorSelector == this.colorSelector)
-            return;
-        JColorSelector old = this.colorSelector;
-        this.colorSelector = colorSelector;
-        firePropertyChange("colorSelector",old,colorSelector);
-        updateColorButtonsEnabled();
-    }
-    
-    public JColorSelector getColorSelector(){
-        return colorSelector;
     }
     
     public Color getFromColor1(){
@@ -202,16 +187,6 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         super.reset();
     }
     
-    protected Color showColorSelector(Color color){
-        if (colorSelector == null)
-            return color;
-        PkmnHelperUtilities.resetColorPreviewColor(colorSelector);
-        if (colorSelector.showDialog(this, color) == JColorSelector.ACCEPT_OPTION){
-            return colorSelector.getSelectedColor();
-        }
-        return color;
-    }
-    
     @Override
     protected void updatePaletteChanges(List<Integer> list, List<Color> palette, 
             Map<Integer,Color> changes){
@@ -221,11 +196,12 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
         }
     }
     
-    private void updateColorButtonsEnabled(){
-        fromColor1Button.setEnabled(isEnabled() && colorSelector != null);
-        fromColor2Button.setEnabled(fromColor1Button.isEnabled());
-        toColor1Button.setEnabled(fromColor1Button.isEnabled());
-        toColor2Button.setEnabled(fromColor1Button.isEnabled());
+    @Override
+    protected void updateColorButtonsEnabled(boolean enabled){
+        fromColor1Button.setEnabled(enabled);
+        fromColor2Button.setEnabled(enabled);
+        toColor1Button.setEnabled(enabled);
+        toColor2Button.setEnabled(enabled);
     }
     
     @Override
@@ -245,8 +221,6 @@ public class PaletteBlendChangeDialog extends AbstractPaletteChangeDialog{
     private Color fromColor2 = Color.WHITE;
     private Color toColor1 = Color.RED;
     private Color toColor2 = Color.BLUE;
-    
-    private JColorSelector colorSelector = null;
     
     private class Handler implements ActionListener{
         @Override
