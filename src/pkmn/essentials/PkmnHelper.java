@@ -1246,9 +1246,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
         }
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        if (recolorColorExchange.isPreviewShown()){
-            setShownRecolorSprites(recolorColorExchange);
-        }
+        setShownRecolorSprites(recolorColorExchange);
         blendPaletteColorChooser.setPalette(recolorSpritePalette);
         blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
         int option = recolorColorExchange.showDialog(this, recolorSpritePalette);
@@ -1353,9 +1351,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
         }
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        if (recolorBlendChange.isPreviewShown()){
-            setShownRecolorSprites(recolorBlendChange);
-        }
+        setShownRecolorSprites(recolorBlendChange);
         blendPaletteColorChooser.setPalette(recolorSpritePalette);
         blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
         int option = recolorBlendChange.showDialog(this, recolorSpritePalette);
@@ -1555,9 +1551,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
         recolorInvertChange.setSprites(icons);
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        if (recolorInvertChange.isPreviewShown()){
-            setShownRecolorSprites(recolorInvertChange);
-        }
+        setShownRecolorSprites(recolorInvertChange);
        
         int option = recolorInvertChange.showDialog(this, recolorSpritePalette);
         recolorSpriteListPanel.setModel(icons);
@@ -1572,9 +1566,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
         recolorDesaturateChange.setSprites(icons);
         recolorSpriteListPanel.setModel(new ListModelList<>());
-        if (recolorDesaturateChange.isPreviewShown()){
-            setShownRecolorSprites(recolorDesaturateChange);
-        }
+        setShownRecolorSprites(recolorDesaturateChange);
        
         int option = recolorDesaturateChange.showDialog(this, recolorSpritePalette);
         recolorSpriteListPanel.setModel(icons);
