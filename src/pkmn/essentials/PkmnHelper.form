@@ -46,10 +46,6 @@
         <Property name="dialogTitle" type="java.lang.String" value="Color Exchange"/>
         <Property name="name" type="java.lang.String" value="recolorColorExchange" noResource="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="recolorColorExchangeStateChanged"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorColorExchangePropertyChange"/>
-      </Events>
     </Component>
     <Component class="components.JColorSelector" name="blendColorSelector">
       <Properties>
@@ -60,10 +56,6 @@
       <Properties>
         <Property name="name" type="java.lang.String" value="recolorBlendChange" noResource="true"/>
       </Properties>
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="recolorBlendChangeStateChanged"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorBlendChangePropertyChange"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="recolorSpriteListAccessory">
 
@@ -167,16 +159,14 @@
       </Properties>
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteInvertChangeDialog" name="recolorInvertChange">
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="recolorInvertChangeStateChanged"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorInvertChangePropertyChange"/>
-      </Events>
+      <Properties>
+        <Property name="name" type="java.lang.String" value="recolorInvertChange" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteDesaturateChangeDialog" name="recolorDesaturateChange">
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="recolorDesaturateChangeStateChanged"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorDesaturateChangePropertyChange"/>
-      </Events>
+      <Properties>
+        <Property name="name" type="java.lang.String" value="recolorDesaturateChange" noResource="true"/>
+      </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>

@@ -21,6 +21,8 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -51,6 +53,8 @@ import java.util.prefs.Preferences;
 import java.util.stream.Stream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataEvent;
@@ -304,12 +308,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.addFileChooser(fc, fc.getName());
             config.loadFileChooser(fc);
         }
+        RecolorPreviewHandler previewHandler = new RecolorPreviewHandler();
         for (Component comp : new Component[]{
             recolorColorSelector,blendColorSelector,recolorColorExchange,
             recolorBlendChange,recolorInvertChange,recolorDesaturateChange
         }){
             config.getComponentNames().put(comp, comp.getName());
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
+            if (comp instanceof AbstractPaletteChangeDialog){
+                AbstractPaletteChangeDialog dialog = (AbstractPaletteChangeDialog) comp;
+                dialog.addPropertyChangeListener(previewHandler);
+                dialog.addChangeListener(previewHandler);
+            }
         }
         
         showHiddenFilesToggle.setSelected(config.getHiddenFilesAreShown());
@@ -452,30 +462,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         recolorColorExchange.setDialogTitle("Color Exchange");
         recolorColorExchange.setName("recolorColorExchange"); // NOI18N
-        recolorColorExchange.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                recolorColorExchangeStateChanged(evt);
-            }
-        });
-        recolorColorExchange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                recolorColorExchangePropertyChange(evt);
-            }
-        });
 
         blendColorSelector.setName("blendColorSelector"); // NOI18N
 
         recolorBlendChange.setName("recolorBlendChange"); // NOI18N
-        recolorBlendChange.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                recolorBlendChangeStateChanged(evt);
-            }
-        });
-        recolorBlendChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                recolorBlendChangePropertyChange(evt);
-            }
-        });
 
         recolorSpriteListAccessory.setLayout(new javax.swing.BoxLayout(recolorSpriteListAccessory, javax.swing.BoxLayout.Y_AXIS));
 
@@ -518,27 +508,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         audioFC.setFileFilter(OGG_FILTER);
         audioFC.setName("audioFC"); // NOI18N
 
-        recolorInvertChange.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                recolorInvertChangeStateChanged(evt);
-            }
-        });
-        recolorInvertChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                recolorInvertChangePropertyChange(evt);
-            }
-        });
 
-        recolorDesaturateChange.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                recolorDesaturateChangeStateChanged(evt);
-            }
-        });
-        recolorDesaturateChange.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                recolorDesaturateChangePropertyChange(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1337,11 +1307,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 recolorSpriteRedo.clear();
         }
     }//GEN-LAST:event_recolorSpriteListPanelActionPerformed
-
-    private void recolorColorExchangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorColorExchangeStateChanged
-        if (recolorColorExchange.isPreviewShown())
-            recolorSpriteListPanel.repaint();
-    }//GEN-LAST:event_recolorColorExchangeStateChanged
     
     private void setShownRecolorSprites(AbstractPaletteChangeDialog dialog){
         recolorSpriteListPanel.getModelList().clear();
@@ -1350,12 +1315,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         config.setRecolorPreviewShown(dialog, dialog.isPreviewShown());
     }
     
-    private void recolorColorExchangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorColorExchangePropertyChange
-        if ("previewShown".equals(evt.getPropertyName())){
-            setShownRecolorSprites(recolorColorExchange);
-        }
-    }//GEN-LAST:event_recolorColorExchangePropertyChange
-
     private void shadowSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shadowSpritePanelActionPerformed
         switch(evt.getActionCommand()){
             case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
@@ -1407,17 +1366,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         config.setComponentSize(recolorColorSelector);
         config.setComponentSize(blendColorSelector);
     }//GEN-LAST:event_recolorBlendChangeButtonActionPerformed
-
-    private void recolorBlendChangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorBlendChangeStateChanged
-        if (recolorBlendChange.isPreviewShown())
-            recolorSpriteListPanel.repaint();
-    }//GEN-LAST:event_recolorBlendChangeStateChanged
-
-    private void recolorBlendChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorBlendChangePropertyChange
-        if ("previewShown".equals(evt.getPropertyName())){
-            setShownRecolorSprites(recolorBlendChange);
-        }
-    }//GEN-LAST:event_recolorBlendChangePropertyChange
 
     private void recolorSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSaveButtonActionPerformed
         File folder = new File(recolorSaveField.getText());
@@ -1635,28 +1583,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         config.setComponentSize(recolorDesaturateChange);
         config.setComponentSize(recolorColorSelector);
     }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
-
-    private void recolorInvertChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorInvertChangePropertyChange
-        if ("previewShown".equals(evt.getPropertyName())){
-            setShownRecolorSprites(recolorInvertChange);
-        }
-    }//GEN-LAST:event_recolorInvertChangePropertyChange
-
-    private void recolorDesaturateChangePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorDesaturateChangePropertyChange
-        if ("previewShown".equals(evt.getPropertyName())){
-            setShownRecolorSprites(recolorDesaturateChange);
-        }
-    }//GEN-LAST:event_recolorDesaturateChangePropertyChange
-
-    private void recolorInvertChangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorInvertChangeStateChanged
-        if (recolorInvertChange.isPreviewShown())
-            recolorSpriteListPanel.repaint();
-    }//GEN-LAST:event_recolorInvertChangeStateChanged
-
-    private void recolorDesaturateChangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_recolorDesaturateChangeStateChanged
-        if (recolorDesaturateChange.isPreviewShown())
-            recolorSpriteListPanel.repaint();
-    }//GEN-LAST:event_recolorDesaturateChangeStateChanged
     
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
@@ -2455,6 +2381,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             } else 
                 updateSpriteApplyButton();
         }
+    }
+    
+    private class RecolorPreviewHandler implements PropertyChangeListener, ChangeListener{
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            AbstractPaletteChangeDialog dialog;
+            if (evt.getSource() instanceof AbstractPaletteChangeDialog)
+                dialog = (AbstractPaletteChangeDialog) evt.getSource();
+            else
+                return;
+            if ("previewShown".equals(evt.getPropertyName())){
+                setShownRecolorSprites(dialog);
+            }
+        }
+        @Override
+        public void stateChanged(ChangeEvent evt) {
+            AbstractPaletteChangeDialog dialog;
+            if (evt.getSource() instanceof AbstractPaletteChangeDialog)
+                dialog = (AbstractPaletteChangeDialog) evt.getSource();
+            else
+                return;
+            if (dialog.isPreviewShown())
+                recolorSpriteListPanel.repaint();
+        }
+        
     }
     /**
      * 
