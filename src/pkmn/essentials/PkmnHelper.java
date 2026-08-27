@@ -508,7 +508,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         audioFC.setFileFilter(OGG_FILTER);
         audioFC.setName("audioFC"); // NOI18N
 
+        recolorInvertChange.setName("recolorInvertChange"); // NOI18N
 
+        recolorDesaturateChange.setName("recolorDesaturateChange"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
