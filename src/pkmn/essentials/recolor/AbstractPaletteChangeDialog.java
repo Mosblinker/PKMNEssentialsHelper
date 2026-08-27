@@ -312,11 +312,11 @@ public abstract class AbstractPaletteChangeDialog extends AbstractConfirmDialogP
         fireChangeEvent();
     }
     
-    private void updateAddButtonEnabled(){
+    protected void updateAddButtonEnabled(){
         applyAddButton.setEnabled(isEnabled() && !palette.isEmpty() && applyToModel.size() < palette.size());
     }
     
-    private void updateRemoveButtonEnabled(){
+    protected void updateRemoveButtonEnabled(){
         applyRemoveButton.setEnabled(isEnabled() && !applyToModel.isEmpty() && 
                 !applyToList.isSelectionEmpty());
     }
