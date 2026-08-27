@@ -317,6 +317,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
             if (comp instanceof AbstractPaletteChangeDialog){
                 AbstractPaletteChangeDialog dialog = (AbstractPaletteChangeDialog) comp;
+                dialog.setPreviewShown(config.getRecolorPreviewShown(comp));
                 dialog.addPropertyChangeListener(previewHandler);
                 dialog.addChangeListener(previewHandler);
             }
@@ -328,8 +329,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         copySpritesToggle.setSelected(config.getPkmnSpritesAreCopied());
         config.getProgramBounds(PkmnHelper.this);
         recolorScaleSlider.setValue(config.getRecolorScaleIndex(recolorScaleSlider.getValue()));
-        recolorColorExchange.setPreviewShown(config.getRecolorPreviewShown(recolorColorExchange));
-        recolorBlendChange.setPreviewShown(config.getRecolorPreviewShown(recolorBlendChange));
         jTabbedPane1.setSelectedIndex(config.getSelectedTabIndex());
         
         gameProjectFolder = config.getGameProjectFolder();
