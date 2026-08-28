@@ -1720,7 +1720,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void browseSingleSprite(int mode){
-        String title = null;
+        String title;
         switch (mode){
             case(0):
                 title = "Select Footprint Sprite";
@@ -1739,48 +1739,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 break;
             case(5):
                 title = "Select Reference";
+                break;
+            default:
+                return;
         }
         if (browseSprites(title,false) == JFileChooser.APPROVE_OPTION){
             File file = spriteFC.getSelectedFile();
             if (file == null || !file.exists())
                 return;
             PkmnSpriteIcon icon;
-            switch(mode){
-                case(5):
+            switch(mode-singlePkmnSpritePanels.length){
+                case(0):
                     icon = loadPaletteSprite(file, null);
+                    if (icon == null)
+                        return;
+                    recolorReferencePanel.setIcon(icon);
+                    List<Color> palette = ((PalettePkmnSpriteIcon)icon).getPalette();
+                    recolorReferencePaletteColorChooser.setPalette(palette);
+                    blendReferencePaletteColorChooser.setPalette(palette);
                     break;
                 default:
                     icon = loadSprite(file);
-            }
-            if (icon != null){
-                switch (mode){
-                    case(0):
-                        footSpritePanel.setIcon(icon);
-                        updateSpriteApplyButton();
-                        break;
-                    case(1):
-                        shadowSpritePanel.setIcon(icon);
-                        updateSpriteApplyButton();
-                        break;
-                    case(2):
-                        eggSpritePanel.setIcon(icon);
-                        updateSpriteApplyButton();
-                        break;
-                    case(3):
-                        eggIconSpritePanel.setIcon(icon);
-                        updateSpriteApplyButton();
-                        break;
-                    case(4):
-                        eggCracksSpritePanel.setIcon(icon);
-                        updateSpriteApplyButton();
-                        break;
-                    case(5):
-                        recolorReferencePanel.setIcon(icon);
-                        List<Color> palette = ((PalettePkmnSpriteIcon)icon).getPalette();
-                        recolorReferencePaletteColorChooser.setPalette(palette);
-                        blendReferencePaletteColorChooser.setPalette(palette);
-                        break;
-                }
+                    if (icon == null)
+                        return;
+                    singlePkmnSpritePanels[mode].setIcon(icon);
+                    updateSpriteApplyButton();
             }
         }
     }
@@ -1791,69 +1774,43 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         switch (mode){
             case(0):
                 title = "Select Front Sprites";
-                list = fSpritePanel.getModelList();
                 break;
             case(1):
                 title = "Select Back Sprites";
-                list = bSpritePanel.getModelList();
                 break;
             case(2):
                 title = "Select Shiny Front Sprites";
-                list = fsSpritePanel.getModelList();
                 break;
             case(3):
                 title = "Select Shiny Back Sprites"; 
-                list = bsSpritePanel.getModelList();
                 break;
             case(4):
                 title = "Select Icons Sprites"; 
-                list = iSpritePanel.getModelList();
                 break;
             case(5):
                 title = "Select Shiny Icons Sprites"; 
-                list = isSpritePanel.getModelList();
                 break;
             case(6):
-                title = "Select Sprites To Recolor";
-                list = recolorSpriteListPanel.getModelList();
+                title = "Select Follower Sprites";
                 break;
             case(7):
-                title = "Select Follower Sprites";
-                list = followerSpritePanel.getModelList();
+                title = "Select Shiny Follower Sprites";
                 break;
             case(8):
-                title = "Select Shiny Follower Sprites";
-                list = followerShinySpritePanel.getModelList();
+                title = "Select Sprites To Recolor";
                 break;
             default:
                 return;
         }
-        if (list == null)
-            return;
         if (browseSprites(title,true) == JFileChooser.APPROVE_OPTION){
             File[] files = spriteFC.getSelectedFiles();
             if (files.length == 0)
                 return;
             Arrays.sort(files, fileNameComparator);
             Set<Color> palette;
-            switch (mode){
+            switch(mode-pkmnSpritePanels.length){
                 case(0):
-                case(1):
-                case(2):
-                case(3):
-                case(4):
-                case(5):
-                case(7):
-                case(8):
-                    for (File file : files){
-                        PkmnSpriteIcon icon = loadSprite(file);
-                        if (icon != null){
-                            list.add(icon);
-                        }
-                    }
-                    updateSpriteApplyButton();
-                    break;
-                case(6):
+                    list = recolorSpriteListPanel.getModelList();
                     palette = new LinkedHashSet<>(recolorSpritePalette);
                     for (File file : files){
                         PalettePkmnSpriteIcon icon = loadPaletteSprite(file,palette);
@@ -1866,12 +1823,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     }
                     palette.removeAll(recolorSpritePalette);
                     recolorSpritePalette.addAll(palette);
-                    
-//                    recolorSpriteUndo.clear();
-//                    recolorSpriteRedo.clear();
+
+    //                recolorSpriteUndo.clear();
+    //                recolorSpriteRedo.clear();
                     updateRecolorUndoRedoButtons();
+                    break;
+                default:
+                    list = pkmnSpritePanels[mode].getModelList();
+                    for (File file : files){
+                        PkmnSpriteIcon icon = loadSprite(file);
+                        if (icon != null){
+                            list.add(icon);
+                        }
+                    }
+                    updateSpriteApplyButton();
             }
-            
         }
     }
     
