@@ -129,6 +129,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     protected static final String FOLLOWER_SHINY_SPRITE_FOLDER = FOLLOWER_SPRITE_FOLDER + " shiny";
     
+    protected static final String FOLLOWER_LEVITATE_SPRITE_FOLDER = CHARACTER_GRAPHICS_FOLDER+File.separator+"Levitates";
+    
+    protected static final String FOLLOWER_LEVITATE_SHINY_SPRITE_FOLDER = FOLLOWER_LEVITATE_SPRITE_FOLDER+" Shiny";
+    
+    protected static final String FOLLOWER_SWIMMING_SPRITE_FOLDER = CHARACTER_GRAPHICS_FOLDER+File.separator+"Swimming";
+    
+    protected static final String FOLLOWER_SWIMMING_SHINY_SPRITE_FOLDER = FOLLOWER_SWIMMING_SPRITE_FOLDER+" Shiny";
+    
     protected static final String FEMALE_SPRITE_SUFFIX = "_female";
     
     protected static final String EGG_ICON_SPRITE_SUFFIX = "_icon";
