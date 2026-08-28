@@ -658,7 +658,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         pkmnFaintCriesAudioPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pkmnFaintCriesAudioPanelActionPerformed(evt);
+                pkmnCriesAudioPanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Faint Cries", pkmnFaintCriesAudioPanel);
@@ -1105,7 +1105,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
                     browseSingleSprite(index);
                     break;
-                case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
+                case(SinglePkmnSpriteNamePanel.CLEAR_ACTION_COMMAND):
                     if (index == singlePkmnSpritePanels.length){
                         recolorReferencePaletteColorChooser.getPalette().clear();
                         blendReferencePaletteColorChooser.getPalette().clear();
@@ -1320,12 +1320,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorReferencePanelPropertyChange
 
     private void pkmnCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnCriesAudioPanelActionPerformed
-        browseMultipleAudioFiles(0);
+        int index = -1;
+        for (int i = 0; i < pkmnAudioPanels.length && index < 0; i++){
+            if (pkmnAudioPanels[i] == evt.getSource())
+                index = i;
+        }
+        if (index >= 0){
+            switch(evt.getActionCommand()){
+                case(TempPkmnAudioFileListPanel.BROWSE_ACTION_COMMAND):
+                    browseMultipleAudioFiles(index);
+            }
+        }
     }//GEN-LAST:event_pkmnCriesAudioPanelActionPerformed
-
-    private void pkmnFaintCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnFaintCriesAudioPanelActionPerformed
-        browseMultipleAudioFiles(1);
-    }//GEN-LAST:event_pkmnFaintCriesAudioPanelActionPerformed
 
     private void gameLoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameLoadButtonActionPerformed
         File file = new File(gameFolderField.getText());
@@ -1847,36 +1853,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private void browseMultipleAudioFiles(int mode){
         String title;
-        List<File> list;
         switch (mode){
             case(0):
                 title = "Select Pokemon Cries";
-                list = pkmnCriesAudioPanel.getModelList();
                 break;
             case(1):
                 title = "Select Fainting Pokemon Cries";
-                list = pkmnFaintCriesAudioPanel.getModelList();
                 break;
             default:
                 return;
         }
-        if (list == null)
-            return;
         if (browseAudio(title,true) == JFileChooser.APPROVE_OPTION){
             File[] files = audioFC.getSelectedFiles();
             Arrays.sort(files, fileNameComparator);
-            switch (mode){
-                case(0):
-                case(1):
-//                    for (File file : files){
-//                        PkmnSpriteIcon icon = loadSprite(file);
-//                        if (icon != null){
-//                            list.add(icon);
-//                        }
-//                    }
-                    list.addAll(Arrays.asList(files));
-                    updateSpriteApplyButton();
-            }
+            pkmnAudioPanels[mode].getModelList().addAll(Arrays.asList(files));
+            updateSpriteApplyButton();
         }
     }
     
