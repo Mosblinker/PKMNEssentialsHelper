@@ -464,7 +464,7 @@
                 </Component>
                 <Container class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="footSpritePanel">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="footSpritePanelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="singleSpritePanelPropertyChange"/>
                   </Events>
                   <Constraints>
@@ -479,7 +479,7 @@
                 </Container>
                 <Container class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="shadowSpritePanel">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shadowSpritePanelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="singleSpritePanelPropertyChange"/>
                   </Events>
                   <Constraints>
@@ -494,7 +494,7 @@
                 </Container>
                 <Container class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="eggSpritePanel">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eggSpritePanelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="singleSpritePanelPropertyChange"/>
                   </Events>
                   <Constraints>
@@ -509,7 +509,7 @@
                 </Container>
                 <Container class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="eggIconSpritePanel">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eggIconSpritePanelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="singleSpritePanelPropertyChange"/>
                   </Events>
                   <Constraints>
@@ -524,7 +524,7 @@
                 </Container>
                 <Container class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="eggCracksSpritePanel">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eggCracksSpritePanelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="singleSpritePanelPropertyChange"/>
                   </Events>
                   <Constraints>
@@ -936,7 +936,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseWheelMoved" listener="pkmn.essentials.listeners.CtrlMouseWheelListener" parameters="java.awt.event.MouseWheelEvent" handler="recolorReferencePanelMouseWheelMoved"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorReferencePanelActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="recolorReferencePanelPropertyChange"/>
                   </Events>
                   <Constraints>

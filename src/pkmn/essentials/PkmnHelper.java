@@ -577,7 +577,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         footSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                footSpritePanelActionPerformed(evt);
+                singleSpritePanelActionPerformed(evt);
             }
         });
         footSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -589,7 +589,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         shadowSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                shadowSpritePanelActionPerformed(evt);
+                singleSpritePanelActionPerformed(evt);
             }
         });
         shadowSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -601,7 +601,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         eggSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eggSpritePanelActionPerformed(evt);
+                singleSpritePanelActionPerformed(evt);
             }
         });
         eggSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -613,7 +613,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         eggIconSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eggIconSpritePanelActionPerformed(evt);
+                singleSpritePanelActionPerformed(evt);
             }
         });
         eggIconSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -625,7 +625,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         eggCracksSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eggCracksSpritePanelActionPerformed(evt);
+                singleSpritePanelActionPerformed(evt);
             }
         });
         eggCracksSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -910,7 +910,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         recolorReferencePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorReferencePanelActionPerformed(evt);
+                singleSpritePanelActionPerformed(evt);
             }
         });
         recolorReferencePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1092,12 +1092,29 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void footSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_footSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                browseSingleSprite(0);
+    private void singleSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleSpritePanelActionPerformed
+        if (evt.getSource() instanceof SinglePkmnSpriteNamePanel){
+            int index = -1;
+            for (int i = 0; i < singlePkmnSpritePanels.length && index < 0; i++){
+                if (singlePkmnSpritePanels[i] == evt.getSource())
+                    index = i;
+            }
+            if (recolorReferencePanel == evt.getSource())
+                index = singlePkmnSpritePanels.length;
+            if (index >= 0){
+                switch(evt.getActionCommand()){
+                    case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
+                        browseSingleSprite(index);
+                        break;
+                    case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
+                        if (index == singlePkmnSpritePanels.length){
+                            recolorReferencePaletteColorChooser.getPalette().clear();
+                            blendReferencePaletteColorChooser.getPalette().clear();
+                        }
+                }
+            }
         }
-    }//GEN-LAST:event_footSpritePanelActionPerformed
+    }//GEN-LAST:event_singleSpritePanelActionPerformed
 
     private void bsSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsSpritePanelActionPerformed
         switch(evt.getActionCommand()){
@@ -1309,34 +1326,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         config.setRecolorPreviewShown(dialog, dialog.isPreviewShown());
     }
     
-    private void shadowSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shadowSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                browseSingleSprite(1);
-        }
-    }//GEN-LAST:event_shadowSpritePanelActionPerformed
-
-    private void eggSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eggSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                browseSingleSprite(2);
-        }
-    }//GEN-LAST:event_eggSpritePanelActionPerformed
-
-    private void eggIconSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eggIconSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                browseSingleSprite(3);
-        }
-    }//GEN-LAST:event_eggIconSpritePanelActionPerformed
-
-    private void eggCracksSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eggCracksSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                browseSingleSprite(4);
-        }
-    }//GEN-LAST:event_eggCracksSpritePanelActionPerformed
-
     private void recolorBlendChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorBlendChangeButtonActionPerformed
         showRecolorChangeDialog(recolorBlendChange);
     }//GEN-LAST:event_recolorBlendChangeButtonActionPerformed
@@ -1358,17 +1347,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         config.setSelectedTabIndex(jTabbedPane1.getSelectedIndex());
     }//GEN-LAST:event_jTabbedPane1StateChanged
-
-    private void recolorReferencePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorReferencePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                browseSingleSprite(5);
-                break;
-            case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
-                recolorReferencePaletteColorChooser.getPalette().clear();
-                blendReferencePaletteColorChooser.getPalette().clear();
-        }
-    }//GEN-LAST:event_recolorReferencePanelActionPerformed
 
     private void recolorReferencePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorReferencePanelPropertyChange
         // TODO add your handling code here:
