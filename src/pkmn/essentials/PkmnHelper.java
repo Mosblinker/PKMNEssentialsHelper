@@ -535,42 +535,42 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         fSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Front", fSpritePanel);
 
         bSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Back", bSpritePanel);
 
         fsSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fsSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Front Shiny", fsSpritePanel);
 
         bsSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bsSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Back Shiny", bsSpritePanel);
 
         iSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                iSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Icons", iSpritePanel);
 
         isSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                isSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Icons Shiny", isSpritePanel);
@@ -637,14 +637,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         followerSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                followerSpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Follower", followerSpritePanel);
 
         followerShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                followerShinySpritePanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane2.addTab("Follower Shiny", followerShinySpritePanel);
@@ -897,7 +897,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpriteListPanel.setFemaleToggleShown(false);
         recolorSpriteListPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorSpriteListPanelActionPerformed(evt);
+                multiSpritePanelActionPerformed(evt);
             }
         });
         jTabbedPane3.addTab("Sprites", recolorSpriteListPanel);
@@ -1093,56 +1093,49 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }// </editor-fold>//GEN-END:initComponents
 
     private void singleSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleSpritePanelActionPerformed
-        if (evt.getSource() instanceof SinglePkmnSpriteNamePanel){
-            int index = -1;
-            for (int i = 0; i < singlePkmnSpritePanels.length && index < 0; i++){
-                if (singlePkmnSpritePanels[i] == evt.getSource())
-                    index = i;
-            }
-            if (recolorReferencePanel == evt.getSource())
-                index = singlePkmnSpritePanels.length;
-            if (index >= 0){
-                switch(evt.getActionCommand()){
-                    case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
-                        browseSingleSprite(index);
-                        break;
-                    case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
-                        if (index == singlePkmnSpritePanels.length){
-                            recolorReferencePaletteColorChooser.getPalette().clear();
-                            blendReferencePaletteColorChooser.getPalette().clear();
-                        }
-                }
+        int index = -1;
+        for (int i = 0; i < singlePkmnSpritePanels.length && index < 0; i++){
+            if (singlePkmnSpritePanels[i] == evt.getSource())
+                index = i;
+        }
+        if (recolorReferencePanel == evt.getSource())
+            index = singlePkmnSpritePanels.length;
+        if (index >= 0){
+            switch(evt.getActionCommand()){
+                case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
+                    browseSingleSprite(index);
+                    break;
+                case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
+                    if (index == singlePkmnSpritePanels.length){
+                        recolorReferencePaletteColorChooser.getPalette().clear();
+                        blendReferencePaletteColorChooser.getPalette().clear();
+                    }
             }
         }
     }//GEN-LAST:event_singleSpritePanelActionPerformed
 
-    private void bsSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(3);
+    private void multiSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiSpritePanelActionPerformed
+        int index = -1;
+        for (int i = 0; i < pkmnSpritePanels.length && index < 0; i++){
+            if (pkmnSpritePanels[i] == evt.getSource())
+                index = i;
         }
-    }//GEN-LAST:event_bsSpritePanelActionPerformed
-
-    private void fsSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fsSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(2);
+        if (recolorSpriteListPanel == evt.getSource())
+            index = pkmnSpritePanels.length;
+        if (index >= 0){
+            switch(evt.getActionCommand()){
+                case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
+                    browseMultipleSprites(index);
+                    break;
+                case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
+                    if (index == pkmnSpritePanels.length){
+                        recolorSpritePalette.clear();
+                        recolorSpriteUndo.clear();
+                        recolorSpriteRedo.clear();
+                    }
+            }
         }
-    }//GEN-LAST:event_fsSpritePanelActionPerformed
-
-    private void bSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(1);
-        }
-    }//GEN-LAST:event_bSpritePanelActionPerformed
-
-    private void fSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(0);
-        }
-    }//GEN-LAST:event_fSpritePanelActionPerformed
+    }//GEN-LAST:event_multiSpritePanelActionPerformed
 
     private void spriteApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteApplyButtonActionPerformed
         File folder;
@@ -1162,20 +1155,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             // Set the file chooser's size in the config if it's saved
         config.storeFileChooser(spriteFolderFC);
     }//GEN-LAST:event_spriteFolderBrowseButtonActionPerformed
-
-    private void iSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(4);
-        }
-    }//GEN-LAST:event_iSpritePanelActionPerformed
-
-    private void isSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(5);
-        }
-    }//GEN-LAST:event_isSpritePanelActionPerformed
 
     private void spriteResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteResetButtonActionPerformed
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
@@ -1306,18 +1285,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorPaletteListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_recolorPaletteListValueChanged
         
     }//GEN-LAST:event_recolorPaletteListValueChanged
-
-    private void recolorSpriteListPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSpriteListPanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(6);
-                break;
-            case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
-                recolorSpritePalette.clear();
-                recolorSpriteUndo.clear();
-                recolorSpriteRedo.clear();
-        }
-    }//GEN-LAST:event_recolorSpriteListPanelActionPerformed
     
     private void setShownRecolorSprites(AbstractPaletteChangeDialog dialog){
         recolorSpriteListPanel.getModelList().clear();
@@ -1351,20 +1318,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorReferencePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorReferencePanelPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_recolorReferencePanelPropertyChange
-
-    private void followerSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerSpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(7);
-        }
-    }//GEN-LAST:event_followerSpritePanelActionPerformed
-
-    private void followerShinySpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerShinySpritePanelActionPerformed
-        switch(evt.getActionCommand()){
-            case(PkmnSpriteNameListPanel.BROWSE_ACTION_COMMAND):
-                browseMultipleSprites(8);
-        }
-    }//GEN-LAST:event_followerShinySpritePanelActionPerformed
 
     private void pkmnCriesAudioPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pkmnCriesAudioPanelActionPerformed
         browseMultipleAudioFiles(0);
