@@ -2750,17 +2750,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private Map<SinglePkmnSpriteNamePanel,File> singleSpriteFiles = new HashMap<>();
         
-        private File frontFolder;
-        private File backFolder;
-        private File frontShinyFolder;
-        private File backShinyFolder;
-        private File iconFolder;
-        private File iconShinyFolder;
+        private File[] multiSpriteFolders;
         private File footprintFolder;
         private File shadowFolder;
         private File eggFolder;
-        private File followerFolder;
-        private File followerShinyFolder;
         private File criesFolder;
         private File[] folders;
         
@@ -2785,31 +2778,25 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             try{
                 switch(stage){
                     case(0):
-                        frontFolder = new File(file,FRONT_SPRITE_FOLDER);
-                        backFolder = new File(file,BACK_SPRITE_FOLDER);
-                        frontShinyFolder = new File(file,FRONT_SHINY_SPRITE_FOLDER);
-                        backShinyFolder = new File(file,BACK_SHINY_SPRITE_FOLDER);
-                        iconFolder = new File(file,ICONS_SPRITE_FOLDER);
-                        iconShinyFolder = new File(file,ICONS_SHINY_SPRITE_FOLDER);
+                        multiSpriteFolders = new File[]{
+                            new File(file,FRONT_SPRITE_FOLDER),
+                            new File(file,BACK_SPRITE_FOLDER),
+                            new File(file,FRONT_SHINY_SPRITE_FOLDER),
+                            new File(file,BACK_SHINY_SPRITE_FOLDER),
+                            new File(file,ICONS_SPRITE_FOLDER),
+                            new File(file,ICONS_SHINY_SPRITE_FOLDER),
+                            new File(file,FOLLOWER_SPRITE_FOLDER),
+                            new File(file,FOLLOWER_SHINY_SPRITE_FOLDER)
+                        };
                         footprintFolder = new File(file,FOOTPRINTS_SPRITE_FOLDER);
                         shadowFolder = new File(file,SHADOW_SPRITE_FOLDER);
                         eggFolder = new File(file,EGG_SPRITE_FOLDER);
-                        followerFolder = new File(file,FOLLOWER_SPRITE_FOLDER);
-                        followerShinyFolder = new File(file,FOLLOWER_SHINY_SPRITE_FOLDER);
                         criesFolder = new File(file,PKMN_CRIES_FOLDER);
                         folders = new File[]{
                             footprintFolder,
                             shadowFolder,
                             eggFolder,
-                            criesFolder,
-                            frontFolder,
-                            backFolder,
-                            frontShinyFolder,
-                            backShinyFolder,
-                            iconFolder,
-                            iconShinyFolder,
-                            followerFolder,
-                            followerShinyFolder
+                            criesFolder
                         };
                         
                         List<File> allFiles = new ArrayList<>();
@@ -2898,7 +2885,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             renamedAudioFiles.put(panel.getModelList(), new HashMap<>());
                         }
                         
-                        progressBar.setMaximum(folders.length + allFiles.size() + tempFiles.size());
+                        progressBar.setMaximum(folders.length + multiSpriteFolders.length + allFiles.size() + tempFiles.size());
                         progressBar.setIndeterminate(false);
                         stage = 1;
                         index = 0;
@@ -2919,6 +2906,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     case(2):
                         for (int i = index; i < folders.length; i++, index++){
                             if (FilesExtended.createDirectories(PkmnHelper.this, folders[i])){
+                                progressBar.setValue(progressBar.getValue()+1);
+                            }
+                            else
+                                return false;
+                        }
+                        for (int i = index-folders.length; i < multiSpriteFolders.length; i++, index++){
+                            if (FilesExtended.createDirectories(PkmnHelper.this, multiSpriteFolders[i])){
                                 progressBar.setValue(progressBar.getValue()+1);
                             }
                             else
@@ -2953,7 +2947,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         index = 0;
                     default:
                         while (stage-6 < pkmnSpritePanels.length){
-                            File folder = folders[stage-2];
+                            File folder = multiSpriteFolders[stage-6];
                             List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-6].getListData();
                             Set<Integer> copied = copiedIndexes.get(stage-6);
                             int maleIndex = 0;
