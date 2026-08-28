@@ -101,19 +101,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private static final String PREFERENCE_NODE_NAME = 
             "mosblinker/essentials/PkmnEssentialsHelper";
     
-    protected static final String POKEMON_GRAPHICS_FOLDER = "Graphics"+File.separator+"Pokemon";
+    protected static final String GRAPHICS_FOLDER = "Graphics";
+    
+    protected static final String POKEMON_GRAPHICS_FOLDER = GRAPHICS_FOLDER+File.separator+"Pokemon";
     
     protected static final String FRONT_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Front";
     
     protected static final String BACK_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Back";
     
-    protected static final String FRONT_SHINY_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Front shiny";
+    protected static final String FRONT_SHINY_SPRITE_FOLDER = FRONT_SPRITE_FOLDER+" shiny";
     
-    protected static final String BACK_SHINY_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Back shiny";
+    protected static final String BACK_SHINY_SPRITE_FOLDER = BACK_SPRITE_FOLDER+" shiny";
     
     protected static final String ICONS_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Icons";
     
-    protected static final String ICONS_SHINY_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Icons shiny";
+    protected static final String ICONS_SHINY_SPRITE_FOLDER = ICONS_SPRITE_FOLDER+" shiny";
     
     protected static final String FOOTPRINTS_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Footprints";
     
@@ -121,7 +123,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     protected static final String EGG_SPRITE_FOLDER = POKEMON_GRAPHICS_FOLDER+File.separator+"Eggs";
     
-    protected static final String FOLLOWER_SPRITE_FOLDER = "Graphics"+File.separator+"Characters"+File.separator+"Followers";
+    protected static final String CHARACTER_GRAPHICS_FOLDER = GRAPHICS_FOLDER+File.separator+"Characters";
+    
+    protected static final String FOLLOWER_SPRITE_FOLDER = CHARACTER_GRAPHICS_FOLDER+File.separator+"Followers";
     
     protected static final String FOLLOWER_SHINY_SPRITE_FOLDER = FOLLOWER_SPRITE_FOLDER + " shiny";
     
