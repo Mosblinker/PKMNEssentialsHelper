@@ -20,6 +20,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -254,15 +256,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             iSpritePanel,isSpritePanel,
             followerSpritePanel,followerShinySpritePanel
         };
-        for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
+        for (PkmnSpriteNameListPanel panel : pkmnSpritePanels){
             panel.addListDataListener(handler);
+        }
         singlePkmnSpritePanels = new SinglePkmnSpriteNamePanel[]{
             footSpritePanel,shadowSpritePanel,
             eggSpritePanel,eggIconSpritePanel,
             eggCracksSpritePanel
         };
+        for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels){
+            panel.addActionListener(handler);
+        }
         
         recolorSpriteListPanel.addListDataListener(handler);
+        recolorReferencePanel.addActionListener(handler);
         recolorSpritePalette.addListDataListener(handler);
         gameFolderField.getDocument().addDocumentListener(handler);
         
@@ -580,21 +587,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 footSpritePanelActionPerformed(evt);
             }
         });
-        footSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                singleSpritePanelPropertyChange(evt);
-            }
-        });
         jTabbedPane2.addTab("Footprints", footSpritePanel);
 
         shadowSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 shadowSpritePanelActionPerformed(evt);
-            }
-        });
-        shadowSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                singleSpritePanelPropertyChange(evt);
             }
         });
         jTabbedPane2.addTab("Shadow", shadowSpritePanel);
@@ -604,11 +601,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 eggSpritePanelActionPerformed(evt);
             }
         });
-        eggSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                singleSpritePanelPropertyChange(evt);
-            }
-        });
         jTabbedPane2.addTab("Egg", eggSpritePanel);
 
         eggIconSpritePanel.addActionListener(new java.awt.event.ActionListener() {
@@ -616,21 +608,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 eggIconSpritePanelActionPerformed(evt);
             }
         });
-        eggIconSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                singleSpritePanelPropertyChange(evt);
-            }
-        });
         jTabbedPane2.addTab("Egg Icon", eggIconSpritePanel);
 
         eggCracksSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eggCracksSpritePanelActionPerformed(evt);
-            }
-        });
-        eggCracksSpritePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                singleSpritePanelPropertyChange(evt);
             }
         });
         jTabbedPane2.addTab("Egg Hatching", eggCracksSpritePanel);
@@ -911,11 +893,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorReferencePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recolorReferencePanelActionPerformed(evt);
-            }
-        });
-        recolorReferencePanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                recolorReferencePanelPropertyChange(evt);
             }
         });
         jTabbedPane3.addTab("Reference", recolorReferencePanel);
@@ -1220,13 +1197,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         config.setPkmnSpritesAreCopied(copySpritesToggle.isSelected());
     }//GEN-LAST:event_copySpritesToggleActionPerformed
 
-    private void singleSpritePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_singleSpritePanelPropertyChange
-        switch(evt.getPropertyName()){
-            case(SinglePkmnSpriteNamePanel.ICON_PROPERTY_CHANGED):
-                updateSpriteApplyButton();
-        }
-    }//GEN-LAST:event_singleSpritePanelPropertyChange
-
     private void gameBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameBrowseButtonActionPerformed
         if (browseFiles(gameFolderFC.getDialogTitle(),false,gameFolderFC) == JFileChooser.APPROVE_OPTION){
 //            File file = FilesExtended.removeQuotations(gameFolderFC.getSelectedFile())
@@ -1369,10 +1339,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 blendReferencePaletteColorChooser.getPalette().clear();
         }
     }//GEN-LAST:event_recolorReferencePanelActionPerformed
-
-    private void recolorReferencePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_recolorReferencePanelPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recolorReferencePanelPropertyChange
 
     private void followerSpritePanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_followerSpritePanelActionPerformed
         switch(evt.getActionCommand()){
@@ -2315,7 +2281,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateGameProjectFolderButtons();
     }
     
-    private class Handler implements DocumentListener, ListDataListener{
+    private class Handler implements DocumentListener, ListDataListener, ActionListener{
         @Override
         public void insertUpdate(DocumentEvent evt) {
             documentUpdate(evt);
@@ -2354,6 +2320,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 updateRecolorSaveButton();
             } else 
                 updateSpriteApplyButton();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            if (evt.getSource() instanceof SinglePkmnSpriteNamePanel){
+                int index = -1;
+                for (int i = 0; i < singlePkmnSpritePanels.length && index < 0; i++){
+                    if (singlePkmnSpritePanels[i] == evt.getSource())
+                        index = i;
+                }
+                if (recolorReferencePanel == evt.getSource())
+                    index = singlePkmnSpritePanels.length;
+                if (index >= 0){
+                    switch(evt.getActionCommand()){
+                        case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
+                            browseSingleSprite(index);
+                            break;
+                        case(PkmnSpriteNameListPanel.CLEAR_ACTION_COMMAND):
+                            if (index == singlePkmnSpritePanels.length){
+                                recolorReferencePaletteColorChooser.getPalette().clear();
+                                blendReferencePaletteColorChooser.getPalette().clear();
+                            }
+                    }
+                }
+            }
         }
     }
     
