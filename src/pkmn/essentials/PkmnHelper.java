@@ -252,7 +252,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             fSpritePanel,bSpritePanel,
             fsSpritePanel,bsSpritePanel,
             iSpritePanel,isSpritePanel,
-            followerSpritePanel,followerShinySpritePanel
+            followerSpritePanel,followerShinySpritePanel,
+            levitateSpritePanel,levitateShinySpritePanel,
+            swimmingSpritePanel,swimmingShinySpritePanel
         };
         for (PkmnSpriteNameListPanel panel : pkmnSpritePanels)
             panel.addListDataListener(handler);
@@ -404,6 +406,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         eggCracksSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         followerSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         followerShinySpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        levitateSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        levitateShinySpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        swimmingSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
+        swimmingShinySpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         pkmnCriesAudioPanel = new pkmn.essentials.audio.TempPkmnAudioFileListPanel();
         pkmnFaintCriesAudioPanel = new pkmn.essentials.audio.TempPkmnAudioFileListPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -648,6 +654,34 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jTabbedPane2.addTab("Follower Shiny", followerShinySpritePanel);
+
+        levitateSpritePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiSpritePanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Levitate", levitateSpritePanel);
+
+        levitateShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiSpritePanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Levitate Shiny", levitateShinySpritePanel);
+
+        swimmingSpritePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiSpritePanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Swimming", swimmingSpritePanel);
+
+        swimmingShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiSpritePanelActionPerformed(evt);
+            }
+        });
+        jTabbedPane2.addTab("Swimming Shiny", swimmingShinySpritePanel);
 
         pkmnCriesAudioPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -950,7 +984,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                     .addComponent(jTabbedPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1803,6 +1837,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 title = "Select Shiny Follower Sprites";
                 break;
             case(8):
+                title = "Select Levitating Sprites";
+                break;
+            case(9):
+                title = "Select Shiny Levitating Sprites";
+                break;
+            case(10):
+                title = "Select Swimming Sprites";
+                break;
+            case(11):
+                title = "Select Shiny Swimming Sprites";
+                break;
+            case(12):
                 title = "Select Sprites To Recolor";
                 break;
             default:
@@ -2144,6 +2190,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private pkmn.essentials.sprite.PkmnSpriteNameListPanel levitateShinySpritePanel;
+    private pkmn.essentials.sprite.PkmnSpriteNameListPanel levitateSpritePanel;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnCriesAudioPanel;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnFaintCriesAudioPanel;
     private javax.swing.JMenuItem printPBSTest;
@@ -2187,6 +2235,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private components.JFileDisplayPanel spritePreview;
     private javax.swing.JButton spriteResetButton;
     private javax.swing.JCheckBox spriteUseGameToggle;
+    private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingShinySpritePanel;
+    private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
     // End of variables declaration//GEN-END:variables
 
     private void documentUpdate(DocumentEvent evt){
@@ -2786,7 +2836,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             new File(file,ICONS_SPRITE_FOLDER),
                             new File(file,ICONS_SHINY_SPRITE_FOLDER),
                             new File(file,FOLLOWER_SPRITE_FOLDER),
-                            new File(file,FOLLOWER_SHINY_SPRITE_FOLDER)
+                            new File(file,FOLLOWER_SHINY_SPRITE_FOLDER),
+                            new File(file,FOLLOWER_LEVITATE_SPRITE_FOLDER),
+                            new File(file,FOLLOWER_LEVITATE_SHINY_SPRITE_FOLDER),
+                            new File(file,FOLLOWER_SWIMMING_SPRITE_FOLDER),
+                            new File(file,FOLLOWER_SWIMMING_SHINY_SPRITE_FOLDER)
                         };
                         footprintFolder = new File(file,FOOTPRINTS_SPRITE_FOLDER);
                         shadowFolder = new File(file,SHADOW_SPRITE_FOLDER);
