@@ -401,6 +401,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         isSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         footSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         shadowSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        eggSprites = new javax.swing.JPanel();
         eggSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         eggIconSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         eggCracksSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
@@ -605,6 +606,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         jTabbedPane2.addTab("Shadow", shadowSpritePanel);
 
+        eggSprites.setLayout(new java.awt.GridLayout(1, 0, 6, 0));
+
+        eggSpritePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Egg"));
         eggSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleSpritePanelActionPerformed(evt);
@@ -615,8 +619,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 singleSpritePanelPropertyChange(evt);
             }
         });
-        jTabbedPane2.addTab("Egg", eggSpritePanel);
+        eggSprites.add(eggSpritePanel);
 
+        eggIconSpritePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Egg Icon"));
         eggIconSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleSpritePanelActionPerformed(evt);
@@ -627,8 +632,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 singleSpritePanelPropertyChange(evt);
             }
         });
-        jTabbedPane2.addTab("Egg Icon", eggIconSpritePanel);
+        eggSprites.add(eggIconSpritePanel);
 
+        eggCracksSpritePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Egg Hatching"));
         eggCracksSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleSpritePanelActionPerformed(evt);
@@ -639,7 +645,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 singleSpritePanelPropertyChange(evt);
             }
         });
-        jTabbedPane2.addTab("Egg Hatching", eggCracksSpritePanel);
+        eggSprites.add(eggCracksSpritePanel);
+
+        jTabbedPane2.addTab("Eggs", eggSprites);
 
         followerSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2158,6 +2166,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggCracksSpritePanel;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggIconSpritePanel;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggSpritePanel;
+    private javax.swing.JPanel eggSprites;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel fSpritePanel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
