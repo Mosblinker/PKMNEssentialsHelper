@@ -405,6 +405,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         eggSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         eggIconSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         eggCracksSpritePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        followerPanel = new javax.swing.JPanel();
+        followerTabs = new javax.swing.JTabbedPane();
         followerSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         followerShinySpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         levitateSpritePanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
@@ -649,47 +651,53 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         jTabbedPane2.addTab("Eggs", eggSprites);
 
+        followerPanel.setLayout(new java.awt.BorderLayout());
+
         followerSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);
             }
         });
-        jTabbedPane2.addTab("Follower", followerSpritePanel);
+        followerTabs.addTab("Follower", followerSpritePanel);
 
         followerShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);
             }
         });
-        jTabbedPane2.addTab("Follower Shiny", followerShinySpritePanel);
+        followerTabs.addTab("Follower Shiny", followerShinySpritePanel);
 
         levitateSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);
             }
         });
-        jTabbedPane2.addTab("Levitate", levitateSpritePanel);
+        followerTabs.addTab("Levitate", levitateSpritePanel);
 
         levitateShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);
             }
         });
-        jTabbedPane2.addTab("Levitate Shiny", levitateShinySpritePanel);
+        followerTabs.addTab("Levitate Shiny", levitateShinySpritePanel);
 
         swimmingSpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);
             }
         });
-        jTabbedPane2.addTab("Swimming", swimmingSpritePanel);
+        followerTabs.addTab("Swimming", swimmingSpritePanel);
 
         swimmingShinySpritePanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);
             }
         });
-        jTabbedPane2.addTab("Swimming Shiny", swimmingShinySpritePanel);
+        followerTabs.addTab("Swimming Shiny", swimmingShinySpritePanel);
+
+        followerPanel.add(followerTabs, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane2.addTab("Follower Sprites", followerPanel);
 
         pkmnCriesAudioPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -992,7 +1000,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                     .addComponent(jTabbedPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -2172,8 +2180,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.JPanel followerPanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerSpritePanel;
+    private javax.swing.JTabbedPane followerTabs;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel footSpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel fsSpritePanel;
     private javax.swing.JButton gameBrowseButton;

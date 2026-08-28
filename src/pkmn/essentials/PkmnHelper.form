@@ -554,78 +554,102 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="followerSpritePanel">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
-                  </Events>
+                <Container class="javax.swing.JPanel" name="followerPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Follower">
-                        <Property name="tabTitle" type="java.lang.String" value="Follower"/>
+                      <JTabbedPaneConstraints tabName="Follower Sprites">
+                        <Property name="tabTitle" type="java.lang.String" value="Follower Sprites"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
-                </Component>
-                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="followerShinySpritePanel">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Follower Shiny">
-                        <Property name="tabTitle" type="java.lang.String" value="Follower Shiny"/>
-                      </JTabbedPaneConstraints>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="levitateSpritePanel">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Levitate">
-                        <Property name="tabTitle" type="java.lang.String" value="Levitate"/>
-                      </JTabbedPaneConstraints>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="levitateShinySpritePanel">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Levitate Shiny">
-                        <Property name="tabTitle" type="java.lang.String" value="Levitate Shiny"/>
-                      </JTabbedPaneConstraints>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="swimmingSpritePanel">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Swimming">
-                        <Property name="tabTitle" type="java.lang.String" value="Swimming"/>
-                      </JTabbedPaneConstraints>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="swimmingShinySpritePanel">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Swimming Shiny">
-                        <Property name="tabTitle" type="java.lang.String" value="Swimming Shiny"/>
-                      </JTabbedPaneConstraints>
-                    </Constraint>
-                  </Constraints>
-                </Component>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JTabbedPane" name="followerTabs">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="followerSpritePanel">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Follower">
+                                <Property name="tabTitle" type="java.lang.String" value="Follower"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="followerShinySpritePanel">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Follower Shiny">
+                                <Property name="tabTitle" type="java.lang.String" value="Follower Shiny"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="levitateSpritePanel">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Levitate">
+                                <Property name="tabTitle" type="java.lang.String" value="Levitate"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="levitateShinySpritePanel">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Levitate Shiny">
+                                <Property name="tabTitle" type="java.lang.String" value="Levitate Shiny"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="swimmingSpritePanel">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Swimming">
+                                <Property name="tabTitle" type="java.lang.String" value="Swimming"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="pkmn.essentials.sprite.PkmnSpriteNameListPanel" name="swimmingShinySpritePanel">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Swimming Shiny">
+                                <Property name="tabTitle" type="java.lang.String" value="Swimming Shiny"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
                 <Component class="pkmn.essentials.audio.TempPkmnAudioFileListPanel" name="pkmnCriesAudioPanel">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pkmnCriesAudioPanelActionPerformed"/>
@@ -754,7 +778,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel3" pref="412" max="32767" attributes="0"/>
+                          <Component id="jPanel3" pref="424" max="32767" attributes="0"/>
                           <Component id="jTabbedPane3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
