@@ -45,6 +45,8 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     public static final String SAVE_ACTION_COMMAND = "Save";
     
+    public static final String EDIT_IMAGE_ACTION_COMMAND = "EditImage";
+    
     private static final Double[] DEFAULT_ZOOM_VALUES = {
         8.0, 4.0, 2.0, 1.0, 0.5, 0.25, 0.125
     };
@@ -113,6 +115,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         pointSaveButton = new javax.swing.JButton();
         pointRemoveButton = new javax.swing.JButton();
         pointCoordsField = new javax.swing.JTextField();
+        editImageButton = new javax.swing.JButton();
 
         jLabel4.setLabelFor(selectCombo);
         jLabel4.setText("Region:");
@@ -374,6 +377,15 @@ public class TownMapEditor extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        editImageButton.setText("Edit Image");
+        editImageButton.setActionCommand(EDIT_IMAGE_ACTION_COMMAND);
+        editImageButton.setEnabled(false);
+        editImageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editImageButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -403,7 +415,9 @@ public class TownMapEditor extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(filenameEditButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(imageBrowseButton))
+                                .addComponent(imageBrowseButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editImageButton))
                             .addComponent(nameField)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -443,7 +457,8 @@ public class TownMapEditor extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(imageBrowseButton)
                     .addComponent(filenameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filenameEditButton))
+                    .addComponent(filenameEditButton)
+                    .addComponent(editImageButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -652,6 +667,10 @@ public class TownMapEditor extends javax.swing.JPanel {
         updateSaveButtonEnabled();
         selectCombo.repaint();
     }//GEN-LAST:event_mapChangeButtonActionPerformed
+
+    private void editImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editImageButtonActionPerformed
+        fireActionPerformed(evt);
+    }//GEN-LAST:event_editImageButtonActionPerformed
     
     public int getSelectedIndex(){
         return selectCombo.getSelectedIndex();
@@ -946,6 +965,7 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     private void updateTownMapControls(){
         addButton.setEnabled(isPBSDataEnabled());
+        editImageButton.setEnabled(addButton.isEnabled());
         selectCombo.setEnabled(addButton.isEnabled() && !selectComboModel.isEmpty());
         updateSelectionEnabled();
         updateFileNameElements();
@@ -979,10 +999,10 @@ public class TownMapEditor extends javax.swing.JPanel {
     private int squareRows = -1;
     
     private int squareCols = -1;
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private components.JThumbnailLabel displayLabel;
+    private javax.swing.JButton editImageButton;
     private javax.swing.JComboBox<String> filenameCombo;
     private javax.swing.JButton filenameEditButton;
     private javax.swing.JSpinner flyIDSpinner;
