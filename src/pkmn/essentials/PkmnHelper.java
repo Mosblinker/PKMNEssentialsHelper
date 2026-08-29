@@ -2612,9 +2612,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void updateTownMapImageElements(){
-        townMapSquareWidthSpinner.setEnabled(isEnabled() && townMapDisplayLabel.getIcon() != null);
-        townMapSquareHeightSpinner.setEnabled(townMapSquareWidthSpinner.isEnabled());
-        townMapScaleCombo.setEnabled(townMapSquareWidthSpinner.isEnabled());
+        townMapScaleCombo.setEnabled(isEnabled() && townMapDisplayLabel.getIcon() != null);
+//        townMapSquareWidthSpinner.setEnabled(townMapScaleCombo.isEnabled());
+//        townMapSquareHeightSpinner.setEnabled(townMapSquareWidthSpinner.isEnabled());
     }
     
     private void updateTownMapChangeButton(){
