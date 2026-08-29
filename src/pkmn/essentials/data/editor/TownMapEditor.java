@@ -379,6 +379,12 @@ public class TownMapEditor extends javax.swing.JPanel {
         PBSData old = pbsData;
         pbsData = data;
         firePropertyChange("pbsData",old,data);
+        filenameComboModel.clear();
+        filenameComboModel.add(null);
+        filenameComboModel.addAll(data.getRegionMapFiles().keySet());
+        selectComboModel.clear();
+        selectComboModel.addAll(data.getRegionMaps());
+        selectCombo.setSelectedIndex(0);
     }
     
     /**
