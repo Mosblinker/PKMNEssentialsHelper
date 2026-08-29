@@ -641,7 +641,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             map.setName(nameField.getText());
             map.setFileName(getSelectedRegionFileName());
         }
-        updateSaveButton();
+        updateSaveButtonEnabled();
     }//GEN-LAST:event_mapChangeButtonActionPerformed
     
     public int getSelectedIndex(){
@@ -898,7 +898,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         updatePointRemoveButton();
     }
     
-    public void updateSaveButtonEnabled(){
+    private void updateSaveButtonEnabled(){
         boolean enabled = isPBSDataEnabled() && !selectComboModel.isEmpty();
         if (pbsData != null){
             for (TownMap map : pbsData.getRegionMaps())
