@@ -12,6 +12,7 @@ import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import pkmn.essentials.PercentRenderer;
+import pkmn.essentials.data.PBSData;
 import pkmn.essentials.data.TownMap;
 
 /**
@@ -45,109 +46,109 @@ public class TownMapEditor extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        townMapSelectCombo = new javax.swing.JComboBox<>();
-        townMapAddButton = new javax.swing.JButton();
-        townMapRemoveButton = new javax.swing.JButton();
-        townMapSaveButton = new javax.swing.JButton();
-        townMapScrollPane = new javax.swing.JScrollPane();
-        townMapDisplayLabel = new components.JThumbnailLabel();
+        selectCombo = new javax.swing.JComboBox<>();
+        addButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        displayLabel = new components.JThumbnailLabel();
         jLabel5 = new javax.swing.JLabel();
-        townMapNameField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        townMapFilenameCombo = new javax.swing.JComboBox<>();
-        townMapFilenameEditButton = new javax.swing.JButton();
-        townMapImageBrowseButton = new javax.swing.JButton();
+        filenameCombo = new javax.swing.JComboBox<>();
+        filenameEditButton = new javax.swing.JButton();
+        imageBrowseButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        townMapSquareWidthSpinner = new javax.swing.JSpinner();
+        squareWidthSpinner = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
-        townMapSquareHeightSpinner = new javax.swing.JSpinner();
+        squareHeightSpinner = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
-        townMapScaleCombo = new javax.swing.JComboBox<>();
-        townMapChangeButton = new javax.swing.JButton();
+        scaleCombo = new javax.swing.JComboBox<>();
+        mapChangeButton = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        townMapPointNameField = new javax.swing.JTextField();
+        pointNameField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        townMapPointPoiField = new javax.swing.JTextField();
+        pointPoiField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        townMapFlyIDSpinner = new javax.swing.JSpinner();
+        flyIDSpinner = new javax.swing.JSpinner();
         jLabel15 = new javax.swing.JLabel();
-        townMapFlyXSpinner = new javax.swing.JSpinner();
+        flyXSpinner = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
-        townMapFlyYSpinner = new javax.swing.JSpinner();
-        townMapSwitchSpinner = new javax.swing.JSpinner();
-        townMapFlyToggle = new javax.swing.JCheckBox();
-        townMapGameSwitchToggle = new javax.swing.JCheckBox();
-        townMapPointSaveButton = new javax.swing.JButton();
-        townMapPointRemoveButton = new javax.swing.JButton();
-        townMapCoordsField = new javax.swing.JTextField();
+        flyYSpinner = new javax.swing.JSpinner();
+        switchSpinner = new javax.swing.JSpinner();
+        flyToggle = new javax.swing.JCheckBox();
+        mapGameSwitchToggle = new javax.swing.JCheckBox();
+        mapPointSaveButton = new javax.swing.JButton();
+        pointRemoveButton = new javax.swing.JButton();
+        pointCoordsField = new javax.swing.JTextField();
 
         jLabel4.setText("Region:");
 
-        townMapSelectCombo.setModel(townMapSelectComboModel);
-        townMapSelectCombo.setEnabled(false);
-        townMapSelectCombo.setRenderer(new TownMapCellRenderer());
+        selectCombo.setModel(townMapSelectComboModel);
+        selectCombo.setEnabled(false);
+        selectCombo.setRenderer(new TownMapCellRenderer());
 
-        townMapAddButton.setText("Add");
-        townMapAddButton.setEnabled(false);
+        addButton.setText("Add");
+        addButton.setEnabled(false);
 
-        townMapRemoveButton.setText("Remove");
-        townMapRemoveButton.setEnabled(false);
+        removeButton.setText("Remove");
+        removeButton.setEnabled(false);
 
-        townMapSaveButton.setText("Save");
-        townMapSaveButton.setActionCommand(SAVE_ACTION_COMMAND);
-        townMapSaveButton.setEnabled(false);
-        townMapSaveButton.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("Save");
+        saveButton.setActionCommand(SAVE_ACTION_COMMAND);
+        saveButton.setEnabled(false);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                townMapSaveButtonActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
-        townMapDisplayLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
-        townMapDisplayLabel.setThumbnailBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        townMapScrollPane.setViewportView(townMapDisplayLabel);
+        displayLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
+        displayLabel.setThumbnailBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        scrollPane.setViewportView(displayLabel);
 
         jLabel5.setText("Region Name:");
 
-        townMapNameField.setEnabled(false);
+        nameField.setEnabled(false);
 
         jLabel6.setText("Map Filename:");
 
-        townMapFilenameCombo.setModel(townMapFilenameComboModel);
-        townMapFilenameCombo.setEnabled(false);
+        filenameCombo.setModel(townMapFilenameComboModel);
+        filenameCombo.setEnabled(false);
 
-        townMapFilenameEditButton.setText("Edit");
-        townMapFilenameEditButton.setEnabled(false);
+        filenameEditButton.setText("Edit");
+        filenameEditButton.setEnabled(false);
 
-        townMapImageBrowseButton.setText("Browse For image");
-        townMapImageBrowseButton.setActionCommand(BROWSE_ACTION_COMMAND);
-        townMapImageBrowseButton.setEnabled(false);
-        townMapImageBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+        imageBrowseButton.setText("Browse For image");
+        imageBrowseButton.setActionCommand(BROWSE_ACTION_COMMAND);
+        imageBrowseButton.setEnabled(false);
+        imageBrowseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                townMapImageBrowseButtonActionPerformed(evt);
+                imageBrowseButtonActionPerformed(evt);
             }
         });
 
         jLabel7.setText("Square Size (Pixels):");
 
-        townMapSquareWidthSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
-        townMapSquareWidthSpinner.setEnabled(false);
+        squareWidthSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
+        squareWidthSpinner.setEnabled(false);
 
         jLabel12.setText("x");
 
-        townMapSquareHeightSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
-        townMapSquareHeightSpinner.setEnabled(false);
+        squareHeightSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
+        squareHeightSpinner.setEnabled(false);
 
         jLabel11.setText("Scale:");
 
-        townMapScaleCombo.setModel(townMapScaleModel);
-        townMapScaleCombo.setSelectedItem(1.0);
-        townMapScaleCombo.setEnabled(false);
-        townMapScaleCombo.setRenderer(new PercentRenderer());
+        scaleCombo.setModel(townMapScaleModel);
+        scaleCombo.setSelectedItem(1.0);
+        scaleCombo.setEnabled(false);
+        scaleCombo.setRenderer(new PercentRenderer());
 
-        townMapChangeButton.setText("Change");
-        townMapChangeButton.setEnabled(false);
+        mapChangeButton.setText("Change");
+        mapChangeButton.setEnabled(false);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Point"));
 
@@ -155,43 +156,43 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         jLabel9.setText("Name:");
 
-        townMapPointNameField.setEnabled(false);
+        pointNameField.setEnabled(false);
 
         jLabel10.setText("Point of Interest:");
 
-        townMapPointPoiField.setEnabled(false);
+        pointPoiField.setEnabled(false);
 
         jLabel14.setText("Map ID:");
 
-        townMapFlyIDSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        townMapFlyIDSpinner.setEnabled(false);
+        flyIDSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        flyIDSpinner.setEnabled(false);
 
         jLabel15.setText(", Position:");
 
-        townMapFlyXSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        townMapFlyXSpinner.setEnabled(false);
+        flyXSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        flyXSpinner.setEnabled(false);
 
         jLabel17.setText(",");
 
-        townMapFlyYSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        townMapFlyYSpinner.setEnabled(false);
+        flyYSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        flyYSpinner.setEnabled(false);
 
-        townMapSwitchSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        townMapSwitchSpinner.setEnabled(false);
+        switchSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        switchSpinner.setEnabled(false);
 
-        townMapFlyToggle.setText("Fly Destination: ");
-        townMapFlyToggle.setEnabled(false);
+        flyToggle.setText("Fly Destination: ");
+        flyToggle.setEnabled(false);
 
-        townMapGameSwitchToggle.setText("Game Switch:");
-        townMapGameSwitchToggle.setEnabled(false);
+        mapGameSwitchToggle.setText("Game Switch:");
+        mapGameSwitchToggle.setEnabled(false);
 
-        townMapPointSaveButton.setText("Save");
-        townMapPointSaveButton.setEnabled(false);
+        mapPointSaveButton.setText("Save");
+        mapPointSaveButton.setEnabled(false);
 
-        townMapPointRemoveButton.setText("Remove");
-        townMapPointRemoveButton.setEnabled(false);
+        pointRemoveButton.setText("Remove");
+        pointRemoveButton.setEnabled(false);
 
-        townMapCoordsField.setEditable(false);
+        pointCoordsField.setEditable(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -201,33 +202,33 @@ public class TownMapEditor extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(jLabel9)
-                    .addComponent(townMapFlyToggle)
+                    .addComponent(flyToggle)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(townMapPointNameField)
-                    .addComponent(townMapPointPoiField)
+                    .addComponent(pointNameField)
+                    .addComponent(pointPoiField)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapFlyIDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(flyIDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapFlyXSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(flyXSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapFlyYSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(flyYSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(townMapGameSwitchToggle)
+                        .addComponent(mapGameSwitchToggle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(townMapSwitchSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(switchSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                        .addComponent(townMapPointSaveButton)
+                        .addComponent(mapPointSaveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapPointRemoveButton))
-                    .addComponent(townMapCoordsField))
+                        .addComponent(pointRemoveButton))
+                    .addComponent(pointCoordsField))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -235,28 +236,28 @@ public class TownMapEditor extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(townMapCoordsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pointCoordsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(townMapPointNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pointNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(townMapPointPoiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pointPoiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(townMapFlyIDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flyIDSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
-                    .addComponent(townMapFlyXSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flyXSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(townMapFlyYSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapSwitchSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapFlyToggle)
-                    .addComponent(townMapGameSwitchToggle)
-                    .addComponent(townMapPointSaveButton)
-                    .addComponent(townMapPointRemoveButton))
+                    .addComponent(flyYSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(switchSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flyToggle)
+                    .addComponent(mapGameSwitchToggle)
+                    .addComponent(mapPointSaveButton)
+                    .addComponent(pointRemoveButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -270,14 +271,14 @@ public class TownMapEditor extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapSelectCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(selectCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapAddButton)
+                        .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapRemoveButton)
+                        .addComponent(removeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapSaveButton))
-                    .addComponent(townMapScrollPane)
+                        .addComponent(saveButton))
+                    .addComponent(scrollPane)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -285,26 +286,26 @@ public class TownMapEditor extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(townMapFilenameCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(filenameCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(townMapFilenameEditButton)
+                                .addComponent(filenameEditButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(townMapImageBrowseButton))
-                            .addComponent(townMapNameField)))
+                                .addComponent(imageBrowseButton))
+                            .addComponent(nameField)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapSquareWidthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(squareWidthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(squareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapScaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapChangeButton))
+                        .addComponent(mapChangeButton))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -314,30 +315,30 @@ public class TownMapEditor extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(townMapSelectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapRemoveButton)
-                    .addComponent(townMapAddButton)
-                    .addComponent(townMapSaveButton))
+                    .addComponent(selectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeButton)
+                    .addComponent(addButton)
+                    .addComponent(saveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(townMapScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(townMapNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(townMapImageBrowseButton)
-                    .addComponent(townMapFilenameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapFilenameEditButton))
+                    .addComponent(imageBrowseButton)
+                    .addComponent(filenameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filenameEditButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(townMapSquareWidthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(squareWidthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapChangeButton)
-                    .addComponent(townMapScaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(squareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mapChangeButton)
+                    .addComponent(scaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,13 +346,13 @@ public class TownMapEditor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void townMapSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSaveButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         fireActionPerformed(evt);
-    }//GEN-LAST:event_townMapSaveButtonActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
+    private void imageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageBrowseButtonActionPerformed
         fireActionPerformed(evt);
-    }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
+    }//GEN-LAST:event_imageBrowseButtonActionPerformed
     
     
     
@@ -359,6 +360,10 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     
     
+    
+    public PBSData getPBSData(){
+        return pbsData;
+    }
     
     /**
      * This adds the given {@code ActionListener} to this panel.
@@ -423,7 +428,18 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     private ArrayComboBoxModel<Double> townMapScaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
     
+    private PBSData pbsData = null;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private components.JThumbnailLabel displayLabel;
+    private javax.swing.JComboBox<String> filenameCombo;
+    private javax.swing.JButton filenameEditButton;
+    private javax.swing.JSpinner flyIDSpinner;
+    private javax.swing.JCheckBox flyToggle;
+    private javax.swing.JSpinner flyXSpinner;
+    private javax.swing.JSpinner flyYSpinner;
+    private javax.swing.JButton imageBrowseButton;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -437,31 +453,22 @@ public class TownMapEditor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JButton townMapAddButton;
-    private javax.swing.JButton townMapChangeButton;
-    private javax.swing.JTextField townMapCoordsField;
-    private components.JThumbnailLabel townMapDisplayLabel;
-    private javax.swing.JComboBox<String> townMapFilenameCombo;
-    private javax.swing.JButton townMapFilenameEditButton;
-    private javax.swing.JSpinner townMapFlyIDSpinner;
-    private javax.swing.JCheckBox townMapFlyToggle;
-    private javax.swing.JSpinner townMapFlyXSpinner;
-    private javax.swing.JSpinner townMapFlyYSpinner;
-    private javax.swing.JCheckBox townMapGameSwitchToggle;
-    private javax.swing.JButton townMapImageBrowseButton;
-    private javax.swing.JTextField townMapNameField;
-    private javax.swing.JTextField townMapPointNameField;
-    private javax.swing.JTextField townMapPointPoiField;
-    private javax.swing.JButton townMapPointRemoveButton;
-    private javax.swing.JButton townMapPointSaveButton;
-    private javax.swing.JButton townMapRemoveButton;
-    private javax.swing.JButton townMapSaveButton;
-    private javax.swing.JComboBox<Double> townMapScaleCombo;
-    private javax.swing.JScrollPane townMapScrollPane;
-    private javax.swing.JComboBox<TownMap> townMapSelectCombo;
-    private javax.swing.JSpinner townMapSquareHeightSpinner;
-    private javax.swing.JSpinner townMapSquareWidthSpinner;
-    private javax.swing.JSpinner townMapSwitchSpinner;
+    private javax.swing.JButton mapChangeButton;
+    private javax.swing.JCheckBox mapGameSwitchToggle;
+    private javax.swing.JButton mapPointSaveButton;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JTextField pointCoordsField;
+    private javax.swing.JTextField pointNameField;
+    private javax.swing.JTextField pointPoiField;
+    private javax.swing.JButton pointRemoveButton;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JComboBox<Double> scaleCombo;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JComboBox<TownMap> selectCombo;
+    private javax.swing.JSpinner squareHeightSpinner;
+    private javax.swing.JSpinner squareWidthSpinner;
+    private javax.swing.JSpinner switchSpinner;
     // End of variables declaration//GEN-END:variables
     
     private class Handler {

@@ -22,15 +22,15 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapSelectCombo" max="32767" attributes="0"/>
+                      <Component id="selectCombo" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapAddButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="addButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapRemoveButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="removeButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapSaveButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="townMapScrollPane" alignment="0" max="32767" attributes="0"/>
+                  <Component id="scrollPane" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel6" max="32767" attributes="0"/>
@@ -39,29 +39,29 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="townMapFilenameCombo" max="32767" attributes="0"/>
+                              <Component id="filenameCombo" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="townMapFilenameEditButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="filenameEditButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="townMapImageBrowseButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="imageBrowseButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="townMapNameField" max="32767" attributes="0"/>
+                          <Component id="nameField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapSquareWidthSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="squareWidthSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapSquareHeightSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="squareHeightSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapScaleCombo" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="scaleCombo" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="townMapChangeButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="mapChangeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -75,33 +75,33 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapSelectCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapRemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapAddButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="selectCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="removeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="townMapScrollPane" pref="51" max="32767" attributes="0"/>
+              <Component id="scrollPane" pref="51" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapNameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapImageBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapFilenameCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapFilenameEditButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="imageBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filenameCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filenameEditButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapSquareWidthSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="squareWidthSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapSquareHeightSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapChangeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="townMapScaleCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="squareHeightSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mapChangeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="scaleCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -117,7 +117,7 @@
         <Property name="text" type="java.lang.String" value="Region:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="townMapSelectCombo">
+    <Component class="javax.swing.JComboBox" name="selectCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="townMapSelectComboModel" type="code"/>
@@ -131,19 +131,19 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;TownMap&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="townMapAddButton">
+    <Component class="javax.swing.JButton" name="addButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="townMapRemoveButton">
+    <Component class="javax.swing.JButton" name="removeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="townMapSaveButton">
+    <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
         <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -152,14 +152,14 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="townMapSaveButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="townMapScrollPane">
+    <Container class="javax.swing.JScrollPane" name="scrollPane">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="components.JThumbnailLabel" name="townMapDisplayLabel">
+        <Component class="components.JThumbnailLabel" name="displayLabel">
           <Properties>
             <Property name="imageScaleMode" type="int" value="0"/>
             <Property name="thumbnailBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -176,7 +176,7 @@
         <Property name="text" type="java.lang.String" value="Region Name:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="townMapNameField">
+    <Component class="javax.swing.JTextField" name="nameField">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -186,7 +186,7 @@
         <Property name="text" type="java.lang.String" value="Map Filename:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="townMapFilenameCombo">
+    <Component class="javax.swing.JComboBox" name="filenameCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="townMapFilenameComboModel" type="code"/>
@@ -197,13 +197,13 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="townMapFilenameEditButton">
+    <Component class="javax.swing.JButton" name="filenameEditButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Edit"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="townMapImageBrowseButton">
+    <Component class="javax.swing.JButton" name="imageBrowseButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Browse For image"/>
         <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -212,7 +212,7 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="townMapImageBrowseButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imageBrowseButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -220,7 +220,7 @@
         <Property name="text" type="java.lang.String" value="Square Size (Pixels):"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="townMapSquareWidthSpinner">
+    <Component class="javax.swing.JSpinner" name="squareWidthSpinner">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="16" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -233,7 +233,7 @@
         <Property name="text" type="java.lang.String" value="x"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="townMapSquareHeightSpinner">
+    <Component class="javax.swing.JSpinner" name="squareHeightSpinner">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="16" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -246,7 +246,7 @@
         <Property name="text" type="java.lang.String" value="Scale:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="townMapScaleCombo">
+    <Component class="javax.swing.JComboBox" name="scaleCombo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="townMapScaleModel" type="code"/>
@@ -263,7 +263,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Double&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="townMapChangeButton">
+    <Component class="javax.swing.JButton" name="mapChangeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Change"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -285,35 +285,35 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapFlyToggle" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="flyToggle" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="townMapPointNameField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="townMapPointPoiField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pointNameField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pointPoiField" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="townMapFlyIDSpinner" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="flyIDSpinner" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="townMapFlyXSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="flyXSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="townMapFlyYSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="flyYSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="townMapGameSwitchToggle" min="-2" max="-2" attributes="0"/>
+                          <Component id="mapGameSwitchToggle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="townMapSwitchSpinner" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="switchSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace pref="100" max="32767" attributes="0"/>
-                          <Component id="townMapPointSaveButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="mapPointSaveButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="townMapPointRemoveButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="pointRemoveButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="townMapCoordsField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pointCoordsField" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -324,31 +324,31 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapCoordsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pointCoordsField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapPointNameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pointNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapPointPoiField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pointPoiField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapFlyIDSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="flyIDSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapFlyXSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="flyXSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapFlyYSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapSwitchSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapFlyToggle" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapGameSwitchToggle" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapPointSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="townMapPointRemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="flyYSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="switchSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="flyToggle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mapGameSwitchToggle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mapPointSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pointRemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -366,7 +366,7 @@
             <Property name="text" type="java.lang.String" value="Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="townMapPointNameField">
+        <Component class="javax.swing.JTextField" name="pointNameField">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -376,7 +376,7 @@
             <Property name="text" type="java.lang.String" value="Point of Interest:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="townMapPointPoiField">
+        <Component class="javax.swing.JTextField" name="pointPoiField">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -386,7 +386,7 @@
             <Property name="text" type="java.lang.String" value="Map ID:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="townMapFlyIDSpinner">
+        <Component class="javax.swing.JSpinner" name="flyIDSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -399,7 +399,7 @@
             <Property name="text" type="java.lang.String" value=", Position:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="townMapFlyXSpinner">
+        <Component class="javax.swing.JSpinner" name="flyXSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -412,7 +412,7 @@
             <Property name="text" type="java.lang.String" value=","/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="townMapFlyYSpinner">
+        <Component class="javax.swing.JSpinner" name="flyYSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -420,7 +420,7 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="townMapSwitchSpinner">
+        <Component class="javax.swing.JSpinner" name="switchSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -428,31 +428,31 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="townMapFlyToggle">
+        <Component class="javax.swing.JCheckBox" name="flyToggle">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fly Destination: "/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="townMapGameSwitchToggle">
+        <Component class="javax.swing.JCheckBox" name="mapGameSwitchToggle">
           <Properties>
             <Property name="text" type="java.lang.String" value="Game Switch:"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="townMapPointSaveButton">
+        <Component class="javax.swing.JButton" name="mapPointSaveButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="townMapPointRemoveButton">
+        <Component class="javax.swing.JButton" name="pointRemoveButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Remove"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="townMapCoordsField">
+        <Component class="javax.swing.JTextField" name="pointCoordsField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
