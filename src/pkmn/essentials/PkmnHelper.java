@@ -1111,14 +1111,29 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         townMapSquareWidthSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         townMapSquareWidthSpinner.setEnabled(false);
+        townMapSquareWidthSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapSquareSizeSpinnerStateChanged(evt);
+            }
+        });
 
         townMapImageBrowseButton.setText("Browse For image");
         townMapImageBrowseButton.setEnabled(false);
+        townMapImageBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapImageBrowseButtonActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("x");
 
         townMapSquareHeightSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         townMapSquareHeightSpinner.setEnabled(false);
+        townMapSquareHeightSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapSquareSizeSpinnerStateChanged(evt);
+            }
+        });
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Point"));
 
@@ -1140,31 +1155,71 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         townMapFlyIDSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapFlyIDSpinner.setEnabled(false);
+        townMapFlyIDSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapFlyIDSpinnerStateChanged(evt);
+            }
+        });
 
         jLabel15.setText(", Position:");
 
         townMapFlyXSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapFlyXSpinner.setEnabled(false);
+        townMapFlyXSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapFlyXSpinnerStateChanged(evt);
+            }
+        });
 
         jLabel17.setText(",");
 
         townMapFlyYSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapFlyYSpinner.setEnabled(false);
+        townMapFlyYSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapFlyYSpinnerStateChanged(evt);
+            }
+        });
 
         townMapSwitchSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapSwitchSpinner.setEnabled(false);
+        townMapSwitchSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapSwitchSpinnerStateChanged(evt);
+            }
+        });
 
         townMapFlyToggle.setText("Fly Destination: ");
         townMapFlyToggle.setEnabled(false);
+        townMapFlyToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapFlyToggleActionPerformed(evt);
+            }
+        });
 
         townMapGameSwitchToggle.setText("Game Switch:");
         townMapGameSwitchToggle.setEnabled(false);
+        townMapGameSwitchToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapGameSwitchToggleActionPerformed(evt);
+            }
+        });
 
         townMapPointSaveButton.setText("Save");
         townMapPointSaveButton.setEnabled(false);
+        townMapPointSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapPointSaveButtonActionPerformed(evt);
+            }
+        });
 
         townMapPointRemoveButton.setText("Remove");
         townMapPointRemoveButton.setEnabled(false);
+        townMapPointRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapPointRemoveButtonActionPerformed(evt);
+            }
+        });
 
         townMapCoordsField.setEditable(false);
 
@@ -1245,6 +1300,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         townMapChangeButton.setText("Change");
         townMapChangeButton.setEnabled(false);
+        townMapChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapChangeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout townMapEditorLayout = new javax.swing.GroupLayout(townMapEditor);
         townMapEditor.setLayout(townMapEditorLayout);
@@ -1869,6 +1929,50 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void townMapSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSaveButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_townMapSaveButtonActionPerformed
+
+    private void townMapChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapChangeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapChangeButtonActionPerformed
+
+    private void townMapFlyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapFlyToggleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapFlyToggleActionPerformed
+
+    private void townMapGameSwitchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapGameSwitchToggleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapGameSwitchToggleActionPerformed
+
+    private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
+
+    private void townMapSquareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapSquareSizeSpinnerStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapSquareSizeSpinnerStateChanged
+
+    private void townMapFlyIDSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapFlyIDSpinnerStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapFlyIDSpinnerStateChanged
+
+    private void townMapFlyXSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapFlyXSpinnerStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapFlyXSpinnerStateChanged
+
+    private void townMapFlyYSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapFlyYSpinnerStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapFlyYSpinnerStateChanged
+
+    private void townMapSwitchSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapSwitchSpinnerStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapSwitchSpinnerStateChanged
+
+    private void townMapPointSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointSaveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapPointSaveButtonActionPerformed
+
+    private void townMapPointRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointRemoveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapPointRemoveButtonActionPerformed
     
     private void loadMapPoint(TownMap.MapPoint point){
         townMapPoint = point;
