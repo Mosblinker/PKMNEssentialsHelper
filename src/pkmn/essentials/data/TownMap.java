@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
     
-    public static final String PBS_FILE = "town_map.txt";
+    public static final String PBS_FILE = "town_map."+PBSData.PBS_FILE_EXTENSION;
     
     public static final String MAP_IMAGES_LOCATION = "Graphics"+File.separator+"UI"+File.separator+"Town Map";
     
