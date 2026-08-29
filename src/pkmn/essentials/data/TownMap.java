@@ -264,6 +264,10 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
             setFlyDestination(x,y);
         }
         
+        public boolean isFlyDestinationSet(){
+            return flyMap != null && flyX != null && flyY != null;
+        }
+        
         public void clearFlyDestination(){
             setFlyDestinationX(null);
             setFlyDestinationY(null);
@@ -282,14 +286,17 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
         
         @Override
         public String toString(){
-            return getX() + ","+
-                    getY()+","+
-                    Objects.toString(getName(),"")+","+
-                    Objects.toString(getPointOfInterest(),"")+","+
-                    Objects.toString(getFlyDestinationMapID(),"")+","+
-                    Objects.toString(getFlyDestinationX(),"")+","+
-                    Objects.toString(getFlyDestinationY(),"")+","+
-                    Objects.toString(getGameSwitch(),"");
+            String str = getX() + ","+getY()+","+
+                    Objects.toString(getName(),"");
+            if (getPointOfInterest() != null || isFlyDestinationSet() || getGameSwitch() != null)
+                str += ","+Objects.toString(getPointOfInterest(),"");
+            if (isFlyDestinationSet() || getGameSwitch() != null)
+                str += ","+Objects.toString(getFlyDestinationMapID(),"")+
+                        ","+Objects.toString(getFlyDestinationX(),"")+
+                        ","+Objects.toString(getFlyDestinationY(),"");
+            if (getGameSwitch() != null)
+                str += ","+Objects.toString(getGameSwitch(),"");
+            return str;
         }
         @Override
         public boolean equals(Object obj){
