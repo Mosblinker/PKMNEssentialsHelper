@@ -2682,10 +2682,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapAddButton.setEnabled(isEnabled() && pbsData != null);
         townMapSelectCombo.setEnabled(townMapAddButton.isEnabled() && !townMapSelectComboModel.isEmpty());
         townMapRemoveButton.setEnabled(townMapAddButton.isEnabled() && townMapSelectCombo.getSelectedIndex() >= 0);
-        townMapSaveButton.setEnabled(townMapSelectCombo.isEnabled());
         townMapNameField.setEnabled(townMapRemoveButton.isEnabled());
         townMapFilenameField.setEnabled(townMapRemoveButton.isEnabled());
         townMapImageBrowseButton.setEnabled(townMapRemoveButton.isEnabled());
+        updateTownMapSaveButton();
+        updateTownMapChangeButton();
+        updateTownMapImageElements();
+        updateTownMapPointElements();
+    }
+    
+    private void updateTownMapSaveButton(){
+        boolean enabled = isEnabled() && pbsData != null && !townMapSelectComboModel.isEmpty();
+        for (TownMap map : pbsData.getRegionMaps())
+            enabled &= map.getName() != null && !map.getName().isBlank() && 
+                    map.getFileName() != null && !map.getFileName().isBlank();
+        townMapSaveButton.setEnabled(enabled);
     }
     
     private void updateTownMapImageElements(){
@@ -2756,8 +2767,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
         updateTownMapConfigElements();
-        updateTownMapChangeButton();
-        updateTownMapImageElements();
     }
     @Override
     public boolean isInputEnabled() {
