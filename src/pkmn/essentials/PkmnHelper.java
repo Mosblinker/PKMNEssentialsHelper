@@ -2595,6 +2595,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
         updateTownMapConfigElements();
+        updateTownMapChangeButton();
+        updateTownMapSquareSizeSpinners();
     }
     @Override
     public boolean isInputEnabled() {
