@@ -389,6 +389,8 @@ public final class PkmnHelperUtilities {
     public static boolean isSameFile(File file1, File file2){
         if (Objects.equals(file1, file2))
             return true;
+        if (file1 == null || file2 == null || !file1.exists() || !file2.exists())
+            return false;
         try{
             return Files.isSameFile(file1.toPath(), file2.toPath());
         } catch (IOException ex){
