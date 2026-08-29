@@ -6,6 +6,7 @@ package pkmn.essentials.data;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -98,6 +99,15 @@ public class PBSData {
     
     public static void addFlagsToRegexMap(Map<String,String> flags){
         addFlagsToRegexMap(flags.keySet());
+    }
+    
+    public static void writePBSDataFile(PrintWriter out, Collection<? extends AbstractPBSElement> data){
+        out.println(PBSData.FILE_HEADER);
+        out.println(PBSData.DATA_SEPARATOR);
+        for (AbstractPBSElement temp : data){
+            out.println(temp.toData());
+            out.println(PBSData.DATA_SEPARATOR);
+        }
     }
     
     private List<Type> types = new ArrayList<>();
