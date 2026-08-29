@@ -1946,11 +1946,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapChangeButtonActionPerformed
 
     private void townMapFlyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapFlyToggleActionPerformed
-        // TODO add your handling code here:
+        updateTownMapFlyDestinationElements();
     }//GEN-LAST:event_townMapFlyToggleActionPerformed
 
     private void townMapGameSwitchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapGameSwitchToggleActionPerformed
-        // TODO add your handling code here:
+        updateTownMapGameSwitchSpinner();
     }//GEN-LAST:event_townMapGameSwitchToggleActionPerformed
 
     private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
