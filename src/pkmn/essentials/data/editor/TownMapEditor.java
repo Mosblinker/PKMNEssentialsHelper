@@ -455,7 +455,7 @@ public class TownMapEditor extends javax.swing.JPanel {
 
     private void filenameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filenameComboActionPerformed
         setTownMapImage(pbsData.getRegionMapImages().get(
-                filenameComboModel.get(filenameCombo.getSelectedIndex())));
+                getSelectedRegionFileName()));
         updateFileNameElements();
     }//GEN-LAST:event_filenameComboActionPerformed
     
