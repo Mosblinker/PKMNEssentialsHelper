@@ -4,11 +4,18 @@
  */
 package pkmn.essentials.map;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Mosblinker
  */
 public class TownMapImageEditor extends javax.swing.JPanel {
+    
+    public static final String LOAD_IMAGE_ACTION_PERFORMED = "LoadImage";
+    
+    public static final String SAVE_IMAGE_ACTION_PERFORMED = "SaveImage";
 
     /**
      * Creates new form TownMapImageEditor
@@ -26,19 +33,196 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        imgScrollPane = new javax.swing.JScrollPane();
+        imgLabel = new components.JThumbnailLabel();
+        loadImageButton = new javax.swing.JButton();
+        saveImageButton = new javax.swing.JButton();
+
+        imgLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
+        imgLabel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                imgLabelMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                imgLabelMouseMoved(evt);
+            }
+        });
+        imgLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgLabelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgLabelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                imgLabelMouseReleased(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                imgLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                imgLabelMouseExited(evt);
+            }
+        });
+        imgLabel.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                imgLabelMouseWheelMoved(evt);
+            }
+        });
+        imgScrollPane.setViewportView(imgLabel);
+
+        loadImageButton.setText("Load Image");
+        loadImageButton.setActionCommand(LOAD_IMAGE_ACTION_PERFORMED);
+        loadImageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadImageButtonActionPerformed(evt);
+            }
+        });
+
+        saveImageButton.setText("Save Image");
+        saveImageButton.setActionCommand(SAVE_IMAGE_ACTION_PERFORMED);
+        saveImageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveImageButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loadImageButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveImageButton)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imgScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loadImageButton)
+                    .addComponent(saveImageButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void imgLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_imgLabelMouseWheelMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseWheelMoved
 
+    private void imgLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseReleased
+
+    private void imgLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMousePressed
+
+    private void imgLabelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseMoved
+
+    private void imgLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseExited
+
+    private void imgLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseEntered
+
+    private void imgLabelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseDragged
+
+    private void imgLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imgLabelMouseClicked
+
+    private void loadImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadImageButtonActionPerformed
+        fireActionPerformed(evt);
+    }//GEN-LAST:event_loadImageButtonActionPerformed
+
+    private void saveImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveImageButtonActionPerformed
+        fireActionPerformed(evt);
+    }//GEN-LAST:event_saveImageButtonActionPerformed
+    
+    
+    
+    
+    /**
+     * This adds the given {@code ActionListener} to this panel.
+     * @param l The listener to add.
+     * @see #removeActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void addActionListener(ActionListener l){
+        if (l != null)          // If the listener is not null
+            listenerList.add(ActionListener.class, l);
+    }
+    /**
+     * This removes the given {@code ActionListener} from this panel.
+     * @param l The listener to remove.
+     * @see #addActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void removeActionListener(ActionListener l){
+        listenerList.remove(ActionListener.class, l);
+    }
+    /**
+     * This returns an array containing all the {@code ActionListener}s that 
+     * have been added to this panel.
+     * @return An array containing the {@code ActionListener}s that have been 
+     * added, or an empty array if none have been added.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     */
+    public ActionListener[] getActionListeners(){
+        return listenerList.getListeners(ActionListener.class);
+    }
+    /**
+     * This notifies all the {@code ActionListener}s that have been added to 
+     * this panel if the given {@code ActionEvent} is not null. If the source 
+     * of the given {@code ActionEvent} is not this panel, then the {@code 
+     * ActionEvent} will be redirected to have this panel as its source.
+     * @param evt The {@code ActionEvent} to fire.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     * @see #fireActionPerformed(String, long, int) 
+     * @see #fireActionPerformed(String) 
+     */
+    protected void fireActionPerformed(ActionEvent evt){
+        if (evt == null)    // If the event is null
+            return;
+            // If the event's source is not this component
+        else if (evt.getSource() != this){
+            evt = new ActionEvent(this, evt.getID(), evt.getActionCommand(),
+                    evt.getWhen(),evt.getModifiers());
+        }
+            // A for loop to go through the action listeners
+        for (ActionListener l : listenerList.getListeners(ActionListener.class)){
+            if (l != null)  // If the listener is not null
+                l.actionPerformed(evt);
+        }
+    }
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private components.JThumbnailLabel imgLabel;
+    private javax.swing.JScrollPane imgScrollPane;
+    private javax.swing.JButton loadImageButton;
+    private javax.swing.JButton saveImageButton;
     // End of variables declaration//GEN-END:variables
 }
