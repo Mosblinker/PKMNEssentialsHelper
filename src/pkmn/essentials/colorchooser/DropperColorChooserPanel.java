@@ -264,18 +264,6 @@ public class DropperColorChooserPanel extends AbstractColorChooserPanel{
         }
     }
     
-    private class PercentRenderer extends DefaultListCellRenderer{
-        @Override
-        public Component getListCellRendererComponent(JList<?> list,Object value,
-                int index,boolean isSelected,boolean cellHasFocus){
-            if (value instanceof Number){
-                double temp = ((Number)value).doubleValue();
-                value = temp*100.0 + " %";
-            }
-            return super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
-        }
-    }
-    
     private class Handler extends MouseAdapter implements ActionListener{
         @Override
         public void mouseWheelMoved(MouseWheelEvent evt){
