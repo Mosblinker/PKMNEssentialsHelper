@@ -29,6 +29,8 @@ import javax.swing.JSpinner;
 import javax.swing.Painter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import pkmn.essentials.PercentRenderer;
 import pkmn.essentials.data.PBSData;
 import pkmn.essentials.data.TownMap;
@@ -61,6 +63,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         nameField.getDocument().addDocumentListener(handler);
         pointNameField.getDocument().addDocumentListener(handler);
         displayLabel.setThumbnailOverlay(squareOverlay);
+        selectComboModel.addListDataListener(handler);
     }
 
     /**
@@ -993,7 +996,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         }
     }
     
-    private class Handler implements DocumentListener{
+    private class Handler implements DocumentListener, ListDataListener{
         @Override
         public void insertUpdate(DocumentEvent e) {
             documentUpdate(e);
@@ -1006,7 +1009,24 @@ public class TownMapEditor extends javax.swing.JPanel {
         public void changedUpdate(DocumentEvent e) {
             documentUpdate(e);
         }
-        
+        @Override
+        public void intervalAdded(ListDataEvent evt) {
+            if (evt.getSource() == selectComboModel){
+                updateTownMapControls();
+            }
+        }
+        @Override
+        public void intervalRemoved(ListDataEvent evt) {
+            if (evt.getSource() == selectComboModel){
+                updateTownMapControls();
+            }
+        }
+        @Override
+        public void contentsChanged(ListDataEvent evt) {
+            if (evt.getSource() == selectComboModel){
+                updateTownMapControls();
+            }
+        }
     }
     
     private class TownMapCellRenderer extends DefaultListCellRenderer{
