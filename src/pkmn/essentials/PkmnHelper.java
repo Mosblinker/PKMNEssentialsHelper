@@ -1936,14 +1936,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             file = new File(file,map.getFileName());
         }
         BufferedImage image = loadSpriteImage(file);
-        townMapScaleCombo.setSelectedItem(1.0);
+        setTownMapImage(image,file);
         if (image != null){
-            updateTownMapImage(new ImageIcon(image),1);
             map.setMapImageFile(file);
-        } else
-            townMapDisplayLabel.setIcon(null);
-        townMapImageFile = file;
-        updateTownMapImageElements();
+        }
     }//GEN-LAST:event_townMapSelectComboActionPerformed
 
     private void townMapDisplayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseClicked
@@ -1974,10 +1970,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             File file = townMapFC.getSelectedFile();
             BufferedImage image = loadSpriteImage(file);
             if (image != null){
-                updateTownMapImage(new ImageIcon(image),1);
-                townMapImageFile = file;
-                townMapScaleCombo.setSelectedItem(1.0);
-                updateTownMapImageElements();
+                setTownMapImage(image,file);
             }
         }
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
@@ -2019,6 +2012,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (scale > 1.0)
             townMapImage.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
         townMapDisplayLabel.setIcon(townMapImage);
+    }
+    
+    private void setTownMapImage(BufferedImage image, File file){
+        townMapDisplayLabel.setIcon(null);
+        townMapScaleCombo.setSelectedItem(1.0);
+        if (image != null)
+            updateTownMapImage(new ImageIcon(image),1);
+        townMapImageFile = file;
+        updateTownMapImageElements();
     }
     
     private void townMapScaleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapScaleComboActionPerformed
