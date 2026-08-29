@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
@@ -481,6 +482,10 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     public void setSelectedRegionFileName(String name){
         filenameComboModel.setSelectedItem(name);
+    }
+    
+    public List<String> getRegionFileNames(){
+        return filenameComboModel;
     }
     
     public PBSData getPBSData(){
