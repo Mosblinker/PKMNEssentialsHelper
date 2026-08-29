@@ -717,6 +717,17 @@ public class TownMapEditor extends javax.swing.JPanel {
                 pointNameField.getText() != null && !pointNameField.getText().isBlank());
     }
     
+    private void updatePointElements(){
+        pointNameField.setEnabled(isTownMapSelectedEnabled() && mapPoint != null);
+        pointPoiField.setEnabled(pointNameField.isEnabled());
+        flyToggle.setEnabled(pointNameField.isEnabled());
+        gameSwitchToggle.setEnabled(pointNameField.isEnabled());
+        updateFlyDestinationElements();
+        updateGameSwitchSpinner();
+        updatePointSaveButton();
+        updatePointRemoveButton();
+    }
+    
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
     private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
