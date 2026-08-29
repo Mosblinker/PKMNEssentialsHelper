@@ -257,6 +257,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         gameSwitchToggle.setText("Game Switch:");
         gameSwitchToggle.setEnabled(false);
+        gameSwitchToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameSwitchToggleActionPerformed(evt);
+            }
+        });
 
         pointSaveButton.setText("Save");
         pointSaveButton.setEnabled(false);
@@ -500,6 +505,10 @@ public class TownMapEditor extends javax.swing.JPanel {
     private void flyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flyToggleActionPerformed
         updateFlyDestinationElements();
     }//GEN-LAST:event_flyToggleActionPerformed
+
+    private void gameSwitchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameSwitchToggleActionPerformed
+        updateGameSwitchSpinner();
+    }//GEN-LAST:event_gameSwitchToggleActionPerformed
     
     
     
@@ -697,6 +706,10 @@ public class TownMapEditor extends javax.swing.JPanel {
         flyIDSpinner.setEnabled(flyToggle.isEnabled() && flyToggle.isSelected());
         flyXSpinner.setEnabled(flyIDSpinner.isEnabled());
         flyYSpinner.setEnabled(flyIDSpinner.isEnabled());
+    }
+    
+    private void updateGameSwitchSpinner(){
+        switchSpinner.setEnabled(gameSwitchToggle.isEnabled()&&gameSwitchToggle.isSelected());
     }
     
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
