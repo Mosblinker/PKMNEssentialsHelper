@@ -2693,9 +2693,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private void updateTownMapSaveButton(){
         boolean enabled = isEnabled() && pbsData != null && !townMapSelectComboModel.isEmpty();
-        for (TownMap map : pbsData.getRegionMaps())
-            enabled &= map.getName() != null && !map.getName().isBlank() && 
-                    map.getFileName() != null && !map.getFileName().isBlank();
+        if (pbsData != null){
+            for (TownMap map : pbsData.getRegionMaps())
+                enabled &= map.getName() != null && !map.getName().isBlank() && 
+                        map.getFileName() != null && !map.getFileName().isBlank();
+        }
         townMapSaveButton.setEnabled(enabled);
     }
     
