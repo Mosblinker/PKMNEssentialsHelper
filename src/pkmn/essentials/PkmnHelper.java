@@ -3325,7 +3325,23 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                } catch(IOException | IllegalArgumentException ex){
+                    stage = 6;
+                    getLogger().finer("Loading Town Map");
+                    progressDisplay.setString(getProgressString());
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        if (pbsFiles.get(i).getName().equals(pkmn.essentials.data.TownMap.PBS_FILE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadRegionMaps(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
+                } catch(IOException | IllegalArgumentException | ArrayIndexOutOfBoundsException ex){
                     getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
                     return false;
                 }
@@ -3409,6 +3425,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return "Loading Pokemon Abilities";
                 case(5):
                     return "Loading Items";
+                case(6):
+                    return "Loading Town Map";
                 
             }
             return "Loading Game Project";
