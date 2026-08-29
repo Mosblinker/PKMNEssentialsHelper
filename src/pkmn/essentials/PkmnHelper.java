@@ -2529,6 +2529,46 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapSelectCombo.setEnabled(townMapAddButton.isEnabled() && !townMapSelectComboModel.isEmpty());
         townMapRemoveButton.setEnabled(townMapAddButton.isEnabled() && townMapSelectCombo.getSelectedIndex() >= 0);
         townMapSaveButton.setEnabled(townMapSelectCombo.isEnabled());
+        townMapNameField.setEnabled(townMapRemoveButton.isEnabled());
+        townMapFilenameField.setEnabled(townMapRemoveButton.isEnabled());
+        townMapImageBrowseButton.setEnabled(townMapRemoveButton.isEnabled());
+    }
+    
+    private void updateTownMapSquareSizeSpinners(){
+        townMapSquareWidthSpinner.setEnabled(isEnabled() && townMapDisplayLabel.getIcon() != null);
+        townMapSquareHeightSpinner.setEnabled(townMapSquareWidthSpinner.isEnabled());
+    }
+    
+    private void updateTownMapChangeButton(){
+        townMapChangeButton.setEnabled(isEnabled() && 
+                townMapNameField.getText() != null && !townMapNameField.getText().isBlank() &&
+                townMapFilenameField.getText() != null && !townMapFilenameField.getText().isBlank());
+    }
+    
+    private void updateTownMapPointElements(){
+        townMapPointNameField.setEnabled(isEnabled() && townMapPoint != null);
+        townMapPointPoiField.setEnabled(townMapPointNameField.isEnabled());
+        townMapFlyToggle.setEnabled(townMapPointNameField.isEnabled());
+        townMapGameSwitchToggle.setEnabled(townMapPointNameField.isEnabled());
+        updateTownMapFlyDestinationElements();
+        updateTownMapGameSwitchSpinner();
+        updateTownMapPointSaveButton();
+        townMapPointRemoveButton.setEnabled(townMapPointNameField.isEnabled());
+    }
+    
+    private void updateTownMapFlyDestinationElements(){
+        townMapFlyIDSpinner.setEnabled(townMapFlyToggle.isEnabled() && townMapFlyToggle.isSelected());
+        townMapFlyXSpinner.setEnabled(townMapFlyIDSpinner.isEnabled());
+        townMapFlyYSpinner.setEnabled(townMapFlyIDSpinner.isEnabled());
+    }
+    
+    private void updateTownMapGameSwitchSpinner(){
+        townMapSwitchSpinner.setEnabled(townMapGameSwitchToggle.isEnabled()&&townMapGameSwitchToggle.isSelected());
+    }
+    
+    private void updateTownMapPointSaveButton(){
+        townMapPointSaveButton.setEnabled(isEnabled() && townMapPoint != null && 
+                townMapPointNameField.getText() != null && !townMapPointNameField.getText().isBlank());
     }
     @Override
     public void setInputEnabled(boolean enabled) {
