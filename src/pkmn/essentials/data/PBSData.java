@@ -101,13 +101,19 @@ public class PBSData {
         addFlagsToRegexMap(flags.keySet());
     }
     
-    public static void writePBSDataFile(PrintWriter out, Collection<? extends AbstractPBSElement> data){
+    public static void writePBSDataFile(PrintWriter out, Collection<? extends AbstractPBSElement> data, JProgressBar progressBar){
         out.println(PBSData.FILE_HEADER);
         out.println(PBSData.DATA_SEPARATOR);
         for (AbstractPBSElement temp : data){
             out.println(temp.toData());
             out.println(PBSData.DATA_SEPARATOR);
+            if (progressBar != null)
+                progressBar.setValue(progressBar.getValue()+1);
         }
+    }
+    
+    public static void writePBSDataFile(PrintWriter out, Collection<? extends AbstractPBSElement> data){
+        writePBSDataFile(out,data,null);
     }
     
     private List<Type> types = new ArrayList<>();
