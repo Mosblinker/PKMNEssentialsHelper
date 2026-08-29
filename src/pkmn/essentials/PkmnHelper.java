@@ -176,7 +176,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         4
     };
     
-    private static final Double[] DEFAULT_ZOOM_VALUES = {
+    public static final Double[] DEFAULT_ZOOM_VALUES = {
         8.0, 4.0, 2.0, 1.0, 0.5, 0.25, 0.125
     };
     

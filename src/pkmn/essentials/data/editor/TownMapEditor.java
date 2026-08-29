@@ -32,6 +32,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import pkmn.essentials.PercentRenderer;
+import static pkmn.essentials.PkmnHelper.DEFAULT_ZOOM_VALUES;
 import pkmn.essentials.data.PBSData;
 import pkmn.essentials.data.TownMap;
 
@@ -44,10 +45,6 @@ public class TownMapEditor extends javax.swing.JPanel {
     public static final String BROWSE_ACTION_COMMAND = "Browse";
     
     public static final String SAVE_ACTION_COMMAND = "Save";
-    
-    private static final Double[] DEFAULT_ZOOM_VALUES = {
-        8.0, 4.0, 2.0, 1.0, 0.5, 0.25, 0.125
-    };
     
     private static final Color TOWN_MAP_GRID_COLOR = new Color(0x80000000, true);
     
