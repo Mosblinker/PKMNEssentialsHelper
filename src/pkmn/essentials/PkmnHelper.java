@@ -1978,11 +1978,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapSwitchSpinnerStateChanged
 
     private void townMapPointSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointSaveButtonActionPerformed
-        // TODO add your handling code here:
+        townMapPoint.setName(townMapPointNameField.getText());
+        if (townMapPointPoiField.getText() != null && !townMapPointPoiField.getText().isBlank())
+            townMapPoint.setPointOfInterest(townMapPointPoiField.getText().trim());
+        else
+            townMapPoint.setPointOfInterest(null);
+        if (townMapFlyToggle.isSelected()){
+            townMapPoint.setFlyDestination((int)townMapFlyXSpinner.getValue(),
+                    (int)townMapFlyYSpinner.getValue(), 
+                    (int)townMapFlyIDSpinner.getValue());
+            
+        } else
+            townMapPoint.clearFlyDestination();
+        if (townMapGameSwitchToggle.isSelected())
+            townMapPoint.setGameSwitch((int)townMapSwitchSpinner.getValue());
+        else
+            townMapPoint.setGameSwitch(null);
+        TownMap map = getSelectedTownMap();
+        if (map.getPoints().contains(townMapPoint))
+            map.getPoints().add(townMapPoint);
+        updateTownMapPointRemoveButton();
     }//GEN-LAST:event_townMapPointSaveButtonActionPerformed
 
     private void townMapPointRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointRemoveButtonActionPerformed
-        // TODO add your handling code here:
+        TownMap map = getSelectedTownMap();
+        map.getPoints().remove(townMapPoint);
     }//GEN-LAST:event_townMapPointRemoveButtonActionPerformed
     
     private void loadMapPoint(TownMap.MapPoint point){
