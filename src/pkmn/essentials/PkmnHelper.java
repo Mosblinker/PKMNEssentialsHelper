@@ -1586,11 +1586,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
 
     private void townMapRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapRemoveButtonActionPerformed
-        // TODO add your handling code here:
+        int selection = townMapSelectCombo.getSelectedIndex();
+        pbsData.getRegionMaps().remove(selection);
+        townMapSelectComboModel.remove(selection);
+        for (int i = selection; i < pbsData.getRegionMaps().size(); i++){
+            TownMap map = pbsData.getRegionMaps().get(i);
+            map.setRegionNumber(map.getRegionNumber()-1);
+        }
     }//GEN-LAST:event_townMapRemoveButtonActionPerformed
 
     private void townMapAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapAddButtonActionPerformed
-        // TODO add your handling code here:
+        TownMap map = new TownMap(pbsData.getRegionMaps().size());
+        pbsData.getRegionMaps().add(map);
+        townMapSelectComboModel.add(map);
+        townMapSelectCombo.setSelectedIndex(map.getRegionNumber());
     }//GEN-LAST:event_townMapAddButtonActionPerformed
 
     private void townMapSelectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSelectComboActionPerformed
