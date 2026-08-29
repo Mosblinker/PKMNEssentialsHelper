@@ -811,7 +811,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             squareRows = (int) Math.ceil(r);
             displayLabel.repaint();
         }
-   }
+    }
     /**
      * This adds the given {@code ActionListener} to this panel.
      * @param l The listener to add.
