@@ -1862,6 +1862,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             BufferedImage image = loadSpriteImage(townMapImageFile);
             if (image != null)
                 townMapDisplayLabel.setImage(image);
+            townMapFilenameField.setText(map.getFileName());
+        }
+        if (map.getName() != null){
+            townMapNameField.setText(map.getName());
         }
     }//GEN-LAST:event_townMapSelectComboActionPerformed
 
