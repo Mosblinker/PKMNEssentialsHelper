@@ -395,7 +395,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         audioFC = new javax.swing.JFileChooser();
         recolorInvertChange = new pkmn.essentials.recolor.PaletteInvertChangeDialog();
         recolorDesaturateChange = new pkmn.essentials.recolor.PaletteDesaturateChangeDialog();
-        townMapPreviewPanel = new components.JFileDisplayPanel();
+        townMapPreview = new components.JFileDisplayPanel();
         townMapFC = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -574,9 +574,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         recolorDesaturateChange.setName("recolorDesaturateChange"); // NOI18N
 
-        townMapPreviewPanel.setFileChooser(townMapFC);
+        townMapPreview.setFileChooser(townMapFC);
 
-        townMapFC.setAccessory(townMapPreviewPanel);
+        townMapFC.setAccessory(townMapPreview);
         townMapFC.setName("townMapFC"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2634,7 +2634,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField townMapPointPoiField;
     private javax.swing.JSpinner townMapPosXSpinner;
     private javax.swing.JSpinner townMapPosYSpinner;
-    private components.JFileDisplayPanel townMapPreviewPanel;
+    private components.JFileDisplayPanel townMapPreview;
     private javax.swing.JButton townMapRemoveButton;
     private javax.swing.JButton townMapSaveButton;
     private javax.swing.JComboBox<TownMap> townMapSelectCombo;
