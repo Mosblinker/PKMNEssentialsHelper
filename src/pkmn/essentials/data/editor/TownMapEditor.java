@@ -22,6 +22,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.Painter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -166,6 +167,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         filenameEditButton.setText("Edit");
         filenameEditButton.setEnabled(false);
+        filenameEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filenameEditButtonActionPerformed(evt);
+            }
+        });
 
         imageBrowseButton.setText("Browse For image");
         imageBrowseButton.setActionCommand(BROWSE_ACTION_COMMAND);
@@ -458,6 +464,33 @@ public class TownMapEditor extends javax.swing.JPanel {
                 getSelectedRegionFileName()));
         updateFileNameElements();
     }//GEN-LAST:event_filenameComboActionPerformed
+
+    private void filenameEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filenameEditButtonActionPerformed
+        String oldName = getSelectedRegionFileName();
+        if (oldName == null)
+            return;
+        String newName;
+        do{
+            newName = JOptionPane.showInputDialog(this, "Enter the new name for the map:", 
+                oldName);
+            if (newName != null && newName.isBlank()){
+                JOptionPane.showMessageDialog(this, "Map file name cannot be blank.", 
+                        "ERROR - Invalid File Name", JOptionPane.WARNING_MESSAGE);
+            }
+        } while (newName != null && newName.isBlank());
+        if (newName != null){
+            newName = newName.trim();
+            int extensionIndex = oldName.lastIndexOf(".");
+            if (extensionIndex >= 0){
+                String extension = oldName.substring(extensionIndex);
+                if (!newName.endsWith(extension))
+                    newName += extension;
+            }
+            pbsData.setRegionMapFileName(oldName, newName);
+            filenameComboModel.set(getSelectedRegionFileNameIndex(), newName);
+            filenameCombo.setSelectedItem(newName);
+        }
+    }//GEN-LAST:event_filenameEditButtonActionPerformed
     
     
     
