@@ -833,7 +833,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         if (evt.getDocument() == nameField.getDocument()){
             updateChangeButton();
         } else if (evt.getDocument() == pointNameField.getDocument()){
-            
+            updatePointSaveButton();
         }
     }
     
