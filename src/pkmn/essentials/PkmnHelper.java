@@ -23,6 +23,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -1954,9 +1955,37 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapSelectComboActionPerformed
 
     private void townMapDisplayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseClicked
-        // TODO add your handling code here:
+        TownMap map = getSelectedTownMap();
+        if (townMapImage == null || map == null)
+            return;
+        Point imagePoint = townMapDisplayLabel.convertPointToThumbnailRegion(evt.getX(),evt.getY());
+        imagePoint = townMapDisplayLabel.convertPointToImage(imagePoint);
+        if (imagePoint.x < 0 || imagePoint.y < 0 || 
+                imagePoint.x >= townMapImage.getIconWidth() || imagePoint.y >= townMapImage.getIconHeight())
+            return;
+        int x = getTownMapPointCoordFromImage(imagePoint.x,townMapImage.getScaleX(),townMapSquareWidthSpinner);
+        int y = getTownMapPointCoordFromImage(imagePoint.y,townMapImage.getScaleY(),townMapSquareHeightSpinner);
+        TownMap.MapPoint point = null;
+        for (TownMap.MapPoint temp : map.getPoints()){
+            if (temp.getX() == x && temp.getY() == y){
+                point = temp;
+                break;
+            }
+        }
+        if (point == null && x >= 0 && y >= 0 && x < townMapSquareCols && y < townMapSquareRows){
+            point = new TownMap.MapPoint(x,y);
+        }
+        loadMapPoint(point);
     }//GEN-LAST:event_townMapDisplayLabelMouseClicked
-
+    
+    private int getTownMapPointCoordFromImage(int value, double scale, int size){
+        return (int) Math.floor((value/scale)/size);
+    }
+    
+    private int getTownMapPointCoordFromImage(int value, double scale, JSpinner sizeSpinner){
+        return getTownMapPointCoordFromImage(value,scale,(int)sizeSpinner.getValue());
+    }
+    
     private void townMapSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSaveButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_townMapSaveButtonActionPerformed
