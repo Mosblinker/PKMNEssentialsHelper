@@ -81,7 +81,7 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
         if (getFileName() != null)
             str += System.lineSeparator()+PROPERTY_NAMES[1] + " = " + getFileName();
         for (MapPoint point : getPoints()){
-            str += System.lineSeparator()+PROPERTY_NAMES[3] + " = " + point;
+            str += System.lineSeparator()+PROPERTY_NAMES[2] + " = " + point;
         }
         return str;
     }
