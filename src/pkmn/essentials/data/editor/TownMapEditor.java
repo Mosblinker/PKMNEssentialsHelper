@@ -576,6 +576,14 @@ public class TownMapEditor extends javax.swing.JPanel {
         }
     }
     
+    private boolean isPBSDataEnabled(){
+        return isEnabled() && pbsData != null;
+    }
+    
+    private boolean isTownMapSelectedEnabled(){
+        return isPBSDataEnabled() && selectCombo.getSelectedIndex() >= 0;
+    }
+    
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
     private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
