@@ -151,6 +151,9 @@
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="townMapSaveButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="townMapScrollPane">
 
@@ -208,6 +211,9 @@
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="townMapImageBrowseButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>

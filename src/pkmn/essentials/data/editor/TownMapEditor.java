@@ -98,6 +98,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         townMapSaveButton.setText("Save");
         townMapSaveButton.setActionCommand(SAVE_ACTION_COMMAND);
         townMapSaveButton.setEnabled(false);
+        townMapSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapSaveButtonActionPerformed(evt);
+            }
+        });
 
         townMapDisplayLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
         townMapDisplayLabel.setThumbnailBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -118,6 +123,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         townMapImageBrowseButton.setText("Browse For image");
         townMapImageBrowseButton.setActionCommand(BROWSE_ACTION_COMMAND);
         townMapImageBrowseButton.setEnabled(false);
+        townMapImageBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapImageBrowseButtonActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Square Size (Pixels):");
 
@@ -336,11 +346,11 @@ public class TownMapEditor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void townMapSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSaveButtonActionPerformed
-        // TODO add your handling code here:
+        fireActionPerformed(evt);
     }//GEN-LAST:event_townMapSaveButtonActionPerformed
 
     private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
-        // TODO add your handling code here:
+        fireActionPerformed(evt);
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
     
     
