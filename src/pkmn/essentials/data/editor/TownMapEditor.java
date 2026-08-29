@@ -545,6 +545,8 @@ public class TownMapEditor extends javax.swing.JPanel {
     }
     
     protected void setTownMapImage(BufferedImage image){
+        if (mapImage != null && Objects.equals(image, ((ImageIcon)mapImage.getIcon()).getImage()))
+            return;
         displayLabel.setIcon(null);
         scaleCombo.setSelectedItem(1.0);
         if (image != null)
