@@ -1963,8 +1963,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
     private void townMapChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapChangeButtonActionPerformed
         TownMap map = getSelectedTownMap();
-        map.setName(townMapNameField.getText());
-        map.setFileName(townMapFilenameField.getText());
+        if (map != null){
+            map.setName(townMapNameField.getText());
+            map.setFileName(townMapFilenameField.getText());
+        }
     }//GEN-LAST:event_townMapChangeButtonActionPerformed
 
     private void townMapFlyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapFlyToggleActionPerformed
@@ -2015,7 +2017,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
     private void townMapPointRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointRemoveButtonActionPerformed
         TownMap map = getSelectedTownMap();
-        map.getPoints().remove(townMapPoint);
+        if (map != null)
+            map.getPoints().remove(townMapPoint);
     }//GEN-LAST:event_townMapPointRemoveButtonActionPerformed
     
     private void updateTownMapImage(Icon icon, double scale){
