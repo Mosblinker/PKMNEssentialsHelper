@@ -1581,6 +1581,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 }
                 break;
             case(TownMapEditor.SAVE_ACTION_COMMAND):
+                new TownMapSaver(gameProjectFolder).execute();
         }
     }//GEN-LAST:event_townMapEditorActionPerformed
     
@@ -3072,7 +3073,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         @Override
         protected void done(){
-            super.done();
             for (Map.Entry<PkmnSpriteIcon, File> temp : renamedFiles.entrySet()){
                 temp.getKey().setFile(temp.getValue());
             }
@@ -3089,6 +3089,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     }
                 }
             }
+            super.done();
         }
     }
     
@@ -3447,6 +3448,86 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 pbsData = data;
                 townMapEditor.setPBSData(data);
                 jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), true);
+            }
+            super.done();
+        }
+    }
+    
+    private class TownMapSaver extends FileSaver{
+        
+        private File folder = null;
+        
+        private File imageFolder = null;
+        
+        private Map<File, File> targetFiles = new LinkedHashMap<>();
+        
+        private Map<File, File> copiedFiles = new LinkedHashMap<>();
+        
+        private int index = 0;
+        
+        private int stage = 0;
+        
+
+        public TownMapSaver(File folder) {
+            super(new File(Objects.requireNonNull(folder),PBSData.PBS_FOLDER+File.separator+TownMap.PBS_FILE));
+            imageFolder = new File(folder,TownMap.MAP_IMAGES_LOCATION);
+            this.folder = folder;
+        }
+        
+        @Override
+        public String getProgressString(){
+            return "Saving Town Maps";
+        }
+
+        @Override
+        protected boolean saveFile(File file) throws IOException {
+            if (!FilesExtended.createDirectories(PkmnHelper.this, imageFolder)){
+                getLogger().log(Level.WARNING, "Failed to create town map image folder");
+                return false;
+            }
+            switch(stage){
+                case(0):
+                    for (Map.Entry<String, File> entry : pbsData.getRegionMapFiles().entrySet()){
+                        File image = new File(imageFolder,entry.getKey());
+                        if (!PkmnHelperUtilities.isSameFile(image, entry.getValue())){
+                            targetFiles.put(entry.getValue(), image);
+                        }
+                    }
+                    progressBar.setMaximum(targetFiles.size()+pbsData.getRegionMaps().size());
+                    index = 0;
+                    stage = 1;
+                case(1):
+                    progressBar.setIndeterminate(false);
+                    targetFiles.keySet().removeAll(copiedFiles.keySet());
+                    for (Map.Entry<File, File> entry : targetFiles.entrySet()){
+                        File temp = entry.getValue();
+                        if (temp.exists()){
+                            temp = FilesExtended.getNextAvailableFilePath(temp);
+                            pbsData.setRegionMapFileName(entry.getValue().getName(), temp.getName());
+                        }
+                        File copy = renameSprite(entry.getKey(),temp,true);
+                        if (copy != entry.getKey()){
+                            copiedFiles.put(entry.getKey(), copy);
+                            progressBar.setValue(progressBar.getValue()+1);
+                        }
+                    }
+                    index = 0;
+                    stage = 2;
+                case(2):
+                    progressBar.setIndeterminate(false);
+                    try(PrintWriter writer = new PrintWriter(file)){
+                        PBSData.writePBSDataFile(writer, pbsData.getRegionMaps(),progressBar);
+                    }
+            }
+            return true;
+        }
+        @Override
+        protected void done(){
+            for (Map.Entry<File, File> entry : copiedFiles.entrySet()){
+                for (Map.Entry<String, File> temp : pbsData.getRegionMapFiles().entrySet()){
+                    if (temp.getValue().equals(entry.getKey()))
+                        temp.setValue(entry.getValue());
+                }
             }
             super.done();
         }
