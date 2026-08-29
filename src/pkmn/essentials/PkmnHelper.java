@@ -1588,9 +1588,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 break;
             case(TownMapEditor.SAVE_ACTION_COMMAND):
                 new TownMapSaver(gameProjectFolder).execute();
-                break;
-            case(TownMapEditor.EDIT_IMAGE_ACTION_COMMAND):
-                
         }
     }//GEN-LAST:event_townMapEditorActionPerformed
     

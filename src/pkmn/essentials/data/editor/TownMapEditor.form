@@ -44,8 +44,6 @@
                               <Component id="filenameEditButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="imageBrowseButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="editImageButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="nameField" max="32767" attributes="0"/>
                       </Group>
@@ -95,7 +93,6 @@
                   <Component id="imageBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="filenameCombo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="filenameEditButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="editImageButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -529,17 +526,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="editImageButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Edit Image"/>
-        <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="EDIT_IMAGE_ACTION_COMMAND" type="code"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editImageButtonActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>
