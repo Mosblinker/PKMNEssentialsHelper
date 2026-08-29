@@ -2565,7 +2565,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateTownMapFlyDestinationElements();
         updateTownMapGameSwitchSpinner();
         updateTownMapPointSaveButton();
-        townMapPointRemoveButton.setEnabled(townMapPointNameField.isEnabled());
+        updateTownMapPointRemoveButton();
+    }
+    
+    private void updateTownMapPointRemoveButton(){
+        TownMap map = getSelectedTownMap();
+        townMapPointRemoveButton.setEnabled(townMapPointNameField.isEnabled() && 
+                map != null && map.getPoints().contains(townMapPoint));
     }
     
     private void updateTownMapFlyDestinationElements(){
