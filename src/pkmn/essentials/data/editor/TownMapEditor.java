@@ -373,6 +373,14 @@ public class TownMapEditor extends javax.swing.JPanel {
         return pbsData;
     }
     
+    public void setPBSData(PBSData data){
+        if (Objects.equals(data, pbsData))
+            return;
+        PBSData old = pbsData;
+        pbsData = data;
+        firePropertyChange("pbsData",old,data);
+    }
+    
     /**
      * This adds the given {@code ActionListener} to this panel.
      * @param l The listener to add.
