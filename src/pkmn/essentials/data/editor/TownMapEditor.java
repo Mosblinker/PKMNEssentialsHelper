@@ -531,11 +531,12 @@ public class TownMapEditor extends javax.swing.JPanel {
         pbsData = data;
         firePropertyChange("pbsData",old,data);
         filenameComboModel.clear();
-        filenameComboModel.add(null);
-        filenameComboModel.addAll(data.getRegionMapFiles().keySet());
         selectComboModel.clear();
-        selectComboModel.addAll(data.getRegionMaps());
-        selectCombo.setSelectedIndex(0);
+        if (data != null){
+            filenameComboModel.add(null);
+            filenameComboModel.addAll(data.getRegionMapFiles().keySet());
+            selectComboModel.addAll(data.getRegionMaps());
+            selectCombo.setSelectedIndex(0);
     }
     
     private void calculateSquares(){
