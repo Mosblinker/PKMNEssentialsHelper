@@ -108,6 +108,8 @@ public class PBSData {
     
     
     
+    private List<TownMap> regions = new ArrayList<>();
+    
     private List<ImageIcon> typeIcons = new ArrayList<>();
     
     private Map<MoveCategory, ImageIcon> moveCategoryIcons = new HashMap<>();
@@ -289,5 +291,31 @@ public class PBSData {
     
     public void loadItems(List<String> lines){
         loadItems(lines,null);
+    }
+    
+    public List<TownMap> getRegionMaps(){
+        return regions;
+    }
+    
+    public void loadRegionMaps(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next map
+            TownMap map = new TownMap();
+            index = map.fromData(lines, index, progressBar);
+            if (map.getID() != null)
+                getRegionMaps().add(map);
+        }
+    }
+    
+    public void loadRegionMaps(List<String> lines){
+        loadRegionMaps(lines,null);
     }
 }
