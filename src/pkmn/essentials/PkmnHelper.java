@@ -1936,7 +1936,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapGameSwitchToggleActionPerformed
 
     private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
-        // TODO add your handling code here:
+        townMapFC.setCurrentDirectory(new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION));
+        if (browseFiles("Select Town Map...",false,townMapFC) == JFileChooser.APPROVE_OPTION){
+            File file = townMapFC.getSelectedFile();
+            BufferedImage image = loadSpriteImage(file);
+            if (image != null){
+                townMapDisplayLabel.setImage(image);
+                townMapImageFile = file;
+                updateTownMapSquareSizeSpinners();
+            }
+        }
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
 
     private void townMapSquareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapSquareSizeSpinnerStateChanged
