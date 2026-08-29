@@ -4,6 +4,7 @@
  */
 package pkmn.essentials;
 
+import components.ArrayComboBoxModel;
 import components.ArrayListModel;
 import components.JColorSelector;
 import components.ListModelList;
@@ -43,6 +44,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
@@ -353,6 +355,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
         
+        jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), false);
+        townMapSelectComboModel.addListDataListener(handler);
+        
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
         if (!PkmnHelperUtilities.getWorkingDirectory().equals(programDir))
@@ -446,6 +451,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jTabbedPane3 = new javax.swing.JTabbedPane();
         recolorSpriteListPanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         recolorReferencePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        townMapEditor = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        townMapSelectCombo = new javax.swing.JComboBox<>();
+        townMapRemoveButton = new javax.swing.JButton();
+        townMapAddButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1016,6 +1026,62 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         jTabbedPane1.addTab("Recolor Sprite", jPanel2);
 
+        jLabel4.setText("Region:");
+
+        townMapSelectCombo.setModel(townMapSelectComboModel);
+        townMapSelectCombo.setEnabled(false);
+        townMapSelectCombo.setRenderer(new TownMapCellRenderer());
+        townMapSelectCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapSelectComboActionPerformed(evt);
+            }
+        });
+
+        townMapRemoveButton.setText("Remove");
+        townMapRemoveButton.setEnabled(false);
+        townMapRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapRemoveButtonActionPerformed(evt);
+            }
+        });
+
+        townMapAddButton.setText("Add");
+        townMapAddButton.setEnabled(false);
+        townMapAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapAddButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout townMapEditorLayout = new javax.swing.GroupLayout(townMapEditor);
+        townMapEditor.setLayout(townMapEditorLayout);
+        townMapEditorLayout.setHorizontalGroup(
+            townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(townMapEditorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(townMapSelectCombo, 0, 812, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(townMapAddButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(townMapRemoveButton)
+                .addContainerGap())
+        );
+        townMapEditorLayout.setVerticalGroup(
+            townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(townMapEditorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(townMapSelectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(townMapRemoveButton)
+                    .addComponent(townMapAddButton))
+                .addContainerGap(450, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Town Maps", townMapEditor);
+
         jLabel3.setText("Game Project Folder:");
 
         gameBrowseButton.setText("Browse");
@@ -1518,6 +1584,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorDesaturateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorDesaturateButtonActionPerformed
         showRecolorChangeDialog(recolorDesaturateChange);
     }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
+
+    private void townMapRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapRemoveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapRemoveButtonActionPerformed
+
+    private void townMapAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapAddButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapAddButtonActionPerformed
+
+    private void townMapSelectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSelectComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapSelectComboActionPerformed
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -2066,6 +2144,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 !gameFolderField.getText().isBlank());
         spriteUseGameToggle.setEnabled(gameFolderField.isEnabled() && gameProjectFolder != null);
     }
+    
+    private void updateTownMapConfigElements(){
+        townMapAddButton.setEnabled(isEnabled() && pbsData != null);
+        townMapSelectCombo.setEnabled(townMapAddButton.isEnabled() && !townMapSelectComboModel.isEmpty());
+        townMapRemoveButton.setEnabled(townMapAddButton.isEnabled() && townMapSelectCombo.getSelectedIndex() >= 0);
+    }
     @Override
     public void setInputEnabled(boolean enabled) {
         inputEnabled = enabled;
@@ -2090,6 +2174,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameFolderField.setEnabled(enabled);
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
+        updateTownMapConfigElements();
     }
     @Override
     public boolean isInputEnabled() {
@@ -2163,6 +2248,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private File gameProjectFolder = null;
     
     private PBSData pbsData = null;
+    
+    private ArrayComboBoxModel<TownMap> townMapSelectComboModel = new ArrayComboBoxModel<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -2197,6 +2284,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -2256,6 +2344,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JCheckBox spriteUseGameToggle;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
+    private javax.swing.JButton townMapAddButton;
+    private javax.swing.JPanel townMapEditor;
+    private javax.swing.JButton townMapRemoveButton;
+    private javax.swing.JComboBox<TownMap> townMapSelectCombo;
     // End of variables declaration//GEN-END:variables
 
     private void documentUpdate(DocumentEvent evt){
@@ -2291,6 +2383,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 updateRecolorPaletteButtons();
             } else if (evt.getSource() == recolorSpriteListPanel){
                 updateRecolorSaveButton();
+            } else if (evt.getSource() == townMapSelectComboModel){
+                updateTownMapConfigElements();
             } else 
                 updateSpriteApplyButton();
         }
@@ -2300,6 +2394,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 updateRecolorPaletteButtons();
             } else if (evt.getSource() == recolorSpriteListPanel){
                 updateRecolorSaveButton();
+            } else if (evt.getSource() == townMapSelectComboModel){
+                updateTownMapConfigElements();
             } else 
                 updateSpriteApplyButton();
         }
@@ -2309,6 +2405,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 updateRecolorPaletteButtons();
             } else if (evt.getSource() == recolorSpriteListPanel){
                 updateRecolorSaveButton();
+            } else if (evt.getSource() == townMapSelectComboModel){
+                updateTownMapConfigElements();
             } else 
                 updateSpriteApplyButton();
         }
@@ -2337,6 +2435,19 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 recolorSpriteListPanel.repaint();
         }
         
+    }
+    
+    private class TownMapCellRenderer extends DefaultListCellRenderer{
+        @Override
+        public Component getListCellRendererComponent(JList<?> list,Object value,
+                int index,boolean isSelected,boolean cellHasFocus){
+            if (value instanceof TownMap){
+                TownMap map = (TownMap) value;
+                value = "["+map.getRegionNumber()+"]: " + Objects.toString(map.getName(),"");
+            }
+            return super.getListCellRendererComponent(list, value, index, 
+                    isSelected, cellHasFocus);
+        }
     }
     /**
      * 
@@ -3435,6 +3546,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         protected void done(){
             if (success){
                 pbsData = data;
+                townMapSelectComboModel.clear();
+                townMapSelectComboModel.addAll(data.getRegionMaps());
+                townMapSelectCombo.setSelectedIndex(0);
+                jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), true);
             }
             super.done();
         }
