@@ -5,6 +5,7 @@
 package pkmn.essentials.data.editor;
 
 import components.ArrayComboBoxModel;
+import icons.ScaledIcon;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -518,6 +519,14 @@ public class TownMapEditor extends javax.swing.JPanel {
     private ArrayComboBoxModel<Double> scaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
     
     private PBSData pbsData = null;
+    
+    private ScaledIcon mapImage = null;
+    
+    private TownMap.MapPoint mapPoint = null;
+    
+    private int squareRows = -1;
+    
+    private int squareCols = -1;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
