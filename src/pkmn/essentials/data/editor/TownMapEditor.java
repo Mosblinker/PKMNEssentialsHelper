@@ -189,7 +189,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             }
         });
 
-        imageBrowseButton.setText("Browse For image");
+        imageBrowseButton.setText("Browse For Image");
         imageBrowseButton.setActionCommand(BROWSE_ACTION_COMMAND);
         imageBrowseButton.setEnabled(false);
         imageBrowseButton.addActionListener(new java.awt.event.ActionListener() {

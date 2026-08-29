@@ -233,7 +233,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="imageBrowseButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Browse For image"/>
+        <Property name="text" type="java.lang.String" value="Browse For Image"/>
         <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="BROWSE_ACTION_COMMAND" type="code"/>
         </Property>
