@@ -26,10 +26,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import static pkmn.essentials.PkmnHelper.getLogger;
 import pkmn.essentials.colorchooser.CustomColorPreviewPanel;
 
 /**
@@ -382,5 +384,16 @@ public final class PkmnHelperUtilities {
                     StandardCopyOption.REPLACE_EXISTING);
         }
         return Files.move(source, target);
+    }
+    
+    public static boolean isSameFile(File file1, File file2){
+        if (Objects.equals(file1, file2))
+            return true;
+        try{
+            return Files.isSameFile(file1.toPath(), file2.toPath());
+        } catch (IOException ex){
+            getLogger().log(Level.WARNING, "Error occurred while checking files", ex);
+            return false;
+        }
     }
 }
