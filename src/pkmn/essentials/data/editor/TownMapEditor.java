@@ -636,6 +636,13 @@ public class TownMapEditor extends javax.swing.JPanel {
 //        squareHeightSpinner.setEnabled(squareWidthSpinner.isEnabled());
     }
     
+    private void updateFileNameElements(){
+        filenameCombo.setEnabled(isTownMapSelectedEnabled() && filenameComboModel.size() > 1);
+        filenameEditButton.setEnabled(filenameCombo.isEnabled() && 
+                filenameCombo.getSelectedIndex() > 0);
+        updateChangeButton();
+    }
+    
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
     private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
