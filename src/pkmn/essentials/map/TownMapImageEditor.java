@@ -6,6 +6,7 @@ package pkmn.essentials.map;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -214,8 +215,17 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         }
     }
     
+    public BufferedImage getImage(){
+        return image;
+    }
+    
+    public void setImage(BufferedImage image){
+        this.image = image;
+    }
     
     
+    
+    private BufferedImage image = null;
     
     
     
