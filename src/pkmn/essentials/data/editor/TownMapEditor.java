@@ -268,6 +268,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         pointRemoveButton.setText("Remove");
         pointRemoveButton.setEnabled(false);
+        pointRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pointRemoveButtonActionPerformed(evt);
+            }
+        });
 
         pointCoordsField.setEditable(false);
 
@@ -509,6 +514,12 @@ public class TownMapEditor extends javax.swing.JPanel {
     private void gameSwitchToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameSwitchToggleActionPerformed
         updateGameSwitchSpinner();
     }//GEN-LAST:event_gameSwitchToggleActionPerformed
+
+    private void pointRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointRemoveButtonActionPerformed
+        TownMap map = getSelectedTownMap();
+        if (map != null)
+            map.getPoints().remove(mapPoint);
+    }//GEN-LAST:event_pointRemoveButtonActionPerformed
     
     
     
