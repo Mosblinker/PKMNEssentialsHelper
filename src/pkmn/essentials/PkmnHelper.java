@@ -2038,7 +2038,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         else
             townMapPoint.setGameSwitch(null);
         TownMap map = getSelectedTownMap();
-        if (map.getPoints().contains(townMapPoint))
+        if (!map.getPoints().contains(townMapPoint))
             map.getPoints().add(townMapPoint);
         updateTownMapPointRemoveButton();
     }//GEN-LAST:event_townMapPointSaveButtonActionPerformed
