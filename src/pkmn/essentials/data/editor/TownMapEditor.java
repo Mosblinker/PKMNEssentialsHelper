@@ -492,7 +492,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         } else {
             nameField.setText(map.getName());
             fileName = map.getFileName();
-            if (fileName.isBlank()){
+            if (fileName != null && fileName.isBlank()){
                 map.setFileName(null);
                 fileName = null;
             }
