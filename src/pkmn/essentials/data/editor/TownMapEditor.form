@@ -338,11 +338,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="flyYSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="mapGameSwitchToggle" min="-2" max="-2" attributes="0"/>
+                          <Component id="gameSwitchToggle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="switchSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                           <EmptySpace pref="100" max="32767" attributes="0"/>
-                          <Component id="mapPointSaveButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="pointSaveButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pointRemoveButton" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -379,8 +379,8 @@
                       <Component id="flyYSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="switchSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="flyToggle" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="mapGameSwitchToggle" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="mapPointSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="gameSwitchToggle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pointSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="pointRemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -479,13 +479,13 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="mapGameSwitchToggle">
+        <Component class="javax.swing.JCheckBox" name="gameSwitchToggle">
           <Properties>
             <Property name="text" type="java.lang.String" value="Game Switch:"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="mapPointSaveButton">
+        <Component class="javax.swing.JButton" name="pointSaveButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save"/>
             <Property name="enabled" type="boolean" value="false"/>

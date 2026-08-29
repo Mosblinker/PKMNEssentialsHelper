@@ -103,8 +103,8 @@ public class TownMapEditor extends javax.swing.JPanel {
         flyYSpinner = new javax.swing.JSpinner();
         switchSpinner = new javax.swing.JSpinner();
         flyToggle = new javax.swing.JCheckBox();
-        mapGameSwitchToggle = new javax.swing.JCheckBox();
-        mapPointSaveButton = new javax.swing.JButton();
+        gameSwitchToggle = new javax.swing.JCheckBox();
+        pointSaveButton = new javax.swing.JButton();
         pointRemoveButton = new javax.swing.JButton();
         pointCoordsField = new javax.swing.JTextField();
 
@@ -250,11 +250,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         flyToggle.setText("Fly Destination: ");
         flyToggle.setEnabled(false);
 
-        mapGameSwitchToggle.setText("Game Switch:");
-        mapGameSwitchToggle.setEnabled(false);
+        gameSwitchToggle.setText("Game Switch:");
+        gameSwitchToggle.setEnabled(false);
 
-        mapPointSaveButton.setText("Save");
-        mapPointSaveButton.setEnabled(false);
+        pointSaveButton.setText("Save");
+        pointSaveButton.setEnabled(false);
 
         pointRemoveButton.setText("Remove");
         pointRemoveButton.setEnabled(false);
@@ -288,11 +288,11 @@ public class TownMapEditor extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(flyYSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(mapGameSwitchToggle)
+                        .addComponent(gameSwitchToggle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(switchSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                        .addComponent(mapPointSaveButton)
+                        .addComponent(pointSaveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pointRemoveButton))
                     .addComponent(pointCoordsField))
@@ -322,8 +322,8 @@ public class TownMapEditor extends javax.swing.JPanel {
                     .addComponent(flyYSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(switchSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(flyToggle)
-                    .addComponent(mapGameSwitchToggle)
-                    .addComponent(mapPointSaveButton)
+                    .addComponent(gameSwitchToggle)
+                    .addComponent(pointSaveButton)
                     .addComponent(pointRemoveButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -705,6 +705,7 @@ public class TownMapEditor extends javax.swing.JPanel {
     private javax.swing.JCheckBox flyToggle;
     private javax.swing.JSpinner flyXSpinner;
     private javax.swing.JSpinner flyYSpinner;
+    private javax.swing.JCheckBox gameSwitchToggle;
     private javax.swing.JButton imageBrowseButton;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -720,13 +721,12 @@ public class TownMapEditor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JButton mapChangeButton;
-    private javax.swing.JCheckBox mapGameSwitchToggle;
-    private javax.swing.JButton mapPointSaveButton;
     private javax.swing.JTextField nameField;
     private javax.swing.JTextField pointCoordsField;
     private javax.swing.JTextField pointNameField;
     private javax.swing.JTextField pointPoiField;
     private javax.swing.JButton pointRemoveButton;
+    private javax.swing.JButton pointSaveButton;
     private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JComboBox<Double> scaleCombo;
