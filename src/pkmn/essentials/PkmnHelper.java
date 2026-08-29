@@ -1539,7 +1539,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void townMapEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapEditorActionPerformed
         switch(evt.getActionCommand()){
             case(TownMapEditor.BROWSE_ACTION_COMMAND):
-                
+                File imageFolder = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
+                townMapFC.setCurrentDirectory(imageFolder);
+                if (browseFiles("Select Town Map...",false,townMapFC) == JFileChooser.APPROVE_OPTION){
+                    File file = townMapFC.getSelectedFile();
+                    String match = null;
+                    for (Map.Entry<String,File> entry : pbsData.getRegionMapFiles().entrySet()){
+                        if (PkmnHelperUtilities.isSameFile(entry.getValue(), file)){
+                            match = entry.getKey();
+                            break;
+                        }
+                    }
+                    if (match != null){
+                        JOptionPane.showMessageDialog(this, "This image is already loaded as\n"+
+                                match, "File Already Loaded", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        BufferedImage image = loadSpriteImage(file);
+                        if (image != null){
+                            String name = file.getName();
+                            pbsData.putRegionMapFile(name, file, image);
+                            townMapEditor.getRegionFileNames().add(name);
+                            townMapEditor.setSelectedRegionFileName(name);
+                        }
+                    }
+                }
+                break;
             case(TownMapEditor.SAVE_ACTION_COMMAND):
         }
     }//GEN-LAST:event_townMapEditorActionPerformed
