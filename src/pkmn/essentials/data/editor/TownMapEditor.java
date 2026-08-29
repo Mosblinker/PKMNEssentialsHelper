@@ -569,8 +569,50 @@ public class TownMapEditor extends javax.swing.JPanel {
         scaleCombo.setSelectedItem(1.0);
         if (image != null)
             updateTownMapImage(new ImageIcon(image),1);
+        loadMapPoint(null);
         calculateSquares();
         updateImageElements();
+    }
+    
+    private void loadMapPoint(TownMap.MapPoint point){
+        mapPoint = point;
+        if (point == null){
+            pointCoordsField.setText("");
+            pointNameField.setText("");
+            pointPoiField.setText("");
+            flyToggle.setSelected(false);
+            flyIDSpinner.setValue(0);
+            flyXSpinner.setValue(0);
+            flyYSpinner.setValue(0);
+            gameSwitchToggle.setSelected(false);
+            switchSpinner.setValue(0);
+        } else {
+            pointCoordsField.setText(String.format("(%d, %d)", point.getX(),point.getY()));
+            pointNameField.setText(point.getName());
+            pointPoiField.setText(point.getPointOfInterest());
+            flyToggle.setSelected(point.getFlyDestinationMapID() != null);
+            if (flyToggle.isSelected()){
+                flyIDSpinner.setValue(point.getFlyDestinationMapID());
+                if (point.getFlyDestinationX() == null)
+                    point.setFlyDestinationX(0);
+                flyXSpinner.setValue(point.getFlyDestinationX());
+                if (point.getFlyDestinationY() == null)
+                    point.setFlyDestinationY(0);
+                flyYSpinner.setValue(point.getFlyDestinationY());
+            } else {
+                flyIDSpinner.setValue(0);
+                flyXSpinner.setValue(0);
+                flyYSpinner.setValue(0);
+                point.clearFlyDestination();
+            }
+            gameSwitchToggle.setSelected(point.getGameSwitch() != null);
+            if (gameSwitchToggle.isSelected())
+                switchSpinner.setValue(point.getGameSwitch());
+            else
+                switchSpinner.setValue(0);
+        }
+        displayLabel.repaint();
+        updatePointElements();
     }
     
     public PBSData getPBSData(){
