@@ -1942,7 +1942,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapSaveButtonActionPerformed
 
     private void townMapChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapChangeButtonActionPerformed
-        // TODO add your handling code here:
+        TownMap map = getSelectedTownMap();
+        map.setName(townMapNameField.getText());
+        map.setFileName(townMapFilenameField.getText());
     }//GEN-LAST:event_townMapChangeButtonActionPerformed
 
     private void townMapFlyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapFlyToggleActionPerformed
