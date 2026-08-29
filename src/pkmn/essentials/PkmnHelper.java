@@ -2013,6 +2013,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             BufferedImage image = loadSpriteImage(file);
             if (image != null){
                 setTownMapImage(image,file);
+                townMapFilenameField.setText(file.getName());
             }
         }
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
