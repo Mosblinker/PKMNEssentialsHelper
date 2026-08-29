@@ -456,6 +456,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapSelectCombo = new javax.swing.JComboBox<>();
         townMapRemoveButton = new javax.swing.JButton();
         townMapAddButton = new javax.swing.JButton();
+        townMapDisplayLabel = new components.JThumbnailLabel();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1053,19 +1054,28 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
+        townMapDisplayLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                townMapDisplayLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout townMapEditorLayout = new javax.swing.GroupLayout(townMapEditor);
         townMapEditor.setLayout(townMapEditorLayout);
         townMapEditorLayout.setHorizontalGroup(
             townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(townMapEditorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(townMapSelectCombo, 0, 812, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(townMapAddButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(townMapRemoveButton)
+                .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(townMapDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(townMapEditorLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(townMapSelectCombo, 0, 812, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(townMapAddButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(townMapRemoveButton)))
                 .addContainerGap())
         );
         townMapEditorLayout.setVerticalGroup(
@@ -1077,7 +1087,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(townMapSelectCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(townMapRemoveButton)
                     .addComponent(townMapAddButton))
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(townMapDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Town Maps", townMapEditor);
@@ -1603,8 +1615,24 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapAddButtonActionPerformed
 
     private void townMapSelectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSelectComboActionPerformed
-        // TODO add your handling code here:
+        int selection = townMapSelectCombo.getSelectedIndex();
+        if (selection < 0)
+            return;
+        TownMap map = townMapSelectComboModel.get(selection);
+        if (map.getFileName() != null){
+            File file = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
+            file = new File(file,map.getFileName());
+            BufferedImage image = loadSpriteImage(file);
+            if (image != null)
+                townMapDisplayLabel.setImage(image);
+        }
     }//GEN-LAST:event_townMapSelectComboActionPerformed
+
+    private void townMapDisplayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapDisplayLabelMouseClicked
+    
+    
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -2354,6 +2382,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
     private javax.swing.JButton townMapAddButton;
+    private components.JThumbnailLabel townMapDisplayLabel;
     private javax.swing.JPanel townMapEditor;
     private javax.swing.JButton townMapRemoveButton;
     private javax.swing.JComboBox<TownMap> townMapSelectCombo;
