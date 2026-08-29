@@ -90,6 +90,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         selectCombo.setModel(selectComboModel);
         selectCombo.setEnabled(false);
         selectCombo.setRenderer(new TownMapCellRenderer());
+        selectCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectComboActionPerformed(evt);
+            }
+        });
 
         addButton.setText("Add");
         addButton.setEnabled(false);
@@ -388,6 +393,22 @@ public class TownMapEditor extends javax.swing.JPanel {
             map.setRegionNumber(map.getRegionNumber()-1);
         }
     }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void selectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectComboActionPerformed
+        TownMap map = getSelectedTownMap();
+        String fileName = null;
+        if (map == null){
+            nameField.setText("");
+        } else {
+            nameField.setText(map.getName());
+            fileName = map.getFileName();
+            if (fileName.isBlank()){
+                map.setFileName(null);
+                fileName = null;
+            }
+        }
+        filenameCombo.setSelectedItem(fileName);
+    }//GEN-LAST:event_selectComboActionPerformed
     
     
     
