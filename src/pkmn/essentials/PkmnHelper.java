@@ -2034,6 +2034,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (image != null)
             updateTownMapImage(new ImageIcon(image),1);
         townMapImageFile = file;
+        loadMapPoint(null);
         calculateTownSquares();
         updateTownMapImageElements();
     }
@@ -2085,27 +2086,42 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private void loadMapPoint(TownMap.MapPoint point){
         townMapPoint = point;
-        townMapCoordsField.setText(String.format("(%d, %d)", point.getX(),point.getY()));
-        townMapPointNameField.setText(point.getName());
-        townMapPointPoiField.setText(point.getPointOfInterest());
-        townMapFlyToggle.setSelected(point.getFlyDestinationMapID() != null);
-        if (townMapFlyToggle.isSelected()){
-            townMapFlyIDSpinner.setValue(point.getFlyDestinationMapID());
-            if (point.getFlyDestinationX() == null)
-                point.setFlyDestinationX(0);
-            townMapFlyXSpinner.setValue(point.getFlyDestinationX());
-            if (point.getFlyDestinationY() == null)
-                point.setFlyDestinationY(0);
-            townMapFlyYSpinner.setValue(point.getFlyDestinationY());
-        } else {
+        if (point == null){
+            townMapCoordsField.setText("");
+            townMapPointNameField.setText("");
+            townMapPointPoiField.setText("");
+            townMapFlyToggle.setSelected(false);
             townMapFlyIDSpinner.setValue(0);
             townMapFlyXSpinner.setValue(0);
             townMapFlyYSpinner.setValue(0);
-            point.clearFlyDestination();
+            townMapGameSwitchToggle.setSelected(false);
+            townMapSwitchSpinner.setValue(0);
+        } else {
+            townMapCoordsField.setText(String.format("(%d, %d)", point.getX(),point.getY()));
+            townMapPointNameField.setText(point.getName());
+            townMapPointPoiField.setText(point.getPointOfInterest());
+            townMapFlyToggle.setSelected(point.getFlyDestinationMapID() != null);
+            if (townMapFlyToggle.isSelected()){
+                townMapFlyIDSpinner.setValue(point.getFlyDestinationMapID());
+                if (point.getFlyDestinationX() == null)
+                    point.setFlyDestinationX(0);
+                townMapFlyXSpinner.setValue(point.getFlyDestinationX());
+                if (point.getFlyDestinationY() == null)
+                    point.setFlyDestinationY(0);
+                townMapFlyYSpinner.setValue(point.getFlyDestinationY());
+            } else {
+                townMapFlyIDSpinner.setValue(0);
+                townMapFlyXSpinner.setValue(0);
+                townMapFlyYSpinner.setValue(0);
+                point.clearFlyDestination();
+            }
+            townMapGameSwitchToggle.setSelected(point.getGameSwitch() != null);
+            if (townMapGameSwitchToggle.isSelected())
+                townMapSwitchSpinner.setValue(point.getGameSwitch());
+            else
+                townMapSwitchSpinner.setValue(0);
         }
-        townMapGameSwitchToggle.setSelected(point.getGameSwitch() != null);
-        if (townMapGameSwitchToggle.isSelected())
-            townMapSwitchSpinner.setValue(point.getGameSwitch());
+        townMapDisplayLabel.repaint();
         updateTownMapPointElements();
     }
     
