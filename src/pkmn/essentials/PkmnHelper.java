@@ -7,6 +7,7 @@ package pkmn.essentials;
 import components.ArrayComboBoxModel;
 import components.ArrayListModel;
 import components.JColorSelector;
+import components.JThumbnailLabel;
 import components.ListModelList;
 import components.disable.DisableGUIInput;
 import components.progress.JProgressDisplayMenu;
@@ -20,10 +21,13 @@ import icons.ScaledIcon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -186,6 +190,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     public static final String DROPPER_CURSOR_IMAGE = "/images/dropper.png";
     
     public static final String DATA_FOLDER = "data";
+    
+    private static final Color TOWN_MAP_GRID_COLOR = new Color(0x80000000, true);
+    
+    private static final Color TOWN_MAP_POINT_COLOR = new Color(0x40000000, true);
+    
+    private static final Color TOWN_MAP_SELECTED_POINT_COLOR = new Color(0x800078D7, true);
     
     /**
      * This is a logger used to log messages for the program.
@@ -363,6 +373,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapPointNameField.getDocument().addDocumentListener(handler);
         townMapNameField.getDocument().addDocumentListener(handler);
         townMapFilenameField.getDocument().addDocumentListener(handler);
+        townMapDisplayLabel.setThumbnailOverlay(townMapSquareOverlay);
         
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
@@ -2784,6 +2795,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private ArrayComboBoxModel<Double> townMapScaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
     
+    private TownMapSquareOverlay townMapSquareOverlay = new TownMapSquareOverlay();
+    
     private int townMapSquareRows = -1;
     
     private int townMapSquareCols = -1;
@@ -3010,7 +3023,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             if (dialog.isPreviewShown())
                 recolorSpriteListPanel.repaint();
         }
-        
     }
     
     private class TownMapCellRenderer extends DefaultListCellRenderer{
@@ -3023,6 +3035,86 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
             return super.getListCellRendererComponent(list, value, index, 
                     isSelected, cellHasFocus);
+        }
+    }
+    
+    private class TownMapSquareOverlay implements Painter<JThumbnailLabel>{
+        
+        private Rectangle2D rect = null;
+        
+        private Path2D path = null;
+
+        @Override
+        public void paint(Graphics2D g, JThumbnailLabel object, int width, int height) {
+            TownMap map = getSelectedTownMap();
+            if (map == null || townMapImage == null || townMapSquareCols == -1 || townMapSquareRows == -1)
+                return;
+            g = (Graphics2D) g.create();
+            if (path == null)
+                path = new Path2D.Double();
+            else
+                path.reset();
+            if (rect == null)
+                rect = new Rectangle2D.Double();
+            double squareW = width / (double) townMapSquareCols;
+            double squareH = height / (double) townMapSquareRows;
+            int pointXOff = 0;
+            int pointYOff = 0;
+            if (squareW >= 5)
+                pointXOff = 2;
+            else if (squareW >= 3)
+                pointXOff = 1;
+            if (squareH >= 5)
+                pointYOff = 2;
+            else if (squareH >= 3)
+                pointYOff = 1;
+            g.setColor(TOWN_MAP_POINT_COLOR);
+            for (TownMap.MapPoint point : map.getPoints()){
+                if (!point.equals(townMapPoint)){
+                    drawTownMapPoint(g,point,pointXOff,pointYOff,squareW,squareH,false);
+                }
+            }
+            if (townMapPoint != null){
+                g.setColor(TOWN_MAP_SELECTED_POINT_COLOR);
+                drawTownMapPoint(g,townMapPoint,pointXOff,pointYOff,squareW,squareH,true);
+            }
+            g.setColor(TOWN_MAP_GRID_COLOR);
+            rect.setFrame(0, 0, width-1, height-1);
+            path.append(rect, false);
+            for (int r = 1; r < townMapSquareRows; r++){
+                double y = squareH * r;
+                path.moveTo(0, y);
+                path.lineTo(width-1, y);
+            }
+            for (int c = 1; c < townMapSquareCols; c++){
+                double x = squareW * c;
+                path.moveTo(x, 0);
+                path.lineTo(x, height-1);
+            }
+            g.draw(path);
+            g.dispose();
+        }
+        
+        private void drawTownMapPoint(Graphics2D g, TownMap.MapPoint point, 
+                double xOff, double yOff, double w, double h, boolean selected){
+            double x = point.getX() * w + xOff;
+            double y = point.getY() * h + yOff;
+            w -= xOff + xOff;
+            h -= yOff + yOff;
+            rect.setFrame(x, y, w, h);
+            g.fill(rect);
+            if (w >= 3 && h >= 3){
+                g.draw(rect);
+                if (selected && w >= 5 && h >= 5){
+                    // Make the size of the center variable to size of the square
+                    double cornerX = rect.getCenterX();
+                    double cornerY = rect.getCenterY();
+                    rect.setFrameFromCenter(rect.getCenterX(), rect.getCenterY(), cornerX, cornerY);
+                    g.fill(rect);
+                }
+            } else {
+                g.fill(rect);
+            }
         }
     }
     /**
