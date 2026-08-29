@@ -1108,6 +1108,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         jLabel7.setText("Square Size (Pixels):");
 
+        townMapSquareWidthSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         townMapSquareWidthSpinner.setEnabled(false);
 
         townMapImageBrowseButton.setText("Browse For image");
@@ -1115,16 +1116,19 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         jLabel12.setText("x");
 
+        townMapSquareHeightSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         townMapSquareHeightSpinner.setEnabled(false);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Point"));
 
         jLabel8.setText("Current Position:");
 
+        townMapPosXSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapPosXSpinner.setEnabled(false);
 
         jLabel13.setText(",");
 
+        townMapPosYSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapPosYSpinner.setEnabled(false);
 
         jLabel18.setLabelFor(townMapSwitchSpinner);
@@ -1145,16 +1149,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jLabel14.setLabelFor(townMapFlyIDSpinner);
         jLabel14.setText("Map ID:");
 
+        townMapFlyIDSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapFlyIDSpinner.setEnabled(false);
 
         jLabel15.setText(", Position:");
 
+        townMapFlyXSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapFlyXSpinner.setEnabled(false);
 
         jLabel17.setText(",");
 
+        townMapFlyYSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapFlyYSpinner.setEnabled(false);
 
+        townMapSwitchSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         townMapSwitchSpinner.setEnabled(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
