@@ -10,13 +10,17 @@ import icons.ScaledIcon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.Painter;
 import javax.swing.event.DocumentEvent;
@@ -154,6 +158,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         filenameCombo.setModel(filenameComboModel);
         filenameCombo.setEnabled(false);
+        filenameCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filenameComboActionPerformed(evt);
+            }
+        });
 
         filenameEditButton.setText("Edit");
         filenameEditButton.setEnabled(false);
@@ -443,6 +452,12 @@ public class TownMapEditor extends javax.swing.JPanel {
     private void squareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_squareSizeSpinnerStateChanged
         calculateSquares();
     }//GEN-LAST:event_squareSizeSpinnerStateChanged
+
+    private void filenameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filenameComboActionPerformed
+        setTownMapImage(pbsData.getRegionMapImages().get(
+                filenameComboModel.get(filenameCombo.getSelectedIndex())));
+        updateFileNameElements();
+    }//GEN-LAST:event_filenameComboActionPerformed
     
     
     
@@ -487,6 +502,22 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     public List<String> getRegionFileNames(){
         return filenameComboModel;
+    }
+    
+    private void updateTownMapImage(Icon icon, double scale){
+        mapImage = new ScaledIcon(icon,scale);
+        if (scale > 1.0)
+            mapImage.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+        displayLabel.setIcon(mapImage);
+    }
+    
+    protected void setTownMapImage(BufferedImage image){
+        displayLabel.setIcon(null);
+        scaleCombo.setSelectedItem(1.0);
+        if (image != null)
+            updateTownMapImage(new ImageIcon(image),1);
+        calculateSquares();
+        updateImageElements();
     }
     
     public PBSData getPBSData(){
@@ -595,6 +626,12 @@ public class TownMapEditor extends javax.swing.JPanel {
         removeButton.setEnabled(isTownMapSelectedEnabled());
         nameField.setEnabled(removeButton.isEnabled());
         imageBrowseButton.setEnabled(removeButton.isEnabled());
+    }
+    
+    private void updateImageElements(){
+        scaleCombo.setEnabled(isEnabled() && displayLabel.getIcon() != null);
+//        squareWidthSpinner.setEnabled(scaleCombo.isEnabled());
+//        squareHeightSpinner.setEnabled(squareWidthSpinner.isEnabled());
     }
     
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
