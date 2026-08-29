@@ -693,12 +693,16 @@ public class TownMapEditor extends javax.swing.JPanel {
     }
     
     protected void setTownMapImage(BufferedImage image){
+        if (mapImage == null && image == null)
+            return;
         if (mapImage != null && Objects.equals(image, ((ImageIcon)mapImage.getIcon()).getImage()))
             return;
         displayLabel.setIcon(null);
         scaleCombo.setSelectedItem(1.0);
         if (image != null)
             updateTownMapImage(new ImageIcon(image),1);
+        else
+            mapImage = null;
         loadMapPoint(null);
         calculateSquares();
         updateImageElements();
