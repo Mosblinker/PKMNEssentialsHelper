@@ -130,12 +130,12 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
             MapPoint point = new MapPoint(x,y,values[2].trim());
             if (values.length > 3)
                 point.setPointOfInterest(values[3].trim());
-            if (values.length > 4){
+            if (values.length > 4 && !values[4].isBlank() && !values[5].isBlank() && !values[6].isBlank()){
                 point.setFlyDestination(Integer.parseInt(values[5].trim()), 
                         Integer.parseInt(values[6].trim()), 
                         Integer.parseInt(values[4].trim()));
             }
-            if (values.length > 7)
+            if (values.length > 7 && !values[7].isBlank())
                 point.setGameSwitch(Integer.valueOf(values[7].trim()));
             return point;
         }
