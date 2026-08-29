@@ -31,6 +31,23 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
     
     private List<MapPoint> points = new ArrayList<>();
     
+    public TownMap(){
+        super();
+    }
+    
+    public TownMap(int regionNumber){
+        super();
+        TownMap.this.setRegionNumber(regionNumber);
+    }
+    
+    public TownMap(TownMap map){
+        super(map);
+        this.regionNumber = map.regionNumber;
+        this.fileName = map.fileName;
+        for (MapPoint point : map.points)
+            this.points.add(new MapPoint(point));
+    }
+    
     @Override
     public void setID(String id){
         setRegionNumber(Integer.parseInt(Objects.requireNonNull(id)));
@@ -149,6 +166,15 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
         public MapPoint(int x, int y, String name){
             this(x,y);
             this.name = name;
+        }
+        
+        public MapPoint(MapPoint point){
+            this(point.x,point.y,point.name);
+            this.poi = point.poi;
+            this.flyMap = point.flyMap;
+            this.flyX = point.flyX;
+            this.flyY = point.flyY;
+            this.gameSwitch = point.gameSwitch;
         }
         
         public int getX(){
