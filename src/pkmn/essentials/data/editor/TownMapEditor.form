@@ -114,6 +114,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="selectCombo"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Region:"/>
       </Properties>
     </Component>
@@ -173,6 +176,9 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="nameField"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Region Name:"/>
       </Properties>
     </Component>
@@ -183,6 +189,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="filenameCombo"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Map Filename:"/>
       </Properties>
     </Component>
@@ -243,6 +252,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="scaleCombo"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Scale:"/>
       </Properties>
     </Component>
@@ -358,11 +370,17 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="pointCoordsField"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Coordinates:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="pointNameField"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Name:"/>
           </Properties>
         </Component>
@@ -373,6 +391,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="pointPoiField"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Point of Interest:"/>
           </Properties>
         </Component>
@@ -383,6 +404,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="flyIDSpinner"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Map ID:"/>
           </Properties>
         </Component>

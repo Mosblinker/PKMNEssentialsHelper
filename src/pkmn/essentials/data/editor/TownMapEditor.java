@@ -84,6 +84,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         pointRemoveButton = new javax.swing.JButton();
         pointCoordsField = new javax.swing.JTextField();
 
+        jLabel4.setLabelFor(selectCombo);
         jLabel4.setText("Region:");
 
         selectCombo.setModel(townMapSelectComboModel);
@@ -109,10 +110,12 @@ public class TownMapEditor extends javax.swing.JPanel {
         displayLabel.setThumbnailBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         scrollPane.setViewportView(displayLabel);
 
+        jLabel5.setLabelFor(nameField);
         jLabel5.setText("Region Name:");
 
         nameField.setEnabled(false);
 
+        jLabel6.setLabelFor(filenameCombo);
         jLabel6.setText("Map Filename:");
 
         filenameCombo.setModel(townMapFilenameComboModel);
@@ -140,6 +143,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         squareHeightSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         squareHeightSpinner.setEnabled(false);
 
+        jLabel11.setLabelFor(scaleCombo);
         jLabel11.setText("Scale:");
 
         scaleCombo.setModel(townMapScaleModel);
@@ -152,16 +156,20 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Point"));
 
+        jLabel8.setLabelFor(pointCoordsField);
         jLabel8.setText("Coordinates:");
 
+        jLabel9.setLabelFor(pointNameField);
         jLabel9.setText("Name:");
 
         pointNameField.setEnabled(false);
 
+        jLabel10.setLabelFor(pointPoiField);
         jLabel10.setText("Point of Interest:");
 
         pointPoiField.setEnabled(false);
 
+        jLabel14.setLabelFor(flyIDSpinner);
         jLabel14.setText("Map ID:");
 
         flyIDSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
