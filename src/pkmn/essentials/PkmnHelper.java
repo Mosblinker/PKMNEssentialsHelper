@@ -1906,26 +1906,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapSelectComboModel.add(map);
         townMapSelectCombo.setSelectedIndex(map.getRegionNumber());
     }//GEN-LAST:event_townMapAddButtonActionPerformed
-
-    private void townMapSelectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSelectComboActionPerformed
+    
+    private TownMap getSelectedTownMap(){
         int selection = townMapSelectCombo.getSelectedIndex();
         if (selection < 0)
-            return;
-        TownMap map = townMapSelectComboModel.get(selection);
-        if (map.getFileName() != null){
-            townMapImageFile = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
-            townMapImageFile = new File(townMapImageFile,map.getFileName());
-            BufferedImage image = loadSpriteImage(townMapImageFile);
-            if (image != null)
-                townMapDisplayLabel.setImage(image);
-            else
-                townMapDisplayLabel.setImage(null);
-            updateTownMapSquareSizeSpinners();
-            townMapFilenameField.setText(map.getFileName());
+            return null;
+        return townMapSelectComboModel.get(selection);
+    }
+    
+    private void townMapSelectComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSelectComboActionPerformed
+        TownMap map = getSelectedTownMap();
+        townMapNameField.setText(map.getName());
+        townMapFilenameField.setText(map.getFileName());
+        File file = map.getMapImageFile();
+        if (file == null){
+            file = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
+            file = new File(file,map.getFileName());
         }
-        if (map.getName() != null){
-            townMapNameField.setText(map.getName());
-        }
+        BufferedImage image = loadSpriteImage(file);
+        if (image != null){
+            townMapDisplayLabel.setImage(image);
+            map.setMapImageFile(file);
+        } else
+            townMapDisplayLabel.setImage(null);
+        townMapImageFile = file;
+        updateTownMapSquareSizeSpinners();
     }//GEN-LAST:event_townMapSelectComboActionPerformed
 
     private void townMapDisplayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseClicked
