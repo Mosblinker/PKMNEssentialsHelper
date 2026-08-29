@@ -40,7 +40,6 @@ import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -415,6 +414,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorDesaturateChange = new pkmn.essentials.recolor.PaletteDesaturateChangeDialog();
         townMapPreview = new components.JFileDisplayPanel();
         townMapFC = new javax.swing.JFileChooser();
+        townMapFilenameField = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -479,7 +479,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jLabel5 = new javax.swing.JLabel();
         townMapNameField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        townMapFilenameField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         townMapSquareWidthSpinner = new javax.swing.JSpinner();
         townMapImageBrowseButton = new javax.swing.JButton();
@@ -509,6 +508,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapDisplayLabel = new components.JThumbnailLabel();
         townMapScaleCombo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        townMapFilenameCombo = new javax.swing.JComboBox<>();
+        townMapFilenameEditButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -600,6 +601,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         townMapFC.setAccessory(townMapPreview);
         townMapFC.setName("townMapFC"); // NOI18N
+
+        townMapFilenameField.setEnabled(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1116,10 +1119,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         townMapNameField.setEnabled(false);
 
-        jLabel6.setLabelFor(townMapFilenameField);
+        jLabel6.setLabelFor(townMapFilenameCombo);
         jLabel6.setText("Map Filename:");
-
-        townMapFilenameField.setEnabled(false);
 
         jLabel7.setText("Square Size (Pixels):");
 
@@ -1327,6 +1328,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jLabel11.setLabelFor(townMapScaleCombo);
         jLabel11.setText("Scale:");
 
+        townMapFilenameCombo.setModel(townMapFilenameComboModel);
+        townMapFilenameCombo.setEnabled(false);
+        townMapFilenameCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapFilenameComboActionPerformed(evt);
+            }
+        });
+
+        townMapFilenameEditButton.setText("Edit");
+        townMapFilenameEditButton.setEnabled(false);
+        townMapFilenameEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapFilenameEditButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout townMapEditorLayout = new javax.swing.GroupLayout(townMapEditor);
         townMapEditor.setLayout(townMapEditorLayout);
         townMapEditorLayout.setHorizontalGroup(
@@ -1342,7 +1359,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(townMapEditorLayout.createSequentialGroup()
-                                .addComponent(townMapFilenameField)
+                                .addComponent(townMapFilenameCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(townMapFilenameEditButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(townMapImageBrowseButton))
                             .addComponent(townMapNameField)))
@@ -1392,8 +1411,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(townMapFilenameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapImageBrowseButton))
+                    .addComponent(townMapImageBrowseButton)
+                    .addComponent(townMapFilenameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(townMapFilenameEditButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -1941,21 +1961,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         TownMap map = getSelectedTownMap();
         townMapNameField.setText(map.getName());
         townMapFilenameField.setText(map.getFileName());
-        File file = map.getMapImageFile();
-        if (file == null){
-            file = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
-            file = new File(file,map.getFileName());
+        String fileName = map.getFileName();
+        if (fileName.isBlank()){
+            map.setFileName(null);
+            fileName = null;
         }
-        BufferedImage image = loadSpriteImage(file);
-        setTownMapImage(image,file);
-        if (image != null){
-            map.setMapImageFile(file);
-        }
+        townMapFilenameCombo.setSelectedItem(fileName);
     }//GEN-LAST:event_townMapSelectComboActionPerformed
 
     private void townMapDisplayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseClicked
         TownMap map = getSelectedTownMap();
-        if (townMapImage == null || map == null)
+        if (townMapImage == null || map == null || !isTownMapSelectedEnabled())
             return;
         Point imagePoint = townMapDisplayLabel.convertPointToThumbnailRegion(evt.getX(),evt.getY());
         imagePoint = townMapDisplayLabel.convertPointToImage(imagePoint);
@@ -1993,8 +2009,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         TownMap map = getSelectedTownMap();
         if (map != null){
             map.setName(townMapNameField.getText());
-            map.setFileName(townMapFilenameField.getText());
-            map.setMapImageFile(townMapImageFile);
+            map.setFileName(townMapFilenameComboModel.get(townMapFilenameCombo.getSelectedIndex()));
         }
         updateTownMapSaveButton();
     }//GEN-LAST:event_townMapChangeButtonActionPerformed
@@ -2008,12 +2023,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapGameSwitchToggleActionPerformed
 
     private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
-        townMapFC.setCurrentDirectory(new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION));
+        File imageFolder = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
+        townMapFC.setCurrentDirectory(imageFolder);
         if (browseFiles("Select Town Map...",false,townMapFC) == JFileChooser.APPROVE_OPTION){
             File file = townMapFC.getSelectedFile();
             BufferedImage image = loadSpriteImage(file);
             if (image != null){
-                setTownMapImage(image,file);
+                File temp = new File(imageFolder,file.getName());
+                if (temp.equals(file)){
+                    
+                }
                 townMapFilenameField.setText(file.getName());
             }
         }
@@ -2059,12 +2078,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapDisplayLabel.setIcon(townMapImage);
     }
     
-    private void setTownMapImage(BufferedImage image, File file){
+    private void setTownMapImage(BufferedImage image){
         townMapDisplayLabel.setIcon(null);
         townMapScaleCombo.setSelectedItem(1.0);
         if (image != null)
             updateTownMapImage(new ImageIcon(image),1);
-        townMapImageFile = file;
         loadMapPoint(null);
         calculateTownSquares();
         updateTownMapImageElements();
@@ -2114,6 +2132,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             townMapDisplayLabel.scrollRectToVisible(rect);
         }
     }//GEN-LAST:event_townMapDisplayLabelMouseWheelMoved
+
+    private void townMapFilenameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapFilenameComboActionPerformed
+        setTownMapImage(pbsData.getRegionMapImages().get(
+                townMapFilenameComboModel.get(townMapFilenameCombo.getSelectedIndex())));
+        updateTownMapFileNameElements();
+    }//GEN-LAST:event_townMapFilenameComboActionPerformed
+
+    private void townMapFilenameEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapFilenameEditButtonActionPerformed
+        
+    }//GEN-LAST:event_townMapFilenameEditButtonActionPerformed
     
     private void loadMapPoint(TownMap.MapPoint point){
         townMapPoint = point;
@@ -2633,26 +2661,39 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteUseGameToggle.setEnabled(gameFolderField.isEnabled() && gameProjectFolder != null);
     }
     
+    private boolean isPBSDataEnabled(){
+        return isEnabled() && pbsData != null;
+    }
+    
+    private boolean isTownMapSelectedEnabled(){
+        return isPBSDataEnabled() && townMapSelectCombo.getSelectedIndex() >= 0;
+    }
+    
     private void updateTownMapConfigElements(){
-        townMapAddButton.setEnabled(isEnabled() && pbsData != null);
+        townMapAddButton.setEnabled(isPBSDataEnabled());
         townMapSelectCombo.setEnabled(townMapAddButton.isEnabled() && !townMapSelectComboModel.isEmpty());
-        townMapRemoveButton.setEnabled(townMapAddButton.isEnabled() && townMapSelectCombo.getSelectedIndex() >= 0);
+        townMapRemoveButton.setEnabled(isTownMapSelectedEnabled());
         townMapNameField.setEnabled(townMapRemoveButton.isEnabled());
-        townMapFilenameField.setEnabled(townMapRemoveButton.isEnabled());
         townMapImageBrowseButton.setEnabled(townMapRemoveButton.isEnabled());
+        updateTownMapFileNameElements();
         updateTownMapSaveButton();
-        updateTownMapChangeButton();
         updateTownMapImageElements();
         updateTownMapPointElements();
     }
     
+    private void updateTownMapFileNameElements(){
+        townMapFilenameCombo.setEnabled(isTownMapSelectedEnabled() && townMapFilenameComboModel.size() > 1);
+        townMapFilenameEditButton.setEnabled(townMapFilenameCombo.isEnabled() && 
+                townMapFilenameCombo.getSelectedIndex() > 0);
+        updateTownMapChangeButton();
+    }
+    
     private void updateTownMapSaveButton(){
-        boolean enabled = isEnabled() && pbsData != null && !townMapSelectComboModel.isEmpty();
+        boolean enabled = isPBSDataEnabled() && !townMapSelectComboModel.isEmpty();
         if (pbsData != null){
             for (TownMap map : pbsData.getRegionMaps())
                 enabled &= map.getName() != null && !map.getName().isBlank() && 
-                        map.getFileName() != null && !map.getFileName().isBlank() &&
-                        map.getMapImageFile() != null && map.getMapImageFile().exists();
+                        map.getFileName() != null && !map.getFileName().isBlank();
         }
         townMapSaveButton.setEnabled(enabled);
     }
@@ -2664,13 +2705,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void updateTownMapChangeButton(){
-        townMapChangeButton.setEnabled(isEnabled() && 
+        townMapChangeButton.setEnabled(isTownMapSelectedEnabled() && 
                 townMapNameField.getText() != null && !townMapNameField.getText().isBlank() &&
-                townMapFilenameField.getText() != null && !townMapFilenameField.getText().isBlank());
+                townMapFilenameCombo.getSelectedIndex() > 0);
     }
     
     private void updateTownMapPointElements(){
-        townMapPointNameField.setEnabled(isEnabled() && townMapPoint != null);
+        townMapPointNameField.setEnabled(isTownMapSelectedEnabled() && townMapPoint != null);
         townMapPointPoiField.setEnabled(townMapPointNameField.isEnabled());
         townMapFlyToggle.setEnabled(townMapPointNameField.isEnabled());
         townMapGameSwitchToggle.setEnabled(townMapPointNameField.isEnabled());
@@ -2682,7 +2723,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private void updateTownMapPointRemoveButton(){
         TownMap map = getSelectedTownMap();
-        townMapPointRemoveButton.setEnabled(townMapPointNameField.isEnabled() && 
+        townMapPointRemoveButton.setEnabled(isTownMapSelectedEnabled() && 
                 map != null && map.getPoints().contains(townMapPoint));
     }
     
@@ -2697,7 +2738,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void updateTownMapPointSaveButton(){
-        townMapPointSaveButton.setEnabled(isEnabled() && townMapPoint != null && 
+        townMapPointSaveButton.setEnabled(isTownMapSelectedEnabled() && townMapPoint != null && 
                 townMapPointNameField.getText() != null && !townMapPointNameField.getText().isBlank());
     }
     @Override
@@ -2801,9 +2842,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private ArrayComboBoxModel<TownMap> townMapSelectComboModel = new ArrayComboBoxModel<>();
     
-    private ScaledIcon townMapImage = null;
+    private ArrayComboBoxModel<String> townMapFilenameComboModel = new ArrayComboBoxModel<>();
     
-    private File townMapImageFile = null;
+    private ScaledIcon townMapImage = null;
     
     private TownMap.MapPoint townMapPoint = null;
     
@@ -2926,6 +2967,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private components.JThumbnailLabel townMapDisplayLabel;
     private javax.swing.JPanel townMapEditor;
     private javax.swing.JFileChooser townMapFC;
+    private javax.swing.JComboBox<String> townMapFilenameCombo;
+    private javax.swing.JButton townMapFilenameEditButton;
     private javax.swing.JTextField townMapFilenameField;
     private javax.swing.JSpinner townMapFlyIDSpinner;
     private javax.swing.JCheckBox townMapFlyToggle;
@@ -4189,6 +4232,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         item.setIcon(new ImageIcon(image));
                     }
                 }
+                data.setRegionMapFiles(file);
+                for (Map.Entry<String, File> entry : data.getRegionMapFiles().entrySet()){
+                    if (entry.getValue().exists()){
+                        BufferedImage img = loadSpriteImage(entry.getValue());
+                        if (img != null)
+                            data.getRegionMapImages().put(entry.getKey(), img);
+                    }
+                }
             } catch(IOException | IllegalArgumentException ex){
                 getLogger().log(Level.WARNING, "Failed to load icons", ex);
             }
@@ -4232,6 +4283,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         protected void done(){
             if (success){
                 pbsData = data;
+                townMapFilenameComboModel.clear();
+                townMapFilenameComboModel.add(null);
+                townMapFilenameComboModel.addAll(data.getRegionMapFiles().keySet());
                 townMapSelectComboModel.clear();
                 townMapSelectComboModel.addAll(data.getRegionMaps());
                 townMapSelectCombo.setSelectedIndex(0);

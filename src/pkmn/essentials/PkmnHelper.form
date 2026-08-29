@@ -183,6 +183,11 @@
         <Property name="name" type="java.lang.String" value="townMapFC" noResource="true"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="townMapFilenameField">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -1079,7 +1084,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="townMapFilenameField" max="32767" attributes="0"/>
+                                      <Component id="townMapFilenameCombo" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="townMapFilenameEditButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="townMapImageBrowseButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -1139,8 +1146,9 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="townMapFilenameField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="townMapImageBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="townMapFilenameCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="townMapFilenameEditButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1216,14 +1224,9 @@
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="townMapFilenameField"/>
+                  <ComponentRef name="townMapFilenameCombo"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Map Filename:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="townMapFilenameField">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -1546,6 +1549,29 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Scale:"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="townMapFilenameCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="townMapFilenameComboModel" type="code"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="townMapFilenameComboActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="townMapFilenameEditButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="townMapFilenameEditButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
