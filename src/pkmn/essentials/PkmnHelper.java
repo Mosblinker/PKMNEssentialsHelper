@@ -489,6 +489,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapPointSaveButton = new javax.swing.JButton();
         townMapPointRemoveButton = new javax.swing.JButton();
         townMapSaveButton = new javax.swing.JButton();
+        townMapChangeButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1257,6 +1258,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
+        townMapChangeButton.setText("Change");
+        townMapChangeButton.setEnabled(false);
+
         javax.swing.GroupLayout townMapEditorLayout = new javax.swing.GroupLayout(townMapEditor);
         townMapEditor.setLayout(townMapEditorLayout);
         townMapEditorLayout.setHorizontalGroup(
@@ -1284,7 +1288,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(townMapChangeButton))
                     .addGroup(townMapEditorLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1294,7 +1300,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(townMapRemoveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(townMapSaveButton)))
+                        .addComponent(townMapSaveButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         townMapEditorLayout.setVerticalGroup(
@@ -1308,7 +1315,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(townMapAddButton)
                     .addComponent(townMapSaveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(townMapDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(townMapDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -1323,7 +1330,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(jLabel7)
                     .addComponent(townMapSquareWidthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(townMapChangeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -2645,6 +2653,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
     private javax.swing.JButton townMapAddButton;
+    private javax.swing.JButton townMapChangeButton;
     private components.JThumbnailLabel townMapDisplayLabel;
     private javax.swing.JPanel townMapEditor;
     private javax.swing.JFileChooser townMapFC;
