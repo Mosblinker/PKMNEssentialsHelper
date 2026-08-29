@@ -230,6 +230,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         mapChangeButton.setText("Change");
         mapChangeButton.setEnabled(false);
+        mapChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapChangeButtonActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Point"));
 
@@ -629,6 +634,15 @@ public class TownMapEditor extends javax.swing.JPanel {
             displayLabel.scrollRectToVisible(rect);
         }
     }//GEN-LAST:event_displayLabelMouseWheelMoved
+
+    private void mapChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapChangeButtonActionPerformed
+        TownMap map = getSelectedTownMap();
+        if (map != null){
+            map.setName(nameField.getText());
+            map.setFileName(getSelectedRegionFileName());
+        }
+        updateSaveButton();
+    }//GEN-LAST:event_mapChangeButtonActionPerformed
     
     public int getSelectedIndex(){
         return selectCombo.getSelectedIndex();
@@ -746,6 +760,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             selectComboModel.addAll(data.getRegionMaps());
             selectCombo.setSelectedIndex(0);
         }
+        updateTownMapControls();
     }
     
     private void calculateSquares(){
