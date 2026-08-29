@@ -1443,6 +1443,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 System.out.println(PBSData.DATA_SEPARATOR);
             }
             System.out.println();
+            System.out.println("Town Map:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (TownMap map : pbsData.getRegionMaps()){
+                System.out.println(map.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
         }
     }//GEN-LAST:event_printPBSTestActionPerformed
 
