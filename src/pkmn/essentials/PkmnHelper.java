@@ -2030,15 +2030,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
     private void townMapDisplayLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseWheelMoved
         if (evt.isControlDown()){
-            int index = townMapScaleCombo.getSelectedIndex() + evt.getWheelRotation();
-            double scale = townMapImage.getScaleX();
-            if (index < 0){
-                townMapScaleModel.add(0, scale * 2);
-                index = 0;
-            } else if (index >= townMapScaleModel.size()){
-                townMapScaleModel.add(scale/2.0);
+            if (townMapImage != null){
+                int index = townMapScaleCombo.getSelectedIndex() + evt.getWheelRotation();
+                double scale = townMapImage.getScaleX();
+                if (index < 0){
+                    townMapScaleModel.add(0, scale * 2);
+                    index = 0;
+                } else if (index >= townMapScaleModel.size()){
+                    townMapScaleModel.add(scale/2.0);
+                }
+                townMapScaleCombo.setSelectedIndex(index);
             }
-            townMapScaleCombo.setSelectedIndex(index);
         } else {
             Rectangle rect = townMapScrollPane.getViewport().getViewRect();
             int scrollUnits = evt.getUnitsToScroll() * 3;
