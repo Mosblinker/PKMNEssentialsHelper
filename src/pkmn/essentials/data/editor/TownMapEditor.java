@@ -537,6 +537,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             filenameComboModel.addAll(data.getRegionMapFiles().keySet());
             selectComboModel.addAll(data.getRegionMaps());
             selectCombo.setSelectedIndex(0);
+        }
     }
     
     private void calculateSquares(){
