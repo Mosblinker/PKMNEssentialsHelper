@@ -59,7 +59,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scaleCombo" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="scaleCombo" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="mapChangeButton" min="-2" max="-2" attributes="0"/>
                   </Group>
