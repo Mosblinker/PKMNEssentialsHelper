@@ -318,7 +318,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteNameField.getDocument().addDocumentListener(handler);
         recolorSaveField.getDocument().addDocumentListener(handler);
         for (JFileChooser fc : new JFileChooser[]{
-            spriteFC,spriteFolderFC,gameFolderFC,recolorFolderFC,audioFC
+            spriteFC,spriteFolderFC,gameFolderFC,recolorFolderFC,audioFC,townMapFC
         }){
             config.addFileChooser(fc, fc.getName());
             config.loadFileChooser(fc);
@@ -395,6 +395,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         audioFC = new javax.swing.JFileChooser();
         recolorInvertChange = new pkmn.essentials.recolor.PaletteInvertChangeDialog();
         recolorDesaturateChange = new pkmn.essentials.recolor.PaletteDesaturateChangeDialog();
+        townMapPreviewPanel = new components.JFileDisplayPanel();
+        townMapFC = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -571,6 +573,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorInvertChange.setName("recolorInvertChange"); // NOI18N
 
         recolorDesaturateChange.setName("recolorDesaturateChange"); // NOI18N
+
+        townMapPreviewPanel.setFileChooser(townMapFC);
+
+        townMapFC.setAccessory(townMapPreviewPanel);
+        townMapFC.setName("townMapFC"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -2616,6 +2623,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JButton townMapAddButton;
     private components.JThumbnailLabel townMapDisplayLabel;
     private javax.swing.JPanel townMapEditor;
+    private javax.swing.JFileChooser townMapFC;
     private javax.swing.JTextField townMapFilenameField;
     private javax.swing.JSpinner townMapFlyIDSpinner;
     private javax.swing.JSpinner townMapFlyXSpinner;
@@ -2626,6 +2634,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField townMapPointPoiField;
     private javax.swing.JSpinner townMapPosXSpinner;
     private javax.swing.JSpinner townMapPosYSpinner;
+    private components.JFileDisplayPanel townMapPreviewPanel;
     private javax.swing.JButton townMapRemoveButton;
     private javax.swing.JButton townMapSaveButton;
     private javax.swing.JComboBox<TownMap> townMapSelectCombo;

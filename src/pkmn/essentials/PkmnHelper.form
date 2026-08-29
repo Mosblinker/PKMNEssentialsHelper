@@ -168,6 +168,21 @@
         <Property name="name" type="java.lang.String" value="recolorDesaturateChange" noResource="true"/>
       </Properties>
     </Component>
+    <Component class="components.JFileDisplayPanel" name="townMapPreviewPanel">
+      <Properties>
+        <Property name="fileChooser" type="javax.swing.JFileChooser" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="townMapFC"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFileChooser" name="townMapFC">
+      <Properties>
+        <Property name="accessory" type="javax.swing.JComponent" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="townMapPreviewPanel"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="townMapFC" noResource="true"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
