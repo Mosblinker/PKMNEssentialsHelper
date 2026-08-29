@@ -10,6 +10,7 @@ import icons.ScaledIcon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.Painter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -147,6 +149,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         displayLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
         displayLabel.setThumbnailBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        displayLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                displayLabelMouseClicked(evt);
+            }
+        });
         scrollPane.setViewportView(displayLabel);
 
         jLabel5.setLabelFor(nameField);
@@ -561,6 +568,38 @@ public class TownMapEditor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_scaleComboActionPerformed
     
+    private int getPointCoordFromImage(int value, double scale, int size){
+        return (int) Math.floor((value/scale)/size);
+    }
+    
+    private int getPointCoordFromImage(int value, double scale, JSpinner sizeSpinner){
+        return getPointCoordFromImage(value,scale,(int)sizeSpinner.getValue());
+    }
+    
+    private void displayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayLabelMouseClicked
+        TownMap map = getSelectedTownMap();
+        if (mapImage == null || map == null || !isTownMapSelectedEnabled())
+            return;
+        Point imagePoint = displayLabel.convertPointToThumbnailRegion(evt.getX(),evt.getY());
+        imagePoint = displayLabel.convertPointToImage(imagePoint);
+        if (imagePoint.x < 0 || imagePoint.y < 0 || 
+                imagePoint.x >= mapImage.getIconWidth() || imagePoint.y >= mapImage.getIconHeight())
+            return;
+        int x = getPointCoordFromImage(imagePoint.x,mapImage.getScaleX(),squareWidthSpinner);
+        int y = getPointCoordFromImage(imagePoint.y,mapImage.getScaleY(),squareHeightSpinner);
+        TownMap.MapPoint point = null;
+        for (TownMap.MapPoint temp : map.getPoints()){
+            if (temp.getX() == x && temp.getY() == y){
+                point = temp;
+                break;
+            }
+        }
+        if (point == null && x >= 0 && y >= 0 && x < squareCols && y < squareRows){
+            point = new TownMap.MapPoint(x,y);
+        }
+        loadMapPoint(point);
+    }//GEN-LAST:event_displayLabelMouseClicked
+
     
     
     
