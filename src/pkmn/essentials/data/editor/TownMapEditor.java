@@ -481,6 +481,20 @@ public class TownMapEditor extends javax.swing.JPanel {
         selectComboModel.addAll(data.getRegionMaps());
         selectCombo.setSelectedIndex(0);
     }
+    
+    private void calculateSquares(){
+        if (mapImage == null){
+            squareRows = squareCols = -1;
+        } else {
+            int width = mapImage.getIcon().getIconWidth();
+            int height = mapImage.getIcon().getIconHeight();
+            double c = width / ((Integer) squareWidthSpinner.getValue()).doubleValue();
+            double r = height / ((Integer) squareHeightSpinner.getValue()).doubleValue();
+            squareCols = (int) Math.ceil(c);
+            squareRows = (int) Math.ceil(r);
+            displayLabel.repaint();
+        }
+   }
     /**
      * This adds the given {@code ActionListener} to this panel.
      * @param l The listener to add.
