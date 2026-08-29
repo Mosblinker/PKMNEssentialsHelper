@@ -111,6 +111,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Redo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="redoButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
