@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import pkmn.essentials.PercentRenderer;
 import pkmn.essentials.data.PBSData;
 import pkmn.essentials.data.TownMap;
@@ -34,6 +36,9 @@ public class TownMapEditor extends javax.swing.JPanel {
      */
     public TownMapEditor() {
         initComponents();
+        Handler handler = new Handler();
+        nameField.getDocument().addDocumentListener(handler);
+        pointNameField.getDocument().addDocumentListener(handler);
     }
 
     /**
@@ -555,7 +560,27 @@ public class TownMapEditor extends javax.swing.JPanel {
     private javax.swing.JSpinner switchSpinner;
     // End of variables declaration//GEN-END:variables
     
-    private class Handler {
+    private void documentUpdate(DocumentEvent evt){
+        if (evt.getDocument() == nameField.getDocument()){
+            
+        } else if (evt.getDocument() == pointNameField.getDocument()){
+            
+        }
+    }
+    
+    private class Handler implements DocumentListener{
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            documentUpdate(e);
+        }
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            documentUpdate(e);
+        }
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            documentUpdate(e);
+        }
         
     }
     
