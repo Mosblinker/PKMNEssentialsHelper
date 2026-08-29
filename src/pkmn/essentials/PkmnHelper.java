@@ -1949,7 +1949,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
 
     private void townMapSquareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapSquareSizeSpinnerStateChanged
-        // TODO add your handling code here:
+        townMapDisplayLabel.repaint();
     }//GEN-LAST:event_townMapSquareSizeSpinnerStateChanged
 
     private void townMapPointSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointSaveButtonActionPerformed
