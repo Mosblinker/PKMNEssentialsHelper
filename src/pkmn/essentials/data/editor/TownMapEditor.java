@@ -601,17 +601,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             return;
         int x = getPointCoordFromImage(imagePoint.x,mapImage.getScaleX(),squareWidthSpinner);
         int y = getPointCoordFromImage(imagePoint.y,mapImage.getScaleY(),squareHeightSpinner);
-        TownMap.MapPoint point = null;
-        for (TownMap.MapPoint temp : map.getPoints()){
-            if (temp.getX() == x && temp.getY() == y){
-                point = temp;
-                break;
-            }
-        }
-        if (point == null && x >= 0 && y >= 0 && x < squareCols && y < squareRows){
-            point = new TownMap.MapPoint(x,y);
-        }
-        loadMapPoint(point);
+        setSelectedPoint(x,y);
     }//GEN-LAST:event_displayLabelMouseClicked
 
     private void displayLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_displayLabelMouseWheelMoved
@@ -684,6 +674,29 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     public List<String> getRegionFileNames(){
         return filenameComboModel;
+    }
+    
+    public TownMap.MapPoint getSelectedPoint(){
+        return mapPoint;
+    }
+    
+    public void setSelectedPoint(TownMap.MapPoint point){
+        loadMapPoint(point);
+    }
+    
+    public void setSelectedPoint(int x, int y){
+        TownMap map = getSelectedTownMap();
+        if (map == null)
+            throw new IllegalStateException();
+        for (TownMap.MapPoint temp : map.getPoints()){
+            if (temp.getX() == x && temp.getY() == y){
+                setSelectedPoint(temp);
+                return;
+            }
+        }
+        if (x >= 0 && y >= 0 && x < squareCols && y < squareRows){
+            setSelectedPoint(new TownMap.MapPoint(x,y));
+        }
     }
     
     private void updateTownMapImage(Icon icon, double scale){
