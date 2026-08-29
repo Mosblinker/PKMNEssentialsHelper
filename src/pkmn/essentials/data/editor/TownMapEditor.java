@@ -209,6 +209,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         scaleCombo.setSelectedItem(1.0);
         scaleCombo.setEnabled(false);
         scaleCombo.setRenderer(new PercentRenderer());
+        scaleCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scaleComboActionPerformed(evt);
+            }
+        });
 
         mapChangeButton.setText("Change");
         mapChangeButton.setEnabled(false);
@@ -548,6 +553,13 @@ public class TownMapEditor extends javax.swing.JPanel {
             map.getPoints().add(mapPoint);
         updatePointRemoveButton();
     }//GEN-LAST:event_pointSaveButtonActionPerformed
+
+    private void scaleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scaleComboActionPerformed
+        double scale = scaleModel.get(scaleCombo.getSelectedIndex());
+        if (mapImage != null && scale != mapImage.getScaleX()){
+            updateTownMapImage(mapImage.getIcon(),scale);
+        }
+    }//GEN-LAST:event_scaleComboActionPerformed
     
     
     
