@@ -7,6 +7,7 @@ package pkmn.essentials.map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayDeque;
 
 /**
  *
@@ -38,6 +39,8 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         imgLabel = new components.JThumbnailLabel();
         loadImageButton = new javax.swing.JButton();
         saveImageButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
+        redoButton = new javax.swing.JButton();
 
         imgLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
         imgLabel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -88,6 +91,15 @@ public class TownMapImageEditor extends javax.swing.JPanel {
             }
         });
 
+        undoButton.setText("Undo");
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoButtonActionPerformed(evt);
+            }
+        });
+
+        redoButton.setText("Redo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,7 +111,11 @@ public class TownMapImageEditor extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(loadImageButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveImageButton)))
+                        .addComponent(saveImageButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(undoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(redoButton)))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,7 +123,11 @@ public class TownMapImageEditor extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(imgScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(undoButton)
+                    .addComponent(redoButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loadImageButton)
                     .addComponent(saveImageButton))
@@ -154,6 +174,10 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     private void saveImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveImageButtonActionPerformed
         fireActionPerformed(evt);
     }//GEN-LAST:event_saveImageButtonActionPerformed
+
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_undoButtonActionPerformed
     
     
     
@@ -221,18 +245,24 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     
     public void setImage(BufferedImage image){
         this.image = image;
+        imageUndo.clear();
+        imageRedo.clear();
     }
     
     
     
     private BufferedImage image = null;
     
+    private ArrayDeque<BufferedImage> imageUndo = new ArrayDeque<>();
     
+    private ArrayDeque<BufferedImage> imageRedo = new ArrayDeque<>();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private components.JThumbnailLabel imgLabel;
     private javax.swing.JScrollPane imgScrollPane;
     private javax.swing.JButton loadImageButton;
+    private javax.swing.JButton redoButton;
     private javax.swing.JButton saveImageButton;
+    private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }
