@@ -5,6 +5,7 @@
 package pkmn.essentials.data;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
 import pkmn.essentials.PkmnHelperUtilities;
@@ -114,7 +116,9 @@ public class PBSData {
     
     private Map<MoveCategory, ImageIcon> moveCategoryIcons = new HashMap<>();
     
+    private Map<String, File> townMapFileNameMap = new LinkedHashMap<>();
     
+    private Map<String, BufferedImage> townMapFileNameImages = new LinkedHashMap<>();
     
     public PBSData(){
         
@@ -313,9 +317,49 @@ public class PBSData {
             if (map.getID() != null)
                 getRegionMaps().add(map);
         }
+        getRegionMapFiles().clear();
+        getRegionMapImages().clear();
     }
     
     public void loadRegionMaps(List<String> lines){
         loadRegionMaps(lines,null);
+    }
+    
+    public Map<String, File> getRegionMapFiles(){
+        return townMapFileNameMap;
+    }
+    
+    public void setRegionMapFiles(File projectFolder){
+        getRegionMapFiles().clear();
+        File imageFolder = new File(projectFolder, TownMap.MAP_IMAGES_LOCATION);
+        for (TownMap map : getRegionMaps()){
+            String name = map.getFileName();
+            if (name != null && !name.isBlank())
+                getRegionMapFiles().put(name, new File(imageFolder, name));
+        }
+    }
+    
+    public Map<String, BufferedImage> getRegionMapImages(){
+        return townMapFileNameImages;
+    }
+    
+    public void putRegionMapFile(String name, File file, BufferedImage image){
+        getRegionMapFiles().put(name, file);
+        getRegionMapImages().put(name, image);
+    }
+    
+    public void removeRegionMapFile(String name){
+        getRegionMapFiles().remove(name);
+        getRegionMapImages().remove(name);
+    }
+    
+    public void setRegionMapFileName(String oldName, String newName){
+        File file = getRegionMapFiles().remove(oldName);
+        BufferedImage img = getRegionMapImages().remove(oldName);
+        putRegionMapFile(newName,file,img);
+        for (TownMap map : getRegionMaps()){
+            if (Objects.equals(map.getFileName(),oldName))
+                map.setFileName(newName);
+        }
     }
 }
