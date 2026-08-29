@@ -2046,7 +2046,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private boolean isPBSDataEnabled(){
-        return isEnabled() && pbsData != null;
+        return inputEnabled && pbsData != null;
     }
     
     @Override
