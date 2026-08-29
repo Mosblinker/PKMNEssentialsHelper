@@ -87,7 +87,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         jLabel4.setLabelFor(selectCombo);
         jLabel4.setText("Region:");
 
-        selectCombo.setModel(townMapSelectComboModel);
+        selectCombo.setModel(selectComboModel);
         selectCombo.setEnabled(false);
         selectCombo.setRenderer(new TownMapCellRenderer());
 
@@ -118,7 +118,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         jLabel6.setLabelFor(filenameCombo);
         jLabel6.setText("Map Filename:");
 
-        filenameCombo.setModel(townMapFilenameComboModel);
+        filenameCombo.setModel(filenameComboModel);
         filenameCombo.setEnabled(false);
 
         filenameEditButton.setText("Edit");
@@ -146,7 +146,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         jLabel11.setLabelFor(scaleCombo);
         jLabel11.setText("Scale:");
 
-        scaleCombo.setModel(townMapScaleModel);
+        scaleCombo.setModel(scaleModel);
         scaleCombo.setSelectedItem(1.0);
         scaleCombo.setEnabled(false);
         scaleCombo.setRenderer(new PercentRenderer());
@@ -438,11 +438,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         }
     }
     
-    private ArrayComboBoxModel<TownMap> townMapSelectComboModel = new ArrayComboBoxModel<>();
+    private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
-    private ArrayComboBoxModel<String> townMapFilenameComboModel = new ArrayComboBoxModel<>();
+    private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
     
-    private ArrayComboBoxModel<Double> townMapScaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
+    private ArrayComboBoxModel<Double> scaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
     
     private PBSData pbsData = null;
     
