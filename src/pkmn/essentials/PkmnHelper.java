@@ -2052,29 +2052,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateRecolorUndoRedoButtons();
     }
     
-    private void recolorUndoOrRedo(ArrayDeque<Map<Integer,Color>> source, ArrayDeque<Map<Integer,Color>> target
-            ,ArrayDeque<Map<Integer,PkmnSpriteIcon>> sourceIcons, ArrayDeque<Map<Integer,PkmnSpriteIcon>> targetIcons){
-        boolean imageChange = false;
-        if (!sourceIcons.isEmpty()){
-            Map<Integer,PkmnSpriteIcon> change = sourceIcons.pop();
-            Map<Integer,PkmnSpriteIcon> inverse = new HashMap<>();
-            imageChange = !change.isEmpty();
-            List<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
-            for (Map.Entry<Integer,PkmnSpriteIcon> entry : change.entrySet()){
-                if (entry.getKey() < icons.size()){
-                    inverse.put(entry.getKey(), icons.set(entry.getKey(), entry.getValue()));
-                }
-            }
-            targetIcons.push(inverse);
-        }
-        if (!source.isEmpty()){
-            Map<Integer,Color> change = source.pop();
-            target.push(recolorChangeColors(change,imageChange));
-        }
-        recolorSpriteListPanel.repaint();
-        updateRecolorUndoRedoButtons();
-    }
-    
     private void recolorUndoOrRedo(ArrayDeque<PaletteEdit> source, ArrayDeque<PaletteEdit> target){
         if (!source.isEmpty()){
             PaletteEdit edit = source.pop();
