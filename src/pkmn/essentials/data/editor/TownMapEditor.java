@@ -5,13 +5,19 @@
 package pkmn.essentials.data.editor;
 
 import components.ArrayComboBoxModel;
+import components.JThumbnailLabel;
 import icons.ScaledIcon;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
+import javax.swing.Painter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import pkmn.essentials.PercentRenderer;
@@ -164,11 +170,21 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         squareWidthSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         squareWidthSpinner.setEnabled(false);
+        squareWidthSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                squareSizeSpinnerStateChanged(evt);
+            }
+        });
 
         jLabel12.setText("x");
 
         squareHeightSpinner.setModel(new javax.swing.SpinnerNumberModel(16, 1, null, 1));
         squareHeightSpinner.setEnabled(false);
+        squareHeightSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                squareSizeSpinnerStateChanged(evt);
+            }
+        });
 
         jLabel11.setLabelFor(scaleCombo);
         jLabel11.setText("Scale:");
@@ -421,6 +437,10 @@ public class TownMapEditor extends javax.swing.JPanel {
         }
         filenameCombo.setSelectedItem(fileName);
     }//GEN-LAST:event_selectComboActionPerformed
+
+    private void squareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_squareSizeSpinnerStateChanged
+        calculateSquares();
+    }//GEN-LAST:event_squareSizeSpinnerStateChanged
     
     
     
