@@ -1284,14 +1284,6 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="townMapPointNameField" max="32767" attributes="0"/>
                               <Component id="townMapPointPoiField" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="townMapPosXSpinner" min="-2" pref="75" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="townMapPosYSpinner" min="-2" pref="75" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1313,6 +1305,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="townMapPointRemoveButton" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="townMapCoordsField" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1323,9 +1316,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="townMapPosXSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="townMapPosYSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="townMapCoordsField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1359,28 +1350,10 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Current Position:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="townMapPosXSpinner">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="townMapCoordsField"/>
                     </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel13">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value=","/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JSpinner" name="townMapPosYSpinner">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
-                    </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="Coordinates:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
