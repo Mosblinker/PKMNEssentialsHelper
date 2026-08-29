@@ -3463,8 +3463,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private Map<File, File> copiedFiles = new LinkedHashMap<>();
         
-        private int index = 0;
-        
         private int stage = 0;
         
 
@@ -3494,7 +3492,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         }
                     }
                     progressBar.setMaximum(targetFiles.size()+pbsData.getRegionMaps().size());
-                    index = 0;
                     stage = 1;
                 case(1):
                     progressBar.setIndeterminate(false);
@@ -3511,7 +3508,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             progressBar.setValue(progressBar.getValue()+1);
                         }
                     }
-                    index = 0;
                     stage = 2;
                 case(2):
                     progressBar.setIndeterminate(false);
