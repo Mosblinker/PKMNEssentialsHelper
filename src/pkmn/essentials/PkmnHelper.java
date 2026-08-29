@@ -16,10 +16,13 @@ import components.text.action.commands.UndoManagerCommands;
 import files.FilesExtended;
 import static files.FilesExtended.generateExtensionFilter;
 import files.extensions.ImageExtensions;
+import icons.ScaledIcon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
@@ -461,7 +464,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapSelectCombo = new javax.swing.JComboBox<>();
         townMapRemoveButton = new javax.swing.JButton();
         townMapAddButton = new javax.swing.JButton();
-        townMapDisplayLabel = new components.JThumbnailLabel();
         jLabel5 = new javax.swing.JLabel();
         townMapNameField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -491,6 +493,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapCoordsField = new javax.swing.JTextField();
         townMapSaveButton = new javax.swing.JButton();
         townMapChangeButton = new javax.swing.JButton();
+        townMapScrollPane = new javax.swing.JScrollPane();
+        townMapDisplayLabel = new components.JThumbnailLabel();
+        townMapScaleCombo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1093,13 +1099,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
-        townMapDisplayLabel.setImageScaleMode(components.JThumbnailLabel.ALWAYS_SCALE_MAINTAIN_ASPECT_RATIO);
-        townMapDisplayLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                townMapDisplayLabelMouseClicked(evt);
-            }
-        });
-
         jLabel5.setLabelFor(townMapNameField);
         jLabel5.setText("Region Name:");
 
@@ -1289,6 +1288,33 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
+        townMapDisplayLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
+        townMapDisplayLabel.setThumbnailBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        townMapDisplayLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                townMapDisplayLabelMouseClicked(evt);
+            }
+        });
+        townMapDisplayLabel.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                townMapDisplayLabelMouseWheelMoved(evt);
+            }
+        });
+        townMapScrollPane.setViewportView(townMapDisplayLabel);
+
+        townMapScaleCombo.setModel(townMapScaleModel);
+        townMapScaleCombo.setSelectedItem(1.0);
+        townMapScaleCombo.setEnabled(false);
+        townMapScaleCombo.setRenderer(new PercentRenderer());
+        townMapScaleCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapScaleComboActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setLabelFor(townMapScaleCombo);
+        jLabel11.setText("Scale:");
+
         javax.swing.GroupLayout townMapEditorLayout = new javax.swing.GroupLayout(townMapEditor);
         townMapEditor.setLayout(townMapEditorLayout);
         townMapEditorLayout.setHorizontalGroup(
@@ -1296,7 +1322,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(townMapEditorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(townMapDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(townMapScrollPane)
                     .addGroup(townMapEditorLayout.createSequentialGroup()
                         .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1318,6 +1344,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(townMapScaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(townMapChangeButton))
                     .addGroup(townMapEditorLayout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -1343,7 +1373,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(townMapAddButton)
                     .addComponent(townMapSaveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(townMapDisplayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addComponent(townMapScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(townMapEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -1359,7 +1389,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(townMapSquareWidthSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(townMapSquareHeightSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(townMapChangeButton))
+                    .addComponent(townMapChangeButton)
+                    .addComponent(townMapScaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1904,13 +1936,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             file = new File(file,map.getFileName());
         }
         BufferedImage image = loadSpriteImage(file);
+        townMapScaleCombo.setSelectedItem(1.0);
         if (image != null){
-            townMapDisplayLabel.setImage(image);
+            updateTownMapImage(new ImageIcon(image),1);
             map.setMapImageFile(file);
         } else
-            townMapDisplayLabel.setImage(null);
+            townMapDisplayLabel.setIcon(null);
         townMapImageFile = file;
-        updateTownMapSquareSizeSpinners();
+        updateTownMapImageElements();
     }//GEN-LAST:event_townMapSelectComboActionPerformed
 
     private void townMapDisplayLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseClicked
@@ -1941,9 +1974,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             File file = townMapFC.getSelectedFile();
             BufferedImage image = loadSpriteImage(file);
             if (image != null){
-                townMapDisplayLabel.setImage(image);
+                updateTownMapImage(new ImageIcon(image),1);
                 townMapImageFile = file;
-                updateTownMapSquareSizeSpinners();
+                townMapScaleCombo.setSelectedItem(1.0);
+                updateTownMapImageElements();
             }
         }
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
@@ -1979,6 +2013,42 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         TownMap map = getSelectedTownMap();
         map.getPoints().remove(townMapPoint);
     }//GEN-LAST:event_townMapPointRemoveButtonActionPerformed
+    
+    private void updateTownMapImage(Icon icon, double scale){
+        townMapImage = new ScaledIcon(icon,scale);
+        if (scale > 1.0)
+            townMapImage.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+        townMapDisplayLabel.setIcon(townMapImage);
+    }
+    
+    private void townMapScaleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapScaleComboActionPerformed
+        double scale = townMapScaleModel.get(townMapScaleCombo.getSelectedIndex());
+        if (townMapImage != null && scale != townMapImage.getScaleX()){
+            updateTownMapImage(townMapImage.getIcon(),scale);
+        }
+    }//GEN-LAST:event_townMapScaleComboActionPerformed
+
+    private void townMapDisplayLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_townMapDisplayLabelMouseWheelMoved
+        if (evt.isControlDown()){
+            int index = townMapScaleCombo.getSelectedIndex() + evt.getWheelRotation();
+            double scale = townMapImage.getScaleX();
+            if (index < 0){
+                townMapScaleModel.add(0, scale * 2);
+                index = 0;
+            } else if (index >= townMapScaleModel.size()){
+                townMapScaleModel.add(scale/2.0);
+            }
+            townMapScaleCombo.setSelectedIndex(index);
+        } else {
+            Rectangle rect = townMapScrollPane.getViewport().getViewRect();
+            int scrollUnits = evt.getUnitsToScroll() * 3;
+            if (evt.isShiftDown())
+                rect.x += scrollUnits;
+            else
+                rect.y += scrollUnits;
+            townMapDisplayLabel.scrollRectToVisible(rect);
+        }
+    }//GEN-LAST:event_townMapDisplayLabelMouseWheelMoved
     
     private void loadMapPoint(TownMap.MapPoint point){
         townMapPoint = point;
@@ -2541,9 +2611,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapImageBrowseButton.setEnabled(townMapRemoveButton.isEnabled());
     }
     
-    private void updateTownMapSquareSizeSpinners(){
+    private void updateTownMapImageElements(){
         townMapSquareWidthSpinner.setEnabled(isEnabled() && townMapDisplayLabel.getIcon() != null);
         townMapSquareHeightSpinner.setEnabled(townMapSquareWidthSpinner.isEnabled());
+        townMapScaleCombo.setEnabled(townMapSquareWidthSpinner.isEnabled());
     }
     
     private void updateTownMapChangeButton(){
@@ -2609,7 +2680,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateSpriteFolderButtons();
         updateTownMapConfigElements();
         updateTownMapChangeButton();
-        updateTownMapSquareSizeSpinners();
+        updateTownMapImageElements();
     }
     @Override
     public boolean isInputEnabled() {
@@ -2686,9 +2757,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private ArrayComboBoxModel<TownMap> townMapSelectComboModel = new ArrayComboBoxModel<>();
     
+    private ScaledIcon townMapImage = null;
+    
     private File townMapImageFile = null;
     
     private TownMap.MapPoint townMapPoint = null;
+    
+    private ArrayComboBoxModel<Double> townMapScaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -2721,6 +2796,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel isSpritePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -2815,6 +2891,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private components.JFileDisplayPanel townMapPreview;
     private javax.swing.JButton townMapRemoveButton;
     private javax.swing.JButton townMapSaveButton;
+    private javax.swing.JComboBox<Double> townMapScaleCombo;
+    private javax.swing.JScrollPane townMapScrollPane;
     private javax.swing.JComboBox<TownMap> townMapSelectCombo;
     private javax.swing.JSpinner townMapSquareHeightSpinner;
     private javax.swing.JSpinner townMapSquareWidthSpinner;
