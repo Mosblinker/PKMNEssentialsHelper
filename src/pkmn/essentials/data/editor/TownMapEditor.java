@@ -31,7 +31,12 @@ public class TownMapEditor extends javax.swing.JPanel {
     private static final Double[] DEFAULT_ZOOM_VALUES = {
         8.0, 4.0, 2.0, 1.0, 0.5, 0.25, 0.125
     };
-
+    
+    private static final Color TOWN_MAP_GRID_COLOR = new Color(0x80000000, true);
+    
+    private static final Color TOWN_MAP_POINT_COLOR = new Color(0x40000000, true);
+    
+    private static final Color TOWN_MAP_SELECTED_POINT_COLOR = new Color(0x800078D7, true);
     /**
      * Creates new form TownMapEditor
      */
@@ -40,6 +45,7 @@ public class TownMapEditor extends javax.swing.JPanel {
         Handler handler = new Handler();
         nameField.getDocument().addDocumentListener(handler);
         pointNameField.getDocument().addDocumentListener(handler);
+        displayLabel.setThumbnailOverlay(squareOverlay);
     }
 
     /**
@@ -524,6 +530,8 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     private TownMap.MapPoint mapPoint = null;
     
+    private TownMapSquareOverlay squareOverlay = new TownMapSquareOverlay();
+    
     private int squareRows = -1;
     
     private int squareCols = -1;
@@ -606,6 +614,87 @@ public class TownMapEditor extends javax.swing.JPanel {
         }
     }
     
-    
-    
+    private class TownMapSquareOverlay implements Painter<JThumbnailLabel>{
+        
+        private Rectangle2D rect = null;
+        
+        private Path2D path = null;
+
+        @Override
+        public void paint(Graphics2D g, JThumbnailLabel object, int width, int height) {
+            TownMap map = getSelectedTownMap();
+            if (map == null || mapImage == null || squareCols == -1 || squareRows == -1)
+                return;
+            g = (Graphics2D) g.create();
+            if (path == null)
+                path = new Path2D.Double();
+            else
+                path.reset();
+            if (rect == null)
+                rect = new Rectangle2D.Double();
+            double squareW = width / (double) squareCols;
+            double squareH = height / (double) squareRows;
+            int pointXOff = 0;
+            int pointYOff = 0;
+            if (squareW >= 5)
+                pointXOff = 2;
+            else if (squareW >= 3)
+                pointXOff = 1;
+            if (squareH >= 5)
+                pointYOff = 2;
+            else if (squareH >= 3)
+                pointYOff = 1;
+            g.setColor(TOWN_MAP_POINT_COLOR);
+            for (TownMap.MapPoint point : map.getPoints()){
+                if (!point.equals(mapPoint)){
+                    drawTownMapPoint(g,point,pointXOff,pointYOff,squareW,squareH,false);
+                }
+            }
+            if (mapPoint != null){
+                g.setColor(TOWN_MAP_SELECTED_POINT_COLOR);
+                drawTownMapPoint(g,mapPoint,pointXOff,pointYOff,squareW,squareH,true);
+            }
+            g.setColor(TOWN_MAP_GRID_COLOR);
+            rect.setFrame(0, 0, width-1, height-1);
+            path.append(rect, false);
+            for (int r = 1; r < squareRows; r++){
+                double y = squareH * r;
+                path.moveTo(0, y);
+                path.lineTo(width-1, y);
+            }
+            for (int c = 1; c < squareCols; c++){
+                double x = squareW * c;
+                path.moveTo(x, 0);
+                path.lineTo(x, height-1);
+            }
+            g.draw(path);
+            g.dispose();
+        }
+        
+        private void drawTownMapPoint(Graphics2D g, TownMap.MapPoint point, 
+                double xOff, double yOff, double w, double h, boolean selected){
+            double x = point.getX() * w + xOff;
+            double y = point.getY() * h + yOff;
+            w -= xOff + xOff;
+            h -= yOff + yOff;
+            rect.setFrame(x, y, w, h);
+            g.fill(rect);
+            if (w >= 3 && h >= 3){
+                g.draw(rect);
+                if (selected && w >= 5 && h >= 5){
+                    // Make the size of the center variable to size of the square
+                    double cornerX = 0.5*(w-4);
+                    double cornerY = 0.5*(h-4);
+                    if (cornerX >= 3)
+                        cornerX /= 2;
+                    if (cornerY >= 3)
+                        cornerY /= 2;
+                    rect.setFrameFromCenter(rect.getCenterX(), rect.getCenterY(), rect.getCenterX()+cornerX, rect.getCenterY()+cornerY);
+                    g.fill(rect);
+                }
+            } else {
+                g.fill(rect);
+            }
+        }
+    }
 }
