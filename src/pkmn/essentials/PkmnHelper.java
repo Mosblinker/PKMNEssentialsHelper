@@ -2272,38 +2272,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private int browseFiles(String title, boolean multiSelection, JFileChooser fc){
-        fc.setMultiSelectionEnabled(multiSelection);
-        fc.setDialogTitle(title);
-        int option;
-        boolean noFile;
-        do{
-            noFile = false;
-            option = fc.showOpenDialog(this);
-            fc.setPreferredSize(fc.getSize());
-                // Set the file chooser's size in the config if it's saved
-            config.storeFileChooser(fc);
-            if (option == JFileChooser.APPROVE_OPTION){
-                for (File file : fc.getSelectedFiles()){
-                    if (!file.exists()){
-                        JOptionPane.showMessageDialog(this, 
-                            "\""+file.getName()+"\"\nFile not found.\n"
-                                    + "Check the file name and try again.", 
-                            "File Not Found", JOptionPane.WARNING_MESSAGE);
-                        noFile = true;
-                        break;
-                    }
-                }
-                if (fc.getSelectedFiles().length == 0 && (fc.getSelectedFile() == null || !fc.getSelectedFile().exists())){
-                    if (fc.getSelectedFile() != null)
-                        JOptionPane.showMessageDialog(this, 
-                            "\""+fc.getSelectedFile().getName()+"\"\nFile not found.\n"
-                                    + "Check the file name and try again.", 
-                            "File Not Found", JOptionPane.WARNING_MESSAGE);
-                    noFile = true;
-                }
-            }
-        } while (option == JFileChooser.APPROVE_OPTION && noFile);
-        return option;
+        return PkmnHelperUtilities.browseFiles(title, multiSelection, fc, config, this);
     }
     
     private int browseSprites(String title, boolean multiSelection){

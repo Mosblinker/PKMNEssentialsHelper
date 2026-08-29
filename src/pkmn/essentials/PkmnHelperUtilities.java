@@ -6,6 +6,7 @@ package pkmn.essentials;
 
 import components.JColorSelector;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.color.ColorSpace;
@@ -23,6 +24,8 @@ import java.util.Objects;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import pkmn.essentials.colorchooser.CustomColorPreviewPanel;
 
 /**
@@ -324,5 +327,40 @@ public final class PkmnHelperUtilities {
      */
     public static float toGrayscale(int rgb, int mode){
         return toGrayscale((rgb >> 16) & 0xFF,(rgb >> 8) & 0xFF,rgb & 0xFF,mode);
+    }
+    
+    public static int browseFiles(String title, boolean multiSelection, JFileChooser fc, PkmnHelperConfig config, Component parent){
+        fc.setMultiSelectionEnabled(multiSelection);
+        fc.setDialogTitle(title);
+        int option;
+        boolean noFile;
+        do{
+            noFile = false;
+            option = fc.showOpenDialog(parent);
+            fc.setPreferredSize(fc.getSize());
+                // Set the file chooser's size in the config if it's saved
+            config.storeFileChooser(fc);
+            if (option == JFileChooser.APPROVE_OPTION){
+                for (File file : fc.getSelectedFiles()){
+                    if (!file.exists()){
+                        JOptionPane.showMessageDialog(parent, 
+                            "\""+file.getName()+"\"\nFile not found.\n"
+                                    + "Check the file name and try again.", 
+                            "File Not Found", JOptionPane.WARNING_MESSAGE);
+                        noFile = true;
+                        break;
+                    }
+                }
+                if (fc.getSelectedFiles().length == 0 && (fc.getSelectedFile() == null || !fc.getSelectedFile().exists())){
+                    if (fc.getSelectedFile() != null)
+                        JOptionPane.showMessageDialog(parent, 
+                            "\""+fc.getSelectedFile().getName()+"\"\nFile not found.\n"
+                                    + "Check the file name and try again.", 
+                            "File Not Found", JOptionPane.WARNING_MESSAGE);
+                    noFile = true;
+                }
+            }
+        } while (option == JFileChooser.APPROVE_OPTION && noFile);
+        return option;
     }
 }
