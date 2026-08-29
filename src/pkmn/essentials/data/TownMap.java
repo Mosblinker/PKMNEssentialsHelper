@@ -31,6 +31,8 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
     
     private List<MapPoint> points = new ArrayList<>();
     
+    private File mapFile = null;
+    
     public TownMap(){
         super();
     }
@@ -46,6 +48,7 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
         this.fileName = map.fileName;
         for (MapPoint point : map.points)
             this.points.add(new MapPoint(point));
+        this.mapFile = map.mapFile;
     }
     
     @Override
@@ -72,6 +75,14 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
     
     public List<MapPoint> getPoints(){
         return points;
+    }
+    
+    public File getMapImageFile(){
+        return mapFile;
+    }
+    
+    public void setMapImageFile(File file){
+        this.mapFile = file;
     }
     @Override
     public String toData(){
@@ -112,6 +123,7 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
         regionNumber = -1;
         fileName = null;
         points.clear();
+        mapFile = null;
     }
 
     @Override
