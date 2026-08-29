@@ -1556,7 +1556,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             case(TownMapEditor.BROWSE_ACTION_COMMAND):
                 File imageFolder = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
                 townMapFC.setCurrentDirectory(imageFolder);
-                if (browseFiles("Select Town Map...",false,townMapFC) == JFileChooser.APPROVE_OPTION){
+                if (browseFiles("Select Town Map",false,townMapFC) == JFileChooser.APPROVE_OPTION){
                     File file = townMapFC.getSelectedFile();
                     String match = null;
                     for (Map.Entry<String,File> entry : pbsData.getRegionMapFiles().entrySet()){
@@ -1601,12 +1601,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapEditorActionPerformed
 
     private void townMapImageEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageEditorActionPerformed
+        File imageFolder = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
+        townMapFC.setCurrentDirectory(imageFolder);
         switch(evt.getActionCommand()){
             case(TownMapImageEditor.LOAD_IMAGE_ACTION_PERFORMED):
-                
+                if (browseFiles("Select Town Map Image",false,townMapFC) == JFileChooser.APPROVE_OPTION){
+                    File file = townMapFC.getSelectedFile();
+                    BufferedImage image = loadSpriteImage(file);
+                    if (image != null)
+                        townMapImageEditor.setImage(image);
+                }
                 break;
             case(TownMapImageEditor.SAVE_IMAGE_ACTION_PERFORMED):
-                
+//                if (townMapFC.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+//                
+//                }
         }
     }//GEN-LAST:event_townMapImageEditorActionPerformed
     
