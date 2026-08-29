@@ -6,6 +6,8 @@ package pkmn.essentials.data.editor;
 
 import components.ArrayComboBoxModel;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
@@ -332,10 +334,78 @@ public class TownMapEditor extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void townMapSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapSaveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapSaveButtonActionPerformed
+
+    private void townMapImageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageBrowseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
     
     
     
     
+    
+    
+    
+    
+    /**
+     * This adds the given {@code ActionListener} to this panel.
+     * @param l The listener to add.
+     * @see #removeActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void addActionListener(ActionListener l){
+        if (l != null)          // If the listener is not null
+            listenerList.add(ActionListener.class, l);
+    }
+    /**
+     * This removes the given {@code ActionListener} from this panel.
+     * @param l The listener to remove.
+     * @see #addActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void removeActionListener(ActionListener l){
+        listenerList.remove(ActionListener.class, l);
+    }
+    /**
+     * This returns an array containing all the {@code ActionListener}s that 
+     * have been added to this panel.
+     * @return An array containing the {@code ActionListener}s that have been 
+     * added, or an empty array if none have been added.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     */
+    public ActionListener[] getActionListeners(){
+        return listenerList.getListeners(ActionListener.class);
+    }
+    /**
+     * This notifies all the {@code ActionListener}s that have been added to 
+     * this panel if the given {@code ActionEvent} is not null. If the source 
+     * of the given {@code ActionEvent} is not this panel, then the {@code 
+     * ActionEvent} will be redirected to have this panel as its source.
+     * @param evt The {@code ActionEvent} to fire.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     * @see #fireActionPerformed(String, long, int) 
+     * @see #fireActionPerformed(String) 
+     */
+    protected void fireActionPerformed(ActionEvent evt){
+        if (evt == null)    // If the event is null
+            return;
+            // If the event's source is not this component
+        else if (evt.getSource() != this){
+            evt = new ActionEvent(this, evt.getID(), evt.getActionCommand(),
+                    evt.getWhen(),evt.getModifiers());
+        }
+            // A for loop to go through the action listeners
+        for (ActionListener l : listenerList.getListeners(ActionListener.class)){
+            if (l != null)  // If the listener is not null
+                l.actionPerformed(evt);
+        }
+    }
     
     private ArrayComboBoxModel<TownMap> townMapSelectComboModel = new ArrayComboBoxModel<>();
     
