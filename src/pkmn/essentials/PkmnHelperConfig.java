@@ -111,13 +111,13 @@ public class PkmnHelperConfig {
     
     public static final String PKMN_EGG_HATCHING_SPRITE_KEY = "EggCracks";
     
-    public static final String PKMN_SPRITE_TARGET_FOLDER_KEY = "TargetFolder";
+    public static final String TARGET_FOLDER_KEY = "TargetFolder";
     
     public static final String PKMN_SPRITE_NAME_KEY = "SpriteName";
     
     public static final String COPY_PKMN_SPRITES_KEY = "CopyPkmnSprites";
     
-    public static final String PKMN_SPRITES_USE_PROJECT_FOLDER = "UseProjectFolder";
+    public static final String USE_PROJECT_FOLDER = "UseProjectFolder";
     
     public static final String RECOLOR_SPRITE_NODE_NAME = "RecolorSprites";
     
@@ -741,14 +741,14 @@ public class PkmnHelperConfig {
     }
     
     public String getPkmnSpriteTargetFolder(){
-        return getPkmnSpritePreferences().get(PKMN_SPRITE_TARGET_FOLDER_KEY, null);
+        return getPkmnSpritePreferences().get(TARGET_FOLDER_KEY, null);
     }
     
     public void setPkmnSpriteTargetFolder(String path){
         if (path == null)
-            getPkmnSpritePreferences().remove(PKMN_SPRITE_TARGET_FOLDER_KEY);
+            getPkmnSpritePreferences().remove(TARGET_FOLDER_KEY);
         else
-            getPkmnSpritePreferences().put(PKMN_SPRITE_TARGET_FOLDER_KEY, path);
+            getPkmnSpritePreferences().put(TARGET_FOLDER_KEY, path);
     }
     
     public String getPkmnSpriteName(){
@@ -828,11 +828,11 @@ public class PkmnHelperConfig {
     }
     
     public boolean getPkmnSpritesUseGameFolder(){
-        return getPkmnSpritePreferences().getBoolean(PKMN_SPRITES_USE_PROJECT_FOLDER, false);
+        return getPkmnSpritePreferences().getBoolean(USE_PROJECT_FOLDER, false);
     }
     
     public void setPkmnSpritesUseGameFolder(boolean value){
-        getPkmnSpritePreferences().putBoolean(PKMN_SPRITES_USE_PROJECT_FOLDER, value);
+        getPkmnSpritePreferences().putBoolean(USE_PROJECT_FOLDER, value);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
