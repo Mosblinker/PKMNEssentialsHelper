@@ -131,7 +131,7 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
         return Integer.compare(regionNumber, o.regionNumber);
     }
     
-    public static class MapPoint {
+    public static class MapPoint implements Comparable<MapPoint>{
         
         public static MapPoint getMapPoint(String text){
             String[] values = text.split(",");
@@ -318,6 +318,13 @@ public class TownMap extends AbstractPBSElement implements Comparable<TownMap>{
             hash = 79 * hash + this.x;
             hash = 79 * hash + this.y;
             return hash;
+        }
+
+        @Override
+        public int compareTo(MapPoint o) {
+            if (x == o.x)
+                return Integer.compare(y, o.y);
+            return Integer.compare(x, o.x);
         }
     }
 }
