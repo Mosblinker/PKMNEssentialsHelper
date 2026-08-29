@@ -357,6 +357,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), false);
         townMapSelectComboModel.addListDataListener(handler);
+        townMapPointNameField.getDocument().addDocumentListener(handler);
+        townMapNameField.getDocument().addDocumentListener(handler);
+        townMapFilenameField.getDocument().addDocumentListener(handler);
         
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
@@ -1915,6 +1918,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             BufferedImage image = loadSpriteImage(townMapImageFile);
             if (image != null)
                 townMapDisplayLabel.setImage(image);
+            else
+                townMapDisplayLabel.setImage(null);
+            updateTownMapSquareSizeSpinners();
             townMapFilenameField.setText(map.getFileName());
         }
         if (map.getName() != null){
@@ -1997,6 +2003,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapGameSwitchToggle.setSelected(point.getGameSwitch() != null);
         if (townMapGameSwitchToggle.isSelected())
             townMapSwitchSpinner.setValue(point.getGameSwitch());
+        updateTownMapPointElements();
     }
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
@@ -2820,6 +2827,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateRecolorSaveButton();
         if (gameFolderField.getDocument() == evt.getDocument())
             updateGameProjectFolderButtons();
+        if (townMapNameField.getDocument() == evt.getDocument() || townMapFilenameField.getDocument() == evt.getDocument())
+            updateTownMapChangeButton();
+        if (townMapPointNameField.getDocument() == evt.getDocument())
+            updateTownMapPointSaveButton();
     }
     
     private class Handler implements DocumentListener, ListDataListener{
