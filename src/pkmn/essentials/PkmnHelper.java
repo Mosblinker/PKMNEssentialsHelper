@@ -1976,7 +1976,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapImageBrowseButtonActionPerformed
 
     private void townMapSquareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapSquareSizeSpinnerStateChanged
-        townMapDisplayLabel.repaint();
+        calculateTownSquares();
     }//GEN-LAST:event_townMapSquareSizeSpinnerStateChanged
 
     private void townMapPointSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapPointSaveButtonActionPerformed
@@ -2020,8 +2020,23 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (image != null)
             updateTownMapImage(new ImageIcon(image),1);
         townMapImageFile = file;
+        calculateTownSquares();
         updateTownMapImageElements();
     }
+    
+    private void calculateTownSquares(){
+        if (townMapImage == null){
+            townMapSquareRows = townMapSquareCols = -1;
+        } else {
+            int width = townMapImage.getIcon().getIconWidth();
+            int height = townMapImage.getIcon().getIconHeight();
+            double c = width / ((Integer) townMapSquareWidthSpinner.getValue()).doubleValue();
+            double r = height / ((Integer) townMapSquareHeightSpinner.getValue()).doubleValue();
+            townMapSquareCols = (int) Math.ceil(c);
+            townMapSquareRows = (int) Math.ceil(r);
+            townMapDisplayLabel.repaint();
+        }
+   }
     
     private void townMapScaleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapScaleComboActionPerformed
         double scale = townMapScaleModel.get(townMapScaleCombo.getSelectedIndex());
@@ -2768,6 +2783,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private TownMap.MapPoint townMapPoint = null;
     
     private ArrayComboBoxModel<Double> townMapScaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
+    
+    private int townMapSquareRows = -1;
+    
+    private int townMapSquareCols = -1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
