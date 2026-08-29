@@ -645,6 +645,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             map.setFileName(getSelectedRegionFileName());
         }
         updateSaveButtonEnabled();
+        selectCombo.repaint();
     }//GEN-LAST:event_mapChangeButtonActionPerformed
     
     public int getSelectedIndex(){
