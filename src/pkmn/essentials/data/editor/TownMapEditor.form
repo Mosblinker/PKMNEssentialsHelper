@@ -224,7 +224,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="filenameEditButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit"/>
+        <Property name="text" type="java.lang.String" value="Edit Name"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>

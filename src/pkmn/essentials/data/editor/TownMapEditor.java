@@ -181,7 +181,7 @@ public class TownMapEditor extends javax.swing.JPanel {
             }
         });
 
-        filenameEditButton.setText("Edit");
+        filenameEditButton.setText("Edit Name");
         filenameEditButton.setEnabled(false);
         filenameEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
