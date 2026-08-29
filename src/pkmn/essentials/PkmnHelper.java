@@ -1877,7 +1877,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         // TODO add your handling code here:
     }//GEN-LAST:event_townMapSaveButtonActionPerformed
     
-    
+    private void loadMapPoint(TownMap.MapPoint point){
+        townMapPoint = point;
+        townMapPosXSpinner.setValue(point.getX());
+        townMapPosYSpinner.setValue(point.getY());
+        townMapPointNameField.setText(point.getName());
+        townMapPointPoiField.setText(point.getPointOfInterest());
+        townMapFlyToggle.setSelected(point.getFlyDestinationMapID() != null);
+        if (townMapFlyToggle.isSelected()){
+            townMapFlyIDSpinner.setValue(point.getFlyDestinationMapID());
+            if (point.getFlyDestinationX() == null)
+                point.setFlyDestinationX(0);
+            townMapFlyXSpinner.setValue(point.getFlyDestinationX());
+            if (point.getFlyDestinationY() == null)
+                point.setFlyDestinationY(0);
+            townMapFlyYSpinner.setValue(point.getFlyDestinationY());
+        } else {
+            townMapFlyIDSpinner.setValue(0);
+            townMapFlyXSpinner.setValue(0);
+            townMapFlyYSpinner.setValue(0);
+            point.clearFlyDestination();
+        }
+        townMapGameSwitchToggle.setSelected(point.getGameSwitch() != null);
+        if (townMapGameSwitchToggle.isSelected())
+            townMapSwitchSpinner.setValue(point.getGameSwitch());
+    }
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -2512,6 +2536,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private ArrayComboBoxModel<TownMap> townMapSelectComboModel = new ArrayComboBoxModel<>();
     
     private File townMapImageFile = null;
+    
+    private TownMap.MapPoint townMapPoint = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
