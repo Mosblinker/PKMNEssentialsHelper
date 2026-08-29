@@ -678,6 +678,12 @@ public class TownMapEditor extends javax.swing.JPanel {
         updateChangeButton();
     }
     
+    private void updatePointRemoveButton(){
+        TownMap map = getSelectedTownMap();
+        pointRemoveButton.setEnabled(isTownMapSelectedEnabled() && 
+                map != null && map.getPoints().contains(mapPoint));
+    }
+    
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
     private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
