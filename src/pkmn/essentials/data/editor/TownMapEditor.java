@@ -265,6 +265,11 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         pointSaveButton.setText("Save");
         pointSaveButton.setEnabled(false);
+        pointSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pointSaveButtonActionPerformed(evt);
+            }
+        });
 
         pointRemoveButton.setText("Remove");
         pointRemoveButton.setEnabled(false);
@@ -520,6 +525,29 @@ public class TownMapEditor extends javax.swing.JPanel {
         if (map != null)
             map.getPoints().remove(mapPoint);
     }//GEN-LAST:event_pointRemoveButtonActionPerformed
+
+    private void pointSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointSaveButtonActionPerformed
+        mapPoint.setName(pointNameField.getText());
+        if (pointPoiField.getText() != null && !pointPoiField.getText().isBlank())
+            mapPoint.setPointOfInterest(pointPoiField.getText().trim());
+        else
+            mapPoint.setPointOfInterest(null);
+        if (flyToggle.isSelected()){
+            mapPoint.setFlyDestination((int)flyXSpinner.getValue(),
+                    (int)flyYSpinner.getValue(), 
+                    (int)flyIDSpinner.getValue());
+            
+        } else
+            mapPoint.clearFlyDestination();
+        if (gameSwitchToggle.isSelected())
+            mapPoint.setGameSwitch((int)switchSpinner.getValue());
+        else
+            mapPoint.setGameSwitch(null);
+        TownMap map = getSelectedTownMap();
+        if (!map.getPoints().contains(mapPoint))
+            map.getPoints().add(mapPoint);
+        updatePointRemoveButton();
+    }//GEN-LAST:event_pointSaveButtonActionPerformed
     
     
     
