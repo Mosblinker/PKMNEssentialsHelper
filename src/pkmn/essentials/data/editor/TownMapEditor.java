@@ -368,6 +368,20 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     
     
+    public int getSelectedIndex(){
+        return selectCombo.getSelectedIndex();
+    }
+    
+    public void setSelectedIndex(int index){
+        selectCombo.setSelectedIndex(index);
+    }
+    
+    public TownMap getSelectedTownMap(){
+        int selection = getSelectedIndex();
+        if (selection < 0)
+            return null;
+        return selectComboModel.get(selection);
+    }
     
     public PBSData getPBSData(){
         return pbsData;
@@ -386,7 +400,6 @@ public class TownMapEditor extends javax.swing.JPanel {
         selectComboModel.addAll(data.getRegionMaps());
         selectCombo.setSelectedIndex(0);
     }
-    
     /**
      * This adds the given {@code ActionListener} to this panel.
      * @param l The listener to add.
