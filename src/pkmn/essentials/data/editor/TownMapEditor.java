@@ -93,9 +93,19 @@ public class TownMapEditor extends javax.swing.JPanel {
 
         addButton.setText("Add");
         addButton.setEnabled(false);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         removeButton.setText("Remove");
         removeButton.setEnabled(false);
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
 
         saveButton.setText("Save");
         saveButton.setActionCommand(SAVE_ACTION_COMMAND);
@@ -361,6 +371,24 @@ public class TownMapEditor extends javax.swing.JPanel {
     private void imageBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageBrowseButtonActionPerformed
         fireActionPerformed(evt);
     }//GEN-LAST:event_imageBrowseButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        TownMap map = new TownMap(pbsData.getRegionMaps().size());
+        pbsData.getRegionMaps().add(map);
+        selectComboModel.add(map);
+        selectCombo.setSelectedIndex(map.getRegionNumber());
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        int selection = getSelectedIndex();
+        pbsData.getRegionMaps().remove(selection);
+        selectComboModel.remove(selection);
+        for (int i = selection; i < pbsData.getRegionMaps().size(); i++){
+            TownMap map = pbsData.getRegionMaps().get(i);
+            map.setRegionNumber(map.getRegionNumber()-1);
+        }
+    }//GEN-LAST:event_removeButtonActionPerformed
+    
     
     
     
