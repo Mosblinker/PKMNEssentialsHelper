@@ -1994,6 +1994,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (map != null){
             map.setName(townMapNameField.getText());
             map.setFileName(townMapFilenameField.getText());
+            map.setMapImageFile(townMapImageFile);
         }
         updateTownMapSaveButton();
     }//GEN-LAST:event_townMapChangeButtonActionPerformed
