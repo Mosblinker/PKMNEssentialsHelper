@@ -66,6 +66,7 @@ import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.*;
 import pkmn.essentials.data.editor.TownMapEditor;
 import pkmn.essentials.data.pkmn.*;
+import pkmn.essentials.map.TownMapImageEditor;
 import pkmn.essentials.recolor.AbstractPaletteChangeDialog;
 import pkmn.essentials.recolor.AbstractPaletteColorChangeDialog;
 import pkmn.essentials.recolor.PaletteColorExchangeDialog;
@@ -451,7 +452,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpriteListPanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         recolorReferencePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         townMapEditor = new pkmn.essentials.data.editor.TownMapEditor();
-        townMapImageEditor1 = new pkmn.essentials.map.TownMapImageEditor();
+        townMapImageEditor = new pkmn.essentials.map.TownMapImageEditor();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1033,7 +1034,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jTabbedPane1.addTab("Town Maps", townMapEditor);
-        jTabbedPane1.addTab("Town Map Images", townMapImageEditor1);
+
+        townMapImageEditor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                townMapImageEditorActionPerformed(evt);
+            }
+        });
+        jTabbedPane1.addTab("Town Map Images", townMapImageEditor);
 
         jLabel3.setText("Game Project Folder:");
 
@@ -1592,6 +1599,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 new TownMapSaver(gameProjectFolder).execute();
         }
     }//GEN-LAST:event_townMapEditorActionPerformed
+
+    private void townMapImageEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageEditorActionPerformed
+        switch(evt.getActionCommand()){
+            case(TownMapImageEditor.LOAD_IMAGE_ACTION_PERFORMED):
+                
+                break;
+            case(TownMapImageEditor.SAVE_IMAGE_ACTION_PERFORMED):
+                
+        }
+    }//GEN-LAST:event_townMapImageEditorActionPerformed
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -2267,7 +2284,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
     private pkmn.essentials.data.editor.TownMapEditor townMapEditor;
     private javax.swing.JFileChooser townMapFC;
-    private pkmn.essentials.map.TownMapImageEditor townMapImageEditor1;
+    private pkmn.essentials.map.TownMapImageEditor townMapImageEditor;
     private components.JFileDisplayPanel townMapPreview;
     // End of variables declaration//GEN-END:variables
 
