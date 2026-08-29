@@ -1106,6 +1106,8 @@ public class TownMapEditor extends javax.swing.JPanel {
         
         private void drawTownMapPoint(Graphics2D g, TownMap.MapPoint point, 
                 double xOff, double yOff, double w, double h, boolean selected){
+            if (point.getX() >= squareCols || point.getY() >= squareRows)
+                return;
             double x = point.getX() * w + xOff;
             double y = point.getY() * h + yOff;
             w -= xOff + xOff;
