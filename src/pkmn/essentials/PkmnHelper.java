@@ -1557,6 +1557,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         BufferedImage image = loadSpriteImage(file);
                         if (image != null){
                             String name = file.getName();
+                            if (pbsData.getRegionMapFiles().containsKey(name)){
+                                int extIndex = name.lastIndexOf(".");
+                                String noExt = name;
+                                String ext = "";
+                                if (extIndex >= 0){
+                                    noExt = name.substring(0,extIndex);
+                                    ext = name.substring(extIndex);
+                                }
+                                int i = 1;
+                                String temp;
+                                do{
+                                    temp = noExt + " (" + i + ")" + ext;
+                                    i++;
+                                } while(pbsData.getRegionMapFiles().containsKey(temp));
+                                name = temp;
+                            }
                             pbsData.putRegionMapFile(name, file, image);
                             townMapEditor.getRegionFileNames().add(name);
                             townMapEditor.setSelectedRegionFileName(name);

@@ -515,16 +515,20 @@ public class TownMapEditor extends javax.swing.JPanel {
         String oldName = getSelectedRegionFileName();
         if (oldName == null)
             return;
+        boolean match;
         String newName;
         do{
-            newName = JOptionPane.showInputDialog(this, "Enter the new name for the map:", 
-                oldName);
-            if (newName != null && newName.isBlank()){
-                JOptionPane.showMessageDialog(this, "Map file name cannot be blank.", 
-                        "ERROR - Invalid File Name", JOptionPane.WARNING_MESSAGE);
-            }
-        } while (newName != null && newName.isBlank());
-        if (newName != null){
+            match = false;
+            do{
+                newName = JOptionPane.showInputDialog(this, "Enter the new name for the map:", 
+                    oldName);
+                if (newName != null && newName.isBlank()){
+                    JOptionPane.showMessageDialog(this, "Map file name cannot be blank.", 
+                            "ERROR - Invalid File Name", JOptionPane.WARNING_MESSAGE);
+                }
+            } while (newName != null && newName.isBlank());
+            if (newName == null)
+                return;
             newName = newName.trim();
             int extensionIndex = oldName.lastIndexOf(".");
             if (extensionIndex >= 0){
@@ -532,10 +536,21 @@ public class TownMapEditor extends javax.swing.JPanel {
                 if (!newName.endsWith(extension))
                     newName += extension;
             }
-            pbsData.setRegionMapFileName(oldName, newName);
-            filenameComboModel.set(getSelectedRegionFileNameIndex(), newName);
-            filenameCombo.setSelectedItem(newName);
+            if (newName.equals(oldName))
+                return;
+            for (String name : pbsData.getRegionMapFiles().keySet()){
+                if (newName.equals(name)){
+                    JOptionPane.showMessageDialog(this, "Map file name already in use.", 
+                            "ERROR - Duplicate File Name", JOptionPane.WARNING_MESSAGE);
+                    match = true;
+                    break;
+                }
+            }
         }
+        while (match && newName.isBlank());
+        pbsData.setRegionMapFileName(oldName, newName);
+        filenameComboModel.set(getSelectedRegionFileNameIndex(), newName);
+        filenameCombo.setSelectedItem(newName);
     }//GEN-LAST:event_filenameEditButtonActionPerformed
 
     private void flyToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flyToggleActionPerformed
