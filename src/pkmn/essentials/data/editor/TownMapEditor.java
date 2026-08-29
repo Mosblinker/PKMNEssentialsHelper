@@ -584,6 +584,12 @@ public class TownMapEditor extends javax.swing.JPanel {
         return isPBSDataEnabled() && selectCombo.getSelectedIndex() >= 0;
     }
     
+    private void updateChangeButton(){
+        mapChangeButton.setEnabled(isTownMapSelectedEnabled() && 
+                nameField.getText() != null && !nameField.getText().isBlank() &&
+                filenameCombo.getSelectedIndex() > 0);
+    }
+    
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
     private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
@@ -645,7 +651,7 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     private void documentUpdate(DocumentEvent evt){
         if (evt.getDocument() == nameField.getDocument()){
-            
+            updateChangeButton();
         } else if (evt.getDocument() == pointNameField.getDocument()){
             
         }
