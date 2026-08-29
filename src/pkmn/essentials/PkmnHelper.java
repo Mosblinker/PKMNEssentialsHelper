@@ -451,6 +451,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpriteListPanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         recolorReferencePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         townMapEditor = new pkmn.essentials.data.editor.TownMapEditor();
+        townMapImageEditor1 = new pkmn.essentials.map.TownMapImageEditor();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1032,6 +1033,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jTabbedPane1.addTab("Town Maps", townMapEditor);
+        jTabbedPane1.addTab("Town Map Images", townMapImageEditor1);
 
         jLabel3.setText("Game Project Folder:");
 
@@ -2265,6 +2267,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
     private pkmn.essentials.data.editor.TownMapEditor townMapEditor;
     private javax.swing.JFileChooser townMapFC;
+    private pkmn.essentials.map.TownMapImageEditor townMapImageEditor1;
     private components.JFileDisplayPanel townMapPreview;
     // End of variables declaration//GEN-END:variables
 
