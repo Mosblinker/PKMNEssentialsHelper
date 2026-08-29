@@ -12,8 +12,12 @@ import java.awt.Image;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -362,5 +366,21 @@ public final class PkmnHelperUtilities {
             }
         } while (option == JFileChooser.APPROVE_OPTION && noFile);
         return option;
+    }
+    
+    public static Path moveOrCopy(Path source, Path target, boolean copy, boolean replace) throws IOException{
+        if (copy){
+            if (replace)
+                return Files.copy(source, target, 
+                        StandardCopyOption.COPY_ATTRIBUTES, 
+                        StandardCopyOption.REPLACE_EXISTING);
+            else
+                return Files.copy(source, target, 
+                        StandardCopyOption.COPY_ATTRIBUTES);
+        } else if (replace){
+            return Files.move(source, target, 
+                    StandardCopyOption.REPLACE_EXISTING);
+        }
+        return Files.move(source, target);
     }
 }

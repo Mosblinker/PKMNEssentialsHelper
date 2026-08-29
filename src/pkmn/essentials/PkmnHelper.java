@@ -2200,13 +2200,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         Path sPath = source.toPath();
         Path tPath = target.toPath();
         try{
-            path = moveOrCopy(sPath,tPath,copy,false);
+            path = PkmnHelperUtilities.moveOrCopy(sPath,tPath,copy,false);
         } catch (FileAlreadyExistsException ex){
             if (JOptionPane.showConfirmDialog(this, "\""+target+"\"\n"
                     + "already exists. Overwrite it?", "File Already Exists", 
                     JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 
                     JOptionPane.YES_OPTION){
-                path = moveOrCopy(sPath,tPath,copySpritesToggle.isSelected(),true);
+                path = PkmnHelperUtilities.moveOrCopy(sPath,tPath,copySpritesToggle.isSelected(),true);
             }
         }
         return (path != null) ? path.toFile() : source;
@@ -2219,22 +2219,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             getLogger().log(Level.WARNING, "Error occurred while checking files", ex);
             return true;
         }
-    }
-    
-    private Path moveOrCopy(Path source, Path target, boolean copy, boolean replace) throws IOException{
-        if (copy){
-            if (replace)
-                return Files.copy(source, target, 
-                        StandardCopyOption.COPY_ATTRIBUTES, 
-                        StandardCopyOption.REPLACE_EXISTING);
-            else
-                return Files.copy(source, target, 
-                        StandardCopyOption.COPY_ATTRIBUTES);
-        } else if (replace){
-            return Files.move(source, target, 
-                    StandardCopyOption.REPLACE_EXISTING);
-        }
-        return Files.move(source, target);
     }
     
     private BufferedImage loadSpriteImage(File file){
@@ -2515,7 +2499,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateSpriteApplyButton();
         }
     }
-    
     /**
      * @param args the command line arguments
      */
@@ -3781,7 +3764,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         for (Map.Entry<File, File> entry : tempFiles.entrySet()){
                             if (i1 >= index){
                                 try{
-                                    entry.setValue(moveOrCopy(entry.getKey().toPath(),entry.getValue().toPath(),copySpritesToggle.isSelected(),true).toFile());
+                                    entry.setValue(PkmnHelperUtilities.moveOrCopy(entry.getKey().toPath(),entry.getValue().toPath(),copySpritesToggle.isSelected(),true).toFile());
                                     progressBar.setValue(progressBar.getValue()+1);
                                 } catch (FileNotFoundException ex){}
                                 index++;
