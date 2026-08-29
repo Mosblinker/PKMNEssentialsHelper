@@ -133,6 +133,10 @@ public class PkmnHelperConfig {
     
     public static final String GAME_PROJECT_FOLDER_KEY = "GameProjectFolder";
     
+    public static final String TOWN_MAP_IMAGE_NODE_NAME = "TownMapImage";
+    
+    public static final String TOWN_MAP_FILE_NAME_KEY = "FileName";
+    
     
     
     /**
@@ -170,6 +174,8 @@ public class PkmnHelperConfig {
     private final Preferences recolorNode;
     
     private final PkmnSpriteFileList recolorSprites;
+    
+    private final Preferences townMapImageNode;
     /**
      * 
      * @param node 
@@ -187,6 +193,7 @@ public class PkmnHelperConfig {
         pkmnSpritesIS = new PkmnSpriteFileList(PKMN_ICONS_SHINY_SPRITE_NODE_NAME);
         recolorNode = node.node(RECOLOR_SPRITE_NODE_NAME);
         recolorSprites = new PkmnSpriteFileList(recolorNode.node(RECOLOR_PKMN_SPRITE_NODE_NAME));
+        townMapImageNode = node.node(TOWN_MAP_IMAGE_NODE_NAME);
     }
     /**
      * 
@@ -833,6 +840,40 @@ public class PkmnHelperConfig {
     
     public void setPkmnSpritesUseGameFolder(boolean value){
         getPkmnSpritePreferences().putBoolean(USE_PROJECT_FOLDER, value);
+    }
+    
+    public Preferences getTownMapImagePreferences(){
+        return townMapImageNode;
+    }
+    
+    public boolean getTownMapImageUseGameFolder(){
+        return getTownMapImagePreferences().getBoolean(USE_PROJECT_FOLDER, false);
+    }
+    
+    public void setTownMapImageUseGameFolder(boolean value){
+        getTownMapImagePreferences().putBoolean(USE_PROJECT_FOLDER, value);
+    }
+    
+    public String getTownMapImageTargetFolder(){
+        return getTownMapImagePreferences().get(TARGET_FOLDER_KEY, null);
+    }
+    
+    public void setTownMapImageTargetFolder(String path){
+        if (path == null)
+            getTownMapImagePreferences().remove(TARGET_FOLDER_KEY);
+        else
+            getTownMapImagePreferences().put(TARGET_FOLDER_KEY, path);
+    }
+    
+    public String getTownMapImageFileName(){
+        return getTownMapImagePreferences().get(TOWN_MAP_FILE_NAME_KEY, null);
+    }
+    
+    public void setTownMapImageName(String path){
+        if (path == null)
+            getTownMapImagePreferences().remove(TOWN_MAP_FILE_NAME_KEY);
+        else
+            getTownMapImagePreferences().put(TOWN_MAP_FILE_NAME_KEY, path);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
