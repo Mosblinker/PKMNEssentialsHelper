@@ -883,6 +883,34 @@ public class TownMapEditor extends javax.swing.JPanel {
         updatePointRemoveButton();
     }
     
+    public void updateSaveButtonEnabled(){
+        boolean enabled = isPBSDataEnabled() && !selectComboModel.isEmpty();
+        if (pbsData != null){
+            for (TownMap map : pbsData.getRegionMaps())
+                enabled &= map.getName() != null && !map.getName().isBlank() && 
+                        map.getFileName() != null && !map.getFileName().isBlank();
+        }
+        saveButton.setEnabled(enabled);
+    }
+    
+    private void updateTownMapControls(){
+        addButton.setEnabled(isPBSDataEnabled());
+        selectCombo.setEnabled(addButton.isEnabled() && !selectComboModel.isEmpty());
+        updateSelectionEnabled();
+        updateFileNameElements();
+        updateSaveButtonEnabled();
+        updateImageElements();
+        updatePointElements();
+    }
+    
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        try{
+            updateTownMapControls();
+        } catch(NullPointerException ex){ }
+    }
+    
     private ArrayComboBoxModel<TownMap> selectComboModel = new ArrayComboBoxModel<>();
     
     private ArrayComboBoxModel<String> filenameComboModel = new ArrayComboBoxModel<>();
