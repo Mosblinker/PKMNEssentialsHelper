@@ -3154,9 +3154,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 g.draw(rect);
                 if (selected && w >= 5 && h >= 5){
                     // Make the size of the center variable to size of the square
-                    double cornerX = rect.getCenterX();
-                    double cornerY = rect.getCenterY();
-                    rect.setFrameFromCenter(rect.getCenterX(), rect.getCenterY(), cornerX, cornerY);
+                    double cornerX = 0.5*(w-4);
+                    double cornerY = 0.5*(h-4);
+                    if (cornerX >= 3)
+                        cornerX /= 2;
+                    if (cornerY >= 3)
+                        cornerY /= 2;
+                    rect.setFrameFromCenter(rect.getCenterX(), rect.getCenterY(), rect.getCenterX()+cornerX, rect.getCenterY()+cornerY);
                     g.fill(rect);
                 }
             } else {
