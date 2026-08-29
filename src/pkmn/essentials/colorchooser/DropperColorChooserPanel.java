@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
+import pkmn.essentials.PercentRenderer;
 import pkmn.essentials.RGBInfoPanel;
 
 /**
