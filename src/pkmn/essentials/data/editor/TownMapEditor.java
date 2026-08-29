@@ -435,7 +435,7 @@ public class TownMapEditor extends javax.swing.JPanel {
                 fileName = null;
             }
         }
-        filenameCombo.setSelectedItem(fileName);
+        setSelectedRegionFileName(fileName);
     }//GEN-LAST:event_selectComboActionPerformed
 
     private void squareSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_squareSizeSpinnerStateChanged
@@ -462,6 +462,25 @@ public class TownMapEditor extends javax.swing.JPanel {
         if (selection < 0)
             return null;
         return selectComboModel.get(selection);
+    }
+    
+    public int getSelectedRegionFileNameIndex(){
+        return filenameCombo.getSelectedIndex();
+    }
+    
+    public void setSelectedRegionFileNameIndex(int index){
+        filenameCombo.setSelectedIndex(index);
+    }
+    
+    public String getSelectedRegionFileName(){
+        int selection = getSelectedRegionFileNameIndex();
+        if (selection < 0)
+            return null;
+        return filenameComboModel.get(selection);
+    }
+    
+    public void setSelectedRegionFileName(String name){
+        filenameComboModel.setSelectedItem(name);
     }
     
     public PBSData getPBSData(){
