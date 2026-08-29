@@ -51,7 +51,7 @@ public class TownMapEditor extends javax.swing.JPanel {
     
     private static final Color TOWN_MAP_GRID_COLOR = new Color(0x80000000, true);
     
-    private static final Color TOWN_MAP_POINT_COLOR = new Color(0x40000000, true);
+    private static final Color TOWN_MAP_POINT_COLOR = new Color(0x60000000, true);
     
     private static final Color TOWN_MAP_SELECTED_POINT_COLOR = new Color(0x800078D7, true);
     /**
