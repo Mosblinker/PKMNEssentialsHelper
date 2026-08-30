@@ -6,6 +6,7 @@ package pkmn.essentials.map;
 
 import components.ArrayComboBoxModel;
 import icons.ScaledIcon;
+import java.awt.Color;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +29,61 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     
     public static final String LOAD_IMAGE_ACTION_PERFORMED = "LoadImage";
     
+    private static final Color TOWN_MAP_GRID_COLOR = new Color(0x80000000, true);
     
+    public static final Color BORDER_COLOR = new Color(0x505050);
+    
+    public static final Color ROAD_COLOR = new Color(0xF8F8F8);
+    
+    public static final Color ROAD_CORNER_COLOR = new Color(0x909090);
+    
+    public static final Color TOWN_TOP_COLOR = new Color(0xF85060);
+    
+    public static final Color TOWN_CENTER_COLOR = new Color(0xC83848);
+    
+    public static final Color TOWN_MIDDLE_COLOR = new Color(0xC83848);
+    
+    public static final Color TOWN_BOTTOM_COLOR = new Color(0xA03048);
+    
+    public static final Color SPECIAL_PLACE_COLOR = new Color(0x70C890);
+    
+    public static final Color WATER_ROAD_COLOR = new Color(0x60B0F8);
+    
+    public static final Color WATER_ROAD_CORNER_COLOR = new Color(0x1878D8);
+    
+    public static final Color OPEN_WATER_COLOR = new Color(0x51BADA);
+    /**
+     * Far coast or deep water
+     */
+    public static final Color FAR_COAST_WATER_COLOR = new Color(0x42b5ce);
+    /**
+     * Coast or deeper water
+     */
+    public static final Color WATER_COAST_COLOR = new Color(0x39a5bd);
+    /**
+     * Foam (whirl)
+     */
+    public static final Color WATER_FOAM_COLOR = new Color(0x8bdbf4);
+    /**
+     * Coast or cliffs
+     */
+    public static final Color COAST_CLIFFS_COLOR = new Color(0xc5916a);
+    /**
+     * Flat or low lands
+     */
+    public static final Color LOW_LAND_COLOR = new Color(0x61c392);
+    /**
+     * Shadows or high lands
+     */
+    public static final Color HIGH_LANDS_COLOR = new Color(0x51b380);
+    
+    public static final Color MOUNTAIN_LOWEST_COLOR = new Color(0xa28259);
+    
+    public static final Color MOUNTAIN_HIGH_COLOR = new Color(0xc39269);
+    
+    public static final Color MOUNTAIN_VERY_HIGH_COLOR = new Color(0xdca272);
+    
+    public static final Color MOUNTAIN_TOP_COLOR = new Color(0xf2b282);
 
     /**
      * Creates new form TownMapImageEditor
