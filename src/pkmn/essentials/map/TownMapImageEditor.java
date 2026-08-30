@@ -28,9 +28,7 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     
     public static final String LOAD_IMAGE_ACTION_PERFORMED = "LoadImage";
     
-    public static final String SAVE_IMAGE_ACTION_PERFORMED = "SaveImage";
     
-    public static final String SAVE_BROWSE_ACTION_PERFORMED = "SaveBrowse";
 
     /**
      * Creates new form TownMapImageEditor
