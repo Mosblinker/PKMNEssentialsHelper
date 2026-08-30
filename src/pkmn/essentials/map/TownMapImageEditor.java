@@ -114,6 +114,7 @@ public class TownMapImageEditor extends javax.swing.JPanel {
 
         scaleCombo.setModel(scaleModel);
         scaleCombo.setSelectedItem(1.0);
+        scaleCombo.setEnabled(false);
         scaleCombo.setRenderer(new PercentRenderer());
         scaleCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,6 +346,7 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         else
             scaledIcon = getScaledIcon(new ImageIcon(image),scale);
         imgLabel.setIcon(scaledIcon);
+        scaleCombo.setEnabled(image!=null);
     }
     
     private ScaledIcon getScaledIcon(Icon icon, double scale){
