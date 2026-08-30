@@ -70,6 +70,7 @@ import pkmn.essentials.map.TownMapImageEditor;
 import pkmn.essentials.recolor.AbstractPaletteChangeDialog;
 import pkmn.essentials.recolor.AbstractPaletteColorChangeDialog;
 import pkmn.essentials.recolor.PaletteColorExchangeDialog;
+import pkmn.essentials.rxdata.DecodingTests;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -487,6 +488,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         printTest = new javax.swing.JMenuItem();
         printRecolorTest = new javax.swing.JMenuItem();
         printPBSTest = new javax.swing.JMenuItem();
+        rxdataFilesTest = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
         spriteFC.setAccessory(spritePreview);
@@ -1242,6 +1244,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         debugMenu.add(printPBSTest);
 
+        rxdataFilesTest.setText("Test Reading rxdata Files");
+        rxdataFilesTest.setEnabled(false);
+        rxdataFilesTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rxdataFilesTestActionPerformed(evt);
+            }
+        });
+        debugMenu.add(rxdataFilesTest);
+
         jMenuBar1.add(debugMenu);
 
         setJMenuBar(jMenuBar1);
@@ -1534,6 +1545,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         gameProjectFolder = file;
         config.setGameProjectFolder(file);
+        rxdataFilesTest.setEnabled(gameProjectFolder!=null);
         new LoadGameProject(file).execute();
     }//GEN-LAST:event_gameLoadButtonActionPerformed
 
@@ -1759,6 +1771,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void townMapImageEditorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapImageEditorStateChanged
         updateTownMapImageSaveButton();
     }//GEN-LAST:event_townMapImageEditorStateChanged
+
+    private void rxdataFilesTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rxdataFilesTestActionPerformed
+        File file = new File(gameProjectFolder, "Data"+File.separator+"System.rxdata");
+        System.out.println(file);
+        boolean decoded = false;
+        try{
+            decoded = DecodingTests.decodeTest(file);
+        } catch (Exception ex){
+            System.out.println("Error: " + ex);
+        }
+        System.out.println("Decoded: " + decoded);
+    }//GEN-LAST:event_rxdataFilesTestActionPerformed
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -2453,6 +2477,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel recolorSpriteListAccessory;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel recolorSpriteListPanel;
     private javax.swing.JButton recolorUndoButton;
+    private javax.swing.JMenuItem rxdataFilesTest;
     private javax.swing.JToggleButton scaleBackToggle;
     private javax.swing.JToggleButton scaleFrontToggle;
     private javax.swing.JPanel scalePanelAccessory;
