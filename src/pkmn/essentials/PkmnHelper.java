@@ -317,7 +317,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteNameField.getDocument().addDocumentListener(handler);
         recolorSaveField.getDocument().addDocumentListener(handler);
         for (JFileChooser fc : new JFileChooser[]{
-            spriteFC,spriteFolderFC,gameFolderFC,recolorFolderFC,audioFC,townMapFC
+            spriteFC,spriteFolderFC,gameFolderFC,recolorFolderFC,audioFC,
+            townMapFC,townMapFolderFC
         }){
             config.addFileChooser(fc, fc.getName());
             config.loadFileChooser(fc);
@@ -353,7 +354,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteUseGameToggle.setSelected(config.getPkmnSpritesUseGameFolder());
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
+        updateTownMapImageFolderButtons();
         
+        mapImageFolderField.getDocument().addDocumentListener(handler);
+        mapImageSaveField.getDocument().addDocumentListener(handler);
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), false);
         
         String programDir = PkmnHelperUtilities.getProgramDirectory();
@@ -395,6 +399,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorDesaturateChange = new pkmn.essentials.recolor.PaletteDesaturateChangeDialog();
         townMapPreview = new components.JFileDisplayPanel();
         townMapFC = new javax.swing.JFileChooser();
+        townMapFolderFC = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -452,7 +457,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpriteListPanel = new pkmn.essentials.sprite.PkmnSpriteNameListPanel();
         recolorReferencePanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
         townMapEditor = new pkmn.essentials.data.editor.TownMapEditor();
+        jPanel6 = new javax.swing.JPanel();
         townMapImageEditor = new pkmn.essentials.map.TownMapImageEditor();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        mapImageFolderField = new javax.swing.JTextField();
+        mapImageFolderBrowseButton = new javax.swing.JButton();
+        mapImageUseProjectFolderToggle = new javax.swing.JCheckBox();
+        jPanel8 = new javax.swing.JPanel();
+        mapImageSaveField = new javax.swing.JTextField();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(6, 0), new java.awt.Dimension(6, 0), new java.awt.Dimension(6, 32767));
+        mapImageSaveButton = new javax.swing.JButton();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(6, 0), new java.awt.Dimension(6, 0), new java.awt.Dimension(6, 32767));
+        mapImageClearButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -544,6 +562,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         townMapFC.setAccessory(townMapPreview);
         townMapFC.setName("townMapFC"); // NOI18N
+
+        townMapFolderFC.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        townMapFolderFC.setDialogTitle("Save Town Map To...");
+        townMapFolderFC.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        townMapFolderFC.setName("spriteFolderFC"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -775,23 +798,25 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spriteFolderField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spriteFolderBrowseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spriteUseGameToggle))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spriteNameField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(copySpritesToggle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spriteApplyButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spriteResetButton)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(spriteFolderField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spriteFolderBrowseButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spriteUseGameToggle))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(spriteNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(copySpritesToggle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spriteApplyButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spriteResetButton)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -801,8 +826,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addComponent(jTabbedPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(spriteFolderField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addComponent(spriteFolderBrowseButton)
                     .addComponent(spriteUseGameToggle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -997,7 +1022,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         .addComponent(recolorBrowseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(recolorSaveButton))
-                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1012,7 +1037,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                     .addComponent(jTabbedPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1035,12 +1060,103 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         jTabbedPane1.addTab("Town Maps", townMapEditor);
 
+        jPanel6.setLayout(new java.awt.BorderLayout(0, 7));
+
+        townMapImageEditor.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                townMapImageEditorStateChanged(evt);
+            }
+        });
         townMapImageEditor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 townMapImageEditorActionPerformed(evt);
             }
         });
-        jTabbedPane1.addTab("Town Map Images", townMapImageEditor);
+        jPanel6.add(townMapImageEditor, java.awt.BorderLayout.CENTER);
+
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        jLabel4.setText("Target Folder:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 7, 6);
+        jPanel7.add(jLabel4, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.9;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 7, 6);
+        jPanel7.add(mapImageFolderField, gridBagConstraints);
+
+        mapImageFolderBrowseButton.setText("Browse");
+        mapImageFolderBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapImageFolderBrowseButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 7, 6);
+        jPanel7.add(mapImageFolderBrowseButton, gridBagConstraints);
+
+        mapImageUseProjectFolderToggle.setText("Use Project Folder");
+        mapImageUseProjectFolderToggle.setEnabled(false);
+        mapImageUseProjectFolderToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapImageUseProjectFolderToggleActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 7, 6);
+        jPanel7.add(mapImageUseProjectFolderToggle, gridBagConstraints);
+
+        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.X_AXIS));
+        jPanel8.add(mapImageSaveField);
+        jPanel8.add(filler5);
+
+        mapImageSaveButton.setText("Save");
+        mapImageSaveButton.setEnabled(false);
+        mapImageSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapImageSaveButtonActionPerformed(evt);
+            }
+        });
+        jPanel8.add(mapImageSaveButton);
+        jPanel8.add(filler6);
+
+        mapImageClearButton.setText("Clear");
+        mapImageClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapImageClearButtonActionPerformed(evt);
+            }
+        });
+        jPanel8.add(mapImageClearButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 7, 6);
+        jPanel7.add(jPanel8, gridBagConstraints);
+
+        jLabel5.setText("File Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 7, 6);
+        jPanel7.add(jLabel5, gridBagConstraints);
+
+        jPanel6.add(jPanel7, java.awt.BorderLayout.PAGE_END);
+
+        jTabbedPane1.addTab("Town Map Images", jPanel6);
 
         jLabel3.setText("Game Project Folder:");
 
@@ -1308,7 +1424,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_gameBrowseButtonActionPerformed
 
     private void spriteUseGameToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spriteUseGameToggleActionPerformed
-        spriteFolderField.setEnabled(inputEnabled);
         updateSpriteFolderButtons();
         config.setPkmnSpritesUseGameFolder(spriteUseGameToggle.isSelected());
     }//GEN-LAST:event_spriteUseGameToggleActionPerformed
@@ -1601,8 +1716,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_townMapEditorActionPerformed
 
     private void townMapImageEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapImageEditorActionPerformed
-        File imageFolder = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
-        townMapFC.setCurrentDirectory(imageFolder);
+        if (gameProjectFolder != null){
+            File imageFolder = new File(gameProjectFolder,TownMap.MAP_IMAGES_LOCATION);
+            townMapFC.setCurrentDirectory(imageFolder);
+        }
         switch(evt.getActionCommand()){
             case(TownMapImageEditor.LOAD_IMAGE_ACTION_PERFORMED):
                 if (browseFiles("Select Town Map Image",false,townMapFC) == JFileChooser.APPROVE_OPTION){
@@ -1612,12 +1729,36 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         townMapImageEditor.setImage(image);
                 }
                 break;
-            case(TownMapImageEditor.SAVE_IMAGE_ACTION_PERFORMED):
-//                if (townMapFC.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
-//                
-//                }
         }
     }//GEN-LAST:event_townMapImageEditorActionPerformed
+
+    private void mapImageUseProjectFolderToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapImageUseProjectFolderToggleActionPerformed
+        updateTownMapImageFolderButtons();
+        config.setTownMapImageUseGameFolder(mapImageUseProjectFolderToggle.isSelected());
+    }//GEN-LAST:event_mapImageUseProjectFolderToggleActionPerformed
+
+    private void mapImageFolderBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapImageFolderBrowseButtonActionPerformed
+        if (townMapFolderFC.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+            mapImageFolderField.setText(townMapFolderFC.getSelectedFile().toString());
+        }
+        townMapFolderFC.setPreferredSize(townMapFolderFC.getSize());
+            // Set the file chooser's size in the config if it's saved
+        config.storeFileChooser(townMapFolderFC);
+    }//GEN-LAST:event_mapImageFolderBrowseButtonActionPerformed
+
+    private void mapImageSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapImageSaveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mapImageSaveButtonActionPerformed
+
+    private void mapImageClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapImageClearButtonActionPerformed
+        mapImageFolderField.setText("");
+        mapImageSaveField.setText("");
+        townMapImageEditor.setImage(null);
+    }//GEN-LAST:event_mapImageClearButtonActionPerformed
+
+    private void townMapImageEditorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapImageEditorStateChanged
+        updateTownMapImageSaveButton();
+    }//GEN-LAST:event_townMapImageEditorStateChanged
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -2094,6 +2235,29 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameLoadButton.setEnabled(gameFolderField.isEnabled() && gameFolderField.getText() != null &&
                 !gameFolderField.getText().isBlank());
         spriteUseGameToggle.setEnabled(gameFolderField.isEnabled() && gameProjectFolder != null);
+        mapImageUseProjectFolderToggle.setEnabled(spriteUseGameToggle.isEnabled());
+    }
+    
+    private void updateTownMapImageSaveButton(){
+        boolean enabled = inputEnabled && mapImageSaveField.getText() != null && 
+                !mapImageSaveField.getText().isBlank();
+        if (enabled){
+            if (mapImageUseProjectFolderToggle.isEnabled() && mapImageUseProjectFolderToggle.isSelected())
+                enabled = gameProjectFolder != null;
+            else
+                enabled = mapImageFolderField.getText() != null && 
+                        !mapImageFolderField.getText().isBlank();
+        }
+        if (enabled){
+            enabled = townMapImageEditor.getImage() != null;
+        }
+        mapImageSaveButton.setEnabled(enabled);
+    }
+    
+    private void updateTownMapImageFolderButtons(){
+        mapImageFolderField.setEnabled(inputEnabled && !(mapImageUseProjectFolderToggle.isEnabled() && mapImageUseProjectFolderToggle.isSelected()));
+        mapImageFolderBrowseButton.setEnabled(mapImageFolderField.isEnabled());
+        updateTownMapImageSaveButton();
     }
     
     private boolean isPBSDataEnabled(){
@@ -2124,6 +2288,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameFolderField.setEnabled(enabled);
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
+        updateTownMapImageFolderButtons();
         townMapEditor.setEnabled(enabled);
     }
     @Override
@@ -2215,6 +2380,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
     private javax.swing.JPanel followerPanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerSpritePanel;
@@ -2232,6 +2399,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -2240,12 +2409,21 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel levitateShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel levitateSpritePanel;
+    private javax.swing.JButton mapImageClearButton;
+    private javax.swing.JButton mapImageFolderBrowseButton;
+    private javax.swing.JTextField mapImageFolderField;
+    private javax.swing.JButton mapImageSaveButton;
+    private javax.swing.JTextField mapImageSaveField;
+    private javax.swing.JCheckBox mapImageUseProjectFolderToggle;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnCriesAudioPanel;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnFaintCriesAudioPanel;
     private javax.swing.JMenuItem printPBSTest;
@@ -2293,6 +2471,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel swimmingSpritePanel;
     private pkmn.essentials.data.editor.TownMapEditor townMapEditor;
     private javax.swing.JFileChooser townMapFC;
+    private javax.swing.JFileChooser townMapFolderFC;
     private pkmn.essentials.map.TownMapImageEditor townMapImageEditor;
     private components.JFileDisplayPanel townMapPreview;
     // End of variables declaration//GEN-END:variables
@@ -2309,6 +2488,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             updateRecolorSaveButton();
         if (gameFolderField.getDocument() == evt.getDocument())
             updateGameProjectFolderButtons();
+        if (mapImageFolderField.getDocument() == evt.getDocument() || 
+                mapImageSaveField.getDocument() == evt.getDocument())
+            updateTownMapImageSaveButton();
+        if (mapImageFolderField.getDocument() == evt.getDocument())
+            config.setTownMapImageTargetFolder(mapImageFolderField.getText());
+        if (mapImageSaveField.getDocument() == evt.getDocument())
+            config.setTownMapImageName(mapImageSaveField.getText());
     }
     
     private class Handler implements DocumentListener, ListDataListener{
