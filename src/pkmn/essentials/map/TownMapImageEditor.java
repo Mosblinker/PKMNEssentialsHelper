@@ -97,6 +97,7 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         });
 
         undoButton.setText("Undo");
+        undoButton.setEnabled(false);
         undoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 undoButtonActionPerformed(evt);
@@ -104,6 +105,7 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         });
 
         redoButton.setText("Redo");
+        redoButton.setEnabled(false);
         redoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 redoButtonActionPerformed(evt);
