@@ -4,12 +4,21 @@
  */
 package pkmn.essentials.map;
 
+import components.ArrayComboBoxModel;
+import icons.ScaledIcon;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
+import java.util.Objects;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import pkmn.essentials.PercentRenderer;
+import static pkmn.essentials.PkmnHelper.DEFAULT_ZOOM_VALUES;
 
 /**
  *
@@ -20,6 +29,8 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     public static final String LOAD_IMAGE_ACTION_PERFORMED = "LoadImage";
     
     public static final String SAVE_IMAGE_ACTION_PERFORMED = "SaveImage";
+    
+    public static final String SAVE_BROWSE_ACTION_PERFORMED = "SaveBrowse";
 
     /**
      * Creates new form TownMapImageEditor
@@ -40,9 +51,9 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         imgScrollPane = new javax.swing.JScrollPane();
         imgLabel = new components.JThumbnailLabel();
         loadImageButton = new javax.swing.JButton();
-        saveImageButton = new javax.swing.JButton();
         undoButton = new javax.swing.JButton();
         redoButton = new javax.swing.JButton();
+        scaleCombo = new javax.swing.JComboBox<>();
 
         imgLabel.setImageScaleMode(components.JThumbnailLabel.NO_SCALING_APPLIED);
         imgLabel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -85,14 +96,6 @@ public class TownMapImageEditor extends javax.swing.JPanel {
             }
         });
 
-        saveImageButton.setText("Save Image");
-        saveImageButton.setActionCommand(SAVE_IMAGE_ACTION_PERFORMED);
-        saveImageButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveImageButtonActionPerformed(evt);
-            }
-        });
-
         undoButton.setText("Undo");
         undoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +110,15 @@ public class TownMapImageEditor extends javax.swing.JPanel {
             }
         });
 
+        scaleCombo.setModel(scaleModel);
+        scaleCombo.setSelectedItem(1.0);
+        scaleCombo.setRenderer(new PercentRenderer());
+        scaleCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scaleComboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,34 +128,51 @@ public class TownMapImageEditor extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imgScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(loadImageButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveImageButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(undoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(redoButton)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                        .addComponent(redoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loadImageButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(imgScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(undoButton)
-                    .addComponent(redoButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(redoButton)
                     .addComponent(loadImageButton)
-                    .addComponent(saveImageButton))
-                .addContainerGap())
+                    .addComponent(scaleCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void imgLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_imgLabelMouseWheelMoved
-        // TODO add your handling code here:
+        if (evt.isControlDown()){
+//            if (mapImage != null){
+                int index = scaleCombo.getSelectedIndex() + evt.getWheelRotation();
+                if (index < 0){
+                    scaleModel.add(0, scale * 2);
+                    index = 0;
+                } else if (index >= scaleModel.size()){
+                    scaleModel.add(scale/2.0);
+                }
+                scaleCombo.setSelectedIndex(index);
+//            }
+        } else {
+            Rectangle rect = imgScrollPane.getViewport().getViewRect();
+            int scrollUnits = evt.getUnitsToScroll() * 3;
+            if (evt.isShiftDown())
+                rect.x += scrollUnits;
+            else
+                rect.y += scrollUnits;
+            imgLabel.scrollRectToVisible(rect);
+        }
     }//GEN-LAST:event_imgLabelMouseWheelMoved
 
     private void imgLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgLabelMouseReleased
@@ -178,10 +207,6 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         fireActionPerformed(evt);
     }//GEN-LAST:event_loadImageButtonActionPerformed
 
-    private void saveImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveImageButtonActionPerformed
-        fireActionPerformed(evt);
-    }//GEN-LAST:event_saveImageButtonActionPerformed
-
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_undoButtonActionPerformed
@@ -189,6 +214,15 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     private void redoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redoButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_redoButtonActionPerformed
+
+    private void scaleComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scaleComboActionPerformed
+        double temp = scaleModel.get(scaleCombo.getSelectedIndex());
+        if (temp == scale)
+            return;
+        scale = temp;
+        if (image != null)
+            imgLabel.setIcon(getScaledIcon(scaledIcon.getIcon(),scale));
+    }//GEN-LAST:event_scaleComboActionPerformed
     
     
     
@@ -304,9 +338,31 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     }
     
     public void setImage(BufferedImage image){
-        this.image = image;
+        if (Objects.equals(this.image, image))
+            return;
         imageUndo.clear();
         imageRedo.clear();
+        scaleCombo.setSelectedItem(1.0);
+        loadImage(image);
+    }
+    
+    private void loadImage(BufferedImage image){
+        this.image = image;
+        fireChangeEvent();
+        if (image == null)
+            scaledIcon = null;
+        else
+            scaledIcon = getScaledIcon(new ImageIcon(image),scale);
+        imgLabel.setIcon(scaledIcon);
+    }
+    
+    private ScaledIcon getScaledIcon(Icon icon, double scale){
+        if (icon == null)
+            return null;
+        ScaledIcon temp = new ScaledIcon(icon,scale);
+        if (scale > 1.0)
+            temp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+        return temp;
     }
     
     
@@ -317,12 +373,17 @@ public class TownMapImageEditor extends javax.swing.JPanel {
     
     private ArrayDeque<BufferedImage> imageRedo = new ArrayDeque<>();
     
+    private ArrayComboBoxModel<Double> scaleModel = new ArrayComboBoxModel<>(DEFAULT_ZOOM_VALUES);
+    
+    private ScaledIcon scaledIcon = null;
+    
+    private double scale = 1.0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private components.JThumbnailLabel imgLabel;
     private javax.swing.JScrollPane imgScrollPane;
     private javax.swing.JButton loadImageButton;
     private javax.swing.JButton redoButton;
-    private javax.swing.JButton saveImageButton;
+    private javax.swing.JComboBox<Double> scaleCombo;
     private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }
