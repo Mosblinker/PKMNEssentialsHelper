@@ -6,7 +6,6 @@ package pkmn.essentials.map;
 
 import components.ArrayComboBoxModel;
 import icons.ScaledIcon;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +18,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import pkmn.essentials.PercentRenderer;
 import static pkmn.essentials.PkmnHelper.DEFAULT_ZOOM_VALUES;
+import pkmn.essentials.PkmnHelperUtilities;
 
 /**
  *
@@ -156,24 +156,13 @@ public class TownMapImageEditor extends javax.swing.JPanel {
 
     private void imgLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_imgLabelMouseWheelMoved
         if (evt.isControlDown()){
-//            if (mapImage != null){
+            if (scaleCombo.isEnabled()){
                 int index = scaleCombo.getSelectedIndex() + evt.getWheelRotation();
-                if (index < 0){
-                    scaleModel.add(0, scale * 2);
-                    index = 0;
-                } else if (index >= scaleModel.size()){
-                    scaleModel.add(scale/2.0);
-                }
+                index = PkmnHelperUtilities.expandScaleIfNecessary(index, scaleModel);
                 scaleCombo.setSelectedIndex(index);
-//            }
+            }
         } else {
-            Rectangle rect = imgScrollPane.getViewport().getViewRect();
-            int scrollUnits = evt.getUnitsToScroll() * 3;
-            if (evt.isShiftDown())
-                rect.x += scrollUnits;
-            else
-                rect.y += scrollUnits;
-            imgLabel.scrollRectToVisible(rect);
+            PkmnHelperUtilities.scroll(evt, imgScrollPane, imgLabel, 3);
         }
     }//GEN-LAST:event_imgLabelMouseWheelMoved
 

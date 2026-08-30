@@ -11,7 +11,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +26,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import pkmn.essentials.PercentRenderer;
+import pkmn.essentials.PkmnHelperUtilities;
 import pkmn.essentials.RGBInfoPanel;
 
 /**
@@ -270,21 +270,10 @@ public class DropperColorChooserPanel extends AbstractColorChooserPanel{
         public void mouseWheelMoved(MouseWheelEvent evt){
             if (evt.isControlDown()){
                 int index = scaleCombo.getSelectedIndex() + evt.getWheelRotation();
-                if (index < 0){
-                    scaleModel.add(0, scale * 2);
-                    index = 0;
-                } else if (index >= scaleModel.size()){
-                    scaleModel.add(scale/2.0);
-                }
+                index = PkmnHelperUtilities.expandScaleIfNecessary(index, scaleModel);
                 scaleCombo.setSelectedIndex(index);
             } else {
-                Rectangle rect = imageScrollPane.getViewport().getViewRect();
-                int scrollUnits = evt.getUnitsToScroll() * imageScrollInc;
-                if (evt.isShiftDown())
-                    rect.x += scrollUnits;
-                else
-                    rect.y += scrollUnits;
-                imageLabel.scrollRectToVisible(rect);
+                PkmnHelperUtilities.scroll(evt, imageScrollPane, imageLabel, imageScrollInc);
             }
         }
         @Override

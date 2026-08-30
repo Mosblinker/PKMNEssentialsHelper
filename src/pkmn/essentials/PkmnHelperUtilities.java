@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.color.ColorSpace;
+import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,8 +31,10 @@ import java.util.Set;
 import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import static pkmn.essentials.PkmnHelper.getLogger;
 import pkmn.essentials.colorchooser.CustomColorPreviewPanel;
 
@@ -397,5 +401,26 @@ public final class PkmnHelperUtilities {
             getLogger().log(Level.WARNING, "Error occurred while checking files", ex);
             return false;
         }
+    }
+    
+    public static int expandScaleIfNecessary(int index, List<Double> scales){
+        while(index < 0){
+            scales.add(0, scales.get(0)*2);
+            index++;
+        }
+        while(index >= scales.size()){
+            scales.add(scales.get(scales.size()-1)/2.0);
+        }
+        return index;
+    }
+    
+    public static void scroll(MouseWheelEvent evt, JScrollPane scrollPane, JComponent comp, int scrollInc){
+        Rectangle rect = scrollPane.getViewport().getViewRect();
+        int scrollUnits = evt.getUnitsToScroll() * scrollInc;
+        if (evt.isShiftDown())
+            rect.x += scrollUnits;
+        else
+            rect.y += scrollUnits;
+        comp.scrollRectToVisible(rect);
     }
 }

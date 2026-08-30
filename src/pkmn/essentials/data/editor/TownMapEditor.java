@@ -11,7 +11,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +32,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import pkmn.essentials.PercentRenderer;
 import static pkmn.essentials.PkmnHelper.DEFAULT_ZOOM_VALUES;
+import pkmn.essentials.PkmnHelperUtilities;
 import pkmn.essentials.data.PBSData;
 import pkmn.essentials.data.TownMap;
 
@@ -620,23 +620,11 @@ public class TownMapEditor extends javax.swing.JPanel {
         if (evt.isControlDown()){
             if (mapImage != null){
                 int index = scaleCombo.getSelectedIndex() + evt.getWheelRotation();
-                double scale = mapImage.getScaleX();
-                if (index < 0){
-                    scaleModel.add(0, scale * 2);
-                    index = 0;
-                } else if (index >= scaleModel.size()){
-                    scaleModel.add(scale/2.0);
-                }
+                index = PkmnHelperUtilities.expandScaleIfNecessary(index, scaleModel);
                 scaleCombo.setSelectedIndex(index);
             }
         } else {
-            Rectangle rect = scrollPane.getViewport().getViewRect();
-            int scrollUnits = evt.getUnitsToScroll() * 3;
-            if (evt.isShiftDown())
-                rect.x += scrollUnits;
-            else
-                rect.y += scrollUnits;
-            displayLabel.scrollRectToVisible(rect);
+            PkmnHelperUtilities.scroll(evt, scrollPane, displayLabel, 3);
         }
     }//GEN-LAST:event_displayLabelMouseWheelMoved
 
