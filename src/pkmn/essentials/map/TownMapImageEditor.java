@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -245,6 +247,55 @@ public class TownMapImageEditor extends javax.swing.JPanel {
         for (ActionListener l : listenerList.getListeners(ActionListener.class)){
             if (l != null)  // If the listener is not null
                 l.actionPerformed(evt);
+        }
+    }
+    /**
+     * This adds the given {@code ChangeListener} to this panel.
+     * @param l The listener to add.
+     * @see #removeActionListener(ChangeListener) 
+     * @see #getActionListeners() 
+     */
+    public void addChangeListener(ChangeListener l){
+        if (l != null)          // If the listener is not null
+            listenerList.add(ChangeListener.class, l);
+    }
+    /**
+     * This removes the given {@code ActionListener} from this panel.
+     * @param l The listener to remove.
+     * @see #addActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     */
+    public void removeChangeListener(ChangeListener l){
+        listenerList.remove(ChangeListener.class, l);
+    }
+    /**
+     * This returns an array containing all the {@code ActionListener}s that 
+     * have been added to this panel.
+     * @return An array containing the {@code ActionListener}s that have been 
+     * added, or an empty array if none have been added.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     */
+    public ChangeListener[] getChangeListeners(){
+        return listenerList.getListeners(ChangeListener.class);
+    }
+    /**
+     * This notifies all the {@code ActionListener}s that have been added to 
+     * this panel if the given {@code ActionEvent} is not null. If the source 
+     * of the given {@code ActionEvent} is not this panel, then the {@code 
+     * ActionEvent} will be redirected to have this panel as its source.
+     * @see #addActionListener(ActionListener) 
+     * @see #removeActionListener(ActionListener) 
+     * @see #getActionListeners() 
+     * @see #fireActionPerformed(String, long, int) 
+     * @see #fireActionPerformed(String) 
+     */
+    protected void fireChangeEvent(){
+        ChangeEvent evt = new ChangeEvent(this);
+            // A for loop to go through the action listeners
+        for (ChangeListener l : listenerList.getListeners(ChangeListener.class)){
+            if (l != null)  // If the listener is not null
+                l.stateChanged(evt);
         }
     }
     
