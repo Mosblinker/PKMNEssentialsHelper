@@ -359,6 +359,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         mapImageFolderField.getDocument().addDocumentListener(handler);
         mapImageSaveField.getDocument().addDocumentListener(handler);
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), false);
+        jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(jPanel6), false);
         
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
