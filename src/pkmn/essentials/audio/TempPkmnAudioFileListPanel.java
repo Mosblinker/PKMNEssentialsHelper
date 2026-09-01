@@ -143,13 +143,15 @@ public class TempPkmnAudioFileListPanel extends JListManipulator<File>{
      */
     public void duplicate(){
         if (!isSelectionEmpty()){
-            int size = getModelList().size();
-            for (int i = 0; i < size; i++){
-                if (list.isSelectedIndex(i)){
-                    getModelList().add(getModelList().get(i));
-                }
+            int[] sel = getSelectedIndices();
+            for (int j = sel.length-1; j >= 0; j--){
+                int i = sel[j];
+                getModelList().add(i+1,getModelList().get(i));
             }
-            setSelectionInterval(size,getModelList().size()-1);
+            for (int i = 0; i < sel.length; i++){
+                sel[i]+= i+1;
+            }
+            setSelectedIndices(sel);
         }
     }
     @Override
