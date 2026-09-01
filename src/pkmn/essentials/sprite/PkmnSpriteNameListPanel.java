@@ -195,7 +195,6 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
      */
     public void duplicate(){
         if (!isSelectionEmpty()){
-            int size = getModelList().size();
             int[] sel = getSelectedIndices();
             for (int j = sel.length-1; j >= 0; j--){
                 int i = sel[j];
