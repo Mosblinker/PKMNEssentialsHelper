@@ -96,6 +96,8 @@ public class PkmnSpriteIcon extends ScaledIcon{
     }
     
     public Image getImage(){
+        if (getIcon() == null)
+            return null;
         return getIcon().getImage();
     }
     
