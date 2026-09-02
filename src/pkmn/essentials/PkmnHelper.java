@@ -401,6 +401,19 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapPreview = new components.JFileDisplayPanel();
         townMapFC = new javax.swing.JFileChooser();
         townMapFolderFC = new javax.swing.JFileChooser();
+        imageDifferenceTestDialog = new javax.swing.JDialog(this);
+        jPanel9 = new javax.swing.JPanel();
+        diffFileAPanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        diffFileBPanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        jPanel10 = new javax.swing.JPanel();
+        diffResultLabel = new components.JThumbnailLabel();
+        jPanel11 = new javax.swing.JPanel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        diffSaveButton = new javax.swing.JButton();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        diffDiffToggle = new javax.swing.JRadioButton();
+        diffSameToggle = new javax.swing.JRadioButton();
+        imgDiffModeGroup = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -488,6 +501,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         printTest = new javax.swing.JMenuItem();
         printRecolorTest = new javax.swing.JMenuItem();
         printPBSTest = new javax.swing.JMenuItem();
+        imageDifferenceTest = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
         spriteFC.setAccessory(spritePreview);
@@ -568,6 +582,98 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapFolderFC.setDialogTitle("Save Town Map To...");
         townMapFolderFC.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         townMapFolderFC.setName("spriteFolderFC"); // NOI18N
+
+        jPanel9.setLayout(new java.awt.GridLayout(1, 0, 6, 0));
+
+        diffFileAPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Image A"));
+        diffFileAPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singleSpritePanelActionPerformed(evt);
+            }
+        });
+        diffFileAPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                diffFilePanelPropertyChange(evt);
+            }
+        });
+        jPanel9.add(diffFileAPanel);
+
+        diffFileBPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Image B"));
+        diffFileBPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singleSpritePanelActionPerformed(evt);
+            }
+        });
+        diffFileBPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                diffFilePanelPropertyChange(evt);
+            }
+        });
+        jPanel9.add(diffFileBPanel);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
+        jPanel10.setLayout(new java.awt.BorderLayout(0, 7));
+        jPanel10.add(diffResultLabel, java.awt.BorderLayout.CENTER);
+
+        jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel11.add(filler7);
+
+        diffSaveButton.setText("Save");
+        diffSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diffSaveButtonActionPerformed(evt);
+            }
+        });
+        jPanel11.add(diffSaveButton);
+        jPanel11.add(filler8);
+
+        jPanel10.add(jPanel11, java.awt.BorderLayout.PAGE_END);
+
+        jPanel9.add(jPanel10);
+
+        imgDiffModeGroup.add(diffDiffToggle);
+        diffDiffToggle.setSelected(true);
+        diffDiffToggle.setText("Difference");
+        diffDiffToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imgDiffModeActionPerformed(evt);
+            }
+        });
+
+        imgDiffModeGroup.add(diffSameToggle);
+        diffSameToggle.setText("Same");
+        diffSameToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imgDiffModeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout imageDifferenceTestDialogLayout = new javax.swing.GroupLayout(imageDifferenceTestDialog.getContentPane());
+        imageDifferenceTestDialog.getContentPane().setLayout(imageDifferenceTestDialogLayout);
+        imageDifferenceTestDialogLayout.setHorizontalGroup(
+            imageDifferenceTestDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imageDifferenceTestDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(imageDifferenceTestDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(imageDifferenceTestDialogLayout.createSequentialGroup()
+                        .addComponent(diffDiffToggle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(diffSameToggle)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        imageDifferenceTestDialogLayout.setVerticalGroup(
+            imageDifferenceTestDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imageDifferenceTestDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(imageDifferenceTestDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(diffDiffToggle)
+                    .addComponent(diffSameToggle))
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1243,6 +1349,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         debugMenu.add(printPBSTest);
 
+        imageDifferenceTest.setText("Image Difference");
+        imageDifferenceTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imageDifferenceTestActionPerformed(evt);
+            }
+        });
+        debugMenu.add(imageDifferenceTest);
+
         jMenuBar1.add(debugMenu);
 
         setJMenuBar(jMenuBar1);
@@ -1293,6 +1407,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         if (recolorReferencePanel == evt.getSource())
             index = singlePkmnSpritePanels.length;
+        if (diffFileAPanel == evt.getSource())
+            index = singlePkmnSpritePanels.length+1;
+        if (diffFileBPanel == evt.getSource())
+            index = singlePkmnSpritePanels.length+2;
         if (index >= 0){
             switch(evt.getActionCommand()){
                 case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
@@ -1760,6 +1878,69 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void townMapImageEditorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_townMapImageEditorStateChanged
         updateTownMapImageSaveButton();
     }//GEN-LAST:event_townMapImageEditorStateChanged
+
+    private void imageDifferenceTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageDifferenceTestActionPerformed
+        imageDifferenceTestDialog.setVisible(true);
+    }//GEN-LAST:event_imageDifferenceTestActionPerformed
+
+    private void diffFilePanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_diffFilePanelPropertyChange
+        if (SinglePkmnSpriteNamePanel.ICON_PROPERTY_CHANGED.equals(evt.getPropertyName()))
+            updateImageDifference();
+    }//GEN-LAST:event_diffFilePanelPropertyChange
+
+    private void diffSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diffSaveButtonActionPerformed
+        if (spriteFC.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+            File file = spriteFC.getSelectedFile();
+            try {
+                ImageIO.write(imgDiff, "png", file);
+            } catch (IOException ex) {
+                getLogger().log(Level.SEVERE, null, ex);
+            }
+        }
+        spriteFC.setPreferredSize(spriteFC.getSize());
+            // Set the file chooser's size in the config if it's saved
+        config.storeFileChooser(spriteFC);
+    }//GEN-LAST:event_diffSaveButtonActionPerformed
+
+    private void imgDiffModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgDiffModeActionPerformed
+        updateImageDifference();
+    }//GEN-LAST:event_imgDiffModeActionPerformed
+    
+    private void updateImageDifference(){
+        PkmnSpriteIcon icon1 = diffFileAPanel.getIcon();
+        PkmnSpriteIcon icon2 = diffFileBPanel.getIcon();
+        Image i1 = (icon1 != null) ? icon1.getImage() : null;
+        Image i2 = (icon2 != null) ? icon2.getImage() : null;
+        BufferedImage img1 = (i1 != null) ? PkmnHelperUtilities.getBufferedImage(i1) : null;
+        BufferedImage img2 = (i2 != null) ? PkmnHelperUtilities.getBufferedImage(i2) : null;
+        imgDiff = produceImageDifference(img1,img2);
+        diffResultLabel.setImage(imgDiff);
+    }
+    
+    private BufferedImage produceImageDifference(BufferedImage image1, BufferedImage image2){
+        if (image1 == null)
+            return image2;
+        if (image2 == null)
+            return image1;
+        BufferedImage img = new BufferedImage(image1.getWidth(),image1.getHeight(),BufferedImage.TYPE_INT_ARGB);
+        int[] data1 = new int[image1.getWidth()];
+        int[] data2 = new int[image2.getWidth()];
+        for (int y = 0; y < image1.getHeight() && y < image2.getHeight(); y++){
+            data1 = image1.getRGB(0, y, image1.getWidth(), 1, data1, 0, 1);
+            data2 = image2.getRGB(0, y, image2.getWidth(), 1, data2, 0, 1);
+            int x;
+            for (x = 0; x < image1.getWidth() && x < image2.getWidth(); x++){
+                if (data1[x] == data2[x]){
+                    if (diffDiffToggle.isSelected())
+                        data1[x] = 0;
+                } else if (diffSameToggle.isSelected()){
+                    data1[x] = 0;
+                }
+            }
+            img.setRGB(0, y, img.getWidth(), 1, data1, 0, 1);
+        }
+        return img;
+    }
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
@@ -1968,6 +2149,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             case(5):
                 title = "Select Reference";
                 break;
+            case(6):
+            case(7):
+                title = "Select Image To Get Difference";
+                break;
             default:
                 return;
         }
@@ -1985,6 +2170,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     List<Color> palette = ((PalettePkmnSpriteIcon)icon).getPalette();
                     recolorReferencePaletteColorChooser.setPalette(palette);
                     blendReferencePaletteColorChooser.setPalette(palette);
+                    break;
+                case(1):
+                    icon = loadSprite(file);
+                    if (icon == null)
+                        return;
+                    diffFileAPanel.setIcon(icon);
+                    break;
+                case(2):
+                    icon = loadSprite(file);
+                    if (icon == null)
+                        return;
+                    diffFileBPanel.setIcon(icon);
                     break;
                 default:
                     icon = loadSprite(file);
@@ -2364,6 +2561,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private File gameProjectFolder = null;
     
     private PBSData pbsData = null;
+    
+    private BufferedImage imgDiff = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
@@ -2372,6 +2571,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JMenuItem configDataButton;
     private javax.swing.JCheckBox copySpritesToggle;
     private javax.swing.JMenu debugMenu;
+    private javax.swing.JRadioButton diffDiffToggle;
+    private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel diffFileAPanel;
+    private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel diffFileBPanel;
+    private components.JThumbnailLabel diffResultLabel;
+    private javax.swing.JRadioButton diffSameToggle;
+    private javax.swing.JButton diffSaveButton;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggCracksSpritePanel;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggIconSpritePanel;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggSpritePanel;
@@ -2383,6 +2588,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
     private javax.swing.JPanel followerPanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerShinySpritePanel;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel followerSpritePanel;
@@ -2394,6 +2601,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField gameFolderField;
     private javax.swing.JButton gameLoadButton;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel iSpritePanel;
+    private javax.swing.JMenuItem imageDifferenceTest;
+    private javax.swing.JDialog imageDifferenceTestDialog;
+    private javax.swing.ButtonGroup imgDiffModeGroup;
     private javax.swing.JCheckBoxMenuItem inputEnabledTest;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel isSpritePanel;
     private javax.swing.JLabel jLabel1;
@@ -2406,6 +2616,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2413,6 +2625,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
