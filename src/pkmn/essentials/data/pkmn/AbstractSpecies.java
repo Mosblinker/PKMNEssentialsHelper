@@ -393,6 +393,25 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         return evs;
     }
     
+    protected String getEVsStr(){
+        if (getEVs().isEmpty())
+            return "";
+        String str = "";
+        for (Map.Entry<Stat, Integer> entry : getEVs().entrySet()){
+            str += entry.getKey()+","+entry.getValue()+",";
+        }
+        return str.substring(0, str.length()-1);
+    }
+    
+    protected void readEVs(String str){
+        String[] arr = str.split(",");
+        for (int i = 0; i < arr.length && i+1 < arr.length; i+=2){
+            if (arr[i] == null || arr[i].isBlank() || arr[i+1] == null && arr[i+1].isBlank())
+                continue;
+            getEVs().put(Stat.valueOf(arr[i].trim()), Integer.valueOf(arr[i+1].trim()));
+        }
+    }
+    
     public int getCatchRate(){
         if (catchRate == null)
             return 255;
