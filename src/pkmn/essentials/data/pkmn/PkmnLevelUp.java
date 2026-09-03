@@ -30,7 +30,6 @@ public class PkmnLevelUp implements Comparable<PkmnLevelUp>{
     public String toString(){
         return level + "," + move.getID();
     }
-
     @Override
     public boolean equals(Object obj){
         if (obj == this)
@@ -41,7 +40,6 @@ public class PkmnLevelUp implements Comparable<PkmnLevelUp>{
         }
         return false;
     }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -49,7 +47,6 @@ public class PkmnLevelUp implements Comparable<PkmnLevelUp>{
         hash = 67 * hash + Objects.hashCode(this.move);
         return hash;
     }
-
     @Override
     public int compareTo(PkmnLevelUp o) {
         if (level == o.level){
