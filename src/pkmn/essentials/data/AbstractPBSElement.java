@@ -217,6 +217,7 @@ public abstract class AbstractPBSElement {
     }
     
     public static AbstractPBSElement getMatch(String id, Collection<? extends AbstractPBSElement> elements){
+        id = id.trim();
         for (AbstractPBSElement element : elements){
             if (element != null && element.matchesID(id))
                 return element;
