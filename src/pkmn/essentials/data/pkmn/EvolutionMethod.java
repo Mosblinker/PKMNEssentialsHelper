@@ -60,7 +60,7 @@ public abstract class EvolutionMethod {
         new ItemEvolutionMethod("HoldItemHappiness","Hold Item Happiness","The Pokémon will evolve if its happiness is 220 or higher (this number is hardcoded) and it is holding the item given in the parameter. The item is consumed."),
         new DefinableEvolutionMethod("HasMove","Has Move","The Pokémon will evolve if it knows the move given in the parameter.","Move",Move.class),
         new DefinableEvolutionMethod("HasMoveType","Has Move Type","The Pokémon will evolve if it knows any move of the type given in the parameter.","Type",Type.class),
-        new DefinableEvolutionMethod("HasInParty","Has In Party","The Pokémon will evolve if the player's party contains a Pokémon whose species is given in the parameter.","Species",Species.class),
+        new DefinableEvolutionMethod("HasInParty","Has In Party","The Pokémon will evolve if the player's party contains a Pokémon whose species is given in the parameter.","Species",AbstractSpecies.class),
         new DefinableEvolutionMethod("Location","Location","The Pokémon will evolve if the player is currently in a map whose ID number is given in the parameter.","ID",Integer.class),
         new DefinableEvolutionMethod("LocationFlag","Location Flag","The Pokémon will evolve if the player is currently in a map whose map metadata contains a flag that matches the parameter.","Flag",String.class),
         new DefinableEvolutionMethod("Region","Region","The Pokémon will evolve if the player is currently in a map that is part of a region whose ID number is given in the parameter.","ID",Integer.class),
@@ -80,7 +80,7 @@ public abstract class EvolutionMethod {
         new NoParamEvolutionMethod("TradeDay","Trade Day","The Pokémon will evolve if it is currently daytime."),
         new NoParamEvolutionMethod("TradeNight","Trade Night","The Pokémon will evolve if it is currently night-time."),
         new ItemEvolutionMethod("TradeItem","Trade Item","The Pokémon will evolve if it is holding the item given in the parameter. The item is consumed."),
-        new DefinableEvolutionMethod("TradeSpecies","Trade Species","The Pokémon will evolve if the other Pokémon that was traded away was the species given in the parameter and wasn't holding an Everstone.","Species",Species.class),
+        new DefinableEvolutionMethod("TradeSpecies","Trade Species","The Pokémon will evolve if the other Pokémon that was traded away was the species given in the parameter and wasn't holding an Everstone.","Species",AbstractSpecies.class),
         
         // After Every Battle Evolution Methods
         new DefinableEvolutionMethod("BattleDealCriticalHit","Battle Deal Critical Hits", "The Pokémon will evolve if the number of critical hits dealt by the Pokémon during the battle is greater than or equal to the number given in the parameter.","Number",Integer.class),
