@@ -369,14 +369,7 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         for (int i = 0; i < str.length() && i < Stat.values().length; i++){
             if (arr[i].isBlank())
                 continue;
-            Stat stat = Stat.values()[i];
-            int value;
-            try{
-                value = Integer.parseInt(arr[i].trim());
-            } catch(NumberFormatException ex){
-                continue;
-            }
-            setBaseStat(stat,value);
+            setBaseStat(Stat.values()[i],Integer.parseInt(arr[i].trim()));
         }
     }
     
