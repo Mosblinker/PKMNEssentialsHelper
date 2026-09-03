@@ -364,6 +364,22 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
                 getBaseSpecialDefense();
     }
     
+    protected void readBaseStats(String str){
+        String[] arr = str.split(",");
+        for (int i = 0; i < str.length() && i < Stat.values().length; i++){
+            if (arr[i].isBlank())
+                continue;
+            Stat stat = Stat.values()[i];
+            int value;
+            try{
+                value = Integer.parseInt(arr[i].trim());
+            } catch(NumberFormatException ex){
+                continue;
+            }
+            setBaseStat(stat,value);
+        }
+    }
+    
     public int getBaseXP(){
         if (baseXP != null)
             return 100;
