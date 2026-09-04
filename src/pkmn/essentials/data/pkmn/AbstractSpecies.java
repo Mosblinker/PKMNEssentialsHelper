@@ -479,7 +479,7 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         else if (getSecondAbility() != null)
             return getSecondAbility().getID();
         else
-            return null;
+            return abilityStr;
     }
     
     protected String getAbilityStr(){
@@ -512,6 +512,17 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     
     public void setMovesStr(String str){
         moveStr = str;
+    }
+    
+    protected String getMovesToString(){
+        if (!getMoves().isEmpty()){
+            String str = "";
+            for (PkmnLevelUp move : getMoves()){
+                str += move + ",";
+            }
+            return str.substring(0, str.length()-1);
+        }
+        return moveStr;
     }
     
     public Set<Move> getTutorMoves(){
@@ -547,6 +558,15 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         for (int i = 0; i < arr.length; i++)
             arr[i] = arr[i].trim();
         getEggGroups().addAll(Arrays.asList(arr));
+    }
+    
+    protected String getEggGroupsStr(){
+        if (getEggGroups().isEmpty())
+            return "";
+        String str = "";
+        for (String temp : getEggGroups())
+            str += temp + ",";
+        return str.substring(0, str.length()-1);
     }
     
     public int getHatchSteps(){
