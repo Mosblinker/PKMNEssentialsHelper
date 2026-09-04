@@ -607,6 +607,8 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     }
     
     public String getColor(){
+        if (color == null)
+            return "Red";
         return color;
     }
     
@@ -614,7 +616,13 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         this.color = color;
     }
     
+    public boolean isColorSet(){
+        return color != null;
+    }
+    
     public String getShape(){
+        if (shape == null)
+            return "Head";
         return shape;
     }
     
@@ -622,12 +630,22 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         this.shape = shape;
     }
     
+    public boolean isShapeSet(){
+        return shape != null;
+    }
+    
     public String getHabitat(){
+        if (habitat == null)
+            return "None";
         return habitat;
     }
     
     public void setHabitat(String habitat){
         this.habitat = habitat;
+    }
+    
+    public boolean isHabitatSet(){
+        return habitat != null;
     }
     
     public String getCategory(){
