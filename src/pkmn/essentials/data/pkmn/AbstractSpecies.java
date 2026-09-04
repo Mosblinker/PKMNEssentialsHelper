@@ -223,6 +223,8 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     
     private String evolutionsStr = null;
     
+    
+    
     private ImageIcon icon = null;
     
     
@@ -233,6 +235,11 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     
     public AbstractSpecies(String id){
         super(id);
+    }
+    
+    public AbstractSpecies(String id, int form){
+        this(id);
+        setVersion(form);
     }
     
     public AbstractSpecies(AbstractSpecies species){
@@ -278,6 +285,10 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
             this.evolutions.add(new PkmnEvolution(evo));
         this.evolutionsStr = species.evolutionsStr;
         this.icon = species.icon;
+    }
+    
+    public int getForm(){
+        return getVersion();
     }
     
     public String getFormName(){
@@ -949,6 +960,23 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
             if (item != null)
                 target.add(item);
         }
+    }
+    
+    @Override
+    public String toString(){
+        String str = getID();
+        if (getForm() > 0) {
+            str += "," + getForm();
+        }
+        return str;
+    }
+    
+    public String getIDString() {
+        return "[" + toString() + "]";
+    }
+    @Override
+    public String toData(){
+        return getIDString();
     }
     
     private class StatsMap extends AbstractMap<Stat, Integer>{
