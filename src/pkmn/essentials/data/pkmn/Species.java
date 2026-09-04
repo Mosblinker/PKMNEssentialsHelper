@@ -89,6 +89,8 @@ public class Species extends AbstractSpecies{
     }
     
     public GenderRatio getGenderRatio(){
+        if (genderRatio == null)
+            return GenderRatio.FEMALE_50_PERCENT;
         return genderRatio;
     }
     
@@ -96,12 +98,22 @@ public class Species extends AbstractSpecies{
         this.genderRatio = ratio;
     }
     
+    public boolean isGenderRatioSet(){
+        return genderRatio != null;
+    }
+    
     public GrowthRate getGrowthRate(){
+        if (growthRate == null)
+            return GrowthRate.MEDIUM;
         return growthRate;
     }
     
     public void setGrowthRate(GrowthRate rate){
         growthRate = rate;
+    }
+    
+    public boolean isGrowthRateSet(){
+        return growthRate != null;
     }
     
     public Item getIncense(){
