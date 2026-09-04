@@ -782,7 +782,7 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     @Override
     public int compareTo(AbstractSpecies o) {
         if (Objects.equals(getID(), o.getID()))
-            return Integer.compare(getVersion(), o.getVersion());
+            return Integer.compare(getForm(), o.getForm());
         return getID().compareTo(o.getID());
     }
     
