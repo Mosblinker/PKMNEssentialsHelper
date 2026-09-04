@@ -240,6 +240,96 @@ public class Species extends AbstractSpecies{
         setGrowthRate(null);
         setIncense(null);
     }
+    @Override
+    public String toData(){
+        String str = super.toData();
+        if (getName() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[0] + " = " + getName();
+        if (getFormName() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[1] + " = " + getFormName();
+        if (!getTypes().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[2] + " = " + toIDString(getTypes());
+        else if (getTypesStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[2] + " = " + getTypesStr();
+        if (!getBaseStats().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[3] + " = " + getBaseStatsStr();
+        if (isGenderRatioSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[4] + " = " + getGenderRatio().getValue();
+        if (isGrowthRateSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[5] + " = " + getGrowthRate().toString();
+        if (isBaseXPSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[6] + " = " + getBaseXP();
+        if (!getEVs().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[7] + " = " + getEVsStr();
+        if (isCatchRateSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[8] + " = " + getCatchRate();
+        if (isHappinessSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[9] + " = " + getHappiness();
+        String abilities = getAbilitiesStr();
+        if (abilities != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[10] + " = " + abilities;
+        if (!getHiddenAbilities().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[11] + " = " + toIDString(getHiddenAbilities());
+        else if (getHiddenAbilitiesStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[11] + " = " + getHiddenAbilitiesStr();
+        String moves = getMovesToString();
+        if (moves != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[12] + " = " + moves;
+        if (!getTutorMoves().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[13] + " = " + toIDString(getTutorMoves());
+        else if (getTutorMovesStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[13] + " = " + getTutorMovesStr();
+        if (!getEggMoves().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[14] + " = " + toIDString(getEggMoves());
+        else if (getEggMovesStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[14] + " = " + getEggMovesStr();
+        if (!getEggGroups().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[15] + " = " + getEggGroupsStr();
+        if (isHatchStepsSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[16] + " = " + getHatchSteps();
+        if (getIncense() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[17] + " = " + getIncense().getID();
+        else if (incenseStr != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[17] + " = " + incenseStr;
+        if (!getOffspring().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[18] + " = " + toIDString(getOffspring());
+        else if (getOffspringStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[18] + " = " + getOffspringStr();
+        if (isHeightSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[19] + " = " + getHeight();
+        if (isWeightSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[20] + " = " + getWeight();
+        if (isColorSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[21] + " = " + getColor();
+        if (isShapeSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[22] + " = " + getShape();
+        if (isHabitatSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[23] + " = " + getHabitat();
+        if (getCategory() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[24] + " = " + getCategory();
+        if (getPokedexEntry() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[25] + " = " + getPokedexEntry();
+        if (isGenerationSet())
+            str += System.lineSeparator()+PROPERTY_NAMES[26] + " = " + getGeneration();
+        if (!getFlags().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[27] + " = " + AbstractPBSElement.getFlagString(getFlags());
+        if (!getCommonWildItems().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[28] + " = " + toIDString(getCommonWildItems());
+        else if (getCommonWildItemsStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[28] + " = " + getCommonWildItemsStr();
+        if (!getUncommonWildItems().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[29] + " = " + toIDString(getUncommonWildItems());
+        else if (getUncommonWildItemsStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[29] + " = " + getUncommonWildItemsStr();
+        if (!getRareWildItems().isEmpty())
+            str += System.lineSeparator()+PROPERTY_NAMES[30] + " = " + toIDString(getRareWildItems());
+        else if (getRareWildItemsStr() != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[30] + " = " + getRareWildItemsStr();
+        String evolutions = evolutionsToString();
+        if (evolutions != null)
+            str += System.lineSeparator()+PROPERTY_NAMES[31] + " = " + evolutions;
+        return str;
+    }
     
     @Override
     public void finishLoading(PBSData data){
