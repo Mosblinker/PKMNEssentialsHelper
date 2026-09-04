@@ -124,7 +124,7 @@ public class PBSData {
     
     private List<Item> items = new ArrayList<>();
     
-    
+    private List<Species> species = new ArrayList<>();
     
     private List<TownMap> regions = new ArrayList<>();
     
@@ -378,4 +378,10 @@ public class PBSData {
                 map.setFileName(newName);
         }
     }
+    
+    public List<Species> getSpecies(){
+        return species;
+    }
+    
+    
 }
