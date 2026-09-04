@@ -529,6 +529,13 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         return eggGroups;
     }
     
+    protected void setEggGroups(String str){
+        String[] arr = str.split(",");
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = arr[i].trim();
+        getEggGroups().addAll(Arrays.asList(arr));
+    }
+    
     public int getHatchSteps(){
         if (hatchSteps == null)
             return 1;
