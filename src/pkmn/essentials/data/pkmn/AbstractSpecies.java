@@ -225,6 +225,8 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     
     private ImageIcon icon = null;
     
+    
+    
     public AbstractSpecies(){
         super();
     }
@@ -467,6 +469,17 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     
     public void setAbilities(Ability ability1){
         setAbilities(ability1, null);
+    }
+    
+    protected String getAbilitiesStr(){
+        if (getFirstAbility() != null && getSecondAbility() != null)
+            return getFirstAbility().getID()+","+getSecondAbility().getID();
+        else if (getFirstAbility() != null)
+            return getFirstAbility().getID();
+        else if (getSecondAbility() != null)
+            return getSecondAbility().getID();
+        else
+            return null;
     }
     
     protected String getAbilityStr(){
