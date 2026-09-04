@@ -19,8 +19,6 @@ public class Species extends AbstractSpecies{
     
     public static final String FORM_PBS_FILE_TEMPLATE = "pokemon_forms";
     
-    public static final String METRICS_PBS_FILE_TEMPLATE = "pokemon_metrics";
-    
     public static final String PBS_FILES_EXCLUDE_LIST_FILE = "pkmn_files.txt";
     
     public static final String SPRITE_FOLDER = "Graphics"+File.separator+"Pokemon"+File.separator+"Front";
@@ -336,6 +334,4 @@ public class Species extends AbstractSpecies{
         super.finishLoading(data);
         setIncense((Item) AbstractPBSElement.getMatch(incenseStr, data.getItems()));
     }
-    
-    // Form and metrics are subclasses of Species. Form implements AbstractSpecies
 }
