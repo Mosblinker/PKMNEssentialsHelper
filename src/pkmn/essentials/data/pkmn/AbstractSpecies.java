@@ -751,6 +751,15 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
         this.evolutionsStr = str;
     }
     
+    protected String evolutionsToString(){
+        if (getEvolutions().isEmpty())
+            return evolutionsStr;
+        String str = "";
+        for (PkmnEvolution temp : getEvolutions())
+            str += temp + ",";
+        return str.substring(0, str.length()-1);
+    }
+    
     public ImageIcon getIcon(){
         return icon;
     }
