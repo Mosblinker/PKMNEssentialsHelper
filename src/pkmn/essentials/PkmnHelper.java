@@ -3822,7 +3822,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         if (fileName.startsWith(Species.PBS_FILE_TEMPLATE) && 
                                 !Species.getExcludedPBSFiles().contains(fileName) &&
                                 !fileName.startsWith(Metrics.PBS_FILE_TEMPLATE) && 
-                                !fileName.startsWith(Species.FORM_PBS_FILE_TEMPLATE)){
+                                !fileName.startsWith(Form.PBS_FILE_TEMPLATE)){
                             readLines(pbsFiles.get(i),lines);
                             progressBar.setMaximum(lines.size());
                             progressBar.setIndeterminate(false);
