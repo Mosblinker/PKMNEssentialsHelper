@@ -185,10 +185,6 @@ public class PBSData {
             if (type.getID() != null)
                 getTypes().add(type);
         }
-            // Set strengths and weaknesses for each type
-        for (Type type : getTypes()){
-            type.finishLoading(this);
-        }
     }
     
     public void loadTypes(List<String> lines){
@@ -233,10 +229,6 @@ public class PBSData {
             index = move.fromData(lines, index, progressBar);
             if (move.getID() != null)
                 getMoves().add(move);
-        }
-            // Set the type for each move
-        for (Move move : getMoves()){
-            move.finishLoading(this);
         }
     }
     
@@ -303,10 +295,6 @@ public class PBSData {
             if (item.getID() != null)
                 getItems().add(item);
         }
-            // Set the move for each type
-        for (Item item : getItems()){
-            item.finishLoading(this);
-        }
     }
     
     public void loadItems(List<String> lines){
@@ -333,8 +321,6 @@ public class PBSData {
             if (map.getID() != null)
                 getRegionMaps().add(map);
         }
-        getRegionMapFiles().clear();
-        getRegionMapImages().clear();
     }
     
     public void loadRegionMaps(List<String> lines){
@@ -384,4 +370,31 @@ public class PBSData {
     }
     
     
+    public void finishLoadingData(JProgressBar progressBar){
+            // Set strengths and weaknesses for each type
+        for (Type type : getTypes()){
+            type.finishLoading(this);
+            if (progressBar != null)
+                progressBar.setValue(progressBar.getValue()+1);
+        }
+            // Set the type for each move
+        for (Move move : getMoves()){
+            move.finishLoading(this);
+            if (progressBar != null)
+                progressBar.setValue(progressBar.getValue()+1);
+        }
+            // Set the move for each type
+        for (Item item : getItems()){
+            item.finishLoading(this);
+            if (progressBar != null)
+                progressBar.setValue(progressBar.getValue()+1);
+        }
+        progressBar.setIndeterminate(true);
+        getRegionMapFiles().clear();
+        getRegionMapImages().clear();
+    }
+    
+    public void finishLoadingData(){
+        finishLoadingData(null);
+    }
 }

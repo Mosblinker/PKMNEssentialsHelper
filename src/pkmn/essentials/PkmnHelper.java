@@ -3785,12 +3785,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
+                    
+                    
+                    
+                    stage = 8;
+                    getLogger().finer("Restructuring Data");
+                    progressDisplay.setString(getProgressString());
+                    data.finishLoadingData(progressBar);
                 } catch(IOException | IllegalArgumentException | ArrayIndexOutOfBoundsException ex){
                     getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
                     return false;
                 }
             }
             stage = 1;
+            getLogger().finer("Loading Images");
             progressDisplay.setString(getProgressString());
             try{
                 File imageFile = new File(file,pkmn.essentials.data.pkmn.Type.ICONS);
@@ -3849,7 +3857,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
             
             
-            
             return true;
         }
         
@@ -3879,6 +3886,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return "Loading Items";
                 case(6):
                     return "Loading Town Map";
+                case(8):
+                    return "Restructuring Data";
                 
             }
             return "Loading Game Project";
