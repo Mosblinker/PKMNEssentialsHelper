@@ -1541,6 +1541,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             System.out.printf("    %6d: %s%n", i, AbstractSpecies.getHabitatNames().get(i));
         }
         System.out.println();
+        System.out.println("Species Exclude Files:");
+        for (int i = 0; i < Species.getExcludedPBSFiles().size(); i++){
+            System.out.printf("    %6d: %s%n", i, Species.getExcludedPBSFiles().get(i));
+        }
+        System.out.println();
     }//GEN-LAST:event_printTestActionPerformed
 
     private void showHiddenFilesToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHiddenFilesToggleActionPerformed
