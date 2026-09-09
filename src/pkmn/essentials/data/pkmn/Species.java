@@ -340,6 +340,8 @@ public class Species extends AbstractSpecies{
     @Override
     public void finishLoading(PBSData data){
         super.finishLoading(data);
-        setIncense((Item) AbstractPBSElement.getMatch(incenseStr, data.getItems()));
+        if (incenseStr != null && !incenseStr.isBlank())
+            setIncense((Item) AbstractPBSElement.getMatch(incenseStr, data.getItems()));
+        incenseStr = null;
     }
 }
