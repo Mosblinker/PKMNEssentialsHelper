@@ -3599,6 +3599,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             loadFlagFile(file,Item.FLAG_FILE,
                     "Item Flags",Item.getFlagMap());
             loadListFile(file,Item.BAG_POCKETS_NAME_FILE,"Bag Pocket Names",Item.getBagPocketNames());
+            loadFlagFile(file,AbstractSpecies.FLAG_FILE,"Species Flags",AbstractSpecies.getFlagMap());
+            loadListFile(file,AbstractSpecies.EGG_GROUP_NAME_FILE,"Egg Groups",AbstractSpecies.getEggGroupNames());
+            loadListFile(file,AbstractSpecies.COLOR_NAME_FILE,"Species Colors",AbstractSpecies.getColorNames());
+            loadListFile(file,AbstractSpecies.BODY_SHAPES_FILE,"Body Shapes",AbstractSpecies.getBodyShapes());
+            loadListFile(file,AbstractSpecies.HABITAT_NAMES_FILE,"Species Habitats",AbstractSpecies.getHabitatNames());
             PBSData.addFlagsToRegexMap(Move.getFlagMap());
             PBSData.addFlagsToRegexMap(pkmn.essentials.data.pkmn.Type.getFlagMap());
             PBSData.addFlagsToRegexMap(Item.getFlagMap());
