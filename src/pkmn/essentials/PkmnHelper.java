@@ -1516,6 +1516,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             System.out.printf("    %6d: %s%n", i, Item.getBagPocketNames().get(i));
         }
         System.out.println();
+        System.out.println("Species Flags:");
+        for (Map.Entry<String, String> entries : AbstractSpecies.getFlagMap().entrySet()){
+            System.out.printf("    %20s - %s%n",entries.getKey(),entries.getValue());
+        }
+        System.out.println();
+        System.out.println("Species Colors:");
+        for (int i = 0; i < AbstractSpecies.getColorNames().size(); i++){
+            System.out.printf("    %6d: %s%n", i, AbstractSpecies.getColorNames().get(i));
+        }
+        System.out.println();
+        System.out.println("Egg Groups:");
+        for (int i = 0; i < AbstractSpecies.getEggGroupNames().size(); i++){
+            System.out.printf("    %6d: %s%n", i, AbstractSpecies.getEggGroupNames().get(i));
+        }
+        System.out.println();
+        System.out.println("Body Shapes:");
+        for (int i = 0; i < AbstractSpecies.getBodyShapes().size(); i++){
+            System.out.printf("    %6d: %s%n", i, AbstractSpecies.getBodyShapes().get(i));
+        }
+        System.out.println();
+        System.out.println("Species Habitats:");
+        for (int i = 0; i < AbstractSpecies.getHabitatNames().size(); i++){
+            System.out.printf("    %6d: %s%n", i, AbstractSpecies.getHabitatNames().get(i));
+        }
+        System.out.println();
     }//GEN-LAST:event_printTestActionPerformed
 
     private void showHiddenFilesToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHiddenFilesToggleActionPerformed
@@ -1690,6 +1715,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             System.out.println(PBSData.DATA_SEPARATOR);
             for (TownMap map : pbsData.getRegionMaps()){
                 System.out.println(map.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
+            System.out.println();
+            System.out.println("Species:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (Species species : pbsData.getSpecies()){
+                System.out.println(species.toData());
                 System.out.println(PBSData.DATA_SEPARATOR);
             }
         }
