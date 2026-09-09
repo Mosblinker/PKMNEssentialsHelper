@@ -369,8 +369,33 @@ public class PBSData {
         return species;
     }
     
+    public void loadSpecies(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next species
+            Species s = new Species();
+            index = s.fromData(lines, index, progressBar);
+            if (s.getID() != null)
+                getSpecies().add(s);
+        }
+    }
+    
+    public void loadSpecies(List<String> lines){
+        loadSpecies(lines,null);
+    }
     
     public void finishLoadingData(JProgressBar progressBar){
+        if (progressBar != null){
+            progressBar.setMaximum(getTypes().size() + getMoves().size() + getItems().size() + getSpecies().size());
+            progressBar.setIndeterminate(false);
+        }
             // Set strengths and weaknesses for each type
         for (Type type : getTypes()){
             type.finishLoading(this);
@@ -386,6 +411,12 @@ public class PBSData {
             // Set the move for each type
         for (Item item : getItems()){
             item.finishLoading(this);
+            if (progressBar != null)
+                progressBar.setValue(progressBar.getValue()+1);
+        }
+            // Set the data for each species
+        for (Species s : getSpecies()){
+            s.finishLoading(this);
             if (progressBar != null)
                 progressBar.setValue(progressBar.getValue()+1);
         }

@@ -3769,6 +3769,26 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
+                    stage = 7;
+                    getLogger().finer("Loading Species");
+                    progressDisplay.setString(getProgressString());
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        String fileName = pbsFiles.get(i).getName();
+                        if (fileName.startsWith(Species.PBS_FILE_TEMPLATE) && 
+                                !Species.getExcludedPBSFiles().contains(fileName) &&
+                                !fileName.startsWith(Metrics.PBS_FILE_TEMPLATE) && 
+                                !fileName.startsWith(Species.FORM_PBS_FILE_TEMPLATE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadSpecies(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
                     stage = 6;
                     getLogger().finer("Loading Town Map");
                     progressDisplay.setString(getProgressString());
@@ -3886,6 +3906,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return "Loading Items";
                 case(6):
                     return "Loading Town Map";
+                case(7):
+                    return "Loading Species";
                 case(8):
                     return "Restructuring Data";
                 
