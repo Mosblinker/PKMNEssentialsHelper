@@ -412,7 +412,7 @@ public class PBSData {
             Metrics m = new Metrics();
             index = m.fromData(lines, index, progressBar);
             if (m.getID() != null){
-                String id = m.getIDString();
+                String id = m.toString();
                 for (Species s : getSpecies()){
                     if (s != null && s.matchesID(id)){
                         getMetrics().put(s, m);
