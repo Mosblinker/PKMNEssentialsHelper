@@ -126,6 +126,8 @@ public class PBSData {
     
     private List<Species> species = new ArrayList<>();
     
+    private Map<AbstractSpecies, Metrics> metrics = new HashMap();
+    
     private List<TownMap> regions = new ArrayList<>();
     
     private List<ImageIcon> typeIcons = new ArrayList<>();
@@ -391,6 +393,38 @@ public class PBSData {
         loadSpecies(lines,null);
     }
     
+    public Map<AbstractSpecies, Metrics> getMetrics(){
+        return metrics;
+    }
+    
+    public void loadMetrics(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next Metrics
+            Metrics m = new Metrics();
+            index = m.fromData(lines, index, progressBar);
+            if (m.getID() != null){
+                String id = m.getIDString();
+                for (Species s : getSpecies()){
+                    if (s != null && s.matchesID(id))
+                        getMetrics().put(s, m);
+                    break;
+                }
+            }
+        }
+    }
+    
+    public void loadMetrics(List<String> lines){
+        loadMetrics(lines,null);
+    }
+    
     public void finishLoadingData(JProgressBar progressBar){
         if (progressBar != null){
             progressBar.setMaximum(getTypes().size() + getMoves().size() + getItems().size() + getSpecies().size());
@@ -420,7 +454,10 @@ public class PBSData {
             if (progressBar != null)
                 progressBar.setValue(progressBar.getValue()+1);
         }
-        progressBar.setIndeterminate(true);
+        if (progressBar != null){
+            progressBar.setValue(0);
+            progressBar.setIndeterminate(true);
+        }
         getRegionMapFiles().clear();
         getRegionMapImages().clear();
     }
