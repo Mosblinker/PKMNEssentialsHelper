@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JProgressBar;
 import pkmn.essentials.PkmnHelperUtilities;
@@ -126,7 +127,7 @@ public class PBSData {
     
     private List<Species> species = new ArrayList<>();
     
-    private Map<AbstractSpecies, Metrics> metrics = new HashMap();
+    private Map<AbstractSpecies, Metrics> metrics = new TreeMap<>();
     
     private List<TownMap> regions = new ArrayList<>();
     
