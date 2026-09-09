@@ -3927,8 +3927,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     private class TownMapSaver extends FileSaver{
         
-        private File folder = null;
-        
         private File imageFolder = null;
         
         private Map<File, File> targetFiles = new LinkedHashMap<>();
@@ -3941,7 +3939,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         public TownMapSaver(File folder) {
             super(new File(Objects.requireNonNull(folder),PBSData.PBS_FOLDER+File.separator+TownMap.PBS_FILE));
             imageFolder = new File(folder,TownMap.MAP_IMAGES_LOCATION);
-            this.folder = folder;
         }
         
         @Override
