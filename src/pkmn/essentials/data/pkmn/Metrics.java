@@ -13,7 +13,7 @@ import pkmn.essentials.data.AbstractPBSElement;
  */
 public class Metrics extends AbstractPBSElement implements Comparable<Metrics>{
     
-    public static final String METRICS_PBS_FILE_TEMPLATE = "pokemon_metrics";
+    public static final String PBS_FILE_TEMPLATE = "pokemon_metrics";
     
     public static final String[] PROPERTY_NAMES = {
         "BackSprite",
