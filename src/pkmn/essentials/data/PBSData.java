@@ -414,9 +414,10 @@ public class PBSData {
             if (m.getID() != null){
                 String id = m.getIDString();
                 for (Species s : getSpecies()){
-                    if (s != null && s.matchesID(id))
+                    if (s != null && s.matchesID(id)){
                         getMetrics().put(s, m);
-                    break;
+                        break;
+                    }
                 }
             }
         }
