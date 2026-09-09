@@ -3604,6 +3604,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             loadListFile(file,AbstractSpecies.COLOR_NAME_FILE,"Species Colors",AbstractSpecies.getColorNames());
             loadListFile(file,AbstractSpecies.BODY_SHAPES_FILE,"Body Shapes",AbstractSpecies.getBodyShapes());
             loadListFile(file,AbstractSpecies.HABITAT_NAMES_FILE,"Species Habitats",AbstractSpecies.getHabitatNames());
+            loadListFile(file,Species.PBS_FILES_EXCLUDE_LIST_FILE,"Species PBS Exclude List",Species.getExcludedPBSFiles());
             PBSData.addFlagsToRegexMap(Move.getFlagMap());
             PBSData.addFlagsToRegexMap(pkmn.essentials.data.pkmn.Type.getFlagMap());
             PBSData.addFlagsToRegexMap(Item.getFlagMap());

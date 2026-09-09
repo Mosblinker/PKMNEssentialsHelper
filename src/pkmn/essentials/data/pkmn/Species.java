@@ -5,6 +5,8 @@
 package pkmn.essentials.data.pkmn;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import pkmn.essentials.data.AbstractPBSElement;
 import pkmn.essentials.data.Item;
 import pkmn.essentials.data.PBSData;
@@ -20,6 +22,12 @@ public class Species extends AbstractSpecies{
     public static final String FORM_PBS_FILE_TEMPLATE = "pokemon_forms";
     
     public static final String PBS_FILES_EXCLUDE_LIST_FILE = "pkmn_files.txt";
+    
+    private static List<String> pbsFilesExclude = new ArrayList<>();
+    
+    public static List<String> getExcludedPBSFiles(){
+        return pbsFilesExclude;
+    }
     
     public static final String SPRITE_FOLDER = "Graphics"+File.separator+"Pokemon"+File.separator+"Front";
     
