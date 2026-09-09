@@ -1729,6 +1729,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 System.out.println(species.toData());
                 System.out.println(PBSData.DATA_SEPARATOR);
             }
+            
+            
+            System.out.println("Metrics:");
+            System.out.println(PBSData.DATA_SEPARATOR);
+            for (Metrics metrics : pbsData.getMetrics().values()){
+                System.out.println(metrics.toData());
+                System.out.println(PBSData.DATA_SEPARATOR);
+            }
         }
     }//GEN-LAST:event_printPBSTestActionPerformed
 
