@@ -223,7 +223,7 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     
     private String evolutionsStr = null;
     
-    private Metrics metrics = null;
+    
     
     private ImageIcon icon = null;
     
@@ -981,14 +981,6 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     @Override
     public boolean matchesID(String str){
         return toString().equals(str);
-    }
-    
-    public Metrics getMetrics(){
-        return metrics;
-    }
-    
-    public void setMetrics(Metrics metrics){
-        this.metrics = metrics;
     }
     
     private class StatsMap extends AbstractMap<Stat, Integer>{
