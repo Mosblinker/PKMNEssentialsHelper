@@ -3812,7 +3812,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     getLogger().finer("Restructuring Data");
                     progressDisplay.setString(getProgressString());
                     data.finishLoadingData(progressBar);
-                } catch(IOException | IllegalArgumentException | ArrayIndexOutOfBoundsException ex){
+                } catch(IOException | IllegalArgumentException | ArrayIndexOutOfBoundsException | NullPointerException ex){
                     getLogger().log(Level.WARNING, "Failed to load PBS files", ex);
                     return false;
                 }
