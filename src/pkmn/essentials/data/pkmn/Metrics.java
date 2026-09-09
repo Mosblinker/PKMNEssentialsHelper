@@ -214,6 +214,10 @@ public class Metrics extends AbstractPBSElement implements Comparable<Metrics>{
         }
         return str;
     }
+    @Override
+    public boolean matchesID(String str){
+        return toString().equals(str);
+    }
     
     public String getIDString() {
         return "[" + toString() + "]";

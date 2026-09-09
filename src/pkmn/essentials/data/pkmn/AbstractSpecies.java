@@ -978,6 +978,10 @@ public abstract class AbstractSpecies extends AbstractPBSElement implements Comp
     public String toData(){
         return getIDString();
     }
+    @Override
+    public boolean matchesID(String str){
+        return toString().equals(str);
+    }
     
     public Metrics getMetrics(){
         return metrics;
