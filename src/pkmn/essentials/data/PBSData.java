@@ -421,7 +421,7 @@ public class PBSData {
                         pkmn = s;
                         break;
                     }
-                    if (s != null && s.getID().equals(m.getID())){
+                    if (s != null && s.getID().equals(m.getID()) && getForms(s) != null){
                         pkmn = (Form) AbstractPBSElement.getMatch(id, getForms(s));
                         break;
                     }
