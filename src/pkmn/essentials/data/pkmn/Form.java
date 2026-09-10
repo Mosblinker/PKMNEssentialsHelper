@@ -66,7 +66,7 @@ public class Form extends AbstractSpecies{
         return megaMessages;
     }
     
-    public static final String MEGA_MESSAGES_NAME_FILE = "mega_messages.txt";
+    public static final String MEGA_MESSAGES_FILE = "mega_messages.txt";
     
     private Species species = null;
     
