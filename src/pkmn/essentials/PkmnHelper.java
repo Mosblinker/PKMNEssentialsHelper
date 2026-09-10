@@ -3650,6 +3650,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             loadListFile(file,AbstractSpecies.BODY_SHAPES_FILE,"Body Shapes",AbstractSpecies.getBodyShapes());
             loadListFile(file,AbstractSpecies.HABITAT_NAMES_FILE,"Species Habitats",AbstractSpecies.getHabitatNames());
             loadListFile(file,Species.PBS_FILES_EXCLUDE_LIST_FILE,"Species PBS Exclude List",Species.getExcludedPBSFiles());
+            loadListFile(file,Form.MEGA_MESSAGES_FILE,"Mega Messages",Form.getMegaMessages());
             PBSData.addFlagsToRegexMap(Move.getFlagMap());
             PBSData.addFlagsToRegexMap(pkmn.essentials.data.pkmn.Type.getFlagMap());
             PBSData.addFlagsToRegexMap(Item.getFlagMap());
@@ -3834,7 +3835,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             i--;
                         }
                     }
-                    
+                    stage = 10;
+                    getLogger().finer("Loading Forms");
+                    progressDisplay.setString(getProgressString());
+                    for (int i = 0; i < pbsFiles.size(); i++){
+                        if (pbsFiles.get(i).getName().startsWith(Form.PBS_FILE_TEMPLATE)){
+                            readLines(pbsFiles.get(i),lines);
+                            progressBar.setMaximum(lines.size());
+                            progressBar.setIndeterminate(false);
+                            data.loadForms(lines, progressBar);
+                            progressBar.setValue(0);
+                            progressBar.setIndeterminate(true);
+                            lines.clear();
+                            pbsFiles.remove(i);
+                            i--;
+                        }
+                    }
                     stage = 9;
                     getLogger().finer("Loading Metrics");
                     progressDisplay.setString(getProgressString());
@@ -3973,6 +3989,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return "Restructuring Data";
                 case(9):
                     return "Loading Metrics";
+                case(10):
+                    return "Loading Forms";
                 
             }
             return "Loading Game Project";
