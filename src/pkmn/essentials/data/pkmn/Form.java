@@ -172,105 +172,102 @@ public class Form extends AbstractSpecies{
     protected void setProperty(int propertyIndex, String value) {
         switch(propertyIndex){
             case(0):
-                setName(value);
-                break;
-            case(1):
                 setFormName(value);
                 break;
-            case(2):
+            case(1):
                 setPokedexForm(Integer.valueOf(value.trim()));
                 break;
-            case(3):
+            case(2):
                 setTypesStr(value);
                 break;
-            case(4):
+            case(3):
                 readBaseStats(value);
                 break;
-            case(5):
+            case(4):
                 setBaseXP(Integer.parseInt(value));
                 break;
-            case(6):
+            case(5):
                 readEVs(value);
                 break;
-            case(7):
+            case(6):
                 setCatchRate(Integer.parseInt(value));
                 break;
-            case(8):
+            case(7):
                 setHappiness(Integer.parseInt(value));
                 break;
-            case(9):
+            case(8):
                 setAbilityStr(value);
                 break;
-            case(10):
+            case(9):
                 setHiddenAbilitiesStr(value);
                 break;
-            case(11):
+            case(10):
                 setMovesStr(value);
                 break;
-            case(12):
+            case(11):
                 setTutorMovesStr(value);
                 break;
-            case(13):
+            case(12):
                 setEggMovesStr(value);
                 break;
-            case(14):
+            case(13):
                 setEggGroups(value);
                 break;
-            case(15):
+            case(14):
                 setHatchSteps(Integer.parseInt(value));
                 break;
-            case(16):
+            case(15):
                 setOffspringStr(value);
                 break;
-            case(17):
+            case(16):
                 setHeight(Double.parseDouble(value));
                 break;
-            case(18):
+            case(17):
                 setWeight(Double.parseDouble(value));
                 break;
-            case(19):
+            case(18):
                 setColor(value);
                 break;
-            case(20):
+            case(19):
                 setShape(value);
                 break;
-            case(21):
+            case(20):
                 setHabitat(value);
                 break;
-            case(22):
+            case(21):
                 setCategory(value);
                 break;
-            case(23):
+            case(22):
                 setPokedexEntry(value);
                 break;
-            case(24):
+            case(23):
                 setGeneration(Integer.parseInt(value));
                 break;
-            case(25):
+            case(24):
                 AbstractPBSElement.getFlags(value, getFlags());
                 break;
-            case(26):
+            case(25):
                 setCommonWildItemsStr(value);
                 break;
-            case(27):
+            case(26):
                 setUncommonWildItemsStr(value);
                 break;
-            case(28):
+            case(27):
                 setRareWildItemsStr(value);
                 break;
-            case(29):
+            case(28):
                 setEvolutionsStr(value);
                 break;
-            case(30):
+            case(29):
                 megaStoneStr = value.trim();
                 break;
-            case(31):
+            case(30):
                 megaMoveStr = value.trim();
                 break;
-            case(32):
+            case(31):
                 setMegaMessage(Integer.parseInt(value.trim()));
                 break;
-            case(33):
+            case(32):
                 setUnmegaForm(Integer.parseInt(value.trim()));
         }
         if (propertyIndex == getPropertyNames().length){
