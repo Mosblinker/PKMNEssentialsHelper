@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import pkmn.essentials.data.AbstractPBSElement;
 import pkmn.essentials.data.Item;
+import pkmn.essentials.data.PBSData;
 
 /**
  *
@@ -390,5 +391,16 @@ public class Form extends AbstractSpecies{
         if (isUnmegaFormSet())
             str += System.lineSeparator()+PROPERTY_NAMES[32] + " = " + getUnmegaForm();
         return str;
+    }
+    
+    @Override
+    public void finishLoading(PBSData data){
+        super.finishLoading(data);
+        if (megaStoneStr != null && !megaStoneStr.isBlank())
+            setMegaStone((Item) AbstractPBSElement.getMatch(megaStoneStr, data.getItems()));
+        megaStoneStr = null;
+        if (megaMoveStr != null && !megaMoveStr.isBlank())
+            setMegaMove((Move)AbstractPBSElement.getMatch(megaMoveStr, data.getMoves()));
+        megaMoveStr = null;
     }
 }
