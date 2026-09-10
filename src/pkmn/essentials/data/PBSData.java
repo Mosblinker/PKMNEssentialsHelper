@@ -501,14 +501,16 @@ public class PBSData {
             // Set the data for each species
         for (Species s : getSpecies()){
             s.finishLoading(this);
-            if (progressBar != null){
-                progressBar.setValue(progressBar.getValue()+1);
-                progressBar.setIndeterminate(true);
-            }
-            for (Form form : getForms(s))
-                form.finishLoading(this);
             if (progressBar != null)
-                progressBar.setIndeterminate(false);
+                progressBar.setValue(progressBar.getValue()+1);
+            if (getForms(s) != null){
+                if (progressBar != null)
+                    progressBar.setIndeterminate(true);
+                for (Form form : getForms(s))
+                    form.finishLoading(this);
+                if (progressBar != null)
+                    progressBar.setIndeterminate(false);
+            }
         }
         if (progressBar != null){
             progressBar.setValue(0);
