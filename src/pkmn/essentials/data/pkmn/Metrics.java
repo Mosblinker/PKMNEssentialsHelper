@@ -40,6 +40,8 @@ public class Metrics extends AbstractPBSElement implements Comparable<Metrics>{
     private Integer shadowX = null;
 
     private Integer shadowSize = null;
+    
+    private AbstractSpecies species = null;
 
     public Metrics(){
         super();
@@ -52,6 +54,14 @@ public class Metrics extends AbstractPBSElement implements Comparable<Metrics>{
     public Metrics(String id, int form){
         this(id);
         setVersion(form);
+    }
+    
+    public AbstractSpecies getSpecies(){
+        return species;
+    }
+    
+    public void setSpecies(AbstractSpecies species){
+        this.species = species;
     }
 
     public Metrics(Metrics metrics){
