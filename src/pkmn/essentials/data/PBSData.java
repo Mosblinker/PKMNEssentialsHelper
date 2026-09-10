@@ -463,6 +463,8 @@ public class PBSData {
                 Species s = (Species) AbstractPBSElement.getMatch(form.getID(), getSpecies());
                 if (s != null){
                     form.setSpecies(s);
+                    if (getForms(s) == null)
+                        getForms().put(s, new ArrayList<>());
                     getForms(s).add(form);
                 }
             }
