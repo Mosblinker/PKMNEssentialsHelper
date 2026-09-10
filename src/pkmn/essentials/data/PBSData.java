@@ -127,6 +127,8 @@ public class PBSData {
     
     private List<Species> species = new ArrayList<>();
     
+    private Map<Species, List<Form>> forms = new TreeMap<>();
+    
     private Map<AbstractSpecies, Metrics> metrics = new TreeMap<>();
     
     private List<TownMap> regions = new ArrayList<>();
@@ -413,11 +415,20 @@ public class PBSData {
             index = m.fromData(lines, index, progressBar);
             if (m.getID() != null){
                 String id = m.toString();
+                AbstractSpecies pkmn = null;
                 for (Species s : getSpecies()){
                     if (s != null && s.matchesID(id)){
-                        getMetrics().put(s, m);
+                        pkmn = s;
                         break;
                     }
+                    if (s != null && s.getID().equals(m.getID())){
+                        pkmn = (Form) AbstractPBSElement.getMatch(id, getForms(s));
+                        break;
+                    }
+                }
+                if (pkmn != null){
+                    m.setSpecies(pkmn);
+                    getMetrics().put(pkmn, m);
                 }
             }
         }
@@ -425,6 +436,41 @@ public class PBSData {
     
     public void loadMetrics(List<String> lines){
         loadMetrics(lines,null);
+    }
+    
+    public Map<Species, List<Form>> getForms(){
+        return forms;
+    }
+    
+    public List<Form> getForms(Species species){
+        return getForms().get(species);
+    }
+    
+    public void loadForms(List<String> lines, JProgressBar progressBar){
+        int index = 0;
+        while (index < lines.size()){
+                // Skip until the next ID in the list
+            while(index < lines.size() && !isID(lines.get(index))){
+                index++;
+                if (progressBar != null)
+                    progressBar.setValue(progressBar.getValue()+1);
+            }
+            
+            // Load the next Metrics
+            Form form = new Form();
+            index = form.fromData(lines, index, progressBar);
+            if (form.getID() != null){
+                Species s = (Species) AbstractPBSElement.getMatch(form.getID(), getSpecies());
+                if (s != null){
+                    form.setSpecies(s);
+                    getForms(s).add(form);
+                }
+            }
+        }
+    }
+    
+    public void loadForms(List<String> lines){
+        loadForms(lines, null);
     }
     
     public void finishLoadingData(JProgressBar progressBar){
@@ -453,8 +499,14 @@ public class PBSData {
             // Set the data for each species
         for (Species s : getSpecies()){
             s.finishLoading(this);
-            if (progressBar != null)
+            if (progressBar != null){
                 progressBar.setValue(progressBar.getValue()+1);
+                progressBar.setIndeterminate(true);
+            }
+            for (Form form : getForms(s))
+                form.finishLoading(this);
+            if (progressBar != null)
+                progressBar.setIndeterminate(false);
         }
         if (progressBar != null){
             progressBar.setValue(0);
