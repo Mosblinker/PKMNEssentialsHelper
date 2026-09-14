@@ -238,7 +238,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         progressDisplay.setProgressDisplayed(true);
         progressBar.addChangeListener(progressDisplay);
         progressBar.addPropertyChangeListener(progressDisplay);
-        for (JTextField field : new JTextField[]{spriteFolderField,spriteNameField,recolorSaveField}){
+        for (JTextField field : new JTextField[]{spriteFolderField,
+            spriteNameField,recolorSaveField,
+            townMapEditor.getRegionNameTextField(),
+            townMapEditor.getPointNameTextField(),
+            townMapEditor.getPointPOITextField()
+        }){
             JPopupMenu popup = new JPopupMenu();
             textPopupMenus.put(field, popup);
             TextComponentCommands textCmd = new TextComponentCommands(field);

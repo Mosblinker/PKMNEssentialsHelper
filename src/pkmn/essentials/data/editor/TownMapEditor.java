@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.Painter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -637,6 +638,18 @@ public class TownMapEditor extends javax.swing.JPanel {
         updateSaveButtonEnabled();
         selectCombo.repaint();
     }//GEN-LAST:event_mapChangeButtonActionPerformed
+    
+    public JTextField getRegionNameTextField(){
+        return nameField;
+    }
+    
+    public JTextField getPointNameTextField(){
+        return pointNameField;
+    }
+    
+    public JTextField getPointPOITextField(){
+        return pointPoiField;
+    }
     
     public int getSelectedIndex(){
         return selectCombo.getSelectedIndex();
