@@ -2544,7 +2544,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     public void useWaitCursor(boolean isWaiting) {
         setCursor((isWaiting)?Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR):null);
     }
+            while(scanner.hasNextLine())
 
+    private List<String> readLines(File file) throws FileNotFoundException{
+        return readLines(file,null);
+    }
     /**
      * This is a map that maps the text components to their text edit commands.
      */
@@ -3995,17 +3999,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             
             
             return true;
-        }
-        
-        private List<String> readLines(File file, List<String> lines) throws FileNotFoundException{
-            getLogger().log(Level.FINER, "Loading File {0}", file);
-            if (lines == null)
-                lines = new ArrayList<>();
-            try(Scanner scanner = new Scanner(file)){
-                while(scanner.hasNextLine())
-                    lines.add(scanner.nextLine());
-            }
-            return lines;
         }
         
         @Override
