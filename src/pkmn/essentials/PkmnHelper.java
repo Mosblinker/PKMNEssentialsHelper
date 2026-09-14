@@ -3536,6 +3536,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             
             return true;
         }
+        @Override
+        protected String getSuccessTitle(File file){
+            return "Sprites Saved Successfully";
+        }
+        @Override
+        protected String getSuccessMessage(File file){
+            return "The sprites were successfully saved.";
+        }
+        @Override
+        protected String getFailureTitle(File file, IOException ex){
+            return "ERROR - Sprites Failed To Save";
+        }
+        @Override
+        protected String getFailureMessage(File file, IOException ex){
+            return "The sprites failed to save.";
+        }
         
         private void renameAudioFiles(List<File> files, File folder, 
                 String suffix, Set<Integer> copied) throws IOException{
