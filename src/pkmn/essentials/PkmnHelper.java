@@ -1165,7 +1165,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 townMapEditorActionPerformed(evt);
             }
         });
-        jTabbedPane1.addTab("Town Maps", townMapEditor);
+        jTabbedPane1.addTab("Region Maps", townMapEditor);
 
         jPanel6.setLayout(new java.awt.BorderLayout(0, 7));
 
@@ -1263,7 +1263,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         jPanel6.add(jPanel7, java.awt.BorderLayout.PAGE_END);
 
-        jTabbedPane1.addTab("Town Map Images", jPanel6);
+        jTabbedPane1.addTab("Region Map Images", jPanel6);
 
         jLabel3.setText("Game Project Folder:");
 

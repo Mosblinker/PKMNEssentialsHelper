@@ -1245,8 +1245,8 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Town Maps">
-                <Property name="tabTitle" type="java.lang.String" value="Town Maps"/>
+              <JTabbedPaneConstraints tabName="Region Maps">
+                <Property name="tabTitle" type="java.lang.String" value="Region Maps"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -1254,8 +1254,8 @@
         <Container class="javax.swing.JPanel" name="jPanel6">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Town Map Images">
-                <Property name="tabTitle" type="java.lang.String" value="Town Map Images"/>
+              <JTabbedPaneConstraints tabName="Region Map Images">
+                <Property name="tabTitle" type="java.lang.String" value="Region Map Images"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
