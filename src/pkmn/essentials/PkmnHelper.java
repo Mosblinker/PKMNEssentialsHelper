@@ -3290,6 +3290,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private Map<SinglePkmnSpriteNamePanel,File> singleSpriteFiles = new HashMap<>();
         
+        private Set<File> allFilesSet = null;
+        
         private File[] multiSpriteFolders;
         private File footprintFolder;
         private File eggFolder;
@@ -3299,6 +3301,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         private int stage = 0;
         
         private int index = 0;
+        
+        private File missingFile = null;
         
         private SpriteRenamer(File folder, String name){
             super(folder);
@@ -3425,11 +3429,24 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             renamedAudioFiles.put(panel.getModelList(), new HashMap<>());
                         }
                         
+                        allFilesSet = new LinkedHashSet<>(allFiles);
                         progressBar.setMaximum(folders.length + multiSpriteFolders.length + allFiles.size() + tempFiles.size());
-                        progressBar.setIndeterminate(false);
                         stage = 1;
                         index = 0;
                     case(1):
+                        missingFile = null;
+                        // Check for non-existant files
+                        for (File temp : allFilesSet){
+                            if (!temp.exists()){
+                                missingFile = temp;
+                                // File does not exist, so stop now before we do any damage
+                                return false;
+                            }
+                        }
+                        progressBar.setIndeterminate(false);
+                        stage = 2;
+                        index = 0;
+                    case(2):
                         int i1 = 0;
                         for (Map.Entry<File, File> entry : tempFiles.entrySet()){
                             if (i1 >= index){
@@ -3441,9 +3458,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             }
                             i1++;
                         }
-                        stage = 2;
+                        stage = 3;
                         index = 0;
-                    case(2):
+                    case(3):
                         progressBar.setIndeterminate(true);
                         Map<File,Boolean> skipFolderMap = new HashMap<>();
                         skipFolderMap.put(footprintFolder, footSpritePanel.getIcon() == null);
@@ -3473,9 +3490,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             else
                                 return false;
                         }
-                        stage = 3;
+                        stage = 4;
                         index = 0;
-                    case(3):
+                    case(4):
                         for (int i = index; i < singlePkmnSpritePanels.length; i++, index++){
                             SinglePkmnSpriteNamePanel panel = singlePkmnSpritePanels[i];
                             PkmnSpriteIcon icon = panel.getIcon();
@@ -3487,24 +3504,24 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                                 progressBar.setValue(progressBar.getValue()+1);
                             }
                         }
-                        stage = 4;
-                        index = 0;
-                    case(4):
-                        renameAudioFiles(pkmnCriesAudioPanel.getModelList(),criesFolder,"",
-                                copiedIndexes.get(pkmnSpritePanels.length+1));
                         stage = 5;
                         index = 0;
                     case(5):
+                        renameAudioFiles(pkmnCriesAudioPanel.getModelList(),criesFolder,"",
+                                copiedIndexes.get(pkmnSpritePanels.length+1));
+                        stage = 6;
+                        index = 0;
+                    case(6):
                         renameAudioFiles(pkmnFaintCriesAudioPanel.getModelList(),
                                 criesFolder,FAINTED_CRY_SUFFIX,
                                 copiedIndexes.get(pkmnSpritePanels.length+2));
-                        stage = 6;
+                        stage = 7;
                         index = 0;
                     default:
-                        while (stage-6 < pkmnSpritePanels.length){
-                            File folder = multiSpriteFolders[stage-6];
-                            List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-6].getListData();
-                            Set<Integer> copied = copiedIndexes.get(stage-6);
+                        while (stage-7 < pkmnSpritePanels.length){
+                            File folder = multiSpriteFolders[stage-7];
+                            List<PkmnSpriteIcon> icons = pkmnSpritePanels[stage-7].getListData();
+                            Set<Integer> copied = copiedIndexes.get(stage-7);
                             int maleIndex = 0;
                             int femaleIndex = 0;
 
@@ -3550,6 +3567,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         @Override
         protected String getFailureMessage(File file, IOException ex){
+            if (missingFile != null)
+                return "File does not exist: \n"+
+                        "\""+missingFile+"\"";
             return "The sprites failed to save.";
         }
         
