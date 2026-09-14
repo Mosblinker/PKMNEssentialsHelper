@@ -3292,7 +3292,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         private File[] multiSpriteFolders;
         private File footprintFolder;
-        private File shadowFolder;
         private File eggFolder;
         private File criesFolder;
         private File[] folders;
@@ -3445,17 +3444,32 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                         stage = 2;
                         index = 0;
                     case(2):
+                        progressBar.setIndeterminate(true);
+                        Map<File,Boolean> skipFolderMap = new HashMap<>();
+                        skipFolderMap.put(footprintFolder, footSpritePanel.getIcon() == null);
+                        skipFolderMap.put(eggFolder, eggSpritePanel.getIcon() == null && 
+                                eggIconSpritePanel.getIcon() == null &&
+                                eggCracksSpritePanel.getIcon() == null);
+                        skipFolderMap.put(criesFolder, true);
+                        for (TempPkmnAudioFileListPanel panel : pkmnAudioPanels){
+                            skipFolderMap.put(criesFolder, skipFolderMap.get(criesFolder) && panel.getModelList().isEmpty());
+                            if (skipFolderMap.get(criesFolder))
+                                break;
+                        }
+                        progressBar.setIndeterminate(false);
                         for (int i = index; i < folders.length; i++, index++){
-                            if (FilesExtended.createDirectories(PkmnHelper.this, folders[i])){
+                            if (skipFolderMap.containsKey(folders[i]))
                                 progressBar.setValue(progressBar.getValue()+1);
-                            }
+                            if (FilesExtended.createDirectories(PkmnHelper.this, folders[i]))
+                                progressBar.setValue(progressBar.getValue()+1);
                             else
                                 return false;
                         }
                         for (int i = index-folders.length; i < multiSpriteFolders.length; i++, index++){
-                            if (FilesExtended.createDirectories(PkmnHelper.this, multiSpriteFolders[i])){
+                            if (pkmnSpritePanels[i].getModelList().isEmpty())
                                 progressBar.setValue(progressBar.getValue()+1);
-                            }
+                            else if (FilesExtended.createDirectories(PkmnHelper.this, multiSpriteFolders[i]))
+                                progressBar.setValue(progressBar.getValue()+1);
                             else
                                 return false;
                         }
