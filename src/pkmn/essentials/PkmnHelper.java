@@ -2544,7 +2544,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     public void useWaitCursor(boolean isWaiting) {
         setCursor((isWaiting)?Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR):null);
     }
+    private List<String> readLines(File file, List<String> lines) throws FileNotFoundException{
+        getLogger().log(Level.FINER, "Loading File {0}", file);
+        if (lines == null)
+            lines = new ArrayList<>();
+        try(Scanner scanner = new Scanner(file)){
             while(scanner.hasNextLine())
+                lines.add(scanner.nextLine());
+        }
+        return lines;
+    }
 
     private List<String> readLines(File file) throws FileNotFoundException{
         return readLines(file,null);
