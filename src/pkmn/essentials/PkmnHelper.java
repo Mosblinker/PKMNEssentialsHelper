@@ -4108,6 +4108,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             return true;
         }
         @Override
+        protected String getSuccessTitle(File file){
+            return "Town Map Saved Successfully";
+        }
+        @Override
+        protected String getSuccessMessage(File file){
+            return "The town map was successfully saved.";
+        }
+        @Override
+        protected String getFailureTitle(File file, IOException ex){
+            return "ERROR - Town Map Failed To Save";
+        }
+        @Override
+        protected String getFailureMessage(File file, IOException ex){
+            return "The town map failed to save.";
+        }
+        @Override
         protected void done(){
             for (Map.Entry<File, File> entry : copiedFiles.entrySet()){
                 for (Map.Entry<String, File> temp : pbsData.getRegionMapFiles().entrySet()){
