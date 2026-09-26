@@ -23,6 +23,8 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
     public static final int CLEAR_BUTTON_ROW = LAST_RESERVED_BUTTON_ROW+2;
     
     public static final int FEMALE_TOGGLE_ROW = LAST_RESERVED_BUTTON_ROW+4;
+    
+    public static final int SHADOW_TOGGLE_ROW = LAST_RESERVED_BUTTON_ROW+5;
     /**
      * 
      */
@@ -33,6 +35,8 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
     public static final String CLEAR_ACTION_COMMAND = "Clear";
     
     public static final String FEMALE_TOGGLE_ACTION_COMMAND = "Female";
+    
+    public static final String SHADOW_TOGGLE_ACTION_COMMAND = "Shadow";
     /**
      * 
      */
@@ -67,6 +71,12 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
         femaleToggle.addActionListener(new Handler());
         femaleToggle.setEnabled(false);
         addSideComponent(femaleToggle,FEMALE_TOGGLE_ROW,true);
+        shadowToggle = new JToggleButton("Shadow");
+        shadowToggle.setActionCommand(SHADOW_TOGGLE_ACTION_COMMAND);
+        shadowToggle.addMouseListener(getDisabledComponentListener());
+        shadowToggle.addActionListener(new Handler());
+        shadowToggle.setEnabled(false);
+        addSideComponent(shadowToggle,SHADOW_TOGGLE_ROW,true);
     }
     
     public JButton getDuplicateButton(){
@@ -92,6 +102,13 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
      */
     public JToggleButton getFemaleToggle(){
         return femaleToggle;
+    }
+    /**
+     * 
+     * @return 
+     */
+    public JToggleButton getShadowToggle(){
+        return shadowToggle;
     }
     /**
      * 
@@ -125,6 +142,21 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
     }
     /**
      * 
+     * @return 
+     */
+    public boolean isShadowToggleShown(){
+        return showShadowToggle;
+    }
+    /**
+     * 
+     * @param value 
+     */
+    public void setShadowToggleShown(boolean value){
+        showShadowToggle = value;
+        shadowToggle.setVisible(value);
+    }
+    /**
+     * 
      * @param scale 
      */
     public void setScale(double scale){
@@ -153,6 +185,7 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
         try{
             duplicateButton.setEnabled(isEnabled()&&!isSelectionEmpty());
             femaleToggle.setEnabled(duplicateButton.isEnabled());
+            shadowToggle.setEnabled(duplicateButton.isEnabled());
         }catch(NullPointerException ex) {}
     }
     @Override
@@ -222,6 +255,17 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
             list.repaint();
         }
     }
+    /**
+     * 
+     * @param value 
+     */
+    protected void setShadow(boolean value){
+        if (!isSelectionEmpty()){
+            for (PkmnSpriteIcon icon : getSelectedValuesList())
+                icon.setShadow(value);
+            list.repaint();
+        }
+    }
     @Override
     protected void fireSelectionChanged(int firstIndex, int lastIndex, 
             boolean isAdjusting){
@@ -233,6 +277,13 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
                 break;
         }
         femaleToggle.setSelected(femaleSprites);
+        boolean shadowSprites = false;
+        for (PkmnSpriteIcon icon : getSelectedValuesList()){
+            shadowSprites = icon.isShadow();
+            if (!shadowSprites)
+                break;
+        }
+        shadowToggle.setSelected(shadowSprites);
     }
     /**
      * 
@@ -258,7 +309,9 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
     
     private boolean showFemaleToggle = true;
     
+    private JToggleButton shadowToggle;
     
+    private boolean showShadowToggle = true;
     
     private double scale = 1.0;
     /**
@@ -281,6 +334,9 @@ public class PkmnSpriteNameListPanel extends JListManipulator<PkmnSpriteIcon>{
                     break;
                 case(FEMALE_TOGGLE_ACTION_COMMAND):
                     setFemale(femaleToggle.isSelected());
+                    break;
+                case(SHADOW_TOGGLE_ACTION_COMMAND):
+                    setShadow(shadowToggle.isSelected());
             }
         }
         

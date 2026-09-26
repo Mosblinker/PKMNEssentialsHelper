@@ -26,7 +26,9 @@ public class PkmnSpriteIcon extends ScaledIcon{
     
     private File file;
     
-    private boolean female;
+    private boolean female = false;
+    
+    private boolean shadow = false;
     
     private int index = -1;
     
@@ -93,6 +95,7 @@ public class PkmnSpriteIcon extends ScaledIcon{
         this(icon.getFile(),icon.getDescription(),icon.getImage(),icon.getScaleX());
         this.index = icon.index;
         this.female = icon.female;
+        this.shadow = icon.shadow;
     }
     
     public Image getImage(){
@@ -131,6 +134,14 @@ public class PkmnSpriteIcon extends ScaledIcon{
     
     public void setFemale(boolean value){
         this.female = value;
+    }
+    
+    public boolean isShadow(){
+        return shadow;
+    }
+    
+    public void setShadow(boolean value){
+        this.shadow = value;
     }
     
     public int getIndex(){

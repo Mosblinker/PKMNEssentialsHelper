@@ -141,6 +141,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     
     protected static final String FEMALE_SPRITE_SUFFIX = "_female";
     
+    protected static final String SHADOW_PKMN_SPRITE_SUFFIX = "_shadow";
+    
     protected static final String EGG_ICON_SPRITE_SUFFIX = "_icon";
     
     protected static final String EGG_HATCHING_SPRITE_SUFFIX = "_cracks";
@@ -2020,6 +2022,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             name += "_"+icon.getIndex();
         if (icon.isFemale())
             name += FEMALE_SPRITE_SUFFIX;
+        if (icon.isShadow())
+            name += SHADOW_PKMN_SPRITE_SUFFIX;
         return name;
     }
     
@@ -3542,10 +3546,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             Set<Integer> copied = copiedIndexes.get(stage-7);
                             int maleIndex = 0;
                             int femaleIndex = 0;
+                            int shadowIndex = 0;
+                            int shadowFemaleIndex = 0;
 
                             for (int i = index; i < icons.size(); i++,index++){
                                 PkmnSpriteIcon icon = icons.get(i);
-                                if (icon.isFemale()){
+                                if (icon.isFemale() && icon.isShadow()){
+                                    icon.setIndex(shadowFemaleIndex);
+                                    shadowFemaleIndex++;
+                                } else if (icon.isShadow()){
+                                    icon.setIndex(shadowIndex);
+                                    shadowIndex++;
+                                } else if (icon.isFemale()){
                                     icon.setIndex(femaleIndex);
                                     femaleIndex++;
                                 } else {
