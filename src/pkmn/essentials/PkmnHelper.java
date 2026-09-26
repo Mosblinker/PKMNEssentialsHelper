@@ -18,6 +18,7 @@ import files.extensions.ImageExtensions;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -185,6 +186,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     public static final String DROPPER_CURSOR_IMAGE = "/images/dropper.png";
     
     public static final String DATA_FOLDER = "data";
+    
+    private static final int PORTRAIT_SIZE = 40;
+    
+    private static final String[] PORTRAIT_NAMES = {
+        "Normal",
+        "Happy",
+        "Pain",
+        "Angry",
+        "Worried",
+        "Sad",
+        "Crying",
+        "Shouting",
+        "TearyEyed",
+        "Determined",
+        "Joyous",
+        "Inspired",
+        "Surprised",
+        "Dizzy",
+        "Special0",
+        "Special1",
+        "Sigh",
+        "Stunned",
+        "Special2",
+        "Special3"
+    };
     /**
      * This is a logger used to log messages for the program.
      */
@@ -420,6 +446,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         diffDiffToggle = new javax.swing.JRadioButton();
         diffSameToggle = new javax.swing.JRadioButton();
         imgDiffModeGroup = new javax.swing.ButtonGroup();
+        portraitSplitDialog = new javax.swing.JDialog(this);
+        portraitSplitPanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
+        portraitSplitSaveButton = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        portraitSplitNameField = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -490,6 +521,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(6, 0), new java.awt.Dimension(6, 0), new java.awt.Dimension(6, 32767));
         mapImageClearButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        gameProjectNameField = new javax.swing.JTextField();
+        gameProjectNameChangeButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -507,6 +542,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         printRecolorTest = new javax.swing.JMenuItem();
         printPBSTest = new javax.swing.JMenuItem();
         imageDifferenceTest = new javax.swing.JMenuItem();
+        splitPortraitsMenuItem = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
         spriteFC.setAccessory(spritePreview);
@@ -677,6 +713,50 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addGroup(imageDifferenceTestDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(diffDiffToggle)
                     .addComponent(diffSameToggle))
+                .addContainerGap())
+        );
+
+        portraitSplitPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singleSpritePanelActionPerformed(evt);
+            }
+        });
+
+        portraitSplitSaveButton.setText("Split and Save");
+        portraitSplitSaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                portraitSplitSaveButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Name:");
+
+        javax.swing.GroupLayout portraitSplitDialogLayout = new javax.swing.GroupLayout(portraitSplitDialog.getContentPane());
+        portraitSplitDialog.getContentPane().setLayout(portraitSplitDialogLayout);
+        portraitSplitDialogLayout.setHorizontalGroup(
+            portraitSplitDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(portraitSplitDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(portraitSplitDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(portraitSplitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, portraitSplitDialogLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(portraitSplitNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(portraitSplitSaveButton)))
+                .addContainerGap())
+        );
+        portraitSplitDialogLayout.setVerticalGroup(
+            portraitSplitDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(portraitSplitDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(portraitSplitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(portraitSplitDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(portraitSplitSaveButton)
+                    .addComponent(jLabel7)
+                    .addComponent(portraitSplitNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1350,6 +1430,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         debugMenu.add(imageDifferenceTest);
 
+        splitPortraitsMenuItem.setText("Split Portraits");
+        splitPortraitsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                splitPortraitsMenuItemActionPerformed(evt);
+            }
+        });
+        debugMenu.add(splitPortraitsMenuItem);
+
         jMenuBar1.add(debugMenu);
 
         setJMenuBar(jMenuBar1);
@@ -1404,6 +1492,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             index = singlePkmnSpritePanels.length+1;
         if (diffFileBPanel == evt.getSource())
             index = singlePkmnSpritePanels.length+2;
+        if (portraitSplitPanel == evt.getSource())
+            index = singlePkmnSpritePanels.length+3;
         if (index >= 0){
             switch(evt.getActionCommand()){
                 case(SinglePkmnSpriteNamePanel.BROWSE_ACTION_COMMAND):
@@ -1949,6 +2039,61 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void imgDiffModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgDiffModeActionPerformed
         updateImageDifference();
     }//GEN-LAST:event_imgDiffModeActionPerformed
+
+    private void portraitSplitSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitSplitSaveButtonActionPerformed
+        if (portraitSplitPanel.getIcon() == null)
+            return;
+        try{
+            File file = portraitSplitPanel.getIcon().getFile();
+            
+            String name = portraitSplitNameField.getText();
+            if (name == null || name.isBlank())
+                name = file.getName();
+            
+            File folder = new File(file.getParentFile(),"Portraits");
+            FilesExtended.createDirectories(portraitSplitDialog, folder);
+            BufferedImage image = ImageIO.read(file);
+            List<BufferedImage> portraits = new ArrayList<>();
+            for (int y = 0; y < image.getHeight(); y+= PORTRAIT_SIZE){
+                int h = Math.min(PORTRAIT_SIZE, image.getHeight() - y);
+                for (int x = 0; x < image.getWidth(); x+= PORTRAIT_SIZE){
+                    portraits.add(image.getSubimage(x, y, Math.min(PORTRAIT_SIZE, image.getWidth()-x), h));
+                }
+            }
+            for (int i = 0; i < portraits.size(); i++){
+                BufferedImage img = portraits.get(i);
+                int[] data = new int[img.getWidth()];
+                boolean hasData = false;
+                for (int y = 0; y < img.getHeight() && !hasData; y++){
+                    data = img.getRGB(0, y, data.length, 1, data, 0, 1);
+                    for (int x = 0; x < data.length && !hasData; x++){
+                            // If the pixel is not transparent
+                        hasData = (data[x] & 0xFF000000) != 0;
+                    }
+                    if (hasData){
+                        BufferedImage temp = new BufferedImage(PORTRAIT_SIZE*2, PORTRAIT_SIZE*2, BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g = temp.createGraphics();
+                        g.scale(2.0, 2.0);
+                        g.drawImage(img, 0, 0, null);
+                        g.dispose();
+                        String pName;
+                        if (i < PORTRAIT_NAMES.length)
+                            pName = PORTRAIT_NAMES[i];
+                        else if (i < PORTRAIT_NAMES.length*2)
+                            pName = PORTRAIT_NAMES[i-PORTRAIT_NAMES.length]+"_Flipped";
+                        else
+                            pName = "Special"+(i-PORTRAIT_NAMES.length+4);
+                        File f = new File(folder,name+"-"+pName+".png");
+                        ImageIO.write(temp, "png", f);
+                    } else{
+                        portraits.set(i, null);
+                    }
+                }
+            }
+        } catch (IOException ex){
+            getLogger().log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_portraitSplitSaveButtonActionPerformed
     
     private void updateImageDifference(){
         PkmnSpriteIcon icon1 = diffFileAPanel.getIcon();
@@ -2196,6 +2341,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             case(6):
                 title = "Select Image To Get Difference";
                 break;
+            case(7):
+                title = "Select Portraits To Split";
+                break;
             default:
                 return;
         }
@@ -2225,6 +2373,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     if (icon == null)
                         return;
                     diffFileBPanel.setIcon(icon);
+                    break;
+                case(3):
+                    icon = loadSprite(file);
+                    if (icon == null)
+                        return;
+                    portraitSplitPanel.setIcon(icon);
                     break;
                 default:
                     icon = loadSprite(file);
@@ -2656,6 +2810,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JFileChooser gameFolderFC;
     private javax.swing.JTextField gameFolderField;
     private javax.swing.JButton gameLoadButton;
+    private javax.swing.JButton gameProjectNameChangeButton;
+    private javax.swing.JTextField gameProjectNameField;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel iSpritePanel;
     private javax.swing.JMenuItem imageDifferenceTest;
     private javax.swing.JDialog imageDifferenceTestDialog;
@@ -2668,6 +2824,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -2696,6 +2854,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JCheckBox mapImageUseProjectFolderToggle;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnCriesAudioPanel;
     private pkmn.essentials.audio.TempPkmnAudioFileListPanel pkmnFaintCriesAudioPanel;
+    private javax.swing.JDialog portraitSplitDialog;
+    private javax.swing.JTextField portraitSplitNameField;
+    private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel portraitSplitPanel;
+    private javax.swing.JButton portraitSplitSaveButton;
     private javax.swing.JMenuItem printPBSTest;
     private javax.swing.JMenuItem printRecolorTest;
     private javax.swing.JMenuItem printTest;
@@ -2727,6 +2889,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JToggleButton scaleFrontToggle;
     private javax.swing.JPanel scalePanelAccessory;
     private javax.swing.JCheckBoxMenuItem showHiddenFilesToggle;
+    private javax.swing.JMenuItem splitPortraitsMenuItem;
     private javax.swing.JButton spriteApplyButton;
     private javax.swing.JFileChooser spriteFC;
     private javax.swing.JButton spriteFolderBrowseButton;
