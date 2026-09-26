@@ -32,6 +32,7 @@ import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.Normalizer;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -155,6 +156,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     public static final String OGG_FILE_EXTENSION = "ogg";
     
     protected static final String PKMN_CRY_FILE_EXTENSION = OGG_FILE_EXTENSION;
+    
+    protected static final String PROJECT_GAME_INI_FILE = "Game.ini";
+    
+    protected static final String PROJECT_MKXP_FILE = "mkxp.json";
+    
+    private static final String GAME_INI_HEADER = "[Game]";
+    
+    private static final String GAME_INI_TITLE_KEY = "Title";
+    
+    private static final String MKXP_TITLE_KEY = "windowTitle";
     /**
      * This is a FileFilter for config files.
      */
@@ -270,7 +281,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             spriteNameField,recolorSaveField,
             townMapEditor.getRegionNameTextField(),
             townMapEditor.getPointNameTextField(),
-            townMapEditor.getPointPOITextField()
+            townMapEditor.getPointPOITextField(),
+            gameProjectNameField
         }){
             JPopupMenu popup = new JPopupMenu();
             textPopupMenus.put(field, popup);
@@ -300,6 +312,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpriteListPanel.addListDataListener(handler);
         recolorSpritePalette.addListDataListener(handler);
         gameFolderField.getDocument().addDocumentListener(handler);
+        gameProjectNameField.getDocument().addDocumentListener(handler);
         
         pkmnAudioPanels = new TempPkmnAudioFileListPanel[]{
             pkmnCriesAudioPanel,
@@ -392,6 +405,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         mapImageSaveField.getDocument().addDocumentListener(handler);
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), false);
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(jPanel6), false);
+        jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(jPanel12), false);
         
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
@@ -1217,7 +1231,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                     .addComponent(jTabbedPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1337,6 +1351,44 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jPanel6.add(jPanel7, java.awt.BorderLayout.PAGE_END);
 
         jTabbedPane1.addTab("Region Map Images", jPanel6);
+
+        jLabel6.setText("Game Name:");
+
+        gameProjectNameField.setEnabled(false);
+
+        gameProjectNameChangeButton.setText("Change");
+        gameProjectNameChangeButton.setEnabled(false);
+        gameProjectNameChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameProjectNameChangeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gameProjectNameField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gameProjectNameChangeButton)
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(gameProjectNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gameProjectNameChangeButton))
+                .addContainerGap(460, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Game Settings", jPanel12);
 
         jLabel3.setText("Game Project Folder:");
 
@@ -2040,6 +2092,14 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateImageDifference();
     }//GEN-LAST:event_imgDiffModeActionPerformed
 
+    private void gameProjectNameChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameProjectNameChangeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gameProjectNameChangeButtonActionPerformed
+
+    private void splitPortraitsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_splitPortraitsMenuItemActionPerformed
+        portraitSplitDialog.setVisible(true);
+    }//GEN-LAST:event_splitPortraitsMenuItemActionPerformed
+
     private void portraitSplitSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitSplitSaveButtonActionPerformed
         if (portraitSplitPanel.getIcon() == null)
             return;
@@ -2655,6 +2715,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateTownMapImageSaveButton();
     }
     
+    private void updateTitleChangeButton(){
+        gameProjectNameChangeButton.setEnabled(gameProjectNameField.isEnabled() && 
+                gameProjectNameField.getText() != null && !gameProjectNameField.getText().isBlank());
+    }
+    
     private boolean isPBSDataEnabled(){
         return inputEnabled && pbsData != null;
     }
@@ -2685,6 +2750,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateSpriteFolderButtons();
         updateTownMapImageFolderButtons();
         townMapEditor.setEnabled(enabled);
+        gameProjectNameField.setEnabled(enabled && isPBSDataEnabled());
+        updateTitleChangeButton();
     }
     @Override
     public boolean isInputEnabled() {
@@ -2832,6 +2899,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2927,6 +2995,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.setTownMapImageTargetFolder(mapImageFolderField.getText());
         if (mapImageSaveField.getDocument() == evt.getDocument())
             config.setTownMapImageName(mapImageSaveField.getText());
+        if (gameProjectNameField.getDocument() == evt.getDocument())
+            updateTitleChangeButton();
     }
     
     private class Handler implements DocumentListener, ListDataListener{
@@ -3952,6 +4022,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         private PBSData data = new PBSData();
         
         private int stage = 0;
+        
+        private String title = null;
 
         public LoadGameProject(File file) {
             super(file);
@@ -3975,6 +4047,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     return false;
                 }
             }
+            File gameIni = new File(file, PROJECT_GAME_INI_FILE);
+            if (gameIni.exists()){
+                List<String> lines = readLines(gameIni);
+                for (String line : lines){
+                    if (line.startsWith(GAME_INI_TITLE_KEY)){
+                        title = line.substring(line.indexOf("=")+1);
+                        break;
+                    }
+                }
+            }
+            File mkxp = new File(file,PROJECT_MKXP_FILE);
+            if (mkxp.exists()){
+                List<String> lines = readLines(mkxp);
+                for (String line : lines){
+                    if (line.contains(MKXP_TITLE_KEY)){
+                        String text = line.substring(line.indexOf(":")+1).trim();
+                        if (text.charAt(text.length()-1) == ',')
+                            text = text.substring(0, text.length()-1);
+                        if (text.length() > 2)
+                            title = text.substring(1,text.length()-1);
+                        break;
+                    }
+                }
+            }
+            
             if (!pbsFiles.isEmpty()){
                 pbsFiles.removeIf((File t) -> t.isDirectory() || !t.exists() || !FilesExtended.endsWithFileExtension(t, PBSData.PBS_FILE_EXTENSION));
                 stage = 2;
@@ -4217,7 +4314,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             if (success){
                 pbsData = data;
                 townMapEditor.setPBSData(data);
+                if (title == null)
+                    gameProjectNameField.setText("");
+                else
+                    gameProjectNameField.setText(title);
                 jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(townMapEditor), true);
+//                jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(jPanel12), true);
             }
             super.done();
         }
@@ -4309,6 +4411,94 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 }
             }
             super.done();
+        }
+    }
+    
+    private class GameSettingsSaver extends FileSaver{
+        
+        private String title;
+
+        private int stage = 0;
+        
+        public GameSettingsSaver(File file, String title) {
+            super(file);
+            this.title = title;
+        }
+        @Override
+        public String getProgressString(){
+            return "Saving Game Settings";
+        }
+        @Override
+        protected boolean saveFile(File file) throws IOException {
+            File gameIniFile = new File(file,PROJECT_GAME_INI_FILE);
+            File mkxpFile = new File(file,PROJECT_MKXP_FILE);
+            List<String> lines = new ArrayList<>();
+            int titleIndex;
+            switch (stage){
+                case(0):
+                    lines.clear();
+                    titleIndex = -1;
+                    if (gameIniFile.exists()){
+                        lines = readLines(gameIniFile,lines);
+                        for (int i = 0; i < lines.size() && titleIndex < 0; i++){
+                            if (lines.get(i).startsWith(GAME_INI_TITLE_KEY))
+                                titleIndex = i;
+                        }
+                    } else {
+                        lines.add(GAME_INI_HEADER);
+                    }
+                    String gameTitle = Normalizer.normalize(title, Normalizer.Form.NFD);
+                    gameTitle = gameTitle.replaceAll("[^\\p{ASCII}]", "");
+                    gameTitle = GAME_INI_TITLE_KEY + "=" + gameTitle;
+                    if (titleIndex < 0)
+                        lines.add(gameTitle);
+                    else
+                        lines.set(titleIndex, gameTitle);
+                    getLogger().log(Level.FINER, "Saving File {0}", gameIniFile);
+                    try(PrintWriter writer = new PrintWriter(gameIniFile)){
+                        for (String line : lines)
+                            writer.println(line);
+                    }
+                    stage = 1;
+                case(1):
+                    lines.clear();
+                    titleIndex = -1;
+//                    JSONObject
+                    if (mkxpFile.exists()){
+                        lines = readLines(mkxpFile,lines);
+                        String temp = "";
+                        for (String str : lines)
+                            temp += str + System.lineSeparator();
+//                        for (int i = 0; i < lines.size() && titleIndex < 0; i++){
+//                            if (lines.get(i).contains(MKXP_TITLE_KEY))
+//                                titleIndex = i;
+//                        }
+                    }
+            }
+            
+            
+            return true;
+        }
+        
+        @Override
+        protected void done(){
+            super.done();
+        }
+        @Override
+        protected String getSuccessTitle(File file){
+            return "Game Settings Saved Successfully";
+        }
+        @Override
+        protected String getSuccessMessage(File file){
+            return "The game settings were successfully saved.";
+        }
+        @Override
+        protected String getFailureTitle(File file, IOException ex){
+            return "ERROR - Game Settings Failed To Save";
+        }
+        @Override
+        protected String getFailureMessage(File file, IOException ex){
+            return "The game settings failed to save.";
         }
     }
 }
