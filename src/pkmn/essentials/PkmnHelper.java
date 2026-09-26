@@ -105,6 +105,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private static final String PREFERENCE_NODE_NAME = 
             "mosblinker/essentials/PkmnEssentialsHelper";
     
+    private static final int MAX_PALETTE_IMAGE_WIDTH = 1000;
+    
+    private static final int MAX_PALETTE_IMAGE_HEIGHT = 1000;
+    
     protected static final String GRAPHICS_FOLDER = "Graphics";
     
     protected static final String POKEMON_GRAPHICS_FOLDER = GRAPHICS_FOLDER+File.separator+"Pokemon";
@@ -2284,6 +2288,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private PalettePkmnSpriteIcon loadPaletteSprite(File file, Collection<Color> palette){
         BufferedImage image = loadSpriteImage(file);
         if (image == null){
+            return null;
+        }
+        if (image.getWidth() > MAX_PALETTE_IMAGE_WIDTH || image.getHeight() > MAX_PALETTE_IMAGE_HEIGHT){
+            getLogger().log(Level.WARNING, "Image is too big for palette (file: {0}, size: {1}x{2}, max size: {3}x{4})", 
+                    new Object[]{file, image.getWidth(), image.getHeight(),MAX_PALETTE_IMAGE_WIDTH,MAX_PALETTE_IMAGE_HEIGHT});
+            JOptionPane.showMessageDialog(this, 
+                    "Image file \""+file.getName()+"\" is too big (Size: "+
+                            image.getWidth()+"x"+image.getHeight() + " > " + 
+                            MAX_PALETTE_IMAGE_WIDTH + "x" + MAX_PALETTE_IMAGE_HEIGHT+")", 
+                    "ERROR - Image Too Big", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         PalettePkmnSpriteIcon icon = new PalettePkmnSpriteIcon(file,PkmnHelperUtilities.createCopy(image),palette);
