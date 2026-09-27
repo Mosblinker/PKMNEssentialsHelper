@@ -173,14 +173,6 @@ public class PaletteColorExchangeDialog extends AbstractPaletteColorChangeDialog
         toColorButton.setEnabled(enabled);
     }
     
-    @Override
-    public void setEnabled(boolean enabled){
-        super.setEnabled(enabled);
-        try{
-            updateColorButtonsEnabled();
-        } catch (NullPointerException ex) {}
-    }
-    
     private JButton fromColorButton;
     
     private JButton toColorButton;
