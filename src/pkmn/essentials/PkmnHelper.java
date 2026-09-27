@@ -374,7 +374,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         RecolorPreviewHandler previewHandler = new RecolorPreviewHandler();
         for (Component comp : new Component[]{
             recolorColorSelector,blendColorSelector,recolorColorExchange,
-            recolorBlendChange,recolorInvertChange,recolorDesaturateChange
+            recolorBlendChange,recolorInvertChange,recolorDesaturateChange,
+            recolorSimplifyChange
         }){
             config.getComponentNames().put(comp, comp.getName());
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
@@ -468,6 +469,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitSplitSaveButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         portraitSplitNameField = new javax.swing.JTextField();
+        recolorSimplifyChange = new pkmn.essentials.recolor.PaletteSimplifyChangeDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -780,6 +782,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(portraitSplitNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        recolorSimplifyChange.setDialogTitle("Simplify Palette");
+        recolorSimplifyChange.setName("recolorSimplifyChange"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -2174,7 +2179,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_portraitSplitSaveButtonActionPerformed
 
     private void recolorSimplifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyButtonActionPerformed
-        // TODO add your handling code here:
+        showRecolorChangeDialog(recolorSimplifyChange);
     }//GEN-LAST:event_recolorSimplifyButtonActionPerformed
     
     private void updateImageDifference(){
@@ -2998,6 +3003,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JLabel recolorScaleLabel;
     private javax.swing.JSlider recolorScaleSlider;
     private javax.swing.JButton recolorSimplifyButton;
+    private pkmn.essentials.recolor.PaletteSimplifyChangeDialog recolorSimplifyChange;
     private javax.swing.JPanel recolorSpriteListAccessory;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel recolorSpriteListPanel;
     private javax.swing.JButton recolorUndoButton;

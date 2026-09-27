@@ -420,6 +420,12 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="pkmn.essentials.recolor.PaletteSimplifyChangeDialog" name="recolorSimplifyChange">
+      <Properties>
+        <Property name="dialogTitle" type="java.lang.String" value="Simplify Palette"/>
+        <Property name="name" type="java.lang.String" value="recolorSimplifyChange" noResource="true"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
