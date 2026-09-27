@@ -1197,6 +1197,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSpriteListPanel.setSideAccessory(recolorSpriteListAccessory);
         recolorSpriteListPanel.setDuplicateButtonShown(false);
         recolorSpriteListPanel.setFemaleToggleShown(false);
+        recolorSpriteListPanel.setShadowToggleShown(false);
         recolorSpriteListPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 multiSpritePanelActionPerformed(evt);

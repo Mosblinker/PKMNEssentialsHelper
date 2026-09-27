@@ -1276,6 +1276,7 @@
                     </Property>
                     <Property name="duplicateButtonShown" type="boolean" value="false"/>
                     <Property name="femaleToggleShown" type="boolean" value="false"/>
+                    <Property name="shadowToggleShown" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="multiSpritePanelActionPerformed"/>
