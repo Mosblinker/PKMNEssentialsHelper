@@ -88,6 +88,7 @@ public class PaletteColorExchangeDialog extends AbstractPaletteColorChangeDialog
     }
     
     public void setFromColor(Color color){
+        Objects.requireNonNull(color);
         if (Objects.equals(fromColor, color))
             return;
         Color old = fromColor;
@@ -102,6 +103,7 @@ public class PaletteColorExchangeDialog extends AbstractPaletteColorChangeDialog
     }
     
     public void setToColor(Color color){
+        Objects.requireNonNull(color);
         if (Objects.equals(toColor, color))
             return;
         Color old = toColor;

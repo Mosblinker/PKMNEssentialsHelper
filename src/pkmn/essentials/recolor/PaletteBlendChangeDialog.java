@@ -122,6 +122,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteColorChangeDialog{
     }
     
     public void setFromColor1(Color color){
+        Objects.requireNonNull(color);
         if (Objects.equals(fromColor1, color))
             return;
         Color old = fromColor1;
@@ -136,6 +137,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteColorChangeDialog{
     }
     
     public void setFromColor2(Color color){
+        Objects.requireNonNull(color);
         if (Objects.equals(fromColor2, color))
             return;
         Color old = fromColor2;
@@ -150,6 +152,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteColorChangeDialog{
     }
     
     public void setToColor1(Color color){
+        Objects.requireNonNull(color);
         if (Objects.equals(toColor1, color))
             return;
         Color old = toColor1;
@@ -164,6 +167,7 @@ public class PaletteBlendChangeDialog extends AbstractPaletteColorChangeDialog{
     }
     
     public void setToColor2(Color color){
+        Objects.requireNonNull(color);
         if (Objects.equals(toColor2, color))
             return;
         Color old = toColor2;
