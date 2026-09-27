@@ -40,6 +40,18 @@ public class PrecisionSlider extends JPanel{
         initialize();
     }
     
+    public PrecisionSlider(double min, double max, double value){
+        this();
+        PrecisionSlider.this.setMinimum(min);
+        PrecisionSlider.this.setMaximum(max);
+        PrecisionSlider.this.setValue(value);
+    }
+    
+    public PrecisionSlider(double min, double max, double value, double stepValue){
+        this(min,max,value);
+        PrecisionSlider.this.setStepSize(stepValue);
+    }
+    
     public double getValue(){
         return value;
     }
