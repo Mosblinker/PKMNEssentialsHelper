@@ -71,7 +71,6 @@ import pkmn.essentials.data.pkmn.*;
 import pkmn.essentials.map.TownMapImageEditor;
 import pkmn.essentials.recolor.AbstractPaletteChangeDialog;
 import pkmn.essentials.recolor.AbstractPaletteColorChangeDialog;
-import pkmn.essentials.recolor.PaletteColorExchangeDialog;
 import pkmn.essentials.sprite.*;
 import utils.SwingExtendedUtilities;
 
@@ -586,6 +585,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         blendColorSelector.setName("blendColorSelector"); // NOI18N
 
+        recolorBlendChange.setDialogTitle("Color Blend Exchange");
         recolorBlendChange.setName("recolorBlendChange"); // NOI18N
 
         recolorSpriteListAccessory.setLayout(new javax.swing.BoxLayout(recolorSpriteListAccessory, javax.swing.BoxLayout.Y_AXIS));
@@ -629,8 +629,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         audioFC.setFileFilter(OGG_FILTER);
         audioFC.setName("audioFC"); // NOI18N
 
+        recolorInvertChange.setDialogTitle("Invert Colors");
         recolorInvertChange.setName("recolorInvertChange"); // NOI18N
 
+        recolorDesaturateChange.setDialogTitle("Desaturate Colors");
         recolorDesaturateChange.setName("recolorDesaturateChange"); // NOI18N
 
         townMapPreview.setFileChooser(townMapFC);
@@ -2228,7 +2230,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         setShownRecolorSprites(dialog);
         int option = dialog.showDialog(this, recolorSpritePalette);
         recolorSpriteListPanel.setModel(icons);
-        if (option == PaletteColorExchangeDialog.ACCEPT_OPTION){
+        if (option == AbstractPaletteChangeDialog.ACCEPT_OPTION){
             recolorChangeColorsUpdate(dialog.getPaletteChanges());
         }
         if (dialog instanceof AbstractPaletteColorChangeDialog){

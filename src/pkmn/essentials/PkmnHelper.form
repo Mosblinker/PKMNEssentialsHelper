@@ -54,6 +54,7 @@
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteBlendChangeDialog" name="recolorBlendChange">
       <Properties>
+        <Property name="dialogTitle" type="java.lang.String" value="Color Blend Exchange"/>
         <Property name="name" type="java.lang.String" value="recolorBlendChange" noResource="true"/>
       </Properties>
     </Component>
@@ -160,11 +161,13 @@
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteInvertChangeDialog" name="recolorInvertChange">
       <Properties>
+        <Property name="dialogTitle" type="java.lang.String" value="Invert Colors"/>
         <Property name="name" type="java.lang.String" value="recolorInvertChange" noResource="true"/>
       </Properties>
     </Component>
     <Component class="pkmn.essentials.recolor.PaletteDesaturateChangeDialog" name="recolorDesaturateChange">
       <Properties>
+        <Property name="dialogTitle" type="java.lang.String" value="Desaturate Colors"/>
         <Property name="name" type="java.lang.String" value="recolorDesaturateChange" noResource="true"/>
       </Properties>
     </Component>
