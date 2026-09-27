@@ -146,14 +146,14 @@ public class PaletteSimplifyChangeDialog extends AbstractPaletteColorChangeDialo
         int[] maxRGB = new int[rgb.length];
         for (int i = 0; i < rgb.length; i++){
             minRGB[i] = Math.max(rgb[i] - threshold, 0);
-            maxRGB[1] = Math.min(rgb[i] + threshold, 255);
+            maxRGB[i] = Math.min(rgb[i] + threshold, 255);
         }
         for (Integer index : list){
             Color temp = palette.get(index);
             int[] tempRGB = new int[]{temp.getRed(), temp.getGreen(), temp.getBlue(), temp.getAlpha()};
             boolean match = true;
             for (int i = 0; i < rgb.length && match; i++){
-                match = minRGB[i] >= tempRGB[i] && tempRGB[i] >= maxRGB[i];
+                match = minRGB[i] <= tempRGB[i] && tempRGB[i] <= maxRGB[i];
             }
             if (match)
                 changes.put(index, color);
