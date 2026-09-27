@@ -1187,6 +1187,15 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="recolorSimplifyButton">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Simplify"/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorSimplifyButtonActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.Box$Filler" name="filler2">

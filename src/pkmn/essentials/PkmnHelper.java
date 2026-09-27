@@ -515,6 +515,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jPanel5 = new javax.swing.JPanel();
         recolorInvertButton = new javax.swing.JButton();
         recolorDesaturateButton = new javax.swing.JButton();
+        recolorSimplifyButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel16 = new javax.swing.JLabel();
@@ -1138,6 +1139,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jPanel5.add(recolorDesaturateButton);
 
         jPanel4.add(jPanel5);
+
+        recolorSimplifyButton.setText("Simplify");
+        recolorSimplifyButton.setEnabled(false);
+        recolorSimplifyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorSimplifyButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(recolorSimplifyButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -2158,6 +2168,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             getLogger().log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_portraitSplitSaveButtonActionPerformed
+
+    private void recolorSimplifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recolorSimplifyButtonActionPerformed
     
     private void updateImageDifference(){
         PkmnSpriteIcon icon1 = diffFileAPanel.getIcon();
@@ -2684,6 +2698,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorRemoveDuplButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorInvertButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorDesaturateButton.setEnabled(recolorColorExchangeButton.isEnabled());
+        recolorSimplifyButton.setEnabled(recolorColorExchangeButton.isEnabled());
         updateRecolorSaveButton();
     }
     
@@ -2964,6 +2979,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
     private javax.swing.JSlider recolorScaleSlider;
+    private javax.swing.JButton recolorSimplifyButton;
     private javax.swing.JPanel recolorSpriteListAccessory;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel recolorSpriteListPanel;
     private javax.swing.JButton recolorUndoButton;
