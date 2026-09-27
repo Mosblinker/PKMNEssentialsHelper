@@ -1748,6 +1748,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorRedoButtonActionPerformed
 
     private void recolorPaletteListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recolorPaletteListMouseClicked
+        if (!inputEnabled || !recolorCtrlsEnabled)
+            return;
         int selected = recolorPaletteList.locationToIndex(evt.getPoint());
         if (selected >= 0 && !recolorPaletteList.getCellBounds(selected, selected).contains(evt.getPoint()))
             selected = -1;
@@ -2210,6 +2212,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
+        setRecolorCtrlsEnabled(false);
         ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
         List<PalettePkmnSpriteIcon> preview = dialog.setSprites(icons);
         if (dialog instanceof AbstractPaletteColorChangeDialog){
@@ -2233,6 +2236,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.setComponentSize(blendColorSelector);
         }
         config.setComponentSize(dialog);
+        setRecolorCtrlsEnabled(true);
     }
     
     private void setFilesAreHidden(boolean value){
@@ -2692,8 +2696,22 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteApplyButton.setEnabled(enabled);
     }
     
+    private void setRecolorCtrlsEnabled(boolean enabled){
+        recolorCtrlsEnabled = enabled;
+        updateRecolorCtrls();
+    }
+    
+    private void updateRecolorCtrls(){
+        updateRecolorPaletteButtons();
+        updateRecolorUndoRedoButtons();
+        updateRecolorSaveButton();
+        recolorBrowseButton.setEnabled(inputEnabled && recolorCtrlsEnabled);
+        recolorSaveField.setEnabled(inputEnabled && recolorCtrlsEnabled);
+//        recolorPaletteList.setEnabled(recolorCtrlsEnabled);
+    }
+    
     private void updateRecolorPaletteButtons(){
-        recolorColorExchangeButton.setEnabled(inputEnabled && !recolorSpritePalette.isEmpty());
+        recolorColorExchangeButton.setEnabled(inputEnabled && !recolorSpritePalette.isEmpty() && recolorCtrlsEnabled);
         recolorBlendChangeButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorRemoveDuplButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorInvertButton.setEnabled(recolorColorExchangeButton.isEnabled());
@@ -2703,15 +2721,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }
     
     private void updateRecolorUndoRedoButtons(){
-        recolorUndoButton.setEnabled(inputEnabled && !recolorSpriteUndo.isEmpty());
-        recolorRedoButton.setEnabled(inputEnabled && !recolorSpriteRedo.isEmpty());
+        recolorUndoButton.setEnabled(inputEnabled && !recolorSpriteUndo.isEmpty() && recolorCtrlsEnabled);
+        recolorRedoButton.setEnabled(inputEnabled && !recolorSpriteRedo.isEmpty() && recolorCtrlsEnabled);
     }
     
     private void updateRecolorSaveButton(){
         recolorSaveButton.setEnabled(inputEnabled && 
                 recolorSaveField.getText() != null && 
                 !recolorSaveField.getText().isEmpty() && 
-                !recolorSpriteListPanel.getModelList().isEmpty());
+                !recolorSpriteListPanel.getModelList().isEmpty() && recolorCtrlsEnabled);
     }
     
     private void updateGameProjectFolderButtons(){
@@ -2769,11 +2787,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         inputEnabledTest.setSelected(enabled);
         recolorSpriteListPanel.setEnabled(enabled);
-        updateRecolorPaletteButtons();
-        updateRecolorUndoRedoButtons();
-        updateRecolorSaveButton();
-        recolorBrowseButton.setEnabled(enabled);
-        recolorSaveField.setEnabled(enabled);
+        updateRecolorCtrls();
         gameFolderField.setEnabled(enabled);
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
@@ -2829,6 +2843,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
      * This is used to store and manage the configuration for this program.
      */
     private PkmnHelperConfig config;
+    
+    private boolean recolorCtrlsEnabled = true;
     
     private boolean inputEnabled = true;
     
