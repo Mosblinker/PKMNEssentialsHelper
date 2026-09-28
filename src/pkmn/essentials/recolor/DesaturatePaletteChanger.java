@@ -4,8 +4,8 @@
  */
 package pkmn.essentials.recolor;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -23,10 +23,15 @@ public class DesaturatePaletteChanger extends AbstractPaletteChangePanel{
     @Override
     protected void constructPanel() {
         Handler handler = new Handler();
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout());
         
+        java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.fill = java.awt.GridBagConstraints.BOTH;
+        constraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         JLabel label = new JLabel("Desaturate:");
-        add(label,BorderLayout.LINE_START);
+        add(label,constraints);
         
         modeCombo = new JComboBox<>(new String[]{
             "Luminance",
@@ -36,7 +41,22 @@ public class DesaturatePaletteChanger extends AbstractPaletteChangePanel{
             "Value (HSV)"
         });
         modeCombo.addActionListener(handler);
-        add(modeCombo,BorderLayout.CENTER);
+        constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.fill = java.awt.GridBagConstraints.BOTH;
+        constraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        constraints.weightx = 0.9;
+        constraints.insets = new java.awt.Insets(0, 6, 0, 0);
+        add(modeCombo,constraints);
+        
+        constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        constraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        constraints.weighty = 0.9;
+        add(new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0)), constraints);
     }
 
     @Override
