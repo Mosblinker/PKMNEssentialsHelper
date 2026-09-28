@@ -89,7 +89,7 @@ public class ColorExchangeChanger extends AbstractPaletteChangePanel{
     
     public void setFromColor(Color color){
         Objects.requireNonNull(color);
-        fromColorButton.setBackground(fromColor);
+        fromColorButton.setBackground(color);
         if (Objects.equals(fromColor, color))
             return;
         Color old = fromColor;
@@ -104,7 +104,7 @@ public class ColorExchangeChanger extends AbstractPaletteChangePanel{
     
     public void setToColor(Color color){
         Objects.requireNonNull(color);
-        toColorButton.setBackground(toColor);
+        toColorButton.setBackground(color);
         if (Objects.equals(toColor, color))
             return;
         Color old = toColor;

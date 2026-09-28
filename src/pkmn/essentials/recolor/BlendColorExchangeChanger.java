@@ -26,7 +26,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
     
     public void setFromColor1(Color color){
         Objects.requireNonNull(color);
-        fromColor1Button.setBackground(fromColor1);
+        fromColor1Button.setBackground(color);
         if (Objects.equals(fromColor1, color))
             return;
         Color old = fromColor1;
@@ -41,7 +41,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
     
     public void setFromColor2(Color color){
         Objects.requireNonNull(color);
-        fromColor2Button.setBackground(fromColor2);
+        fromColor2Button.setBackground(color);
         if (Objects.equals(fromColor2, color))
             return;
         Color old = fromColor2;
@@ -56,7 +56,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
     
     public void setToColor1(Color color){
         Objects.requireNonNull(color);
-        toColor1Button.setBackground(toColor1);
+        toColor1Button.setBackground(color);
         if (Objects.equals(toColor1, color))
             return;
         Color old = toColor1;
@@ -71,7 +71,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
     
     public void setToColor2(Color color){
         Objects.requireNonNull(color);
-        toColor2Button.setBackground(toColor2);
+        toColor2Button.setBackground(color);
         if (Objects.equals(toColor2, color))
             return;
         Color old = toColor2;
