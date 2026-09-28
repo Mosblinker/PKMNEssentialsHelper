@@ -119,7 +119,6 @@ public class JPaletteChangerPanel extends JPanel{
         constraints.gridy = 0;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
         add(topLabel, constraints);
         topLabel.setVisible(false);
         
@@ -127,7 +126,7 @@ public class JPaletteChangerPanel extends JPanel{
         constraints.gridy = 1;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        constraints.insets = new java.awt.Insets(7, 0, 0, 0);
         add(ctrlPanel, constraints);
         ctrlPanel.setVisible(false);
         
@@ -136,7 +135,7 @@ public class JPaletteChangerPanel extends JPanel{
         constraints.gridy = 2;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        constraints.insets = new java.awt.Insets(7, 0, 0, 0);
         constraints.weightx = 0.9;
         constraints.weighty = 0.9;
         add(applyPanel, constraints);
@@ -146,7 +145,7 @@ public class JPaletteChangerPanel extends JPanel{
         constraints.gridy = 3;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 7, 6);
+        constraints.insets = new java.awt.Insets(7, 0, 0, 0);
         add(bottomPanel, constraints);
         
         applyAddSelector = new JListSelector<>(new DefaultListModel<>());
