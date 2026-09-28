@@ -57,7 +57,6 @@ public class SimplifyPaletteChanger extends AbstractPaletteChangePanel{
         constraints.insets = new java.awt.Insets(0, 6, 0, 0);
         constraints.ipady = 15;
         constraints.weightx = 0.9;
-        constraints.weighty = 0.5;
         add(colorButton, constraints);
         
         constraints = new java.awt.GridBagConstraints();
@@ -76,8 +75,15 @@ public class SimplifyPaletteChanger extends AbstractPaletteChangePanel{
         constraints.insets = new java.awt.Insets(7, 6, 0, 0);
         constraints.ipady = 15;
         constraints.weightx = 0.9;
-        constraints.weighty = 0.5;
         add(slider, constraints);
+        
+        constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.fill = java.awt.GridBagConstraints.VERTICAL;
+        constraints.anchor = java.awt.GridBagConstraints.CENTER;
+        constraints.weighty = 0.9;
+        add(new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0)), constraints);
     }
     
     public Color getColor(){
