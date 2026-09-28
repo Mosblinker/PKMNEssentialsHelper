@@ -34,6 +34,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import static pkmn.essentials.PkmnHelper.getLogger;
 import pkmn.essentials.colorchooser.CustomColorPreviewPanel;
@@ -422,5 +423,21 @@ public final class PkmnHelperUtilities {
         else
             rect.y += scrollUnits;
         comp.scrollRectToVisible(rect);
+    }
+    /**
+     * 
+     * @param panel
+     * @param cardName 
+     */
+    public static void setCard(JPanel panel, String cardName){
+        ((java.awt.CardLayout) panel.getLayout()).show(panel, cardName);
+    }
+    /**
+     * 
+     * @param panel
+     * @param card 
+     */
+    public static void setCard(JPanel panel, JComponent card){
+        setCard(panel,card.getName());
     }
 }
