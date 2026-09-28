@@ -41,21 +41,9 @@
         <Property name="name" type="java.lang.String" value="recolorColorSelector" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="pkmn.essentials.recolor.PaletteColorExchangeDialog" name="recolorColorExchange">
-      <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="Color Exchange"/>
-        <Property name="name" type="java.lang.String" value="recolorColorExchange" noResource="true"/>
-      </Properties>
-    </Component>
     <Component class="components.JColorSelector" name="blendColorSelector">
       <Properties>
         <Property name="name" type="java.lang.String" value="blendColorSelector" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="pkmn.essentials.recolor.PaletteBlendChangeDialog" name="recolorBlendChange">
-      <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="Color Blend Exchange"/>
-        <Property name="name" type="java.lang.String" value="recolorBlendChange" noResource="true"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="recolorSpriteListAccessory">
@@ -157,18 +145,6 @@
           <Connection code="OGG_FILTER" type="code"/>
         </Property>
         <Property name="name" type="java.lang.String" value="audioFC" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="pkmn.essentials.recolor.PaletteInvertChangeDialog" name="recolorInvertChange">
-      <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="Invert Colors"/>
-        <Property name="name" type="java.lang.String" value="recolorInvertChange" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="pkmn.essentials.recolor.PaletteDesaturateChangeDialog" name="recolorDesaturateChange">
-      <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="Desaturate Colors"/>
-        <Property name="name" type="java.lang.String" value="recolorDesaturateChange" noResource="true"/>
       </Properties>
     </Component>
     <Component class="components.JFileDisplayPanel" name="townMapPreview">
@@ -420,18 +396,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="pkmn.essentials.recolor.PaletteSimplifyChangeDialog" name="recolorSimplifyChange">
-      <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="Simplify Palette"/>
-        <Property name="name" type="java.lang.String" value="recolorSimplifyChange" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="pkmn.essentials.recolor.PaletteRemoveAlphaChangeDialog" name="recolorRemoveAlphaChange">
-      <Properties>
-        <Property name="dialogTitle" type="java.lang.String" value="Remove Alpha Channel"/>
-        <Property name="name" type="java.lang.String" value="recolorRemoveAlphaChange" noResource="true"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JDialog" name="recolorPaletteDialog">
       <Properties>
         <Property name="locationByPlatform" type="boolean" value="true"/>

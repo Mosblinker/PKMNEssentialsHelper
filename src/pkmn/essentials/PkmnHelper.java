@@ -381,9 +381,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         RecolorPreviewHandler previewHandler = new RecolorPreviewHandler();
         for (Component comp : new Component[]{
-            recolorColorSelector,blendColorSelector,recolorPaletteDialog,recolorColorExchange,
-            recolorBlendChange,recolorInvertChange,recolorDesaturateChange,
-            recolorSimplifyChange,recolorRemoveAlphaChange
+            recolorColorSelector,blendColorSelector,recolorPaletteDialog
         }){
             config.getComponentNames().put(comp, comp.getName());
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
@@ -450,9 +448,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteFolderFC = new javax.swing.JFileChooser();
         gameFolderFC = new javax.swing.JFileChooser();
         recolorColorSelector = new components.JColorSelector();
-        recolorColorExchange = new pkmn.essentials.recolor.PaletteColorExchangeDialog();
         blendColorSelector = new components.JColorSelector();
-        recolorBlendChange = new pkmn.essentials.recolor.PaletteBlendChangeDialog();
         recolorSpriteListAccessory = new javax.swing.JPanel();
         recolorUndoButton = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
@@ -463,8 +459,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 7), new java.awt.Dimension(0, 7), new java.awt.Dimension(32767, 7));
         scaleBackToggle = new javax.swing.JToggleButton();
         audioFC = new javax.swing.JFileChooser();
-        recolorInvertChange = new pkmn.essentials.recolor.PaletteInvertChangeDialog();
-        recolorDesaturateChange = new pkmn.essentials.recolor.PaletteDesaturateChangeDialog();
         townMapPreview = new components.JFileDisplayPanel();
         townMapFC = new javax.swing.JFileChooser();
         townMapFolderFC = new javax.swing.JFileChooser();
@@ -486,8 +480,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitSplitSaveButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         portraitSplitNameField = new javax.swing.JTextField();
-        recolorSimplifyChange = new pkmn.essentials.recolor.PaletteSimplifyChangeDialog();
-        recolorRemoveAlphaChange = new pkmn.essentials.recolor.PaletteRemoveAlphaChangeDialog();
         recolorPaletteDialog = new javax.swing.JDialog(this);
         recolorPaletteChangerPanel = new pkmn.essentials.recolor.JPaletteChangerPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -603,13 +595,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         recolorColorSelector.setName("recolorColorSelector"); // NOI18N
 
-        recolorColorExchange.setDialogTitle("Color Exchange");
-        recolorColorExchange.setName("recolorColorExchange"); // NOI18N
-
         blendColorSelector.setName("blendColorSelector"); // NOI18N
-
-        recolorBlendChange.setDialogTitle("Color Blend Exchange");
-        recolorBlendChange.setName("recolorBlendChange"); // NOI18N
 
         recolorSpriteListAccessory.setLayout(new javax.swing.BoxLayout(recolorSpriteListAccessory, javax.swing.BoxLayout.Y_AXIS));
 
@@ -651,12 +637,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         audioFC.setFileFilter(OGG_FILTER);
         audioFC.setName("audioFC"); // NOI18N
-
-        recolorInvertChange.setDialogTitle("Invert Colors");
-        recolorInvertChange.setName("recolorInvertChange"); // NOI18N
-
-        recolorDesaturateChange.setDialogTitle("Desaturate Colors");
-        recolorDesaturateChange.setName("recolorDesaturateChange"); // NOI18N
 
         townMapPreview.setFileChooser(townMapFC);
 
@@ -803,12 +783,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(portraitSplitNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        recolorSimplifyChange.setDialogTitle("Simplify Palette");
-        recolorSimplifyChange.setName("recolorSimplifyChange"); // NOI18N
-
-        recolorRemoveAlphaChange.setDialogTitle("Remove Alpha Channel");
-        recolorRemoveAlphaChange.setName("recolorRemoveAlphaChange"); // NOI18N
 
         recolorPaletteDialog.setLocationByPlatform(true);
         recolorPaletteDialog.setMinimumSize(new java.awt.Dimension(320, 320));
@@ -3144,31 +3118,25 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JMenuItem printTest;
     private javax.swing.JProgressBar progressBar;
     private components.progress.JProgressDisplayMenu progressDisplay;
-    private pkmn.essentials.recolor.PaletteBlendChangeDialog recolorBlendChange;
     private javax.swing.JButton recolorBlendChangeButton;
     private javax.swing.JButton recolorBrowseButton;
-    private pkmn.essentials.recolor.PaletteColorExchangeDialog recolorColorExchange;
     private javax.swing.JButton recolorColorExchangeButton;
     private components.JColorSelector recolorColorSelector;
     private javax.swing.JButton recolorDesaturateButton;
-    private pkmn.essentials.recolor.PaletteDesaturateChangeDialog recolorDesaturateChange;
     private javax.swing.JFileChooser recolorFolderFC;
     private javax.swing.JButton recolorInvertButton;
-    private pkmn.essentials.recolor.PaletteInvertChangeDialog recolorInvertChange;
     private pkmn.essentials.recolor.JPaletteChangerPanel recolorPaletteChangerPanel;
     private javax.swing.JDialog recolorPaletteDialog;
     private javax.swing.JList<Color> recolorPaletteList;
     private javax.swing.JButton recolorRedoButton;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
     private javax.swing.JButton recolorRemoveAlphaButton;
-    private pkmn.essentials.recolor.PaletteRemoveAlphaChangeDialog recolorRemoveAlphaChange;
     private javax.swing.JButton recolorRemoveDuplButton;
     private javax.swing.JButton recolorSaveButton;
     private javax.swing.JTextField recolorSaveField;
     private javax.swing.JLabel recolorScaleLabel;
     private javax.swing.JSlider recolorScaleSlider;
     private javax.swing.JButton recolorSimplifyButton;
-    private pkmn.essentials.recolor.PaletteSimplifyChangeDialog recolorSimplifyChange;
     private javax.swing.JPanel recolorSpriteListAccessory;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel recolorSpriteListPanel;
     private javax.swing.JButton recolorUndoButton;
