@@ -62,6 +62,8 @@ public class JPaletteChangerPanel extends JPanel{
         paletteChangers = new ArrayList<>();
         handler = new Handler();
         
+        topLabel = new JLabel();
+        
         ctrlPanel = new JPanel(new java.awt.CardLayout());
         emptyCtrlPanel = new JPanel();
         ctrlPanel.add(emptyCtrlPanel, "");
@@ -118,12 +120,20 @@ public class JPaletteChangerPanel extends JPanel{
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
         constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        add(topLabel, constraints);
+        topLabel.setVisible(false);
+        
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.fill = java.awt.GridBagConstraints.BOTH;
+        constraints.anchor = java.awt.GridBagConstraints.CENTER;
+        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
         add(ctrlPanel, constraints);
         ctrlPanel.setVisible(false);
         
         constraints = new java.awt.GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
         constraints.insets = new java.awt.Insets(7, 6, 0, 6);
@@ -133,7 +143,7 @@ public class JPaletteChangerPanel extends JPanel{
         
         constraints = new java.awt.GridBagConstraints();
         constraints.gridx = 0;
-        constraints.gridy = (ctrlPanel != null)?2:1;
+        constraints.gridy = 3;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
         constraints.insets = new java.awt.Insets(7, 6, 7, 6);
@@ -290,6 +300,11 @@ public class JPaletteChangerPanel extends JPanel{
         acceptButton.setText((acceptText==null)?"Apply":acceptText);
         acceptButton.setToolTipText((acceptToolTip==null)?"Apply changes":acceptToolTip);
         cancelButton.setToolTipText((cancelToolTip==null)?"Close the window":cancelToolTip);
+        if (changer != null){
+            topLabel.setText(changer.getLabelText());
+            topLabel.setVisible(changer.getLabelText() != null);
+        } else 
+            topLabel.setVisible(false);
         updatePaletteChanges();
     }
     
@@ -571,6 +586,8 @@ public class JPaletteChangerPanel extends JPanel{
                 l.stateChanged(evt);
         }
     }
+    
+    protected JLabel topLabel;
     
     private JPanel emptyCtrlPanel;
     

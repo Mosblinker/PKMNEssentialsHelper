@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Mosblinker
  */
-public class InvertPaletteChanger extends AbstractPaletteChangePanelWithLabel{
+public class InvertPaletteChanger extends AbstractPaletteChanger{
 
     @Override
     protected String getDefaultCardName() {
@@ -43,7 +43,7 @@ public class InvertPaletteChanger extends AbstractPaletteChangePanelWithLabel{
     }
 
     @Override
-    protected String getLabelText() {
+    public String getLabelText() {
         return "Select colors to invert:";
     }
 }

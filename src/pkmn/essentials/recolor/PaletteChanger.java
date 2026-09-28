@@ -16,6 +16,10 @@ import javax.swing.event.ChangeListener;
  */
 public interface PaletteChanger {
     
+    public default String getLabelText(){
+        return null;
+    }
+    
     public String getCardName();
     
     public void setCardName(String name);

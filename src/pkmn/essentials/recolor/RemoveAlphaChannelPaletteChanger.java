@@ -12,10 +12,10 @@ import java.util.Map;
  *
  * @author Mosblinker
  */
-public class RemoveAlphaChannelPaletteChanger extends AbstractPaletteChangePanelWithLabel{
+public class RemoveAlphaChannelPaletteChanger extends AbstractPaletteChanger{
 
     @Override
-    protected String getLabelText() {
+    public String getLabelText() {
         return "Remove alpha channel from:";
     }
 
