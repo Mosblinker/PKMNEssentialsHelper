@@ -809,7 +809,23 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 recolorPaletteChangerPanelPropertyChange(evt);
             }
         });
-        recolorPaletteDialog.getContentPane().add(recolorPaletteChangerPanel, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout recolorPaletteDialogLayout = new javax.swing.GroupLayout(recolorPaletteDialog.getContentPane());
+        recolorPaletteDialog.getContentPane().setLayout(recolorPaletteDialogLayout);
+        recolorPaletteDialogLayout.setHorizontalGroup(
+            recolorPaletteDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(recolorPaletteDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(recolorPaletteChangerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        recolorPaletteDialogLayout.setVerticalGroup(
+            recolorPaletteDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(recolorPaletteDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(recolorPaletteChangerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
