@@ -115,7 +115,6 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
         constraints.gridy = 0;
         constraints.fill = java.awt.GridBagConstraints.VERTICAL;
         constraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 0);
         add(fromColorLabel, constraints);
         
         constraints = new java.awt.GridBagConstraints();
@@ -123,7 +122,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
         constraints.gridy = 0;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        constraints.insets = new java.awt.Insets(0, 6, 0, 0);
         constraints.ipady = 15;
         constraints.weightx = 0.5;
         constraints.weighty = 0.5;
@@ -134,7 +133,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
         constraints.gridy = 0;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        constraints.insets = new java.awt.Insets(0, 6, 0, 0);
         constraints.ipady = 15;
         constraints.weightx = 0.5;
         add(fromColor2Button, constraints);
@@ -144,7 +143,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
         constraints.gridy = 1;
         constraints.fill = java.awt.GridBagConstraints.VERTICAL;
         constraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 0);
+        constraints.insets = new java.awt.Insets(7, 0, 0, 0);
         add(toColorLabel, constraints);
         
         constraints = new java.awt.GridBagConstraints();
@@ -152,7 +151,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
         constraints.gridy = 1;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        constraints.insets = new java.awt.Insets(7, 6, 0, 0);
         constraints.ipady = 15;
         constraints.weightx = 0.5;
         constraints.weighty = 0.5;
@@ -163,7 +162,7 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
         constraints.gridy = 1;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
         constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
+        constraints.insets = new java.awt.Insets(7, 6, 0, 0);
         constraints.ipady = 15;
         constraints.weightx = 0.5;
         add(toColor2Button, constraints);
