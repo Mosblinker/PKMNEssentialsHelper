@@ -131,6 +131,8 @@ public class PkmnHelperConfig {
     
     public static final String PREVIEW_SHOWN_KEY_SUFFIX = "PreviewShown";
     
+    public static final String RECOLOR_PREVIEW_SHOWN_KEY = "Recolor"+PREVIEW_SHOWN_KEY_SUFFIX;
+    
     public static final String GAME_PROJECT_FOLDER_KEY = "GameProjectFolder";
     
     public static final String TOWN_MAP_IMAGE_NODE_NAME = "TownMapImage";
@@ -810,6 +812,14 @@ public class PkmnHelperConfig {
     
     public void setRecolorPreviewShown(Component comp, boolean value){
         getRecolorSpritePreferences().putBoolean(getComponentNames().get(comp)+PREVIEW_SHOWN_KEY_SUFFIX, value);
+    }
+    
+    public boolean getRecolorPreviewShown(){
+        return getRecolorSpritePreferences().getBoolean(RECOLOR_PREVIEW_SHOWN_KEY, true);
+    }
+    
+    public void setRecolorPreviewShown(boolean value){
+        getRecolorSpritePreferences().putBoolean(RECOLOR_PREVIEW_SHOWN_KEY, value);
     }
     /**
      * 
