@@ -426,6 +426,12 @@
         <Property name="name" type="java.lang.String" value="recolorSimplifyChange" noResource="true"/>
       </Properties>
     </Component>
+    <Component class="pkmn.essentials.recolor.PaletteRemoveAlphaChangeDialog" name="recolorRemoveAlphaChange">
+      <Properties>
+        <Property name="dialogTitle" type="java.lang.String" value="Remove Alpha Channel"/>
+        <Property name="name" type="java.lang.String" value="recolorRemoveAlphaChange" noResource="true"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -1166,6 +1172,15 @@
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorRemoveDuplButtonActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="recolorRemoveAlphaButton">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Remove Alpha"/>
+                        <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recolorRemoveAlphaButtonActionPerformed"/>
                       </Events>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel5">

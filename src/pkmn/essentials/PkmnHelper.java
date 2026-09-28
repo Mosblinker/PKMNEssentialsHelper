@@ -375,7 +375,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         for (Component comp : new Component[]{
             recolorColorSelector,blendColorSelector,recolorColorExchange,
             recolorBlendChange,recolorInvertChange,recolorDesaturateChange,
-            recolorSimplifyChange
+            recolorSimplifyChange,recolorRemoveAlphaChange
         }){
             config.getComponentNames().put(comp, comp.getName());
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
@@ -470,6 +470,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jLabel7 = new javax.swing.JLabel();
         portraitSplitNameField = new javax.swing.JTextField();
         recolorSimplifyChange = new pkmn.essentials.recolor.PaletteSimplifyChangeDialog();
+        recolorRemoveAlphaChange = new pkmn.essentials.recolor.PaletteRemoveAlphaChangeDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -513,6 +514,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorColorExchangeButton = new javax.swing.JButton();
         recolorBlendChangeButton = new javax.swing.JButton();
         recolorRemoveDuplButton = new javax.swing.JButton();
+        recolorRemoveAlphaButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         recolorInvertButton = new javax.swing.JButton();
         recolorDesaturateButton = new javax.swing.JButton();
@@ -785,6 +787,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
 
         recolorSimplifyChange.setDialogTitle("Simplify Palette");
         recolorSimplifyChange.setName("recolorSimplifyChange"); // NOI18N
+
+        recolorRemoveAlphaChange.setDialogTitle("Remove Alpha Channel");
+        recolorRemoveAlphaChange.setName("recolorRemoveAlphaChange"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1124,6 +1129,15 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
         jPanel4.add(recolorRemoveDuplButton);
+
+        recolorRemoveAlphaButton.setText("Remove Alpha");
+        recolorRemoveAlphaButton.setEnabled(false);
+        recolorRemoveAlphaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recolorRemoveAlphaButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(recolorRemoveAlphaButton);
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 0, 6, 0));
 
@@ -2182,6 +2196,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void recolorSimplifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyButtonActionPerformed
         showRecolorChangeDialog(recolorSimplifyChange);
     }//GEN-LAST:event_recolorSimplifyButtonActionPerformed
+
+    private void recolorRemoveAlphaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorRemoveAlphaButtonActionPerformed
+        showRecolorChangeDialog(recolorRemoveAlphaChange);
+    }//GEN-LAST:event_recolorRemoveAlphaButtonActionPerformed
     
     private void updateImageDifference(){
         PkmnSpriteIcon icon1 = diffFileAPanel.getIcon();
@@ -2725,6 +2743,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorInvertButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorDesaturateButton.setEnabled(recolorColorExchangeButton.isEnabled());
         recolorSimplifyButton.setEnabled(recolorColorExchangeButton.isEnabled());
+        recolorRemoveAlphaButton.setEnabled(recolorColorExchangeButton.isEnabled());
         updateRecolorSaveButton();
     }
     
@@ -2998,6 +3017,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JList<Color> recolorPaletteList;
     private javax.swing.JButton recolorRedoButton;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel recolorReferencePanel;
+    private javax.swing.JButton recolorRemoveAlphaButton;
+    private pkmn.essentials.recolor.PaletteRemoveAlphaChangeDialog recolorRemoveAlphaChange;
     private javax.swing.JButton recolorRemoveDuplButton;
     private javax.swing.JButton recolorSaveButton;
     private javax.swing.JTextField recolorSaveField;
