@@ -7,6 +7,7 @@ package pkmn.essentials.recolor;
 import components.ArrayListModel;
 import components.JColorSelector;
 import components.JListSelector;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.*;
@@ -112,32 +113,12 @@ public class JPaletteChangerPanel extends JPanel{
         bottomPanel.add(previewToggle,java.awt.BorderLayout.LINE_START);
         bottomPanel.add(bottomButtonPanel,java.awt.BorderLayout.LINE_END);
         
-        java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.fill = java.awt.GridBagConstraints.BOTH;
-        constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
-        add(ctrlPanel, constraints);
+        add(ctrlPanel, BorderLayout.PAGE_START);
         ctrlPanel.setVisible(false);
         
-        constraints = new java.awt.GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.fill = java.awt.GridBagConstraints.BOTH;
-        constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 0, 6);
-        constraints.weightx = 0.9;
-        constraints.weighty = 0.9;
-        add(applyPanel, constraints);
+        add(applyPanel, BorderLayout.CENTER);
         
-        constraints = new java.awt.GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = (ctrlPanel != null)?2:1;
-        constraints.fill = java.awt.GridBagConstraints.BOTH;
-        constraints.anchor = java.awt.GridBagConstraints.CENTER;
-        constraints.insets = new java.awt.Insets(7, 6, 7, 6);
-        add(bottomPanel, constraints);
+        add(bottomPanel, BorderLayout.PAGE_END);
         
         applyAddSelector = new JListSelector<>(new DefaultListModel<>());
         applyAddSelector.setCellRenderer(new ColorIndexCellRenderer());
@@ -150,7 +131,7 @@ public class JPaletteChangerPanel extends JPanel{
     }
     
     public JPaletteChangerPanel(){
-        super(new java.awt.GridBagLayout());
+        super(new BorderLayout(6,7));
         initialize();
     }
     
