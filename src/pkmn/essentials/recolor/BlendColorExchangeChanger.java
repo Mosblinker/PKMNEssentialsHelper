@@ -182,7 +182,10 @@ public class BlendColorExchangeChanger extends AbstractPaletteChangePanel{
 
     @Override
     public void prepareToShow(List<Color> palette, Color color) {
-        super.prepareToShow(palette, color);
+        setFromColor1((color!=null)?color:Color.BLACK);
+        setFromColor2(Color.WHITE);
+        setToColor1(Color.RED);
+        setToColor2(Color.BLUE);
     }
     @Override
     public String getAcceptButtonTooltipText() {
