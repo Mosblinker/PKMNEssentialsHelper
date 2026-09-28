@@ -401,7 +401,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorPaletteChangerPanel.setColorSelector(recolorColorSelector);
         recolorPaletteChangerPanel.addPaletteChanger(new ColorExchangeChanger());
         recolorPaletteChangerPanel.addPaletteChanger(new BlendColorExchangeChanger());
-        
+        recolorPaletteChangerPanel.addPaletteChanger(new InvertPaletteChanger());
+        recolorPaletteChangerPanel.addPaletteChanger(new DesaturatePaletteChanger());
+        recolorPaletteChangerPanel.addPaletteChanger(new SimplifyPaletteChanger());
+        recolorPaletteChangerPanel.addPaletteChanger(new RemoveAlphaChannelPaletteChanger());
         
         showHiddenFilesToggle.setSelected(config.getHiddenFilesAreShown());
         setFilesAreHidden(showHiddenFilesToggle.isSelected());
@@ -1195,7 +1198,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorRemoveAlphaButton.setEnabled(false);
         recolorRemoveAlphaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorRemoveAlphaButtonActionPerformed(evt);
+                recolorPaletteChangeActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1212,7 +1215,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorInvertButton.setEnabled(false);
         recolorInvertButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorInvertButtonActionPerformed(evt);
+                recolorPaletteChangeActionPerformed(evt);
             }
         });
         jPanel5.add(recolorInvertButton);
@@ -1222,7 +1225,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorDesaturateButton.setEnabled(false);
         recolorDesaturateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorDesaturateButtonActionPerformed(evt);
+                recolorPaletteChangeActionPerformed(evt);
             }
         });
         jPanel5.add(recolorDesaturateButton);
@@ -1239,7 +1242,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         recolorSimplifyButton.setEnabled(false);
         recolorSimplifyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recolorSimplifyButtonActionPerformed(evt);
+                recolorPaletteChangeActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2072,14 +2075,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
     }//GEN-LAST:event_recolorReferencePanelMouseWheelMoved
 
-    private void recolorInvertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorInvertButtonActionPerformed
-        showRecolorChangeDialog(recolorInvertChange);
-    }//GEN-LAST:event_recolorInvertButtonActionPerformed
-
-    private void recolorDesaturateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorDesaturateButtonActionPerformed
-        showRecolorChangeDialog(recolorDesaturateChange);
-    }//GEN-LAST:event_recolorDesaturateButtonActionPerformed
-
     private void townMapEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townMapEditorActionPerformed
         switch(evt.getActionCommand()){
             case(TownMapEditor.BROWSE_ACTION_COMMAND):
@@ -2263,14 +2258,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             getLogger().log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_portraitSplitSaveButtonActionPerformed
-
-    private void recolorSimplifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSimplifyButtonActionPerformed
-        showRecolorChangeDialog(recolorSimplifyChange);
-    }//GEN-LAST:event_recolorSimplifyButtonActionPerformed
-
-    private void recolorRemoveAlphaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorRemoveAlphaButtonActionPerformed
-        showRecolorChangeDialog(recolorRemoveAlphaChange);
-    }//GEN-LAST:event_recolorRemoveAlphaButtonActionPerformed
     
     private void closeRecolorPaletteDialog(boolean accept){
         recolorPaletteDialog.setVisible(false);
