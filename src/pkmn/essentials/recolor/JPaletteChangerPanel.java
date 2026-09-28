@@ -122,6 +122,7 @@ public class JPaletteChangerPanel extends JPanel{
         add(topLabel, constraints);
         topLabel.setVisible(false);
         
+        constraints = new java.awt.GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.fill = java.awt.GridBagConstraints.BOTH;
