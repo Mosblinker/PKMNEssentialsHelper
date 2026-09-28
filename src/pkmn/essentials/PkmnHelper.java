@@ -22,8 +22,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -55,8 +53,6 @@ import java.util.prefs.Preferences;
 import java.util.stream.Stream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataEvent;
@@ -379,20 +375,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.addFileChooser(fc, fc.getName());
             config.loadFileChooser(fc);
         }
-        RecolorPreviewHandler previewHandler = new RecolorPreviewHandler();
         for (Component comp : new Component[]{
             recolorColorSelector,blendColorSelector,recolorPaletteDialog
         }){
             config.getComponentNames().put(comp, comp.getName());
             SwingExtendedUtilities.setComponentSize(comp, config.getComponentSize(comp));
-            if (comp instanceof AbstractPaletteChangeDialog){
-                AbstractPaletteChangeDialog dialog = (AbstractPaletteChangeDialog) comp;
-                if (dialog instanceof AbstractPaletteColorChangeDialog)
-                    ((AbstractPaletteColorChangeDialog)dialog).setColorSelector(recolorColorSelector);
-                dialog.setPreviewShown(config.getRecolorPreviewShown(comp));
-                dialog.addPropertyChangeListener(previewHandler);
-                dialog.addChangeListener(previewHandler);
-            }
         }
         recolorPaletteChangerPanel.setPreviewShown(config.getRecolorPreviewShown());
         
@@ -1867,13 +1854,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
     }//GEN-LAST:event_recolorPaletteListValueChanged
     
-    private void setShownRecolorSprites(AbstractPaletteChangeDialog dialog){
-        recolorSpriteListPanel.getModelList().clear();
-        recolorSpriteListPanel.getModelList().addAll((dialog.isPreviewShown())?
-                dialog.getPreviewSprites():dialog.getSprites());
-        config.setRecolorPreviewShown(dialog, dialog.isPreviewShown());
-    }
-    
     private void recolorSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolorSaveButtonActionPerformed
         File folder = new File(recolorSaveField.getText());
         new RecolorSpriteSaver(folder).execute();
@@ -2363,34 +2343,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             img.setRGB(0, y, img.getWidth(), 1, data1, 0, 1);
         }
         return img;
-    }
-    
-    private void showRecolorChangeDialog(AbstractPaletteChangeDialog dialog){
-        setRecolorCtrlsEnabled(false);
-        ListModelList<PkmnSpriteIcon> icons = recolorSpriteListPanel.getModelList();
-        List<PalettePkmnSpriteIcon> preview = dialog.setSprites(icons);
-        if (dialog instanceof AbstractPaletteColorChangeDialog){
-            recolorPaletteColorChooser.setPalette(recolorSpritePalette);
-            updateRecolorDropperImages();
-            for (PalettePkmnSpriteIcon icon : preview){
-                recolorDropperColorChooser.getImages().add(icon.getBufferedImage());
-            }
-            blendPaletteColorChooser.setPalette(recolorSpritePalette);
-            blendDropperColorChooser.setImages(recolorDropperColorChooser.getImages());
-        }
-        recolorSpriteListPanel.setModel(new ListModelList<>());
-        setShownRecolorSprites(dialog);
-        int option = dialog.showDialog(this, recolorSpritePalette);
-        recolorSpriteListPanel.setModel(icons);
-        if (option == AbstractPaletteChangeDialog.ACCEPT_OPTION){
-            recolorChangeColorsUpdate(dialog.getPaletteChanges());
-        }
-        if (dialog instanceof AbstractPaletteColorChangeDialog){
-            config.setComponentSize(recolorColorSelector);
-            config.setComponentSize(blendColorSelector);
-        }
-        config.setComponentSize(dialog);
-        setRecolorCtrlsEnabled(true);
     }
     
     private void setFilesAreHidden(boolean value){
@@ -3241,30 +3193,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 updateRecolorSaveButton();
             } else 
                 updateSpriteApplyButton();
-        }
-    }
-    
-    private class RecolorPreviewHandler implements PropertyChangeListener, ChangeListener{
-        @Override
-        public void propertyChange(PropertyChangeEvent evt) {
-            AbstractPaletteChangeDialog dialog;
-            if (evt.getSource() instanceof AbstractPaletteChangeDialog)
-                dialog = (AbstractPaletteChangeDialog) evt.getSource();
-            else
-                return;
-            if ("previewShown".equals(evt.getPropertyName())){
-                setShownRecolorSprites(dialog);
-            }
-        }
-        @Override
-        public void stateChanged(ChangeEvent evt) {
-            AbstractPaletteChangeDialog dialog;
-            if (evt.getSource() instanceof AbstractPaletteChangeDialog)
-                dialog = (AbstractPaletteChangeDialog) evt.getSource();
-            else
-                return;
-            if (dialog.isPreviewShown())
-                recolorSpriteListPanel.repaint();
         }
     }
     /**
