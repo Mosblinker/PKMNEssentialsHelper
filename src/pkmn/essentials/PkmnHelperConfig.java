@@ -139,7 +139,9 @@ public class PkmnHelperConfig {
     
     public static final String TOWN_MAP_FILE_NAME_KEY = "FileName";
     
+    public static final String PORTRAIT_NODE_NAME = "PMDPortraits";
     
+    public static final String PORTRAIT_NAME_KEY = "PortraitName";
     
     /**
      * This is a preference node to store the settings for this program.
@@ -178,6 +180,8 @@ public class PkmnHelperConfig {
     private final PkmnSpriteFileList recolorSprites;
     
     private final Preferences townMapImageNode;
+    
+    private final Preferences portraitNode;
     /**
      * 
      * @param node 
@@ -196,6 +200,7 @@ public class PkmnHelperConfig {
         recolorNode = node.node(RECOLOR_SPRITE_NODE_NAME);
         recolorSprites = new PkmnSpriteFileList(recolorNode.node(RECOLOR_PKMN_SPRITE_NODE_NAME));
         townMapImageNode = node.node(TOWN_MAP_IMAGE_NODE_NAME);
+        portraitNode = node.node(PORTRAIT_NODE_NAME);
     }
     /**
      * 
@@ -884,6 +889,40 @@ public class PkmnHelperConfig {
             getTownMapImagePreferences().remove(TOWN_MAP_FILE_NAME_KEY);
         else
             getTownMapImagePreferences().put(TOWN_MAP_FILE_NAME_KEY, path);
+    }
+    
+    public Preferences getPortraitPreferences(){
+        return portraitNode;
+    }
+    
+    public boolean getPortraitUseGameFolder(){
+        return getPortraitPreferences().getBoolean(USE_PROJECT_FOLDER, false);
+    }
+    
+    public void setPortraitUseGameFolder(boolean value){
+        getPortraitPreferences().putBoolean(USE_PROJECT_FOLDER, value);
+    }
+    
+    public String getPortraitTargetFolder(){
+        return getPortraitPreferences().get(TARGET_FOLDER_KEY, null);
+    }
+    
+    public void setPortraitTargetFolder(String path){
+        if (path == null)
+            getPortraitPreferences().remove(TARGET_FOLDER_KEY);
+        else
+            getPortraitPreferences().put(TARGET_FOLDER_KEY, path);
+    }
+    
+    public String getPortraitName(){
+        return getPortraitPreferences().get(PORTRAIT_NAME_KEY, null);
+    }
+    
+    public void setPortraitName(String path){
+        if (path == null)
+            getPortraitPreferences().remove(PORTRAIT_NAME_KEY);
+        else
+            getPortraitPreferences().put(PORTRAIT_NAME_KEY, path);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{
