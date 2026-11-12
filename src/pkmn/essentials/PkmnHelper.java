@@ -2273,58 +2273,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_splitPortraitsMenuItemActionPerformed
 
     private void portraitSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitSaveButtonActionPerformed
-        if (portraitSplitPanel.getIcon() == null)
-            return;
-        try{
-            File file = portraitSplitPanel.getIcon().getFile();
-            
-            String name = portraitNameField.getText();
-            if (name == null || name.isBlank())
-                name = file.getName();
-            
-            File folder = new File(file.getParentFile(),"Portraits");
-            FilesExtended.createDirectories(portraitSplitDialog, folder);
-            BufferedImage image = ImageIO.read(file);
-            List<BufferedImage> portraits = new ArrayList<>();
-            for (int y = 0; y < image.getHeight(); y+= PORTRAIT_SIZE){
-                int h = Math.min(PORTRAIT_SIZE, image.getHeight() - y);
-                for (int x = 0; x < image.getWidth(); x+= PORTRAIT_SIZE){
-                    portraits.add(image.getSubimage(x, y, Math.min(PORTRAIT_SIZE, image.getWidth()-x), h));
-                }
-            }
-            for (int i = 0; i < portraits.size(); i++){
-                BufferedImage img = portraits.get(i);
-                int[] data = new int[img.getWidth()];
-                boolean hasData = false;
-                for (int y = 0; y < img.getHeight() && !hasData; y++){
-                    data = img.getRGB(0, y, data.length, 1, data, 0, 1);
-                    for (int x = 0; x < data.length && !hasData; x++){
-                            // If the pixel is not transparent
-                        hasData = (data[x] & 0xFF000000) != 0;
-                    }
-                    if (hasData){
-                        BufferedImage temp = new BufferedImage(PORTRAIT_SIZE*2, PORTRAIT_SIZE*2, BufferedImage.TYPE_INT_ARGB);
-                        Graphics2D g = temp.createGraphics();
-                        g.scale(2.0, 2.0);
-                        g.drawImage(img, 0, 0, null);
-                        g.dispose();
-                        String pName;
-                        if (i < PORTRAIT_NAMES.length)
-                            pName = PORTRAIT_NAMES[i];
-                        else if (i < PORTRAIT_NAMES.length*2)
-                            pName = PORTRAIT_NAMES[i-PORTRAIT_NAMES.length]+"_Flipped";
-                        else
-                            pName = "Special"+(i-PORTRAIT_NAMES.length+4);
-                        File f = new File(folder,name+"-"+pName+".png");
-                        ImageIO.write(temp, "png", f);
-                    } else{
-                        portraits.set(i, null);
-                    }
-                }
-            }
-        } catch (IOException ex){
-            getLogger().log(Level.SEVERE, null, ex);
-        }
+        File folder;
+        if (portraitUseGameToggle.isEnabled() && portraitUseGameToggle.isSelected())
+            folder = new File(gameProjectFolder, GAME_PORTRAIT_FOLDER);
+        else
+            folder = new File(portraitFolderField.getText());
+        String name = portraitNameField.getText();
+        new PortraitSplitter(folder,name).execute();
     }//GEN-LAST:event_portraitSaveButtonActionPerformed
     
     private void closeRecolorPaletteDialog(boolean accept){
@@ -4803,6 +4758,124 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         @Override
         protected String getFailureMessage(File file, IOException ex){
             return "The game settings failed to save.";
+        }
+    }
+    
+    private class PortraitSplitter extends FileSaver{
+        
+        private String name;
+        
+        private int stage = 0;
+        
+        private int index = 0;
+        
+        private List<BufferedImage> portraits = new ArrayList<>();
+        
+        private int portraitCount = 0;
+        
+        private PortraitSplitter(File folder, String name){
+            super(folder);
+            this.name = name;
+        }
+        @Override
+        public String getProgressString(){
+            switch(stage){
+                case(0):
+                    return "Splitting Portraits";
+                default:
+                    return "Saving Portraits";
+            }
+        }
+        @Override
+        protected boolean isFileDirectory(){
+            return true;
+        }
+        
+        private boolean imageHasData(BufferedImage image){
+            int[] data = new int[image.getWidth()];
+            for (int y = 0; y < image.getHeight(); y++){
+                data = image.getRGB(0, y, data.length, 1, data, 0, 1);
+                for (int x = 0; x < data.length; x++){
+                        // If the pixel is not transparent
+                    if ((data[x] & 0xFF000000) != 0)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected boolean saveFile(File file) throws IOException {
+            switch(stage){
+                case(0):
+                    File originalImage = portraitSplitPanel.getIcon().getFile();
+                    BufferedImage image = ImageIO.read(originalImage);
+                    
+                    progressBar.setMaximum((int)Math.ceil(image.getWidth() / (double)PORTRAIT_SIZE) * 
+                            (int)Math.ceil(image.getHeight() / (double)PORTRAIT_SIZE));
+                    progressBar.setValue(0);
+                    progressBar.setIndeterminate(false);
+                    
+                    for (int y = 0; y < image.getHeight(); y+= PORTRAIT_SIZE){
+                        int h = Math.min(PORTRAIT_SIZE, image.getHeight() - y);
+                        for (int x = 0; x < image.getWidth(); x+= PORTRAIT_SIZE){
+                            BufferedImage img = image.getSubimage(x, y, Math.min(PORTRAIT_SIZE, image.getWidth()-x), h);
+                            if (imageHasData(img)){
+                                portraits.add(img);
+                                portraitCount++;
+                            } else
+                                portraits.add(null);
+                            progressBar.setValue(progressBar.getValue()+1);
+                        }
+                    }
+                    progressBar.setValue(0);
+                    progressBar.setMaximum(portraitCount);
+                    stage = 1;
+                case(1):
+                    int scale = (int)portraitScaleSpinner.getValue();
+                    for (int i = index; i < portraits.size(); i++, index++){
+                        BufferedImage img = portraits.get(i);
+                        if (img == null)
+                            continue;
+                        if (scale > 1){
+                            BufferedImage temp = new BufferedImage(PORTRAIT_SIZE*scale, PORTRAIT_SIZE*scale, BufferedImage.TYPE_INT_ARGB);
+                            Graphics2D g = temp.createGraphics();
+                            g.scale(scale, scale);
+                            g.drawImage(img, 0, 0, null);
+                            g.dispose();
+                            img = temp;
+                        }
+                        String pName;
+                        if (i < PORTRAIT_NAMES.length)
+                            pName = PORTRAIT_NAMES[i];
+                        else if (i < PORTRAIT_NAMES.length*2)
+                            pName = PORTRAIT_NAMES[i-PORTRAIT_NAMES.length]+"_Flipped";
+                        else
+                            pName = "Special"+(i-PORTRAIT_NAMES.length+4);
+                        File f = new File(file,name+"-"+pName+".png");
+                        ImageIO.write(img, "png", f);
+                        progressBar.setValue(progressBar.getValue()+1);
+                    }
+            }
+            return true;
+        }
+        
+        
+        @Override
+        protected String getSuccessTitle(File file){
+            return "Portraits Saved Successfully";
+        }
+        @Override
+        protected String getSuccessMessage(File file){
+            return "The portraits were successfully split and saved.";
+        }
+        @Override
+        protected String getFailureTitle(File file, IOException ex){
+            return "ERROR - Portraits Failed To Save";
+        }
+        @Override
+        protected String getFailureMessage(File file, IOException ex){
+            return "The portraits failed to save.";
         }
     }
 }
