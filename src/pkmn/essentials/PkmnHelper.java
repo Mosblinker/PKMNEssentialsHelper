@@ -708,7 +708,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         printRecolorTest = new javax.swing.JMenuItem();
         printPBSTest = new javax.swing.JMenuItem();
         imageDifferenceTest = new javax.swing.JMenuItem();
-        splitPortraitsMenuItem = new javax.swing.JMenuItem();
 
         spriteFC.setAcceptAllFileFilterUsed(false);
         spriteFC.setAccessory(spritePreview);
@@ -1849,14 +1848,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
         debugMenu.add(imageDifferenceTest);
 
-        splitPortraitsMenuItem.setText("Split Portraits");
-        splitPortraitsMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                splitPortraitsMenuItemActionPerformed(evt);
-            }
-        });
-        debugMenu.add(splitPortraitsMenuItem);
-
         jMenuBar1.add(debugMenu);
 
         setJMenuBar(jMenuBar1);
@@ -2441,10 +2432,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void gameProjectNameChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameProjectNameChangeButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_gameProjectNameChangeButtonActionPerformed
-
-    private void splitPortraitsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_splitPortraitsMenuItemActionPerformed
-        portraitSplitDialog.setVisible(true);
-    }//GEN-LAST:event_splitPortraitsMenuItemActionPerformed
 
     private void portraitSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitSaveButtonActionPerformed
         File folder;
@@ -3461,7 +3448,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JToggleButton scaleFrontToggle;
     private javax.swing.JPanel scalePanelAccessory;
     private javax.swing.JCheckBoxMenuItem showHiddenFilesToggle;
-    private javax.swing.JMenuItem splitPortraitsMenuItem;
     private javax.swing.JButton spriteApplyButton;
     private javax.swing.JFileChooser spriteFC;
     private javax.swing.JButton spriteFolderBrowseButton;
