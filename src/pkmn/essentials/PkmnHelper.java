@@ -2389,8 +2389,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_portraitFolderBrowseButtonActionPerformed
 
     private void portraitUseGameToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitUseGameToggleActionPerformed
-        // TODO add your handling code here:
+        updatePortraitFolderButtons();
+        config.setPortraitUseGameFolder(portraitUseGameToggle.isSelected());
     }//GEN-LAST:event_portraitUseGameToggleActionPerformed
+
+    private void portraitSplitPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_portraitSplitPanelPropertyChange
+        switch(evt.getPropertyName()){
+            case(SinglePkmnSpriteNamePanel.ICON_PROPERTY_CHANGED):
+                updatePortraitSaveButton();
+        }
+    }//GEN-LAST:event_portraitSplitPanelPropertyChange
     
     private void setShownRecolorSprites(){
         recolorSpriteListPanel.getModelList().clear();
