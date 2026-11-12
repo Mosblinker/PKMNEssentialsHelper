@@ -3292,6 +3292,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (portraitFolderField.getDocument() == evt.getDocument() || 
                 portraitNameField.getDocument() == evt.getDocument())
             updatePortraitSaveButton();
+        if (portraitFolderField.getDocument() == evt.getDocument())
+            config.setPortraitTargetFolder(portraitFolderField.getText());
+        if (portraitNameField.getDocument() == evt.getDocument())
+            config.setPortraitName(portraitNameField.getText());
     }
     
     private class Handler implements DocumentListener, ListDataListener{
