@@ -408,6 +408,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
         updateTownMapImageFolderButtons();
+        updatePortraitFolderButtons();
         
         mapImageFolderField.getDocument().addDocumentListener(handler);
         mapImageSaveField.getDocument().addDocumentListener(handler);
@@ -2852,6 +2853,27 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         });
     }
     
+    private void updatePortraitFolderButtons(){
+        portraitFolderField.setEnabled(inputEnabled && !(portraitUseGameToggle.isEnabled() && portraitUseGameToggle.isSelected()));
+        portraitFolderBrowseButton.setEnabled(portraitFolderField.isEnabled());
+        updatePortraitSaveButton();
+    }
+    
+    private void updatePortraitSaveButton(){
+        boolean enabled = inputEnabled && portraitNameField.getText() != null && 
+                !portraitNameField.getText().isBlank();
+        if (enabled){
+            if (portraitUseGameToggle.isEnabled() && portraitUseGameToggle.isSelected())
+                enabled = gameProjectFolder != null;
+            else
+                enabled = portraitFolderField.getText() != null && 
+                        !portraitFolderField.getText().isBlank();
+        }
+        if (enabled)
+            enabled = portraitSplitPanel.getIcon() != null;
+        portraitSaveButton.setEnabled(enabled);
+    }
+    
     private void updateSpriteFolderButtons(){
         spriteFolderField.setEnabled(inputEnabled && !(spriteUseGameToggle.isEnabled() && spriteUseGameToggle.isSelected()));
         spriteFolderBrowseButton.setEnabled(spriteFolderField.isEnabled());
@@ -2937,6 +2959,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 !gameFolderField.getText().isBlank());
         spriteUseGameToggle.setEnabled(gameFolderField.isEnabled() && gameProjectFolder != null);
         mapImageUseProjectFolderToggle.setEnabled(spriteUseGameToggle.isEnabled());
+        portraitUseGameToggle.setEnabled(spriteUseGameToggle.isEnabled());
     }
     
     private void updateTownMapImageSaveButton(){
@@ -2995,6 +3018,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         townMapEditor.setEnabled(enabled);
         gameProjectNameField.setEnabled(enabled && isPBSDataEnabled());
         updateTitleChangeButton();
+        portraitSplitPanel.setEnabled(enabled);
+        portraitNameField.setEnabled(enabled);
+        updatePortraitFolderButtons();
     }
     @Override
     public boolean isInputEnabled() {
@@ -3252,6 +3278,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             config.setTownMapImageName(mapImageSaveField.getText());
         if (gameProjectNameField.getDocument() == evt.getDocument())
             updateTitleChangeButton();
+        if (portraitFolderField.getDocument() == evt.getDocument() || 
+                portraitNameField.getDocument() == evt.getDocument())
+            updatePortraitSaveButton();
     }
     
     private class Handler implements DocumentListener, ListDataListener{
