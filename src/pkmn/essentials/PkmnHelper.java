@@ -1581,7 +1581,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Split PMD Portraits", jPanel13);
+        jTabbedPane1.addTab("Split PMD Portraits", null, jPanel13, "Split Pokemon Mystery Dungeon portraits into individual images.");
 
         jLabel3.setText("Game Project Folder:");
 
