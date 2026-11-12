@@ -2655,19 +2655,20 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     icon = loadSprite(file);
                     if (icon == null)
                         return;
-                    diffFileAPanel.setIcon(icon);
+                    portraitSplitPanel.setIcon(icon);
+                    updatePortraitSaveButton();
                     break;
                 case(2):
                     icon = loadSprite(file);
                     if (icon == null)
                         return;
-                    diffFileBPanel.setIcon(icon);
+                    diffFileAPanel.setIcon(icon);
                     break;
                 case(3):
                     icon = loadSprite(file);
                     if (icon == null)
                         return;
-                    portraitSplitPanel.setIcon(icon);
+                    diffFileBPanel.setIcon(icon);
                     break;
                 default:
                     icon = loadSprite(file);
