@@ -4,8 +4,11 @@
  */
 package pkmn.essentials;
 
+import com.technicjelle.UpdateChecker;
 import components.ArrayListModel;
+import components.JAboutPanel;
 import components.JColorSelector;
+import components.JHyperlinkLabel;
 import components.ListModelList;
 import components.disable.DisableGUIInput;
 import components.progress.JProgressDisplayMenu;
@@ -18,6 +21,7 @@ import files.extensions.ImageExtensions;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -27,6 +31,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,7 +65,13 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 import pkmn.essentials.audio.TempPkmnAudioFileListPanel;
 import pkmn.essentials.colorchooser.*;
 import pkmn.essentials.data.*;
@@ -83,15 +96,45 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
      */
     protected static final String INTERNAL_PROGRAM_NAME = "PKMNEssentialsHelper";
     /**
+     * This has the version information of this program.
+     */
+    public static final String VERSION_INFO = "0.1.0";
+    /**
      * This is the pattern for the file handler to use for the log files of this 
      * program.
      */
     private static final String PROGRAM_LOG_PATTERN = 
             "%h/.mosblinker/logs/"+INTERNAL_PROGRAM_NAME+"-%u.%g.log";
     /**
-     * This has the version information of this program.
+     * The name of the author and main developer.
      */
-    public static final String VERSION_INFO = "0.1.0";
+    protected static final String AUTHOR_NAME = "Mosblinker";
+    /**
+     * This is the credits for the program. This is currently private as I plan 
+     * to rework it.
+     * @todo Rework this and then make it public. Also add any additional 
+     * credits necessary
+     */
+    private static final String[][] CREDITS = {{
+            "Developers",
+            "Mosblinker - Main developer and artist."
+//        },{
+//            "Testers",
+//            "*Insert Testers Here*"
+    }};
+    /**
+     * 
+     */
+    private static final String[][] LIBRARY_CREDITS = {
+        {"Thumbnailator","coobird","https://github.com/coobird/thumbnailator"},
+        {"SwingExtended","Mosblinker","https://github.com/Mosblinker/SwingExtended"},
+        {"FilesExtended","Mosblinker","https://github.com/Mosblinker/FilesExtended"},
+        {"Measure","Mosblinker",null},
+        {"SwingFilesExtended","Mosblinker",null},
+        {"GUIComponents","Mosblinker",null},
+        {"GeomArt4J","Mosblinker","https://github.com/Mosblinker/GeomArt4J"},
+        {"UpdateChecker","TechnicJelle","https://github.com/TechnicJelle/UpdateCheckerJava"}
+    };
     /**
      * This is the name of the preference node used to store the settings for 
      * this program.
@@ -276,6 +319,13 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             getLogger().log(Level.SEVERE, "Unable to load preference node", ex);
             // TODO: Error message window
         }
+        try{
+            updateChecker = new UpdateChecker(AUTHOR_NAME,INTERNAL_PROGRAM_NAME,
+                    VERSION_INFO);
+        } catch (RuntimeException ex){
+            getLogger().log(Level.WARNING, "UpdateChecker could not be constructed", 
+                    ex);
+        }
         config = new PkmnHelperConfig(node);
         editCommands = new HashMap<>();
         undoCommands = new HashMap<>();
@@ -423,6 +473,71 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         portraitScaleSpinner.setValue(config.getPortraitScale());
         
+            // Create a style to use to center the text on the text pane
+        SimpleAttributeSet centeredText = new SimpleAttributeSet();
+            // Make the style center the text
+        StyleConstants.setAlignment(centeredText, StyleConstants.ALIGN_CENTER);
+        SimpleAttributeSet leftText = new SimpleAttributeSet();
+        StyleConstants.setAlignment(leftText, StyleConstants.ALIGN_LEFT);
+            // Get the document for the credits text pane
+        StyledDocument creditsDoc = aboutPanel.getCreditsDocument();
+        try{
+                // Go through the credits arrays
+            for (String[] creditSection : CREDITS) {
+                int start = creditsDoc.getLength();
+                    // Add the header for this section
+                creditsDoc.insertString(start, 
+                        "---- "+creditSection[0]+" ----"+System.lineSeparator(), 
+                        null);
+                    // Center the header
+                creditsDoc.setParagraphAttributes(start, creditsDoc.getLength(),
+                        centeredText, false);
+                    // Rest of the text is left aligned
+                creditsDoc.setParagraphAttributes(creditsDoc.getLength(), 1,
+                        leftText, false);
+                    // Go through the credits in this section
+                for (int j = 1; j < creditSection.length; j++) {
+                    creditsDoc.insertString(creditsDoc.getLength(), 
+                            creditSection[j] + System.lineSeparator(), null);
+                }
+                creditsDoc.insertString(creditsDoc.getLength(), 
+                        System.lineSeparator(),null);
+            }
+                // Center the header
+            creditsDoc.setParagraphAttributes(creditsDoc.getLength(), 1,
+                    centeredText, false);
+            creditsDoc.insertString(creditsDoc.getLength(), 
+                    "---- Libraries ----"+System.lineSeparator(),null);
+                // Rest of the text is left aligned
+            creditsDoc.setParagraphAttributes(creditsDoc.getLength(), 1,
+                    leftText, false);
+            Style defStyle = StyleContext.getDefaultStyleContext().
+                    getStyle(StyleContext.DEFAULT_STYLE);
+            for (int i = 0; i < LIBRARY_CREDITS.length; i++){
+                if (i > 0)
+                    creditsDoc.insertString(creditsDoc.getLength(), 
+                            System.lineSeparator(),null);
+                Style linkStyle = null;
+                if (LIBRARY_CREDITS[i].length > 2 && LIBRARY_CREDITS[i][2] != null){
+                    linkStyle = creditsDoc.addStyle("hyperlink"+i, defStyle);
+                    JHyperlinkLabel hyperlink = new JHyperlinkLabel(LIBRARY_CREDITS[i][0],
+                            URI.create(LIBRARY_CREDITS[i][2]));
+                    hyperlink.setAlignmentY((float) 0.85);
+                    StyleConstants.setComponent(linkStyle, hyperlink);
+                }
+                creditsDoc.insertString(creditsDoc.getLength(), 
+                        LIBRARY_CREDITS[i][0],linkStyle);
+                if (LIBRARY_CREDITS[i].length > 1 && LIBRARY_CREDITS[i][1] != null) 
+                    creditsDoc.insertString(creditsDoc.getLength(), 
+                            " - " + LIBRARY_CREDITS[i][1],null);
+            }
+        } catch (BadLocationException ex){
+            getLogger().log(Level.WARNING, "Bad location found while populating credits", 
+                    ex);
+        }
+        
+        System.gc();        // Run the garbage collector
+        
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
         if (!PkmnHelperUtilities.getWorkingDirectory().equals(programDir))
@@ -478,6 +593,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitFC = new javax.swing.JFileChooser();
         portraitPreview = new components.JFileDisplayPanel();
         portraitFolderFC = new javax.swing.JFileChooser();
+        aboutDialog = new javax.swing.JDialog(this);
+        aboutPanel = new components.JAboutPanel();
+        updateCheckPanel = new pkmn.essentials.UpdateCheckPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -573,6 +691,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         configDataButton = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        aboutMenuItem = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         progressDisplay = new components.progress.JProgressDisplayMenu();
         showHiddenFilesToggle = new javax.swing.JCheckBoxMenuItem();
@@ -756,7 +878,6 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             portraitSplitDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         );
 
-        recolorPaletteDialog.setLocationByPlatform(true);
         recolorPaletteDialog.setMinimumSize(new java.awt.Dimension(320, 320));
         recolorPaletteDialog.setName("recolorPaletteDialog"); // NOI18N
         recolorPaletteDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -810,6 +931,36 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitFolderFC.setDialogTitle("Save Portraits To...");
         portraitFolderFC.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         portraitFolderFC.setName("portraitFolderFC"); // NOI18N
+
+        aboutDialog.setTitle("About "+PROGRAM_NAME);
+        aboutDialog.setMinimumSize(new java.awt.Dimension(640, 400));
+        aboutDialog.setResizable(false);
+
+        aboutPanel.setProgramName(PROGRAM_NAME);
+        aboutPanel.setProgramVersion(VERSION_INFO);
+        aboutPanel.setProgramWebsiteText("Visit the Github Repository");
+        aboutPanel.setProgramWebsiteURI(java.net.URI.create("https://github.com/Mosblinker/PKMNEssentialsHelper"));
+        aboutPanel.setUpdateButtonIsShown(true);
+        aboutPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutPanelActionPerformed(evt);
+            }
+        });
+        aboutDialog.getContentPane().add(aboutPanel, java.awt.BorderLayout.CENTER);
+
+        updateCheckPanel.setDialogTitle(PROGRAM_NAME+" Update Checker");
+        updateCheckPanel.setCurrentVersion(VERSION_INFO);
+        updateCheckPanel.setProgramName(PROGRAM_NAME);
+        updateCheckPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                updateCheckPanelPropertyChange(evt);
+            }
+        });
+        updateCheckPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCheckPanelActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pokemon Essentials Helper Tool");
@@ -1603,12 +1754,31 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jMenu1.setText("File");
 
         configDataButton.setText("Configure Data");
+        configDataButton.setEnabled(false);
         configDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 configDataButtonActionPerformed(evt);
             }
         });
         jMenu1.add(configDataButton);
+        jMenu1.add(jSeparator1);
+
+        aboutMenuItem.setText("About PKMN Essentials Helper Tool");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(aboutMenuItem);
+        jMenu1.add(jSeparator2);
+
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitMenuItem);
 
         jMenuBar1.add(jMenu1);
 
@@ -2380,6 +2550,46 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void portraitScaleSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_portraitScaleSpinnerStateChanged
         config.setPortraitScale((Integer)portraitScaleSpinner.getValue());
     }//GEN-LAST:event_portraitScaleSpinnerStateChanged
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        getLogger().finer("Exiting program normally");
+        System.exit(0);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+            // Make the about dialog location relative to the program
+        aboutDialog.setLocationRelativeTo(this);
+            // Show the about dialog
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void aboutPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutPanelActionPerformed
+        switch(evt.getActionCommand()){
+            case(JAboutPanel.CLOSE_SELECTED):
+                aboutDialog.setVisible(false);
+                break;
+            case(JAboutPanel.UPDATE_SELECTED):
+                updateWorker = new UpdateCheckWorker(false);
+                updateWorker.execute();
+        }
+    }//GEN-LAST:event_aboutPanelActionPerformed
+
+    private void updateCheckPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_updateCheckPanelPropertyChange
+        if (UpdateCheckPanel.CHECK_FOR_UPDATES_AT_STARTUP_PROPERTY_CHANGED.equals(evt.getPropertyName()))
+            config.setCheckForUpdateAtStartup(updateCheckPanel.getCheckForUpdatesAtStartup());
+    }//GEN-LAST:event_updateCheckPanelPropertyChange
+
+    private void updateCheckPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCheckPanelActionPerformed
+        if (UpdateCheckPanel.OPEN_WEBSITE_COMMAND.equals(evt.getActionCommand())){
+            // Get the update URL
+            String url = updateChecker.getUpdateUrl();
+            try {   // Try to open the update URL in the user's web browser
+                Desktop.getDesktop().browse(new URL(url).toURI());
+            } catch (URISyntaxException | IOException ex) {
+                getLogger().log(Level.WARNING,"Could not open update URL "+url,ex);
+            }
+        }
+    }//GEN-LAST:event_updateCheckPanelActionPerformed
     
     private void setShownRecolorSprites(){
         recolorSpriteListPanel.getModelList().clear();
@@ -3106,7 +3316,18 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private PBSData pbsData = null;
     
     private BufferedImage imgDiff = null;
+    /**
+     * 
+     */
+    private UpdateCheckWorker updateWorker = null;
+    /**
+     * This is the checker to use to check for updates for the program.
+     */
+    private UpdateChecker updateChecker = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog aboutDialog;
+    private javax.swing.JMenuItem aboutMenuItem;
+    private components.JAboutPanel aboutPanel;
     private javax.swing.JFileChooser audioFC;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel bSpritePanel;
     private components.JColorSelector blendColorSelector;
@@ -3124,6 +3345,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggIconSpritePanel;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel eggSpritePanel;
     private javax.swing.JPanel eggSprites;
+    private javax.swing.JMenuItem exitMenuItem;
     private pkmn.essentials.sprite.PkmnSpriteNameListPanel fSpritePanel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
@@ -3178,6 +3400,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
@@ -3250,6 +3474,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JFileChooser townMapFolderFC;
     private pkmn.essentials.map.TownMapImageEditor townMapImageEditor;
     private components.JFileDisplayPanel townMapPreview;
+    private pkmn.essentials.UpdateCheckPanel updateCheckPanel;
     // End of variables declaration//GEN-END:variables
 
     private void documentUpdate(DocumentEvent evt){
@@ -4876,6 +5101,108 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         @Override
         protected String getFailureMessage(File file, IOException ex){
             return "The portraits failed to save.";
+        }
+    }
+    
+    /**
+     * 
+     */
+    private class UpdateCheckWorker extends SwingWorker<Boolean, Void>{
+        /**
+         * This gets whether there is an update available for the program.
+         */
+        private boolean updateAvailable = false;
+        
+        private boolean success = false;
+        /**
+         * Whether this is being called at the start of the program.
+         */
+        private boolean isAtStart;
+        /**
+         * 
+         * @param isAtStart 
+         */
+        UpdateCheckWorker(boolean isAtStart){
+            this.isAtStart = isAtStart;
+        }
+        /**
+         * 
+         * @return 
+         */
+        protected Component getParentComponent(){
+            return (isAtStart)?PkmnHelper.this:aboutDialog;
+        }
+        public String getProgressString() {
+            return "Checking For Updates";
+        }
+        protected Boolean backgroundAction() throws Exception {
+            getLogger().entering(this.getClass().getName(), "backgroundAction");
+                // Whether this should retry to check for an update
+            boolean retry = false;
+            do{
+                useWaitCursor(true);
+                try{    // Check for an update
+                    updateChecker.check();
+                    success = true;
+                } catch (Exception ex){
+                    getLogger().log(Level.WARNING, 
+                            "An error occurred while checking the latest version",
+                            ex);
+                    useWaitCursor(false);
+                        // Ask the user if they would like to try checking for 
+                        // updates again
+                    retry = JOptionPane.showConfirmDialog(getParentComponent(),
+                        "Failed to check for updates.\nWould you like to try again?",
+                        "Update Checker Failed",JOptionPane.YES_NO_OPTION,
+                        JOptionPane.ERROR_MESSAGE) == JOptionPane.YES_OPTION;
+                }
+            }   // While this has not checked for an update and the user wants 
+                // to try again
+            while (!success && retry);
+                // Get whether there is an update available
+            updateAvailable = updateChecker.isUpdateAvailable();
+            getLogger().exiting(this.getClass().getName(), "backgroundAction", 
+                    updateAvailable);
+            return updateAvailable;
+        }
+        @Override
+        protected void done(){
+                // If this was successful at checking for an update
+            if (success){
+                updateCheckPanel.setLatestVersion(updateChecker, updateAvailable);
+            }
+            System.gc();        // Run the garbage collector
+            progressBar.setValue(0);
+            progressBar.setIndeterminate(false);
+            progressBar.setStringPainted(false);
+            progressDisplay.setString(null);
+            setInputEnabled(true);
+            useWaitCursor(false);
+                // If this was successful at checking for an update
+            if (success){
+                    // If there is an update available for the program
+                if (updateAvailable){
+                        // Log the update
+                    updateChecker.logUpdateMessage(getLogger());
+                    updateCheckPanel.showDialog(getParentComponent());
+                } else if (!isAtStart){
+                    updateCheckPanel.showUpToDateDialog(aboutDialog);
+                }
+            }
+        }
+
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            getLogger().entering(this.getClass().getName(), "doInBackground");
+            useWaitCursor(true);
+            setInputEnabled(false);
+            progressDisplay.setString(getProgressString());
+            progressBar.setIndeterminate(true);
+            progressBar.setStringPainted(true);
+            progressBar.setValue(0);
+            Boolean value = backgroundAction();
+            getLogger().exiting(this.getClass().getName(), "doInBackground",value);
+            return value;
         }
     }
 }

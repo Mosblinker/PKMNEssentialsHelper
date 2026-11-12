@@ -206,6 +206,28 @@ public class PkmnHelperConfig {
     }
     /**
      * 
+     * @param defaultValue
+     * @return 
+     */
+    public boolean getCheckForUpdateAtStartup(boolean defaultValue){
+        return getPreferences().getBoolean(CHECK_FOR_UPDATES_AT_START_KEY, defaultValue);
+    }
+    /**
+     * 
+     * @return 
+     */
+    public boolean getCheckForUpdateAtStartup(){
+        return getCheckForUpdateAtStartup(true);
+    }
+    /**
+     * 
+     * @param value 
+     */
+    public void setCheckForUpdateAtStartup(boolean value){
+        getPreferences().putBoolean(CHECK_FOR_UPDATES_AT_START_KEY, value);
+    }
+    /**
+     * 
      * @return 
      */
     public Preferences getPreferences(){
