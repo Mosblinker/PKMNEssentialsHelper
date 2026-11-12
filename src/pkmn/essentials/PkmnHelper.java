@@ -2371,7 +2371,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     }//GEN-LAST:event_recolorPaletteDialogWindowClosing
 
     private void portraitFolderBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitFolderBrowseButtonActionPerformed
-        // TODO add your handling code here:
+        if (portraitFolderFC.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+            portraitFolderField.setText(portraitFolderFC.getSelectedFile().toString());
+        }
+        portraitFolderFC.setPreferredSize(portraitFolderFC.getSize());
+            // Set the file chooser's size in the config if it's saved
+        config.storeFileChooser(portraitFolderFC);
     }//GEN-LAST:event_portraitFolderBrowseButtonActionPerformed
 
     private void portraitUseGameToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitUseGameToggleActionPerformed
