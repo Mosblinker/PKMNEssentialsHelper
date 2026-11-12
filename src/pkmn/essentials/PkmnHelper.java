@@ -1702,11 +1702,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         }
         if (recolorReferencePanel == evt.getSource())
             index = singlePkmnSpritePanels.length;
-        if (diffFileAPanel == evt.getSource())
-            index = singlePkmnSpritePanels.length+1;
-        if (diffFileBPanel == evt.getSource())
-            index = singlePkmnSpritePanels.length+2;
         if (portraitSplitPanel == evt.getSource())
+            index = singlePkmnSpritePanels.length+1;
+        if (diffFileAPanel == evt.getSource())
+            index = singlePkmnSpritePanels.length+2;
+        if (diffFileBPanel == evt.getSource())
             index = singlePkmnSpritePanels.length+3;
         if (index >= 0){
             switch(evt.getActionCommand()){
@@ -2617,11 +2617,11 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 title = "Select Reference";
                 break;
             case(5):
-            case(6):
-                title = "Select Image To Get Difference";
-                break;
-            case(7):
                 title = "Select Portraits To Split";
+                break;
+            case(6):
+            case(7):
+                title = "Select Image To Get Difference";
                 break;
             default:
                 return;
