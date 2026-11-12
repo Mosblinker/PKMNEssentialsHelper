@@ -143,6 +143,8 @@ public class PkmnHelperConfig {
     
     public static final String PORTRAIT_NAME_KEY = "PortraitName";
     
+    public static final String PORTRAIT_SCALE_KEY = "PortraitScale";
+    
     /**
      * This is a preference node to store the settings for this program.
      */
@@ -923,6 +925,14 @@ public class PkmnHelperConfig {
             getPortraitPreferences().remove(PORTRAIT_NAME_KEY);
         else
             getPortraitPreferences().put(PORTRAIT_NAME_KEY, path);
+    }
+    
+    public int getPortraitScale(){
+        return getPortraitPreferences().getInt(PORTRAIT_SCALE_KEY, 2);
+    }
+    
+    public void setPortraitScale(int scale){
+        getPortraitPreferences().putInt(PORTRAIT_SCALE_KEY, scale);
     }
     
     private class PkmnSpriteFileList extends AbstractList<File>{

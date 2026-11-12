@@ -229,6 +229,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         "Special2",
         "Special3"
     };
+    
+    protected static final String GAME_PORTRAIT_FOLDER = GRAPHICS_FOLDER+File.separator+"Pictures"+File.separator+"Portraits";
     /**
      * This is a logger used to log messages for the program.
      */
@@ -419,6 +421,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(jPanel6), false);
         jTabbedPane1.setEnabledAt(jTabbedPane1.indexOfComponent(jPanel12), false);
         
+        portraitScaleSpinner.setValue(config.getPortraitScale());
+        
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
         if (!PkmnHelperUtilities.getWorkingDirectory().equals(programDir))
@@ -559,6 +563,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitFolderField = new javax.swing.JTextField();
         portraitFolderBrowseButton = new javax.swing.JButton();
         portraitUseGameToggle = new javax.swing.JCheckBox();
+        portraitScaleSpinner = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         gameBrowseButton = new javax.swing.JButton();
@@ -1514,6 +1520,16 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
         });
 
+        portraitScaleSpinner.setModel(new javax.swing.SpinnerNumberModel(2, 1, 20, 1));
+        portraitScaleSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                portraitScaleSpinnerStateChanged(evt);
+            }
+        });
+
+        jLabel9.setLabelFor(portraitScaleSpinner);
+        jLabel9.setText("Scale:");
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1528,8 +1544,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                            .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(portraitNameField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(portraitScaleSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(portraitSaveButton))
                             .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1555,7 +1575,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(portraitSaveButton)
                     .addComponent(jLabel7)
-                    .addComponent(portraitNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(portraitNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(portraitScaleSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addContainerGap())
         );
 
@@ -2399,6 +2421,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 updatePortraitSaveButton();
         }
     }//GEN-LAST:event_portraitSplitPanelPropertyChange
+
+    private void portraitScaleSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_portraitScaleSpinnerStateChanged
+        config.setPortraitScale((Integer)portraitScaleSpinner.getValue());
+    }//GEN-LAST:event_portraitScaleSpinnerStateChanged
     
     private void setShownRecolorSprites(){
         recolorSpriteListPanel.getModelList().clear();
@@ -3032,6 +3058,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitSplitPanel.setEnabled(enabled);
         portraitNameField.setEnabled(enabled);
         updatePortraitFolderButtons();
+        portraitScaleSpinner.setEnabled(enabled);
     }
     @Override
     public boolean isInputEnabled() {
@@ -3178,6 +3205,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -3215,6 +3243,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField portraitNameField;
     private components.JFileDisplayPanel portraitPreview;
     private javax.swing.JButton portraitSaveButton;
+    private javax.swing.JSpinner portraitScaleSpinner;
     private javax.swing.JDialog portraitSplitDialog;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel portraitSplitPanel;
     private javax.swing.JCheckBox portraitUseGameToggle;
