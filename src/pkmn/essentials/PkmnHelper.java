@@ -548,7 +548,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         gameProjectNameChangeButton = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         portraitSplitPanel = new pkmn.essentials.sprite.SinglePkmnSpriteNamePanel();
-        portraitSplitSaveButton = new javax.swing.JButton();
+        portraitSaveButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         portraitNameField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -1477,12 +1477,17 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                 singleSpritePanelActionPerformed(evt);
             }
         });
+        portraitSplitPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                portraitSplitPanelPropertyChange(evt);
+            }
+        });
 
-        portraitSplitSaveButton.setText("Split and Save");
-        portraitSplitSaveButton.setEnabled(false);
-        portraitSplitSaveButton.addActionListener(new java.awt.event.ActionListener() {
+        portraitSaveButton.setText("Split and Save");
+        portraitSaveButton.setEnabled(false);
+        portraitSaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                portraitSplitSaveButtonActionPerformed(evt);
+                portraitSaveButtonActionPerformed(evt);
             }
         });
 
@@ -1522,7 +1527,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                                 .addComponent(portraitNameField)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(portraitSplitSaveButton))
+                                .addComponent(portraitSaveButton))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(portraitFolderField, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1544,7 +1549,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
                     .addComponent(portraitUseGameToggle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(portraitSplitSaveButton)
+                    .addComponent(portraitSaveButton)
                     .addComponent(jLabel7)
                     .addComponent(portraitNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -2241,7 +2246,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         portraitSplitDialog.setVisible(true);
     }//GEN-LAST:event_splitPortraitsMenuItemActionPerformed
 
-    private void portraitSplitSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitSplitSaveButtonActionPerformed
+    private void portraitSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portraitSaveButtonActionPerformed
         if (portraitSplitPanel.getIcon() == null)
             return;
         try{
@@ -2294,7 +2299,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         } catch (IOException ex){
             getLogger().log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_portraitSplitSaveButtonActionPerformed
+    }//GEN-LAST:event_portraitSaveButtonActionPerformed
     
     private void closeRecolorPaletteDialog(boolean accept){
         recolorPaletteDialog.setVisible(false);
@@ -3171,9 +3176,9 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private javax.swing.JTextField portraitFolderField;
     private javax.swing.JTextField portraitNameField;
     private components.JFileDisplayPanel portraitPreview;
+    private javax.swing.JButton portraitSaveButton;
     private javax.swing.JDialog portraitSplitDialog;
     private pkmn.essentials.sprite.SinglePkmnSpriteNamePanel portraitSplitPanel;
-    private javax.swing.JButton portraitSplitSaveButton;
     private javax.swing.JCheckBox portraitUseGameToggle;
     private javax.swing.JMenuItem printPBSTest;
     private javax.swing.JMenuItem printRecolorTest;

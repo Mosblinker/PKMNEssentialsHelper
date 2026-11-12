@@ -1620,7 +1620,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="portraitNameField" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="portraitSplitSaveButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="portraitSaveButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="portraitFolderField" pref="562" max="32767" attributes="0"/>
@@ -1650,7 +1650,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="portraitSplitSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="portraitSaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="portraitNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1663,15 +1663,16 @@
             <Component class="pkmn.essentials.sprite.SinglePkmnSpriteNamePanel" name="portraitSplitPanel">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleSpritePanelActionPerformed"/>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="portraitSplitPanelPropertyChange"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="portraitSplitSaveButton">
+            <Component class="javax.swing.JButton" name="portraitSaveButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Split and Save"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="portraitSplitSaveButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="portraitSaveButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
