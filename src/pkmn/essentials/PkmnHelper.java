@@ -2872,7 +2872,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
             }
             if (!enabled){
                 for (SinglePkmnSpriteNamePanel panel : singlePkmnSpritePanels) {
-                    enabled = panel != null;
+                    enabled = panel.getIcon() != null;
                     if (enabled)
                         break;
                 }
