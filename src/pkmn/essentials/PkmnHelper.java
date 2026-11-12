@@ -365,6 +365,8 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         spriteFolderField.setText(config.getPkmnSpriteTargetFolder());
         spriteNameField.setText(config.getPkmnSpriteName());
         recolorSaveField.setText(config.getRecolorTargetFolder());
+        portraitFolderField.setText(config.getPortraitTargetFolder());
+        portraitNameField.setText(config.getPortraitName());
         spriteFolderField.getDocument().addDocumentListener(handler);
         spriteNameField.getDocument().addDocumentListener(handler);
         recolorSaveField.getDocument().addDocumentListener(handler);
@@ -405,6 +407,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         if (gameProjectFolder != null)
             gameFolderField.setText(gameProjectFolder.toString());
         spriteUseGameToggle.setSelected(config.getPkmnSpritesUseGameFolder());
+        portraitUseGameToggle.setSelected(config.getPortraitUseGameFolder());
         updateGameProjectFolderButtons();
         updateSpriteFolderButtons();
         updateTownMapImageFolderButtons();
