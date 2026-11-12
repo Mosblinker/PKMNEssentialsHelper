@@ -98,7 +98,7 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     /**
      * This has the version information of this program.
      */
-    public static final String VERSION_INFO = "0.1.0";
+    public static final String VERSION_INFO = "0.1.1";
     /**
      * This is the pattern for the file handler to use for the log files of this 
      * program.
@@ -538,6 +538,10 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
         
         System.gc();        // Run the garbage collector
         
+        if (updateCheckPanel.getCheckForUpdatesAtStartup()){
+            updateWorker = new UpdateCheckWorker(true);
+            updateWorker.execute();
+        }
         String programDir = PkmnHelperUtilities.getProgramDirectory();
         File programDirFile = new File(programDir);
         if (!PkmnHelperUtilities.getWorkingDirectory().equals(programDir))
