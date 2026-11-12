@@ -2423,6 +2423,12 @@ public class PkmnHelper extends javax.swing.JFrame implements DisableGUIInput{
     private void setFilesAreHidden(boolean value){
         spriteFC.setFileHidingEnabled(!value);
         spriteFolderFC.setFileHidingEnabled(!value);
+        recolorFolderFC.setFileHidingEnabled(!value);
+        audioFC.setFileHidingEnabled(!value);
+        townMapFC.setFileHidingEnabled(!value);
+        townMapFolderFC.setFileHidingEnabled(!value);
+        portraitFC.setFileHidingEnabled(!value);
+        portraitFolderFC.setFileHidingEnabled(!value);
     }
     
     private String getSpriteName(String name, PkmnSpriteIcon icon){
